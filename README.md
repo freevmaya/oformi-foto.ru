@@ -1,0 +1,2 @@
+# oformi-foto.ru
+images
