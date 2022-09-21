@@ -1,0 +1,105 @@
+<link href="<?=SSURL?>styles-viboom.css" rel="stylesheet" />
+<script type="text/javascript">
+//---VIDOOM ADV------------
+    var viboomAdv = new (function() {     
+        var vd, vc, This = this;
+        var pl, cht, canclose = false, after, tsec, ADVSHOWSEC = 16, 
+            callcount = Math.max(Cookie.read('OAB_COUNT'), 0), CCLIMIT=10, timeout;
+        
+        window.addEvent('domready', function() {
+            vd = $('viboom');
+            tsec = vd.getElement('.viboom-title span');
+            vd.addEvent('click', close);
+        });                   
+        
+        function close() {
+            if (canclose) {
+                //vd.removeClass('vdshow');
+                vd.dispose();
+                vd = null;
+                if (cht) clearInterval(cht);
+                after();
+            } 
+        }
+        
+        function getv() {
+            return vd?vd.getElement('.viboom-frame'):null;
+        }
+        
+        function beginTime() {
+            var sec = timeout;
+            cht = setInterval(function() {
+                if (!(pl = getv())) close();
+                sec--;
+                if ((sec >= 0) && (tsec)) {
+                    tsec.set('text', sec);                                
+                    if (sec == 0) {
+                        canclose = true;
+                        vd.addClass('canclose');
+                    }
+                }
+            }, 1000);
+        }
+
+        this.close = ()=>{
+            vd.removeClass('vdshow');
+        }
+
+        this.showAdv = (a_after, title, a_timeout=0)=>{
+            after = a_after;
+            timeout = a_timeout?a_timeout:ADVSHOWSEC;
+            if (pl = getv()) {
+                if (title) {
+                    vd.getElement('.viboom-title').set('html', title);
+                    tsec = vd.getElement('.viboom-title span');
+                }
+                setTimeout(function() {
+                    vd.addClass('vdshow');
+                    var sz = vd.getSize();
+                    pl.setStyle('margin-top', Math.round((sz.y - pl.getSize().y) / 2));
+                    beginTime();
+                }, 300);            
+            } else after();
+        } 
+        
+        PJApp = new Class({
+            Extends  : PJApp,    
+            afterAdv: function(a_after, title) {               
+                callcount++;
+                Cookie.write('OAB_COUNT', callcount, {duration: 1/24});
+                if ((callcount > CCLIMIT) && (Math.random() > 0.8))
+                    This.showAdv(a_after, title);
+                else a_after();
+            }
+        });
+    })();
+    var player;
+    function onYouTubePlayerAPIReady() { 
+      // create the global player from the specific iframe (#video)
+      setTimeout(function() {
+            var frame = $('viboom').getElement('iframe');
+            player = new YT.Player(frame.id, {
+                events: {
+                  // call this function when player is ready to use
+                  'onReady': onPlayerReady
+                }
+            });
+        }, 1000);
+    }
+    
+    function onPlayerReady(e) {
+        console.log(e);
+    }
+
+    function postMessage() {
+        console.log(arguments);
+    } 
+</script>
+<div id="viboom">
+    <div class="viboom-frame">
+        <!--<div class="viboom-curtain"></div>-->
+        <script type='text/javascript' id='s-e975b9301ce5ab5eaa54ad0d16f1773f'>(function() { var s = document.getElementById('s-e975b9301ce5ab5eaa54ad0d16f1773f'); s.id = +new Date()+Math.floor(Math.random()*1000)+'-vseed'; var v = document.createElement('script'); v.type = 'text/javascript'; v.async = true; v.src = 'https://ytimgg.com/oO/rotator?align=1&height=350&width=550&key=e975b9301ce5ab5eaa54ad0d16f1773f&adaptive=1&pid=18413&csid='+s.id; v.charset = 'utf-8'; s.parentNode.insertBefore(v, s); })(); </script>
+        <div class="viboom-title"><?=$locale['ADVTITLE']?></div>
+        <div class="viboom-footer"><a><?=$locale['CLOSE']?></a></div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<h2>Родовые деревья</h2>
+<span><?=date('d.m.Y H:i:s')?></span>
+<table class="report">
+    <tr>
+        <th>
+            Название
+        </th>
+        <th>
+            UID
+        </th>
+        <th>
+            Объем
+        </th>
+        <th>
+            Ссылка
+        </th>
+    </tr>
+<?
+foreach ($list as $item) {
+    $r_link = $item['rod_id'].'-'.$item['main_id'];
+?>    
+    <tr>
+        <td><?=$item['name']?></td>
+        <td><?=$item['uid']?></td>
+        <td><?=$item['count_people']?></td> 
+        <td><a href="//oformi-foto.ru/tree/<?=$r_link?>.htm" target="_blank"><?=$r_link?></a></td>
+    </tr>
+<?}?>
+</table>

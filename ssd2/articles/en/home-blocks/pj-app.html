@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    var eindex = 0;
+    var eurls = ['<?=$sheme?>oformi-foto.ru/<?=$pjjs_path?>', '<?=$sheme?>fotoprivet.com/pjjs/left-list.php?group=child'];
+    function swapEditor() {
+        eindex = (eindex + 1) % eurls.length;
+        $('appframe').src = eurls[eindex];
+    }
+</script>
+
+<div class="post">
+    <p><b>Choose a frame or template</b> to design a photo from the template list. When the frame opens, you can upload your photo. To do this, double click on the cutout or click the "Insert your photo" button next to the cutout. Select a photo from your computer. Using the mouse, edit the position of your photo in the cutout. Save the result to the computer, click the arrow button pointing down on the rectangle symbolizing the container or floppy disk. Look 
+    <a href="//www.youtube.com/embed/NCMeTj9f3Sw" class="boxed" data-video="{url:'//www.youtube.com/embed/NCMeTj9f3Sw',handler:'iframe',size:{x:900,y:506},iframePreload:true}">video instruction</a></p><p>If you prefer the old version of the editor, <a href="#old-editor" onclick="swapEditor()">click here.</a></p>
+    <div id="pjjs">
+        <?//include(__DIR__.'/pj_app_share.html')?>
+        <iframe src="<?=PJJS_URL.'/'.$pjjs_path?>" id="appframe">
+        </iframe>
+    </div>
+    <div style="text-align: center; margin: 10px;">
+        <a href="<?=mainURL?>view.htm" data-rel="<?=MAINURL?>/pjjs.htm" class="ctrl-button app-link">I want more photo frames!</a>
+        <a href="#" class="ctrl-button app-link" onclick="showThankView()">Thank you!</a>
+    </div>
+    <div class="clr"></div>
+    <p>You can also go to <a href="//oformi-foto.ru/view.htm">flash application</a>, or in <a href="http://oformi-foto.ru/fotoramki.html">catalog of photo frames</a> and funny templates where you need to insert your face.</p>
+</div>

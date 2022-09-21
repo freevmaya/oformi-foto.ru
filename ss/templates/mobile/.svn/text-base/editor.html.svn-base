@@ -1,0 +1,5 @@
+<div data-role="page" id="editor">
+    <div class="app-view">
+        <iframe id="appframe"></iframe>
+    </div>
+</div>

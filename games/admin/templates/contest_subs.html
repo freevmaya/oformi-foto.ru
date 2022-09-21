@@ -1,0 +1,29 @@
+<h1>Подписки</h2>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&subs-page=%s')?>
+    <h3>Всего <?=$count?> подписчика</h3>
+</div>
+
+<table class="report">
+    <tr>
+        <th>uid</th>
+        <th>Крайний вход</th>
+        <th>Пользователь</th>
+        <th>source</th>
+        <th>max votes</th>  
+        <th>Коллажей всего/ожидает/активных/победителей</th>
+    </tr>
+<?foreach ($items as $i=>$item) {?>
+    <tr class="<?=(($i%2)?'odd':'')?>">
+        <td><?=$item['uid']?></td>
+        <td><?=date('d.m.Y', strtotime($item['last_time']))?></td>
+        <td><a href="?task=contest,subs_item&subs_id=<?=$item['subs_id']?>">
+                <img src="//oformi-foto.ru/user_avatars/<?=$item['source']?>/<?=$item['uid']?>">
+                <?=$item['first_name']?> <?=$item['last_name']?>
+            </a></td>
+        <td><?=$item['source']?></td> 
+        <td><?=$item['max_votes']?></td>
+        <td><?=$item['game_count'].'/'.$item['game_wait'].'/<b>'.$item['game_active'].'</b>/'.$item['game_victory']?></td>
+    </tr>
+<?}?>    
+</table>

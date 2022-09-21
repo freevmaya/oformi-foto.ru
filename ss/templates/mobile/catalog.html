@@ -1,0 +1,200 @@
+<?
+    GLOBAL $sheme, $locale, $_SESSION;
+    
+    define('BASEFRAMESURL', $sheme.'oformi-foto.ru');
+    
+    if (!isset($_SESSION['JPG_URL']) || (preg_match_all("/http[s]*:\/\//i", $_SESSION['JPG_URL'], $r) > 0)) {
+        $storage = json_decode(file_get_contents(BASEFRAMESURL.'/games/data/storage.php'));
+        $_SESSION['JPG_URL']        = $storage->options->JPG_URL.'/';
+        $_SESSION['previewURL120']  = $storage->options->PREVIEW_URL120.'/'; 
+    }
+    
+    define('FRAMES_URL', $sheme.$_SESSION['JPG_URL']);
+                                                               
+    include_once(TEMPLATES_PATH.'paginator.php');
+    
+//    $defaultDesc = 'Найти идеальную <b>рамку для фото</b> совсем не сложно! Воспользуйтесь нашим каталогом. Здесь фоторамки и рамки для оформления текста разделены по самым разным темам. Вы сможете вставить <a href="'.MAINURL.'/view.htm">фото в рамку онлайн</a>, выбрав одну из категорий в меню слева экрана.Коллажи, открытки, <a href="'.MAINURL.'/view.htm">фотоэффекты онлайн</a> - все это поможет превратить любую фотографию в произведение искусства!<br>Выберите любую <a href="'.MAINURL.'/pjjs.htm">рамку для оформления текста</a> и оформите свое поздравление в креативный дизайн';
+    
+    $imgAlt = '';
+    $groupDesc = '';
+    $pageTool = '';
+    ss::$noadv = true;
+    $fullDesc = '';
+    $pageDesc = (($page > 1)?(' страница '.$page):'');
+    
+    function addDesc($desc, $addDesc) {
+        $lw = limitWords($addDesc, 8, ''); 
+        return $desc.(($lw && $desc)?', ':'').$lw;
+    }
+        
+    if ($holiday) {              // Праздник
+        $this->title = 'Праздник: '.$holiday['name'].$pageDesc;
+        $imgAlt = $holiday['name'];
+        
+        $fullDesc = $this->description = $holiday['desc'].$pageDesc;
+        $this->addMeta('page-image', holidayImage($holiday));
+        $pageTool = paginator($page, $totalPages, MAINURL.'/'.CATALOGSELECTOR.'/'.$groupsStr.'/%d.html');
+        
+    } else if (!isset($searchStr)) {  // Обычный каталог, или праздничные шаблоны
+        $this->description = '';
+        $isGroups = count($groupIds) > 1;
+        $this->noindex = $isGroups;
+        
+        foreach ($menu as $item) {
+            $gid = $item['group_id'];
+            if (in_array($item['group_id'], $groupIds)) {
+                $imgAlt .= ($imgAlt?', ':'').$item['name'];
+                $groupDesc .= ($groupDesc?', ':'').$item['small_desc'];
+//                $keywords[] = $item['name'];
+                $smdesc = $item['small_desc']?$item['small_desc']:$item['desc'];
+                $this->description = $isGroups?addDesc($this->description, $smdesc):$smdesc;
+                if ($item['keywords']) $this->keywords = $isGroups?addDesc($this->keywords, $item['keywords']):$item['keywords'];
+            }                     
+        }
+        
+        if (!$groupDesc) {
+            $default = defaultCat();
+            $groupDesc = $default['small_desc'];
+            $imgAlt = $default['name']; 
+            $smdesc = $default['small_desc']?$default['small_desc']:$default['desc'];
+            $this->description = $isGroups?addDesc($this->description, $smdesc):$smdesc;
+        }
+    
+        if ($holidays === true) {
+            $imgAlt = $locale['ALLHOLIDAYS'];
+                         
+            $this->title = $locale['ALLHOLIDAYS'].$pageDesc;;
+            $fullDesc = 'Список всех праздников. Здесь вы можете на любой <b>праздник</b> подобрать интересующий вас шаблон фото-рамки, эффекта или фото-коллажа. Выберите из списка нужный <i>праздник</i> и перейдите на страницу списка фото-рамок к празднику, кликнув на ссылке в названии.';
+        } else {
+            $firstAlt = 'Рамка, фотоэффект: ';
+            
+            $this->title = $locale['CATFRAMESTITLE'].', '.($imgAlt?$imgAlt:'фото-оформления и фотоэффекты. Последнее обновление').'.'.$pageDesc;
+            $fullDesc = $groupDesc;
+                                               
+            $imageRelative = '/images/catalog/'.str_replace(' ', '+', $groupEng[$groupIds[0]]).'.jpg';
+            if (file_exists(MAINPATH.$imageRelative))
+                $this->addMeta('page-image', MAINURL.$imageRelative);
+        }            
+//        $this->addMeta('page-image',MAINURL.'/images/share/catalog2.jpg');
+        $pageTool = '';//paginator($page, $totalPages, MAINURL.'/'.CATALOGSELECTOR.'/'.urlencode($groupsStr?$groupsStr:'0').'/%d.html');
+        
+        if (!$this->description) $this->description = $fullDesc;
+        $this->description .= $pageDesc;
+    } else { // Поиск
+        $firstAlt = 'Найдены рамки: '.$searchStr.' ';
+        $imgAlt = $firstAlt;
+        $article = t($task2);
+        $this->title = $locale['CATFRAMESTITLE'].', '.$firstAlt.$pageDesc;
+        $this->noindex = true;
+        $fullDesc = $this->description = ($article?$article['text']:'В каталоге рамок для фотографий вы можете быстро выбрать нужную для вас фото-рамку, оформление или эффект.').$pageDesc;
+    }
+    $transition = 'data-transition="flip"';
+?>
+<script type="text/javascript">
+    cat_phone(<?=$page?>, <?=PREVIEW_WIDTH?>, '<?=addslashes($groupsStr)?>', '<?=FRAMES_URLPREVIEW?>', '<?=link::c(LONGLINK, "templates")?>', '<?=$holidays===true?'h':'c'?>');
+</script>
+
+<div role="main" class="ui-content jqm-content jqm-fullwidth catalog">
+        <div class="tmpls_header">
+<?            
+            if (isset($groups) && (count($groups) > 0)) {
+?>
+                <div class="groups desc" style="margin-bottom: 10px;">
+                    <h3>Так же мы нашли похожие категории:</h3>
+                    <?
+                        foreach ($groups as $group) 
+                            $url = link::c('catalog', str_replace(' ', '+', $group['translit']));
+                            echo '<a href="'.$url."\">{$group['name']}</a>"; 
+                    ?>
+                </div>
+<?          }?>            
+        </div>
+        <div class="desc">
+        <?
+            if ($holiday) {?> 
+                <div>
+                    <h3><?=todayDate($holiday['date']);?></h3>
+                    <img src="<?=holidayImage($holiday, true, false)?>" style="margin:10px auto;display:block" alt="<?=$holiday['name'];?>">
+                </div>
+            <?}
+            echo parseDesc($fullDesc, false);
+        ?>
+            <div class="clr"></div>
+        </div>
+        <?//include(TEMPLATES_PATH.'/search-block.html');?>
+        <div class="clr"></div>
+        <div class="tmpls">
+        <div class="list">
+        <div class="items_layer">
+            
+<?
+    if (isset($items) && (count($items)>0)) {
+        if ($holidays === true) {
+            foreach ($items as $i=>$item) {
+                $tmplId = $item['defTmplID']?$item['defTmplID']:$item['tmpl_id'];
+                $itemAlt = ($item['name']?($item['name'].'. '):'').$item['desc'];
+                $appLink = link::c('template', $tmplId.'-'.controller::translit($title));//MAINURL.'/template/'.$tmplId.'-'.controller::translit($item['name']).'.html';
+                
+                $holidayLink = link::c('holidays', 'holiday', $item['holiday_id'].'-'.controller::translit($item['hName']));//MAINURL.'/holidays/holiday-'.$item['holiday_id'].'-'.controller::translit($item['hName']).'.html';
+                $today = isToday($item['date']);
+                $isnear = isset($near_holiday_id) && ($item['holiday_id'] == $near_holiday_id);                  
+                ?>
+                <div class="item holiday<?=($today?' today':'').($isnear?' near':'')?>">
+                    <div class="hInfo">
+                        <a class="hName hlink" href="<?=$holidayLink?>"><?=$item['hName']?></a>
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="hTmpl">
+                                <a href="<?=$appLink?>" data-id="a-<?=$tmplId?>" <?=$transition?>><img src="<?=FRAMES_URLPREVIEW.$tmplId?>.jpg" alt="<?=$itemAlt?>"></a>
+                            </td>
+                            <td class="desc">
+                                <b><?=todayDate($item['date'])?></b>
+                                <p><?=limitWords(strip_all_tags($item['hDesc']), 20)?></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="<?=$holidayLink?>" class="ui-btn ui-icon-star ui-btn-icon-left ui-shadow-icon"><?=$locale['HOLIDAYFRAMES']?></a>
+                </div>                
+                <?
+            }
+        } else {
+            $topheight = 280;
+            if ($holiday) {?>
+                <h2>Фоторамки и эффекты к празднику</h2>        
+            <?}
+            
+            $gid = implode(',', $groupIds);
+            
+            foreach ($items as $i=>$item) {
+                $tmplId = $item['tmpl_id'];
+               
+                $tl_name = controller::translit($item['name']);
+                $appLink = link::c('template', $tmplId, controller::translit($tl_name));
+                
+                $itemAlt = ($imgAlt?($imgAlt.'. '):'').$firstAlt.($item['name']?($item['name'].'. '):'').$item['desc'];
+                
+                $titleHTML = $item['name']?limitWords($item['name'], 5):'';
+                $footerLine = '<td><p>'.$titleHTML.'</p></td>';
+                //$pngFileURL = $sheme.'fotoprivet.com/games/models/tmpls/template'.($this->getVar('dev')?'_dev':'').'.php?id='.$tmplId;
+    
+               
+                echo '<div class="item catitm"><div class="dl">'.
+                    '<table><tr><td>'.
+                    '<div class="img-box"><a href="'.$appLink.'" '.$transition.'><img src="'.FRAMES_URLPREVIEW.$tmplId.'.jpg" alt="'.$itemAlt.'"/></a></div>'.
+                    '</td></tr><tr>'.
+                    $footerLine
+                    .'</tr></table></div></div>';
+            }
+        }
+    } else {
+?>   
+<span class="warning">На ваш запрос нет данных. Попробуйте выбрать более мягкие критерии поиска.</span>       
+<?
+    }
+?>      
+        </div>
+        <div class="v-indicator ui-header ui-bar-inherit clr"><?=$locale['WAITCOMPLETE']?></div>
+    </div>
+    </div>
+</div>

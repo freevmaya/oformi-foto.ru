@@ -1,0 +1,53 @@
+<h1>Быстрые ссылки, блок: <?=$block['name']?></h1>
+<h3>ID: <?=$block['id']?>, <?=$block['title']?></h3>
+<div>
+    <a href="?task=<?=Admin::$task[0]?>,blocks">Вернуться к списку блоков</a><br><br><br>
+<?                              
+    $link = Admin::getTaskLink();
+    if ($this->request->getVar('action', false) && isset($result) && $result)
+        echo '<h3 style="color:red">Успешно!</h3>';
+?>
+<form method="POST" action="<?=$link?>&group_id=<?=$group_id?>">
+    <?=$this->getLinksHtml('item_id', $this->request->getVar('item_id', 0))?><br>
+    <input type="hidden" name="action" value="add">
+    <input type="submit" value="Добавить">
+</form>
+<table class="report">
+    <tr> 
+        <th>
+            ID
+        </th>
+        <th>
+            Текст
+        </th>
+        <th>
+            атрибут: title
+        </th>
+        <th>
+            URL
+        </th>
+        <th>
+            Удалить
+        </th>
+    </tr>
+<?foreach ($list as $key=>$item) {?>
+    <tr class="<?=(($key%2)?'odd':'')?>?>">
+        <td>
+            <?=$item['id']?>
+        </td>
+        <td>
+            <?=$item['name']?>
+        </td>
+        <td>
+            <?=$item['title']?>
+        </td>
+        <td>
+            <a href="<?=MAINURL.'/'.$item['url']?>" target="_blank"><?=$item['url']?></a>
+        </td>
+        <td>
+            <a href="<?=$link?>&state=delete&action=delete&group_id=<?=$item['group_id']?>&item_id=<?=$item['item_id']?>" onclick="return confirm('Вы действительно хотите удалить запись?');">удалить</a>
+        </td>
+    </tr>
+<?}?>    
+</table>    
+</div>

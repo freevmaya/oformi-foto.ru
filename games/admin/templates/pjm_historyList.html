@@ -1,0 +1,21 @@
+<h2>Последнии истории</h2>
+<table class="report">
+    <tr>
+        <th>Время</th>
+        <th>history_id</th>
+        <th>Пользователь</th>
+        <th>Название</th>
+    </tr>
+    <?foreach ($list as $key=>$item) {?>
+    <tr>
+        <td><?=$item['createTime']?>
+        </td>
+        <td><a href="<?=$this->historyLink($item)?>" target="_blank"><?=$item['history_id']?></a>
+        </td>
+        <td><?=$item['uid']?>
+        </td>
+        <td><a href="<?=$this->historyLink($item)?>" target="_blank"><?=$item['name']?></a>
+        </td>
+    </tr>
+    <?}?>
+</table>

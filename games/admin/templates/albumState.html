@@ -1,0 +1,44 @@
+<h3>Статистика по альбомам</h3>
+<table class="report">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Количество пользователей
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2">
+            Тема
+        </th>
+    </tr>
+<? foreach ($albums as $album) {?>
+    <tr>
+        <td><?= $album['theme']?></td>
+        <td><?= $album['count']?></td>
+    </tr>
+<?}?>    
+    <tr>
+        <th colspan="2">
+            Музыка
+        </th>
+    </tr>
+<? foreach ($musics as $music) {?>
+    <tr>
+        <td><?= $music['music']?></td>
+        <td><?= $music['count']?></td>
+    </tr>
+<?}?>      
+    <tr>
+        <th colspan="2">
+            Фон
+        </th>
+    </tr>
+<? foreach ($backs as $back) {?>
+    <tr>
+        <td><?= $back['background']?></td>
+        <td><?= $back['count']?></td>
+    </tr>
+<?}?>      
+</table>

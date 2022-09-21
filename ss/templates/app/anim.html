@@ -1,0 +1,188 @@
+<?
+    GLOBAL $_GET, $ver;              
+    require_once(SSPATH.'templates/chrome_plugin.php');
+    define('IMAGEPROXY', '//oformi-foto.ru/getimage.php?src=');
+    
+//    require_once(SSPATH.'templates/banners.php');
+    $v = filemtime('anim_free/dev/anim_free.swf');
+    $dev = $this->getVar('dev'); 
+    $debug = $this->getVar('debug');
+    if ($dev) {    
+        $flashFile = MAINURL.'/anim_free/dev/anim_free.swf?v='.$v;
+    } else {  
+        $flashFile = MAINURL.'/anim_free/v1/anim_free.swf?v='.$v;
+    }     
+    
+    
+    $this->og['type'] = 'video.movie';
+    $this->og['video'] = MAINURL.'/video/demo_0001.mpeg';
+    $this->og['video:secure_url'] = 'https://oformi-foto.ru/video/demo_0001.mpeg';
+    $this->og['video:video:type'] = 'video/mpeg';
+    $this->og['video:video:width'] = '854';
+    $this->og['video:video:height'] = '641';
+     
+    $this->title = 'Как создать отличный фото видео клип.';
+    
+    $JSURL = MAINURL.'/'.SSRELATIVE.'js/';
+    $this->addMeta('page-image', MAINURL.'/images/promo/anim01.jpg');
+//    $this->addMeta('page-image', MAINURL.'/images/promo/kaleidoscope.gif');
+    
+    $this->description = 'Фото видео редактор, создай музыкальный видеоклип за пять минут! Все просто будут удивлены вашей работой. Вам не нужно специальных знаний и навыков что бы создать из СВОИХ ФОТОГРАФИЙ отличный музыкальный клип!';
+
+    if ($debug) {
+        ss::$noadv = true;
+        ss::$nomenu = true;
+        ss::$nofooter = true;
+    }
+?>
+<h1>Фото видео редактор</h1>
+<?    
+    if ($user = ss::getUser()) {
+        $balance = DB::line("SELECT SUM(`amount`) AS balance FROM `yandex-pay` WHERE `source`='{$user['source']}' AND `uid`='{$user['uid']}'");
+?>
+<style type="text/css">
+    #flashContainer {
+        margin:20px auto 20px auto;
+        padding: 40px 0px 10px 0px !important;
+        background: #F2F2F3;
+    }
+    
+    .video_demo {
+        width: 420px !important;
+        height: 315px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    #bvideo {
+        background: url(anim_ok/images/jpg/5.jpg); 
+        padding: 20px;
+        border: 3px solid yellow;
+        height: 480px;
+    }
+</style>
+<script src="<?=$JSURL?>external.js?v=<?=$ver?>" type="text/javascript"></script>
+<script type="text/javascript">
+    
+    var flashObject     = null;
+    
+    function loginUser(user) {
+        if (user) eval('external = ' + user.source + '_external');
+        else {
+            eval('external = default_external');
+            user = {
+                uid: 1
+            }
+        }
+        
+        var query           = $merge(user, <?=json_encode($_GET)?>);
+        query.balance       = <?=$balance['balance']?$balance['balance']:0;?>;
+        var ver             = '?v=<?=$v?>';
+        
+        function setUserValue(varName, value) {
+            if (!query[varName]) query[varName] = value; 
+        } 
+        
+        var div = $('wrapper');                   
+        
+        if (!query.flash) query.flash = '<?=$flashFile?>';
+        
+        
+        setUserValue('UNLOADMODEL', 'upload_free_01'); 
+        setUserValue('INTERNALMODEL', 'anim_free_01'); 
+        setUserValue('PERDAY_ENABLED', false);
+        
+        //setUserValue('IMAGEPROXY', (user.source == 'mm')?'<?=IMAGEPROXY?>':''); 
+        
+        if (query.flash) {
+            if (!query.data) query.data = 'data.json,vmaya/data.json';
+            
+            var params = {
+                quality                     : "high",
+                bgcolor                     : "#F0F0F2",
+                allowscriptaccess           : "always",
+                allowfullscreen             : "true",
+                allowFullScreenInteractive  : "true",
+                wmode                       : "direct",
+                scale                       : 'noscale',
+                menu                        : 'false',
+                salign                      : 'tl',
+                base                        : '<?=MAINURL?>/anim_ok/'
+            };
+            
+            var attributes = {
+                id      : 'embed',
+                name    : 'embed',
+                align   : 'middle',
+                scale   : 'noscale',
+                menu    : 'false'
+            };
+            
+            swfobject.embedSWF('<?=$flashFile?>', "embed", 930, 610, "11", "expressInstall.swf", query, params, attributes);
+            callbackObject = $('embed');
+        }
+    }
+    
+    window.addEvent('domready', function() {
+        if ($('bvideo')) {
+            var sine = 0;
+            (function() {
+                var bvideo = $('bvideo');
+                if (bvideo) {
+                    bvideo.setStyle('background-position', Math.round(Math.sin(sine) * 10) + 'px');
+                    sine += 0.1;
+                }
+            }).periodical(1000 / 24);
+        }
+    });
+    
+    <?if ($debug) {?>
+    window.addEvent('domready', function() {
+         callbackObject = $('embed');
+         eval('external = mm_external');
+    });
+    <?} else {?>
+    window.addEvent('userInfo', function(user) {
+        if (user) {
+            loginUser(user);
+        } else {
+            $('loginHelp').setStyle('display', 'block');
+            $('flashContainer').set('html', '');
+            $('flashContainer').setStyle('display', 'none');
+        }
+    });    
+    <?}?>
+</script>
+<div id="flashContainer" class="wrapper post">
+    <div style="width: 930px; margin:0 auto;">
+        <?if ($debug) {?>
+        
+        <object style="visibility: visible;" data="http://oformi-foto.ru/anim_free/dev/anim_free.swf?v=<?=$v?>" menu="false" scale="noscale" name="embed" id="embed" type="application/x-shockwave-flash" align="middle" height="610" width="930"><param value="high" name="quality"><param value="#F0F0F2" name="bgcolor"><param value="always" name="allowscriptaccess"><param value="true" name="allowfullscreen"><param value="true" name="allowFullScreenInteractive"><param value="direct" name="wmode"><param value="noscale" name="scale"><param value="false" name="menu"><param value="tl" name="salign"><param value="http://oformi-foto.ru/anim_ok/" name="base"><param value="source=mm&amp;pic_50=http://avt-27.foto.mail.ru/mail/fwadim/_avatar50?1402048674&amp;video_count=17&amp;friends_count=146&amp;show_age=1&amp;nick=Вадим Фролов&amp;is_friend=0&amp;is_online=0&amp;email=fwadim@mail.ru&amp;has_pic=1&amp;follower=0&amp;pic_190=http://avt-22.foto.mail.ru/mail/fwadim/_avatar190?1402048674&amp;referer_id=&amp;app_count=[object Object]&amp;following=0&amp;pic_32=http://avt-1.foto.mail.ru/mail/fwadim/_avatar32?1402048674&amp;referer_type=&amp;last_visit=1447401121&amp;uid=8062938299454250872&amp;app_installed=1&amp;status_text=Проба пера в игроделание https://www.youtube.com/watch?v=W5qF5Z_fJMY Устанавливаем отсюда: https://play.google.com/store/apps/details?id=com.vf.eagle&amp;pic_22=http://avt-18.foto.mail.ru/mail/fwadim/_avatar22?1402048674&amp;has_my=1&amp;age=46&amp;last_name=Фролов&amp;is_verified=1&amp;pic_big=http://avt-4.foto.mail.ru/mail/fwadim/_avatarbig?1402048674&amp;vip=0&amp;birthday=07.09.1969&amp;link=http://my.mail.ru/mail/fwadim/&amp;pic_128=http://avt-25.foto.mail.ru/mail/fwadim/_avatar128?1402048674&amp;sex=0&amp;pic=http://avt-16.foto.mail.ru/mail/fwadim/_avatar?1402048674&amp;pic_small=http://avt-16.foto.mail.ru/mail/fwadim/_avatarsmall?1402048674&amp;pic_180=http://avt-9.foto.mail.ru/mail/fwadim/_avatar180?1402048674&amp;first_name=Вадим&amp;pic_40=http://avt-30.foto.mail.ru/mail/fwadim/_avatar40?1402048674&amp;task=app,anim&amp;target=d2&amp;dev=1&amp;flash=http://oformi-foto.ru/anim_free/dev/anim_free.swf?v=1447409819&amp;UNLOADMODEL=upload_free_01&amp;INTERNALMODEL=anim_free_01&amp;PERDAY_ENABLED=false&amp;data=data.json,vmaya/data.json&amp;balance=712.21" name="flashvars"></object>
+        
+<!--OK
+        <object style="visibility: visible;" data="http://oformi-foto.ru/anim_free/dev/anim_free.swf?v=<?=$v?>" menu="false" scale="noscale" name="embed" id="embed" type="application/x-shockwave-flash" align="middle" height="610" width="930"><param value="high" name="quality"><param value="#F0F0F2" name="bgcolor"><param value="always" name="allowscriptaccess"><param value="true" name="allowfullscreen"><param value="true" name="allowFullScreenInteractive"><param value="direct" name="wmode"><param value="noscale" name="scale"><param value="false" name="menu"><param value="tl" name="salign"><param value="http://oformi-foto.ru/anim_ok/" name="base"><param value="source=ok&amp;uid=351762715688&amp;birthday=1969-09-07&amp;age=46&amp;name=Вадим Фролов&amp;locale=ru&amp;gender=male&amp;location=[object Object]&amp;online=web&amp;first_name=Вадим&amp;last_name=Фролов&amp;has_email=true&amp;photo_id=772590112040&amp;pic_1=http://i.mycdn.me/image?id=772590112040&amp;bid=772590126888&amp;t=32&amp;plc=API&amp;ts=00000000a8000d0211&amp;viewToken=_nJUEiHg7PT76Bmc_FnY0Q&amp;tkn=*D_x9YVxCWWbss56ci3D66A_lHpU&amp;pic_2=http://usd1.mycdn.me/image?id=772590112040&amp;bid=772590126888&amp;t=2&amp;plc=API&amp;ts=00&amp;viewToken=_nJUEiHg7PT76Bmc_FnY0Q&amp;tkn=*K2-gK57HKtbIuxqvUGMnz8_XnWk&amp;task=app,anim&amp;target=d2&amp;dev=1&amp;flash=http://oformi-foto.ru/anim_free/dev/anim_free.swf?v=1447401663&amp;UNLOADMODEL=upload_model_17&amp;INTERNALMODEL=anim_model_06&amp;PERDAY_ENABLED=false" name="flashvars"></object>
+-->
+<!--VK
+        <object style="visibility: visible;" data="http://oformi-foto.ru/anim_free/dev/anim_free.swf?v=<?=$v?>" menu="false" scale="noscale" name="embed" id="embed" type="application/x-shockwave-flash" align="middle" height="610" width="930"><param value="high" name="quality"><param value="#F0F0F2" name="bgcolor"><param value="always" name="allowscriptaccess"><param value="true" name="allowfullscreen"><param value="true" name="allowFullScreenInteractive"><param value="direct" name="wmode"><param value="noscale" name="scale"><param value="false" name="menu"><param value="tl" name="salign"><param value="http://oformi-foto.ru/anim_ok/" name="base"><param value="source=vk&amp;uid=44108006&amp;first_name=Вадим&amp;last_name=Фролов&amp;sex=2&amp;screen_name=fwadim&amp;bdate=7.9.1969&amp;photo_100=http://cs625317.vk.me/v625317006/4b0fc/r_rNQ3--tJ4.jpg&amp;photo_max_orig=http://cs625317.vk.me/v625317006/4b0fb/8AWOw_sLZU4.jpg&amp;task=app,anim&amp;target=d2&amp;dev=1&amp;flash=http://oformi-foto.ru/anim_free/dev/anim_free.swf?v=1447401663&amp;UNLOADMODEL=upload_free_01&amp;INTERNALMODEL=anim_free_01&amp;PERDAY_ENABLED=false&amp;data=data.json,vmaya/data.json" name="flashvars"></object>
+-->        
+        <?} else {?>    
+            <div id="embed">
+            </div>
+        <?}?>
+    </div>
+</div>
+<div class="post" id="loginHelp" style="display:none">
+    <h3>Чтобы сделать <b>видеоклип</b> из своих <i>фотографий</i> нужно <a href="http://oformi-foto.ru/?task=user,login">авторизоваться</a></h3>
+</div>
+<?} else {?>        
+<div class="post" id="loginHelp">
+    <p>В этом <i>фото видео</i> редакторе вы можете собрать оригинальный <i>музыкальный видеоклип</i> из своих <b>фотографий</b>, из альбомов соц-сетей или из фото загруженных с компьютера.</p>
+    <p>Примерно такой <b>музыкальный видеоклип</b> вы можете собрать из своих <i>фотографий</i>. Для этого вам потребуется пять минут и вы станете обладателем эксклюзивного <b>видео ролика</b>.</p>
+    <p>Чтобы сделать <b>видеоклип</b> из своих <i>фотографий</i> нужно <a href="http://oformi-foto.ru/?task=user,login">авторизоваться</a></p>
+    <div id="bvideo">
+        <iframe style="height:480px;" class="video_demo" src="https://www.youtube.com/embed/q-pvGXnP3_E" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<?}?>
+    <?if (!$debug) include(TEMPLATES_PATH.'/social.html');?>
+</div>

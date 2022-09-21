@@ -1,0 +1,71 @@
+<?
+    $this->styles[] = SSURL.'dispute.css';
+    
+    function userName($user) {
+        if (is_numeric($user)) return $user;
+        else return $user['first_name'].' '.$user['last_name'];
+    }
+    
+    function userBlock($user) {
+        if (is_numeric($user)) {
+            $result = '<div class="ds-user" rel="'.$user.'">
+                <div class="ds-user-name"></div>
+                <a class="ds-user-link" href="" target="_blank"><img class="ds-user-pic" src="" rel=""></a>
+                <div class="ds-user-info"></div>        
+            </div>';
+        } else {
+            $s_name = userName($user);
+            $a_data = $user['name']?$user['name']:$s_name;
+            $result = '<div class="ds-user" rel="'.$user['uid'].'">'.
+                '<div class="ds-user-name">'.$a_data.'</div>'.
+                '<a class="ds-user-link" href="'.$user['url'].'" target="_blank"><img class="ds-user-pic" src="'.($user['pic']?$user['pic']:DEFAULTUSERIMAGE).'" rel="'.($user['pic']?1:0).'" alt="'.$a_data.'"></a>';
+    
+            if ($s_name != $a_data) $result .= '<div class="ds-user-info">'.$s_name.'</div>';
+            $result .= '</div>';
+        }
+        
+        return $result;
+    }
+    
+    include_once(MOBILETEMPLATEPATH.'/paginator.php');
+    
+    $paginator = paginator($page, $totalPages, link::c('discussion', $method, '%d'));
+?>
+
+<script type="text/javascript">
+</script>
+<div role="main" class="ui-content jqm-content jqm-fullwidth catalog">
+    <div>
+        <div style="height:30px;"><?=$paginator?></div>
+    <?
+        if ($result['list'])
+            foreach ($result['list'] as $item) {
+                $clname = ($item['name']?$item['name']:'Коллаж').' '.userName($item['user']);
+    ?>
+        <div class="ds-leader">
+            <div class="leader-image">
+                <a href="<?=link::c((intval($item['best'])==1)?'best-collage':'discussion', $item['id'])?>" <?=($item['noVictory'] == 0)?'rel="nofollow"':''?>><img src="<?=$this->collageURL($item['id']);?>" alt="<?=$clname?>" title="<?=$clname?>"></a>
+            </div>
+            <div class="ds-info">
+                <h2><?=$item['name']?></h2>
+                <table>
+                    <tr class="ds-param">
+                        <td>Номер коллажа</td><td class="right"><?=$item['id']?></td>
+                    </tr>
+                    <tr class="ds-param">
+                        <td>Рейтинг</td><td class="right"><?=$item['rate']?></td>
+                    </tr>
+                    <tr class="ds-param-small">
+                        <td>Время публикации</td><td class="right tipz" title="Информация::<?=$this->collageInfo($item)?>"><?=$this->collageStartTime($item)?></td>
+                    </tr>
+                </table>
+                <div id="ds-autor">
+                    <h3>Автор</h3>
+                    <?=userBlock($item['user']);?>
+                </div>
+            </div>
+        </div>
+    <?}?>
+        <div style="height:30px;"><?=$paginator?></div>
+    </div>
+</div>

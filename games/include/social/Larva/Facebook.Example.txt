@@ -1,0 +1,13 @@
+<?php
+	
+	try {
+
+		$larva = new Social_Larva_Facebook('email', 'password');
+		$larva->updateStatus('Status text', 'Only me');
+		$larva->__destruct();
+
+	} catch (Exception $e) {
+		print $e->getMessage();
+	}
+	
+?>

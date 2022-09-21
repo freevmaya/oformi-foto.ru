@@ -1,0 +1,36 @@
+<?if (count($collages) > 0) {
+?>
+<h3><?=$isMainPage?$locale['MAINGAMES']:$locale['USERGAMES']?></h3>
+<div class="games">
+    <div style="width: <?=count($collages) * 110?>px">
+    <?foreach ($collages as $item) {?>
+       <div class="g-item <?=$item['state']?>" id="g-<?=$item['game_id']?>">
+            <div class="game-state"></div>
+            <?if ($isMainPage || ss::$isAdmin) {?>
+            <div class="game-menu">
+                <div class="submenu">
+                    <a data-action="remove" data-id="<?=$item['game_id']?>"><?=$locale['REMOVEGAME']?></a>
+                    <?if (!$pushall['state']) {?>
+                    <a data-action="subsgame" data-id="<?=$item['game_id']?>"><?=$locale['SUBSEVENTS']?></a>
+                    <?}?>
+                </div>
+            </div>
+            <?}?>
+            <a href="<?=link::c('game', 'view', $item['game_id'])?>" class="tipz" title="<?=$locale['INFO']?>::<?=$this->gameInfo($item)?>" style="background-image: url(<?=$this->gameImageURL($item)?>)">
+                <!--<img src="<?=$this->gameImageURL($item)?>">-->
+            </a>
+       </div>     
+    <?}?>
+    </div>
+</div>
+<?}?>
+<?if ($isMainPage || ss::$isAdmin) {?>
+<script type="text/javascript">
+    window.addEvent('userInfo', function(e) {
+        loadLastEvents($$('.last_events'), {uid: '<?=$user['uid']?>', source: '<?=$user['source']?>'});
+    });
+</script>    
+<h2><?=$locale['LASTEVENTS']?></h2>
+<div class="last_events">
+</div>
+<?}?>

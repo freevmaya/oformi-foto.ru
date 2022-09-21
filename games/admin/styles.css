@@ -1,0 +1,237 @@
+body {
+    font-family: Arial, Tahoma;
+    font-size: 12px;
+}
+
+table td {
+    font-size: 12px;
+}
+
+table th a {
+    color: white;
+}
+
+div.state {
+    float: left;
+    width: 230px;
+    border-right: 1px solid gray;
+}
+
+div.result {
+    position: absolute;
+    margin-left: 240px;
+}
+
+div.state a {
+    display: block;
+    padding: 5px;
+    border: 1px solid #EEE;
+    margin: 2px;
+    width: 210px;
+    text-decoration: none;
+}
+
+div.state a:hover {
+    background: #EE0000;
+    color: white;
+}
+
+table.report {
+    min-width: 600px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+table.report td {
+    padding: 5px; 
+    padding-bottom: 4px;
+}
+
+.report tr:hover td {
+    padding-bottom: 0px !important;
+    border-bottom: 4px solid #AAF;
+} 
+
+table.report th {
+   background: #888888;
+   color: white;
+   padding: 5px;
+}
+
+tr.odd td {
+    background: #EEEEEE;
+}
+
+tr.admin td {
+    border: 1px solid black;
+}
+
+#tmplBox {
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid gray;
+    margin-top: 10px;
+}
+
+#tmplBox table {
+    margin: 10px;
+}
+
+#tmplBox .pName {
+    text-align: right;
+    font-weight: bold;
+    min-width: 150px;
+}
+
+.line {
+}
+
+.warning {
+    color: #FF2200;
+    font-weight: bold; 
+}
+
+.message {
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: 1px solid #AAA;
+    margin: 10px 0;
+    padding: 10px;
+    background: #FFFFAA;
+}
+
+.message pre {
+    font-family: Arial, Tahoma;
+    font-size: 9px;
+    color: #555500;
+}
+
+.block, .panel {
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: 1px solid #AAA;
+    margin: 10px 0;
+    padding: 15px;
+}
+
+.panel {
+    background: #CCC;
+}
+
+.panel input {
+    border: 1px solid gray;
+    padding: 2px 10px;
+}
+
+
+.paginator {
+    display: block;
+    text-align: right;
+    margin: 5px;
+}
+
+.paginator p {
+    display: inline-block;
+    padding: 2px 5px;
+    color: gray;
+}
+
+.paginator span {
+    display: inline-block;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    text-align: center;
+    min-width: 18px;
+    background: #FFF;
+}
+
+.paginator span a {
+    display: block;
+    padding: 2px 3px;
+    min-width: 18px;
+}
+
+.paginator .current {
+    border: 1px solid gray;
+}
+
+.tmplContext {
+}
+
+.tmplContext div.item {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid gray;
+    width: 170px;
+    height: 216px;
+    float: left;
+    text-align: center;
+    display: inline-grid;
+}
+
+.item div {
+}
+
+.state1 {
+    background: #CEF;
+}
+
+.state2 {
+    background: #FE8;
+}
+
+.item img {
+    cursor: pointer;
+}
+
+.separator {
+    border-top: 1px solid gray;
+    margin: 10px;
+}
+
+.active td {
+    background: #AAEEAA !important;
+}
+
+.menu h3 {
+    cursor: pointer;
+}
+
+.menu a {
+    display: block;
+    overflow: hidden;
+}
+
+.menu .current {
+    background: #888;
+    color: white;
+    border: 0 !important;
+}
+
+.noactive {
+    color: #AAA;
+}
+
+.noactive a {
+    color: #AAF;
+}
+
+.a-right {
+    text-align: right;
+}
+
+.param {
+    font-weight: bold;
+    min-width: 200px;    
+} 
+
+.report td img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+}
+
+.mce-notification-warning {
+    display: none;
+}

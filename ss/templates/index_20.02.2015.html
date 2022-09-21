@@ -1,0 +1,127 @@
+<?
+    GLOBAL $menuList, $_SESSION;
+    $title = $controller->getTitle('Прикольное оформление ваших фотографий');
+    $description = $controller->getDescription('Создай открытку, календарик, этикетку со своим фото, сохрани на компьютер, отправь другу или размести в гостевой. Преврати свое фото в шедевр!');
+    $keywords = $controller->getKeywords('прикольное оформление, коллаж фотографий, рамка онлайн, коллаж онлайн, фото-открытка, оформление фотографий');
+    $ver = 1;
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru" dir="ltr">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1251" />
+    <meta name="description" content="<?=$description?>" />
+    <meta name="keywords" content="<?=$keywords?>" />
+    <meta name="verify-admitad" content="28733bfc01" />
+    <meta name="mrc__share_title" content="<?=$title?>" />
+    <meta name="mrc__share_description" content="<?=$description?>" />
+    <meta name='yandex-verification' content='4a7430ebd7905ad9' />
+    <meta name="cpazilla-site-verification" content="854691c9d4b4c96e3" />
+    <link rel="image_src" href="pj/images/75x75_cat.png" />
+    <title><?=$title?></title>
+	<link rel="stylesheet" href="<?=MAINURL.'/'.SSRELATIVE.$controller->getFileStyle('styles.css')?>?v=<?=$ver?>" type="text/css" media="screen" />
+<?
+        foreach ($controller->getStyles() as $fileStyle) {
+            echo '<link rel="stylesheet" href="'.$fileStyle.'?v='.$ver.'" type="text/css" media="screen" />'."\n";
+        }
+?>
+    <script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="<?=MAINURL?>/pj/js/swfobject.js" type="text/javascript"></script>
+    <script src="<?=MAINURL.'/'.SSRELATIVE?>js/mootools-1.2.6-core-yc.js" type="text/javascript"></script>
+    <script src="<?=MAINURL.'/'.SSRELATIVE?>js/app.js?v=1" type="text/javascript"></script>
+<?
+        foreach ($controller->getScripts() as $fileScript) {
+            echo '<script src="'.$fileScript.'?v='.$ver.'" type="text/javascript"></script>'."\n";
+        }
+?>    
+    <script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function submenuInit(topitem) {
+            var submenu = topitem.getElement('.submenu');
+            if (submenu) {
+                submenu.setStyle('opacity', 0);
+                topitem.addEvent('mouseover', function(e) {
+                    submenu.setStyle('display', 'block');
+                    submenu.fade(1);
+                });
+                topitem.addEvent('mouseout', function(e) {
+                    submenu.fade(0);
+                    (function() {
+                        if (submenu.getStyle('opacity') == 0) submenu.setStyle('display', 'none');
+                    }).delay(500);
+                });
+            }
+        }
+    
+        window.addEvent('domready', function() {
+            new PJApp({URL: '<?=SSURL?>echo.php'}, <?=json_encode(@$_SESSION['user'])?>);
+        });
+        
+        window.addEvent('userInfo', function(user) {
+            var userBlock = $('user'); 
+            var avatar = $('avatar');
+            if (user && user.app_installed) {
+                userBlock.getElement('h2').set('text', app.getUserLogin(user));
+                submenuInit(userBlock);
+                avatar.setStyle('background', (user?('url(' + user.pic_small + ') no-repeat center center'):''));
+            } else {
+                userBlock.getElement('h2').set('text', '');
+                avatar.setStyle('background', '');
+            }
+        });
+        
+        window.addEvent('login_status', function(e) {
+            if (!e.status) {
+                with (new Ya.Metrika(5639515)) {
+                    clickmap(true);
+                    hit(document.location.href);
+                }
+            } 
+        });
+        
+    </script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-23388080-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>    
+</head>
+<body>
+<div id="bodyArea">
+    <?include_once(SSPATH.'helpers/flashTest.html')?>
+    <?if (!ss::$nomenu) include TEMPLATES_PATH.'menu.html'?>
+    <div id="up-panel">
+        <?
+            GLOBAL $target;
+            if ($target) {
+                echo '<div class="session">target: '.$target.'</div>';
+            }
+        ?>
+    </div>
+    <? //include(TEMPLATES_PATH.'/cpazzila.html') ?>
+    
+   <div id="content">
+        <div class="wrapper">
+            <?include_once(TEMPLATES_PATH.'check_android.php')?>
+            <?if (!ss::$noadv) include_once(TEMPLATES_PATH.'topadv.html');?>            
+            <?=$content?>
+            <?//require(TEMPLATES_PATH.'clodoWords.html')?>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="wrapper">
+        <span>Разработано <a href="mailto:fwadim@mail.ru">"vmaya"</a> 2011-2014 год.</span>
+    </div>
+</div>
+<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter4524184 = new Ya.Metrika({id:4524184, clickmap:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/4524184" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+</body>
+</html>

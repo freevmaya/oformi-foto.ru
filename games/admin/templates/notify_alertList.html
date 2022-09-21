@@ -1,0 +1,19 @@
+<?
+    foreach ($list as $index=>$item)
+        $list[$index]['Выбор'] = '<input type="checkbox" value="'.$item['id'].'" name="select[]"/>'; 
+?>
+<h3>
+    Сообщения в приложении
+</h3>
+<div class="block">
+    <form method="POST" action="<?=Admin::getTaskLink()?>">
+        <?=$this->showTable($list);?>
+        <div>
+            <select name="action">
+                <option value="none">--</option>
+                <option value="clear">Удалить собщения выбранных типов</option>
+            </select>
+        </div>
+        <input type="submit">
+    </form>
+</div>

@@ -1,0 +1,19 @@
+<script type="text/javascript">
+     function sendSearch(form) {
+        var text = form.getElement('.searchText').get('value').trim();
+        text = translit(text.replace(/\s+/g, '+'));
+        if (text && (text.length > 2)) {                             
+            form.set('action', '<?=link::c(FINDSELECTOR, '%s');?>'.replace('%s', text));
+            return true;
+        } else {
+            alert(locale.TOOSMALLTEXT);
+            return false;
+        }        
+     }
+</script>
+<div id="search">
+    <form method="POST" onsubmit="return sendSearch(this);">
+        <label for="searchText"><?=$locale['SEARCHLABEL']?></label>
+        <input class="searchText" type="text" name="searchText" id="searchText" value="<?=$this->getVar('searchText', '');?>"/><input type="submit" value=" "/>
+    </form>
+</div>

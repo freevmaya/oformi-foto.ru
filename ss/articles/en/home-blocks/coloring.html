@@ -1,0 +1,29 @@
+<?
+    $imgurl = SSURL.'articles/images/coloring/';
+    $applink = link::c('app', 'coloring');
+    $alt = 'Turn a black and white photo into a color photo';
+    ss::addCSS('.images', 'text-align: center;');
+    ss::addCSS('.images img', 'display:inline-block;padding:0px;margin:3px;max-height:180px;');
+?>
+<div class="post">
+    <h2>We turn a black and white photo into a color photo.</h2>
+    <p>Make the photo more attractive or paint an old black and white photo! Now it can be done with the help of a new <a href="<?=$applink?>">instrument</a> color styling.</p>
+    <p>In this <a href="<?=$applink?>">приложении</a> you can color a photo or make a color stylization. You can create interesting works from old photos. If you want to revive an old photo, you will need a scanner, our <a href="<?=$applink?>">application</a> and a little patience.</p>
+    <div class="images">
+        <img src="<?=$imgurl?>1_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>1_out.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>2_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>2_out.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>3_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>3_out.jpg" alt="<?=$alt?>">
+    </div>
+    <div class="post-footer">
+        <a href="<?=link::c('article', 'raskraska-cherno-belykh-fotografiy');?>" class="ctrl-button app-link">
+            Learn More
+        </a>
+        <a href="<?=$applink?>" class="ctrl-button app-link">
+            Start Coloring
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

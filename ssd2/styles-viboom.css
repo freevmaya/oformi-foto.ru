@@ -1,0 +1,76 @@
+#viboom {
+    position: fixed;
+    z-index: 65558;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.viboom-curtain {
+    position: absolute;
+    z-index: 65560;
+    width: 550px;
+    height: 350px;
+} 
+
+.viboom-frame,
+.rtp-wrapper {
+    margin: 0px auto;
+}                    
+
+.viboom-frame {
+    width: 550px;
+    border: 5px solid black;
+    transition: margin-top .6s cubic-bezier(1, 0, .79, .97);
+}
+
+.rtp-wrapper, .viboom-title, .viboom-footer {
+    background: black;
+}
+
+.vdshow {
+    display: block !important;
+}
+
+.viboom-title, .viboom-footer {
+    width: 550px;
+    margin: 0px auto;
+    line-height: 20px;
+    color: white;  
+}
+
+.viboom-footer a {
+    display: none;
+    opacity: 0;
+    transition: opacity .6s;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.canclose a {
+    display: block;            
+    opacity: 1;
+}
+
+.viboom-title {
+    margin-top: 0px;
+    transition: margin-top .6s;
+}
+
+.canclose .viboom-title {
+    margin-top: -20px !important;
+}
+
+.canclose .time-block {
+    display: none;
+}
+
+.canclose .viboom-footer a {
+    display: block !important;
+}

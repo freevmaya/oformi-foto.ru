@@ -1,0 +1,6 @@
+<?
+if ($_SERVER['REQUEST_URI'] > '/') {
+    if (!ss::$noadv) require(TEMPLATES_PATH.'adv/cpazilla.html');
+    //if (!ss::$noadv) require(TEMPLATES_PATH.'adv/google-adv-1000.html');
+}
+?>

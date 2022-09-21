@@ -1,0 +1,31 @@
+<?
+GLOBAL $isSocial, $locale, $_SERVER;
+if (!ss::$nofooter) {
+?>
+<div id="footer">
+    <div class="wrapper">
+        <div class="copiright">
+            <span><?=$locale['DEVELOPEDTO']?> <a href="mailto:fwadim@mail.ru">"vmaya"</a> 2011-<?=date('Y')?></span>
+            <span><a href="<?=link::c('article', 'privacy-policy-of')?>"><?=$locale['PRIVACYPOLICY']?></a></span>
+        </div>        
+        <div></div>
+    </div>
+    <div style="display:none"><?=$_SERVER['HTTP_REFERER']?></div>
+</div>
+<?}?>
+<? //include(__DIR__.'/yandex_metrica.php')?>
+<div id="fixed-footer">
+    <div class="wrapper">
+        <a class="subscribe_push"><?=$locale['SUBSCRIBE']?></a>
+        <a onclick="showThankView()" style="margin-right: 10px;"><?=$locale['THANKYOU']?></a>
+        <div id="payList" class="payList">
+            <h3><?=$locale['PAYHISTORYTITLE']?></h3>
+            <p class="note"><?=$locale['PAYHISNODE']?></p>
+            <div class="pl-items">
+                <table>
+                </table>
+            </div>
+            <p class="thank"><?=$locale['THANKYOUDESC']?></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<h2>Системная информация</h2>
+<span><?=date('d.m.Y H:i:s')?></span>
+<table class="report">
+    <tr>
+        <th>
+            Сервер
+        </th>
+        <th>
+            Диск
+        </th>
+        <th>
+            Размер диска
+        </th>
+        <th>
+            Свободное дисковое пространство
+        </th>   
+        <th>
+            %
+        </th>
+        <th>
+        </th> 
+        <th>
+        </th>
+    </tr>
+<?
+foreach ($servers as $server=>$data) {
+?>    
+    <tr>
+        <td>
+            <b><?=$server?></b>
+        </td>
+        <td colspan="5">
+            <hr>
+        </td>
+    </tr>
+<?
+    $index = 0;
+    foreach ($data as $disk=>$sysInfo) {
+        $class = ($index%2)?'':'odd';
+        $loadavg = $disk == 'loadavg';
+        $comment = '';         
+        if ($loadavg) {
+            $max = max($sysInfo);
+            if ($max > 50) {
+                $class = 'warning';
+                $comment = 'Большая нагрузка';
+            }
+        } else {
+            $percent = $sysInfo['freeSpace']/$sysInfo['totalSpace']*100;
+            if ($percent < 10) {
+                $class = 'warning';
+                $comment = 'Заканчивается свободное<br>пространство на диске';
+            } 
+        }
+        echo '<tr class="'.$class.'"><td></td>';
+        if ($loadavg) {
+?>
+        <td></td>
+        <td class="param">load average</td>
+        <td colspan="3">
+            <?=implode(', ', $sysInfo)?>
+        </td>
+        <td>
+            <div style="margin:5px;height:20px;width:<?=round($max * 25)?>px;background:#80F"></div>
+        </td>
+    </tr>
+<?
+        } else {
+?>
+        <td>
+            <?=$disk?>
+        </td>
+        <td>
+            <?=$sysInfo['totalSpace']?> Мб.
+        </td>
+        <td>
+            <?=$sysInfo['freeSpace']?> Мб.
+        </td>
+        <td>
+            <?=round($percent)?>%
+        </td>
+        <td>
+            <?=$comment?>
+        </td> 
+        <td>
+        </td>
+    </tr>
+<?
+        }
+        $index++;
+    }
+}
+?>    
+</table>

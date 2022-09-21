@@ -1,0 +1,25 @@
+<h2>Состояние сервера</h2>
+<table class="report">
+    <tr>
+        <td>
+            Скорость канала
+        </td>
+        <td>
+            <?=round($result['speed']['kbTotal']/1024)?>
+        </td>
+        <td>
+            Мб.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Память
+        </td>
+        <td>
+            <?=round($result['mem']['used']/1024)?> / <?=round($result['mem']['total']/1024)?>
+        </td>
+        <td>
+            Мб.
+        </td>
+    </tr>
+</table>

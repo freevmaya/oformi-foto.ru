@@ -1,0 +1,59 @@
+<h2>Альбомы пользователя</h2>
+<form method="POST" action="?task=album,albumList">
+<table>
+    <tr>
+        <td>
+            UID:
+        </td>
+        <td>
+            <?=$this->html_uidInput()?>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="ok">
+        </td>
+    </tr>
+</table>
+</form>
+<?if (@$delResult) {?>
+<h3>Запись уделана!</h3>
+<?}?>
+<?if (isset($list)) {?>
+<table class="report">
+    <tr>
+        <th>
+            Удалить
+        </th>
+        <th>
+            файл
+        </th>
+        <th>
+            Размер
+        </th>
+        <th>
+            Параметры
+        </th>
+    </tr>
+    <?foreach ($list as $item) {?>
+    <tr>
+        <td>
+            <a href="?task=album,albumList&action=delete&sid=<?=$item['service_id']?>&time=<?=$item['time']?>">X</a>
+        </td>
+        <td>
+            <?if ($item['url']) {?>
+                <a href="<?=$item['url']?>" target="_blank"><?=$item['fileName']?></a>
+            <?} else {?>
+                <?=$item['fileName']?>
+            <?}?>
+        </td>
+        <td>
+            <b><?=$item['size']?></b>
+        </td>
+        <td>
+            <b><?=$item['params']?></b>
+        </td>
+    </tr>
+    <?}?>
+</table>
+<?}?>

@@ -1,0 +1,264 @@
+.catalog {
+    margin-bottom: 10px;
+}
+
+.cats {
+    margin: 0px 0px 30px;
+}
+
+#tmpls {
+    width: 820px
+}
+
+.catalog .cats {
+    width: 180px;
+}
+
+.cats a {
+    display: inline-block;
+    padding: 4px;
+    font-size: 13px;
+    color: #656565 !important;
+}
+
+.cats a:hover {
+    color: white !important;
+}
+
+.cats span {
+    display: block;
+    font-size: 13px;
+}
+
+.cats h3 {
+    font-weight: bold;
+    color: #776;
+}
+
+.cats h2 {
+    margin: 15px 5px;
+}
+
+.item h3 a {
+    color: #444 !important;
+}
+
+.cats span input {
+    margin: 5px 5px 0px 5px;
+}
+
+.item span, .item span a {
+    color: #555 !important;
+}
+
+.cats .current {
+    background: #AAA;
+    color: #FFF;
+}
+
+.catalog .list {
+    width: 830px;  
+}
+
+.list div.item {
+    float: left;
+    margin: 2px;
+    padding: 3px;
+    background-color: #F7F7F7;
+    border: 1px solid #DDD;
+    overflow: hidden;
+}
+
+.item span {
+    display: block;
+    height: 52px;
+}
+
+.item span span,
+.item span h3 {
+    width: 170px;
+    overflow: hidden;
+}
+
+.hDesc {
+    padding: 10px;
+    font-size: 1.3em;
+}
+
+.item span span {
+    font-size: 9px;
+    padding: 3px;
+    color: #444;
+    display: block;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.item span h3 {
+    font-size: 14px;
+    height: 17px;
+}
+
+.catalog .list td {
+    width: 185px;
+    height: 170px;
+    border: 1px solid #DDD;
+    text-align: center;
+    background: #FFF;
+}
+
+.noPicture {
+    background-image: url(images/nopicture.jpg) center center no-repeat;
+}
+
+.item-tools {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    height: 0px;
+}
+
+.toolButton {
+    display: inline-block;
+    width: 26px;
+    height: 23px; 
+    cursor: pointer;
+    margin: 2px;
+}
+
+.near {
+    border: 2px solid #F8F !important;
+    background: white !important; 
+}
+
+/*
+.list div.item .toolButton {
+    visibility: hidden;
+}
+
+.list div.item:hover .toolButton {
+    visibility: visible;
+}
+*/
+
+.zoom {
+    background: url(images/zoom.gif) center center no-repeat;
+}
+
+.inject {
+    background: url(images/inject.gif) center center no-repeat;
+}
+
+.appeal {
+    margin: -2px 0px 0px 58px;
+    background: url(images/appeal.gif) center center no-repeat;
+}
+
+.desc {
+    color: #808080;
+    font-size: 13px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    padding: 10px;
+    text-indent: 30px;
+}
+
+.desc img {
+    margin: 5px 15px 5px 5px;
+}
+
+.desc a {
+    color: #33A;
+    text-decoration: underline !important;
+}
+
+.desc .quick-links {
+    padding: 0px 0px 0px 20px !important;
+}
+
+.desc .quick-links h3 {
+    margin: 5px 0px 5px 23px !important;
+}
+
+.currentHoliday a {
+}          
+
+.currentHoliday img {
+    max-width: 170px;
+    margin: 0 auto;
+}
+
+.share42init {
+    float:left;
+    width: 300px;
+    margin: 5px 0px -2px 2px;
+}
+
+.tmpls_header {
+}
+
+#tmpls h2 {
+    display: block;
+    width: 450px;
+}
+
+#tmpls .search_block {
+    float: right;
+    width: 350px;
+}
+
+.gsc-control-cse {
+    padding: 0px;
+}
+
+
+.item .adv {
+    width: 398px;
+    color: #555;
+    text-align: center;    
+} 
+
+.holiday {
+    float:none !important;
+}
+
+.hTmpl {
+    float: right;
+}
+
+.hInfo {
+    float: left;
+    width: 420px;
+}
+
+.hName {
+    font-size: 16px;
+    margin: 10px;
+    display: block;
+    color: black;
+    text-decoration: underline;
+}
+
+.today {
+    background: #FEA !important;
+}
+
+.today b {
+    color: red;    
+}
+
+.sbox-content-iframe iframe {
+    border: 0;
+    overflow:hidden;
+}
+
+.groups a { 
+    display: block;
+    padding: 5px 20px;
+    font-size: 14px;
+}

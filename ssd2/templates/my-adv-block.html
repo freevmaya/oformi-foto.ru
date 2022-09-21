@@ -1,0 +1,61 @@
+<?
+    GLOBAL $locale;
+    $noPages = array('app', 'articles', 'order');
+    if ((ss::lang() == 'ru') && (array_search(ss::$task[0], $noPages) === false)) {
+?>
+<script type="text/javascript">
+    (function() {
+        var date = (new Date()).getDate();
+        var childadv, isshow = <?=(ss::isDev()?'false':'Cookie.read(\'MADV\') == date')?>;
+        var ws;        
+        
+        function show(url, img, title, desc) {  
+            if (!isshow) {        
+                var a = (new Element('a', {
+                    href: url,
+                    title: title,
+                    html: '<img src="' + img + '">' 
+                })).inject(childadv);                            
+                                                                                      
+                ws = window.getSize();
+                a.store('tip:title', title);
+            	a.store('tip:text', desc);
+                a.getElement('img').addEvent('load', function() {
+                    childadv.setStyles({
+                        'margin-left': '-230px',
+                        'opacity': 1
+                    })                                        
+                });
+                
+                new Tips(a, {
+                    className : 'tipz',
+                    hideDelay: 50,
+                    showDelay: 50
+                });
+                
+                isshow = true;
+                Cookie.write('MADV', date, {duration: 1})
+            }                                                    
+        }
+        
+        function showCADV() {   
+            show('<?=$sheme?>play.google.com/store/apps/details?id=vmaya.oformifoto.child', '<?=SSURL?>images/child-banner.png', '<?=$locale['DESCRIPTION']?>', 'Детские фоторамки для вашего телефона или планшета');
+        }                
+        
+        window.addEvent('domready', function() {
+            childadv = $('childadv');        
+            var ch = $('currentHoliday');
+            ws = window.getSize();            
+            childadv.setStyles({
+                top: (80 + (ch?(ch.getSize().y):0)) + 'px', 
+                'margin-left': (-(ws.x - 1000) / 2) + 'px',
+                'opacity': 0,
+                'transition': '2s opacity, 2s margin-left'
+            })
+            if (ws.x >= 1300) showCADV.delay(5000);
+        });
+    })();
+</script>
+<div id="childadv">
+</div>
+<?}?>

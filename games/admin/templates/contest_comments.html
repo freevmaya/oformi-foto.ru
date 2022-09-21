@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    function checkSubmit(form) {
+        return confirm('Вы действительно выбранные записи?');
+    } 
+</script>                                                                             
+<h1>Комментарии</h1>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&com-page=%s')?>
+</div>
+<form action="<?=Admin::getTaskLink()?>" method="POST" id="cform">
+<div class="panel">
+    <?if ($waitOnly) {?>
+        <input type="checkbox" name="allRecs" onchange="$('cform').submit()">Показать все записи
+    <?} else {?>
+        <input type="checkbox" name="waitOnly" onchange="$('cform').submit()">Показать только ожидающие модерации
+    <?}?>
+</div>
+<table class="report">
+    <tr>
+        <th>*</th>
+        <th>Дата</th>
+        <th>uid</th>
+        <th>Пользователь</th>
+        <th>текст</th>
+        <th>страница</th>
+    </tr>
+<?foreach ($items as $i=>$item) {
+    $url = MAINURL.'/'.$item['url'];
+?>
+    <tr class="<?=(($i%2)?'odd':'')?> <?=$item['state']?>">
+        <td><input type="checkbox" name="ids[]" value="<?=$item['comment_id']?>"></td>
+        <td><?=date('d.m.y', strtotime($item['date']))?>_<?=date('H:i', strtotime($item['time']))?></td>
+        <td><?=$item['uid']?> <?=$item['source']?></td>  
+        <td><a href="?task=contest,comments&comment_id=<?=$item['comment_id']?>"><?=$item['first_name']?> <?=$item['last_name']?></a></td>
+        <td><?=$item['text']?></td> 
+        <td><a href="<?=$url?>" target="_blank"><?=$item['url']?></a></td>
+    </tr>
+<?}?>    
+</table>
+<div class="panel">
+    <span><input type="radio" name="state" value="removed">Удалить выбранные</span>
+    <span><input type="radio" name="state" value="active">Принять выбранные</span>
+    <span><input type="radio" name="state" value="bad">Забанить выбранные</span>
+</div>
+<input type="submit" value="Ок" onclick="return checkSubmit(this);">
+</form>

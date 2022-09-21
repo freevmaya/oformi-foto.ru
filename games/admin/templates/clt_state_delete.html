@@ -1,0 +1,12 @@
+<h2>Удаление претендентов</h2>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+<div>Обрабатывать по дату:</div>
+<input type="text" name="sDate" value="<?=$this->request->getVar('sDate', date('Y-m-d H:i:s', strtotime('-4 day')))?>">
+<br>
+<input type="checkbox" name="isNull" <?=$this->request->getVar('isNull', 'CHECKED')?'CHECKED':''?><label>Удалять только нулевые, за которые ни кто не проголосовал</label><br>
+<input type="checkbox" name="noVictory" <?=$this->request->getVar('noVictory', 'CHECKED')?'CHECKED':''?><label>Удалять только те которые не победили в конкурсе и уже обработанны (noVictory)</label><br>
+<input type="submit" value="ok">
+</form>
+<?if (isset($list)) {?>
+<div>Удалено <?=count($list)?> коллажей</div>
+<?}?>

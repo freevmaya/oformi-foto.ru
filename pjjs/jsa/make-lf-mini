@@ -1,0 +1,7 @@
+#!/bin/bash
+cat mootools-core-1.4.5-c.js mootools-more-1.4.0.1.js mootools-tips.js debug.js base64.js events.js canvasSave.js geom/matrix.js geom/vector.js geom/rectangle.js canvas/utils.js canvas/draw-object.js canvas/draw-object-more.js canvas/gcanvas.js canvas/holes-image.js pjApp/defImages.js lfApp/lfcanvas.js pjApp/baseapp.js lfApp/lfApp.js pjApp/partsList.js lfApp/lfpartsList.js pjApp/textEditor.js pjApp/toast.js lfApp/lfmenu.js lfApp/lf_tmplList.js locale/bypass.js mootools-slider.js controls/drag.js controls/basePanel.js controls/color-panel.js input/base-input.js input/pc-input.js input/tablet-input.js canvas/filters/baseFilter.js canvas/filters/colorTransform.js> __prepare__lfmini.js
+rm -f lfmini.js
+java -jar /usr/share/yuicompressor-2.4.8.jar __prepare__lfmini.js -o lfmini.js
+rm -f __prepare__lfmini.js
+chown vmaya:apache lfmini.js
+chmod +x lfmini.js

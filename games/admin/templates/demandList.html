@@ -1,0 +1,52 @@
+<h3>
+    <?= $date?>
+</h3>
+<div class="panel">
+    <form method="POST" action="<?=Admin::getTaskLink()?>">
+        За период: <input type="text" name="back_day" value="<?=$this->svar('back_day')?>" size="5"/> дней.<br>
+        Минимальное кол-во отправок: <input type="text" name="min_count" value="<?=$this->svar('min_count', 10)?>"/><br>
+        Всего показывать <input type="text" name="count" value="<?=$this->svar('count')?>" size="5"/> строк.<br>
+        <input type="submit" value="ok">
+    </form>
+</div>
+<table width="100%" cellpadding="5" class="report">
+    <tr>
+        <th>
+        </th>
+        <th>
+            <a href="?task=demand&order=ID">ID</a>
+        </th>
+        <th>
+            <a href="?task=demand&order=name">Название</a>
+        </th>
+        <th>
+            <a href="?task=demand&order=count">Отправления</a>
+        </th>
+    </tr>
+    <? $num=0; foreach ($cards as $card) { $num++?>
+    <tr <?= ($num%2==0)?'class="odd"':''; ?>>
+        <td>
+            <a href="?task=demand20&id=<?=$card['id']?>">
+            <? if (isset($card['image'])) {?>
+                <img src="<?= $card['image']?>" title="Последние 20 отправок" border="0">
+            <?} else {?>
+                Последние 20 отправок
+            <?}?>
+            </a>
+        </td>
+        <td>
+            <?= $card['id']?>
+        </td>
+        <td>
+            <?= @$card['name']?>
+        </td>
+        <td>
+            <?
+                if ($card['count'] < $this->svar('min_count', 10)) {
+                    echo "<b><font color=\"#FF0000\">{$card['count']}</font></b>";
+                } else echo $card['count'];
+            ?>
+        </td>
+    </tr>
+    <?}?>
+</table>

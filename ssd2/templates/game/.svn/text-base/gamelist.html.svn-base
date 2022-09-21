@@ -1,0 +1,99 @@
+<?
+    $this->styles[] = SSURL.'dispute.css';
+    $this->addScript(SSURL.'js/mootools-1.2.5.1-tips.js');
+    $this->addScript(SSURL.'js/rate-bar.js');
+    $this->addScript(SSURL.'js/dispute.js');
+    $this->addScript(SSURL.'js/game.js');
+    $this->addScript(SSURL.'js/mrequest.js');
+    
+    function userBlock($user) {
+        GLOBAL $locale;
+        if (is_numeric($user)) {
+            $result = '<div class="ds-user" rel="'.$user.'">
+                <div class="ds-user-name"></div>
+                <a class="ds-user-link" href="" target="_blank"><img class="ds-user-pic" src="" rel=""></a>
+                <div class="ds-user-info"></div>        
+            </div>';
+        } else {
+            $s_name = ss::userName($user);
+            $result = '<div class="ds-user" rel="'.$user['uid'].'">'.
+                '<div class="ds-user-name">'.$s_name.'</div>'.
+                '<a class="ds-user-link" href="'.ss::userLink($user).'" target="_self"><img class="ds-user-pic" src="'.ss::avatar($user).'" alt="'.$s_name.'"></a>';
+            $result .= '</div>';
+        }
+        
+        return $result;
+    }
+    
+    include_once(TEMPLATES_PATH.'/paginator.php');
+    
+    $paginator = paginator($result['page'], $result['total'], $pageLink);//MAINURL.'/discussion/'.ss::$task[2].'/%d.html');
+    
+    $appName = isset($result['group']['app'])?$result['group']['app']:'clothing';
+    $applink = link::c('app', $appName);
+?>
+<script>
+    game.init(<?=CMDDLGGROUPS?>, '<?=link::c('game', 'ajax')?>');
+    gameListInit();
+</script>
+<h1><?=$this->title?></h1>
+<div>
+<?
+    if ($result['group']) {
+?>
+        <div class="post">
+            <?=parseTags($result['group']['rulesText'])?>
+            <?=parseTags($result['group']['descText'])?>
+        </div>
+<?    
+    }
+?>
+    <div class="paginator-line"><?=$paginator?></div>
+<?    
+    if ($result['items']) {
+        foreach ($result['items'] as $item) {
+            $clname = ($item['name']?$item['name']:'Коллаж').' '.ss::userName($item);
+            $imageURL = $this->gameImageURL($item);
+?>
+    <div class="ds-leader <?=$appName?>">
+        <div class="leader-image">
+            <a href="<?=link::c('game', 'view', $item['game_id'])?>" <?=($item['state'] == 'novictory')?'rel="nofollow"':''?> style="background-image: url(<?=$imageURL?>)" title="<?=$clname?>">
+                <!--<img src="<?=$imageURL?>" alt="<?=$clname?>" title="<?=$clname?>">-->
+            </a>
+        </div>
+        <div class="ds-info">
+            <h2><?=$item['name']?></h2>
+            <table class="tipz" title="Информация::<?=$this->gameInfo($item)?>">
+                <tr class="ds-param">
+                    <td>Номер коллажа</td><td class="a-right"><?=$item['game_id']?></td>
+                </tr>
+                <tr class="ds-param">
+                    <td>Рейтинг</td><td class="a-right" id="votes-<?=$item['game_id']?>"><?=$item['votes']?></td>
+                </tr>
+                <tr class="ds-param-small">
+                    <td>Время публикации</td><td class="a-right"><?=$this->gameTime($item)?></td>
+                </tr> 
+                <tr class="ds-param-small">
+                    <td colspan="2"><div class="rate tipz" data-rate="<?=round($item['rate'])?>" data-id="<?=$item['game_id']?>" title="Средняя оценка:: <?=round($item['rate'])?>"></div></td>
+                </tr>
+            </table>
+            <div id="ds-autor">
+                <h3>Автор</h3>
+                <?=userBlock($item);?>
+            </div>
+        </div>
+    </div>
+<?}} else {?>
+    <div class="post">
+        <h2>Здесь пока ничего нет!</h2>
+        <p>В скором будущем здесь будет список победителей в конкурсе. Вы также можете учавствовать в конкурсе. Создайте коллаж в нашем <a href="<?=$applink?>">приложении</a>, получайте голоса и поощрение пользователей.</p>
+        <p>Не забудьте выбрать "Отправить на конкурс" в меню приложения</p>
+        <div style="margin: 10px;" class="a-right">
+            <a href="<?=$applink?>" data-rel="<?=$applink?>" class="ctrl-button app-link">Создать коллаж</a>
+        </div>
+    </div>
+<?}?>
+    <div class="paginator-line"><?=$paginator?></div>
+</div>
+<?include(dirname(__FILE__).'/_templates.html');?>    
+<?include(TEMPLATES_PATH.'comments.html');?>

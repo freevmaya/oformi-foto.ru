@@ -1,0 +1,52 @@
+<head>
+    <?=$controller_head?>
+    <script type="text/javascript">
+        $.mobile.page.prototype.options.domCache = true;
+    </script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos ui-responsive-panel" data-title="<?=$title?>" <?=$controller->page_id?(' id="'.$controller->page_id.'"'):''?>>
+    <div data-role="header">
+        <h1><?=$title?></h1>
+        <a href="#nav-panel<?=$controller->page_id?>" data-icon="bars" data-iconpos="notext">Меню</a>
+    </div>                                                  
+
+    <?=$content?>
+	<div data-role="panel" data-display="push" data-theme="b" id="nav-panel<?=$controller->page_id?>">
+        <?include_once(MOBILETEMPLATEPATH.'menu.html');?>
+	</div>
+</div>
+<div class="totop sbtn"><a href="#" class="ui-icon-carat-u ui-btn-icon-notext ui-corner-all"></a></div>
+<div class="smartmbtn sbtn"><a href="#" class="ui-icon-bars ui-btn-icon-notext ui-corner-all"></a></div>
+<?
+    foreach ($controller->getMobilePages() as $page)
+        include_once(MOBILETEMPLATEPATH.$page);
+?>
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter4524184 = new Ya.Metrika({ id:4524184, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/4524184" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (w, d, c) {
+        (w[c] = w[c] || []).push(function() {
+            var options = {
+                project: 4455572
+            };
+            try {
+                w.top100Counter = new top100(options);
+            } catch(e) { }
+        });
+        var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src =
+        (d.location.protocol == "https:" ? "https:" : "http:") +
+        "//st.top100.ru/top100/top100.js";
+    
+        if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+    })(window, document, "_top100q");
+</script>
+<?include_once('analytics.google.php')?>
+<noscript><img src="//counter.rambler.ru/top100.cnt?pid=4455572"></noscript>
+</body>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1251">
+    <style type="text/css">
+        body {
+            font-family: tahome, arial, verbana;        
+        }    
+    </style>
+<!--[if IE]><script type="text/javascript" src="ie/excanvas.js"></script><![endif]--></head>
+<body>
+    <canvas id="a_canvas" width="600" height="600" style="margin-left:100px;"></canvas>
+    <script type="text/javascript">
+        function drawImage(context, image, position, rotation, scale) {
+            var center = {
+                x: image.width / 2,                
+                y: image.height / 2            
+            };            
+            context.translate(center.x * scale, center.y * scale);            
+            context.scale(scale, scale);            
+            context.rotate(rotation);            
+            context.translate(- center.x, - center.y);            
+            context.drawImage(image, position.x / scale, position.y / scale);                        
+            context.setTransform(1, 0,                                 
+                0, 1,                                  
+                0, 0);        
+        }            
+            var a_canvas = document.getElementById("a_canvas");        
+            var context = a_canvas.getContext("2d");        
+            context.fillStyle  = '#004400';        
+            context.fillRect(0, 0, a_canvas.width, a_canvas.height);                
+            var image = new Image();        
+            var mask = new Image();        
+            var frame = new Image();        
+            var loaded = 0;                
+            function doLoad() {            
+                loaded++;            
+                if (loaded == 2) {                
+                    var tCanvas = document.createElement('canvas');                
+                    tCanvas.width = a_canvas.width;                
+                    tCanvas.height = a_canvas.height;                                
+                    var tContext = tCanvas.getContext("2d");                
+                    drawImage(context, image, {x: 60, y: 100}, 0, 0.8);                                
+                    //tContext.globalCompositeOperation = 'destination-out';
+                    //                tContext.globalAlpha = 0.5;
+                    //                drawImage(tContext, mask, {x: 60, y: 100}, 0, 0.5);
+                    /*                tContext.globalCompositeOperation = 'source-over';                
+                        tContext.globalAlpha = 0;                
+                        drawImage(tContext, mask, {x: 60, y: 100}, 0, 0.5);*/                                                
+                    //context.globalCompositeOperation  = 'overlay';                
+                    //drawImage(context, frame, {x: 80, y: 120}, 0, 0.5);                
+                    //drawImage(context, tCanvas, {x: 0, y: 0}, 0, 1);            
+                }        
+            }                
+            //http://vds-14a5.1gb.ru/pj/JPG/17909.jpg        
+            //http://vds-14a5.1gb.ru/pj/JPG/17909m.jpg        
+            image.onload = doLoad;        
+            frame.onload = doLoad;                
+            image.src = 'http://cs312424.vk.me/v312424006/4795/6lKlMu-_l_I.jpg'; 
+            //        mask.src = 'canvas_data/6151.png';        
+            frame.src = 'http://vds-14a5.1gb.ru/pj/JPG/17909.jpg';    
+        </script>
+    </body>
+</html>

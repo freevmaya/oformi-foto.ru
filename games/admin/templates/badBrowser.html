@@ -1,0 +1,26 @@
+<h3>Браузеры при неудачных стартах за <?=$hour?> час</h3>
+<span>Приложение: <?=$app_id?></span>
+<form method="POST" action="?task=utils,userBrowser&app_id=<?=$app_id?>">
+    UID: <input type="text" name="uid" value="" size="60">
+    <input type="submit" value="Найти">
+</form>
+<table class="report">
+    <tr>
+        <th>
+            Количество
+        </th>
+        <th>
+            Агент
+        </th>
+    </tr>
+    <?foreach ($result as $item) {?>
+    <tr>
+        <td>
+            <?=$item['badCount']?>
+        </td>
+        <td>
+            <?=$item['info']?>
+        </td>
+    </tr>
+    <?}?>
+</table>

@@ -1,0 +1,29 @@
+<?
+    $imgurl = SSURL.'articles/images/coloring/';
+    $applink = link::c('app', 'coloring');
+    $alt = 'Kako pretvoriti črno-belo fotografijo v barvno fotografijo';
+    ss::addCSS('.images', 'text-align: center;');
+    ss::addCSS('.images img', 'display:inline-block;padding:0px;margin:3px;max-height:180px;');
+?>
+<div class="post">
+    <h2>Pretvorite črno-belo fotografijo v barvno fotografijo.</h2>
+    <p>Naredite fotografijo privlačnejšo ali obarvajte staro črno-belo fotografijo! To lahko zdaj storite z novim<a href="<?=$applink?>"> orodjem za barvno oblikovanje</a>.</p>
+    <p>V tej <a href="<?=$applink?>">aplikaciji</a> lahko fotografijo obarvate ali barvno oblikujete. Iz starih fotografij lahko ustvarite zanimiva dela. Če želite oživiti staro fotografijo, potrebujete optični bralnik, našo <a href="<?=$applink?>">aplikacijo</a> in malo potrpljenja.</p>
+    <div class="images">
+        <img src="<?=$imgurl?>1_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>1_out.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>2_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>2_out.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>3_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>3_out.jpg" alt="<?=$alt?>">
+    </div>
+    <div class="post-footer">
+        <a href="<?=link::c('article', 'raskraska-cherno-belykh-fotografiy');?>" class="ctrl-button app-link">
+            Več podrobnosti
+        </a>
+        <a href="<?=$applink?>" class="ctrl-button app-link">
+            Začnite slikati
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

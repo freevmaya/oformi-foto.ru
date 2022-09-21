@@ -1,0 +1,50 @@
+<?
+    define('CLOTHING_TEXT_EXPIRE', 60 * 60 * 24); // 24 часа
+    
+    $cacheKey = 'clothing-get-bests';
+    $result_str = ss::getCache($cacheKey);
+    if (!($result_str = ss::getCache($cacheKey)) || $this->getVar('dev', false)) {
+        include_once(CONTROLLERS_PATH.'discussionController.php');
+        $dc = new discussionController($this->request);
+        
+        $items = $dc->getGameListObject('Bests', 1, 5);
+        $result_str = json_encode($items);
+        ss::setCache($cacheKey, $result_str, CLOTHING_TEXT_EXPIRE);
+    } else $items = json_decode($result_str, true);
+?>
+<div class="post">
+    <h2>Cool reinkarnacija</h2>
+        
+    <p>To je edinstvena aplikacija za spreminjanje vaše slike. Tukaj lahko:</p>
+    <ul>
+        <li>Prilagodite svojo pričesko svoji fotografiji</li>
+        <li>Spremenite kostum na fotografiji</li>
+        <li>Spremeni ozadje</li>
+        <li>In popolnoma reinkarnirana!</li>
+    </ul>
+    <p>Naložite fotografijo z obrazom in izberite želene obleke, pričeske in ozadja. Vse je mogoče prilagoditi v velikosti, obstaja veliko nastavitev za doseganje realističnega učinka!</p> 
+    <div class="images">
+        <?
+            if ($items)
+                foreach ($items['list'] as $collage) {
+                    $avatar = 'default';
+                    $tips = 'class="collage"';
+                    $pic = AVAURL.$collage['uid'];
+                    if ($collage['user']) {
+                        $tips = 'class="tipz collage" title="'.mb_substr($collage['name'], 0, 20, 'UTF-8').'::'.$collage['user']['name'].'"';
+                        $pic = $collage['user']['pic'];
+                    } 
+                        
+                    echo '<a href="'.link::c('discussion', $collage['id']).'"><img '.$tips.' src="http://oformi-foto.ru/games/data/clothing/game/'.$collage['id'].'.jpg" alt="'.$collage['name'].'">'.
+                    '<div class="avatar"><img src="'.$pic.'"></div></a>';
+                }
+        ?>
+        <!--<img src="<?=$imgurl?>1_in.jpg" alt="<?=$alt?>">-->
+    </div>
+    <div class="post-footer">
+        <a href="<?=link::c('app', 'clothing')?>" class="ctrl-button app-link">
+            Začnite reinkarnacijo
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

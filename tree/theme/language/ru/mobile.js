@@ -1,0 +1,1 @@
+var pay_locale = {}

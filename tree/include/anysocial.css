@@ -1,0 +1,59 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(236, 178, 115);
+    background-image: url(theme/tree/images/back_all.jpg);
+    background-position: center top;
+}
+
+body {
+    overflow: hidden;
+}
+
+html, body, table, tbody, td, img  {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none; 
+    -o-user-select: none;
+    user-select: none;
+}
+
+#page {
+    display: none;
+}
+
+#loadinfo {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: Arial, Tahoma;
+}
+
+#wrapper {
+    max-width: 1230px;
+    margin: 0px auto 0px auto;
+    position: relative;
+    height: 100%;
+}
+
+#content, #tree-content {
+    max-width: 1230px;
+    margin: 0px 0px 0px auto;
+    position: relative;
+    height: 100%;
+}          
+
+#loadinfo span {
+    padding: 10px;
+    background: rgb(253, 172, 81);
+    color: rgb(23,40,4);
+    display: inline-block;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    box-shadow: 1px 1px 3px black;
+    min-width: 50px;
+}          

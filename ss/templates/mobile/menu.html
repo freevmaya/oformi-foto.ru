@@ -1,0 +1,22 @@
+<?
+    include_once(SSPATH.'controllers/catalog/list.php');
+    $catalog = catalogFromMenu();
+    $transition = 'data-transition="flip"';
+
+    $date = date("Y-m-d 00:00");
+
+    $h = DB::line("SELECT * FROM `gpj_holiday` WHERE `date` >= '{$date}' ORDER BY `date` ASC, `type` ASC LIMIT 1");
+
+?>
+<ul data-role="listview">
+    <li data-icon="carat-l"><a href="#" data-rel="close"><?=$locale['HIDEMENU']?></a></li>
+<?if ($h) {?>    
+    <li data-icon="check"><a href="<?=link::c('holidays', $h['holiday_id'].'-'.controller::translit($h['name']));?>" <?=$transition?>><?=$h['name']?></a>
+    </li>
+<?}?> 
+    <li data-icon="star"><a href="<?=link::c('holidays')?>" <?=$transition?>><?=$locale['ALLHOLIDAYS']?></a></li>
+<?
+    foreach ($catalog as $link=>$name) 
+        echo "<li><a href=\"{$link}\" {$transition}>{$name}</a></li>";
+?>    
+</ul>

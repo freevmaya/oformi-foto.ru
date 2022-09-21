@@ -1,0 +1,85 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+?>
+<h2>Праздники</h2>
+<div>
+    <a href="?task=holiday,addHoliday">Добавить</a>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&page=%s')?>
+</div>
+<table class="report">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Картинка
+        </th>
+        <th>
+            Шаблоны/Шаблон по умолчанию
+        </th>
+        <th>
+            Название
+        </th>
+        <th>
+            Описание
+        </th>
+        <th>
+            Тип
+        </th>
+        <th>
+            Функция
+        </th>
+        <th>
+            Тек. Дата
+        </th>
+        <th>
+            Индивидуальное поздравление
+        </th>
+        <th>
+            Поздравление для оповещений
+        </th>
+    </tr>
+    <? foreach ($list as $key=>$item) {
+        if ($item['image']) $icon = $item['image'];
+        else $icon = str_replace('.', '', $item['func']);
+    ?>
+        <tr class="<?=(($key%2)?'odd':'')?>">
+            <td>
+                <?=$item['holiday_id']?>
+            </td>
+            <td>
+                <a href="?task=holiday,addHoliday&holiday_id=<?=$item['holiday_id']?>"><img src="https://oformi-foto.ru/games/data/64/<?=$icon?>.jpg"></a>
+            </td>
+            <td>
+                <?      
+                    if ($item['deftml_id'])  {
+                        $image = 'https://oformi-foto.ru/pj/jpg_preview/i'.$item['deftml_id'].'.jpg';
+                    } else $image = 'https://oformi-foto.ru/pj/empty_03.jpg';
+                ?>
+                <a href="?task=holiday,holidayTmpls&holiday=<?=$item['holiday_id']?>&retLink=<?=$link?>"><img src="<?=$image?>"></a>
+            </td>
+            <td>
+                <a href="?task=holiday,addHoliday&holiday_id=<?=$item['holiday_id']?>"><?=$item['name']?></a>
+            </td>
+            <td>
+                <?=$item['desc']?>
+            </td>
+            <td>
+                <?=$item['type']?>
+            </td>
+            <td>
+                <?=$item['func']?>
+            </td> 
+            <td>
+                <?=$item['date']?>
+            </td>
+            <td>
+                <?=$item['congratulation']?>
+            </td>
+            <td>
+                <?=$item['congratulation2']?>
+            </td>
+        </tr>
+    <?}?>    
+</table>

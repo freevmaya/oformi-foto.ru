@@ -1,0 +1,42 @@
+<h2>Итоги конкурса</h2>
+<h3>Необработаные претенденты</h3>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+<div>Дата крайних претендентов (коллажей)</div>
+<input type="text" name="sDate" value="<?=$this->request->getVar('sDate', date('Y-m-d H:i:s', strtotime('-1 hour')))?>">
+<br>
+<input type="submit" value="ok">
+</form>
+<?if (isset($list)) {?>
+<table class="report">
+    <tr>
+        <th>
+            UID
+        </th>
+        <th>
+            Время
+        </th>
+        <th>
+            Коллаж
+        </th>
+        <th>
+            Рейтинг
+        </th>
+    </tr>
+<?foreach ($list as $item) {?>
+    <tr>
+        <td>
+            <?=$item['uid']?>
+        </td>
+        <td>
+            <?=$item['time']?>
+        </td>
+        <td>
+            <?=$item['id']?>
+        </td>
+        <td>
+            <?=$item['rate']?>
+        </td>
+    </tr>
+<?}?>    
+</table>
+<?}?>

@@ -1,0 +1,25 @@
+<style type="text/css">
+    .task-frame {
+        border:0; 
+    }
+</style>
+<script type="text/javascript">
+    var tv;
+    function refreshSizeTV() {
+        var size = window.getSize();
+        tv.setStyles({
+            width: size.x - 260,
+            height: size.y - 30
+        });
+    }
+    
+    window.addEvent('resize', function() {
+        refreshSizeTV();
+    });
+    
+    window.addEvent('domready', function() {
+        tv = $('tv');
+        refreshSizeTV();
+    });
+</script>
+<iframe id="tv" src="<?=$link?>" class="task-frame" frameborder="no"></iframe>

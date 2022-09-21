@@ -1,0 +1,63 @@
+<script type="text/javascript" src="admin/js/mootools-1.2.4-core.js"></script>
+<script type="text/javascript" src="admin/js/cycle-form.js"></script>
+
+<h3>Свертка транзакций</h3>
+<div>
+    <form action="<?=Admin::getTaskLink()?>" method="POST">
+        <table>
+            <tr>
+                <td>Начиная с пользователя №:
+                </td>
+                <td><input type="text" value="<?=$start?>" name="start">
+                </td>
+            </tr>
+            <tr>
+                <td>Количество сверток №:
+                </td>
+                <td><input type="text" value="<?=$count?>" name="count">
+                </td>
+            </tr
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" value="1" name="begin">
+                    <input type="submit" value="начать">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<?
+    if (isset($list)) {  
+?>
+<h3>Результат светки</h3>
+    <table class="report">
+        <tr>
+            <th>№
+            </th>
+            <th>
+                Кол-во транзакций
+            </th>
+            <th>
+                Пользователь
+            </th>
+            <th>
+                Сумма
+            </th>
+        </tr>
+    <?foreach ($list as $key=>$item) {?>
+        <tr>
+            <td><?=$key?>
+            </td>
+            <td>
+                <?=$item['count']?>
+            </td>
+            <td>
+                <?=$item['user_id']?>
+            </td>
+            <td>
+                <?=$item['balance']?>
+            </td>
+        </tr>
+    <?}?>
+    </table>
+<?}?>

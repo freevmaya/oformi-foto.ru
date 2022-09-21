@@ -1,0 +1,337 @@
+#ds-content {
+    height: 25%;
+    width: 1000px;
+    position: fixed;
+    top: 68px;
+    background: #FFF;
+    opacity: 0
+}
+
+#ds-header, #ds-concurent {
+    font-size: 16px;
+    color: #888;
+    padding-left: 10px;
+    position: absolute;
+}
+
+#ds-conc-list {
+    width: 95px;
+    height: 50%;
+    overflow-y: scroll;
+}
+
+#ds-concurent h2 {
+    color: #888;
+}
+
+#ds-header td {
+    vertical-align: top;
+}
+
+#ds-info {
+    overflow: hidden;
+}
+
+#ds-info h2 {
+    margin: 8px 0px;
+    font-size: 18px;
+}
+
+#ds-autor {
+}
+
+#ds-autor h3 {
+    margin: 8px 0px;
+}
+
+#ds-content-footer {
+    padding: 3px;
+}
+
+.ds-param {
+    font-size: 18px;
+}
+
+.ds-param-small {
+    font-size: 13px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+#ds-image {
+    position: absolute;
+}
+
+#ds-list {
+    padding-top: 10px;
+}
+
+.ds-conc-item {
+    margin: 5px;
+    padding: 5px;
+    background: white;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.ds-conc-item span {
+    font-size: 13px;
+    display: block;
+}
+
+.round {
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+.ds-editor, .ds-item {
+    border: 1px solid #EEE;    
+}
+
+.ds-editor {
+    padding: 10px;
+    background: white;
+}
+
+.ds-editor .text {
+    border: 1px solid #777;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 10px;
+}
+
+.ds-editor textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 0;
+    font-size: 16px;
+    color: #555;
+    font-family: Arial, Tahoma, Verbana;
+}
+
+.ds-editor .input-demo {
+    position: absolute;
+    font-size: 16px;
+    color: #DDD;
+}
+
+.ds-editor .send-button {
+    margin: 10px;        
+}
+
+.ds-item {
+    margin: 10px 0;
+    padding: 5px;
+    background: white;
+}
+
+.ds-item .ds-user {
+    margin: 10px;
+    width: 110px;
+    float: left;
+    text-align: center;
+} 
+
+.ds-user-link {
+    display: block;
+}
+
+.ds-user .ds-user-pic {
+    width: 80px;
+    height: auto;
+}
+
+.ds-user-name {
+}
+
+.ds-item-title {
+    font-size: 16px;
+    color: #AAA;
+}
+
+.ds-item-not {
+    float: left;
+    margin: 16px;
+    max-width: 820px;
+}
+
+.ds-item-desc {
+    margin-top: 10px;
+    font-family: Arial, Tahoma, Varbana;
+    font-size: 16px;
+}
+
+.ds-user-pic {
+    margin: 10px;
+    border: 5px solid #EEE;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.ds-more {
+    color: #f66;
+}
+
+.ds-litle {
+    color: #aaf;
+}
+
+.ds-litle img {
+    opacity: 0.5;
+}
+
+
+.ds-rate {
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.ds-rate-star {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+
+.star-e {
+    background: url(images/star-e.png);
+}
+
+.star-f {
+    background: url(images/star-f.png);
+}
+
+.vote-form {
+    text-align: center;
+}
+
+.is-adv .adv {
+    width: 300px;
+    height: 250px;
+    background: url(images/no-adv.jpg)    
+}
+
+.is-adv .vote-block {
+}
+
+.wait-block {
+    font-size: 16px;
+    margin: 10px 0px;
+    line-height: 40px;
+}
+
+.add-comment {
+    width: 84px;
+    height: 85px;
+    position: absolute;
+    background: url(images/comm.png);
+    right: -60px;
+    bottom: -60px;    
+}
+
+.button {
+    cursor: pointer;
+    display: block;
+    z-index: 10;
+}
+
+.close-button {
+	width: 30px;
+	height: 30px;
+    float: right;
+	background: url(images/closebox.png) no-repeat center;
+	border: none;
+    cursor: pointer;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.share-panel {
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.share42init {
+    margin: 0px auto;
+    padding: 5px 1px 0px 5px;
+}
+
+.ds-leader {
+    padding: 10px;
+    width: 800px;
+    margin: 0px auto;
+}
+
+.ds-leader .ds-info {
+    display: inline-block;
+    margin-top: 0px;
+    position: absolute;
+    padding: 20px;
+    max-width: 282px;
+    overflow: hidden;
+}
+
+.ds-leader .rate {
+    margin: 10px auto;
+}
+
+.ds-info h2 {
+    font-size: 26px;
+    color: #335;    
+}
+
+.ds-info .ds-user-link {
+    text-align: left; !important;
+}
+
+.leader-image {
+    padding: 10px;
+    background: #EEE;
+    border: 1px solid #888;
+    display: inline-block;    
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.leader-image img {
+    width: 45vh;
+    height: auto;
+}
+
+.leader-image a {
+    display: block;
+    width: 45vh;
+    height: 45vh;
+    min-width: 315px;
+    min-height: 315px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+}
+
+#gadv {
+    position: absolute;
+    right: 0px; 
+    bottom: 0px;
+    padding: 10px;
+    background: white;
+    z-index; 10;
+}
+
+.view .leader-image a {
+    display: block;
+    width: 45vh;
+    height: 45vh;
+    overflow: hidden;    
+}
+
+.view .leader-image img {
+    display: inline-block;
+}

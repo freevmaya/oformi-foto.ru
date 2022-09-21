@@ -1,0 +1,110 @@
+<h1>Каталог, категории</h1>
+<div>
+<?
+    global $LANGSINSTALL; 
+    
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+    if ($this->request->getVar('action', false) && isset($result) && $result)
+        echo '<h3 style="color:red">Успешно!</h3>';
+    if (($state == 'new') || ($state == 'edit')) {
+?>
+    <a href="<?=$link?>">назад</a>
+    <h2><?=($state=='new')?'Новая категория':'Редактирование'?></h2>
+    <?=isset($result['group_id'])?('<h3>ID: '.$result['group_id'].'</h3>'):''?>
+    <form method="POST" action="<?=$link?>&state=update">
+        <table>
+            <tr>
+                <td class="param">
+                    Идентификатор (translit) (80)
+                </td>
+                <td>
+                    <?=$this->inputHtml('translit', 80, @$result['translit']);?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param">
+                    Название (80)
+                </td>
+                <td>
+                    <?=$this->inputHtml('name', 60, @$result['name']);?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param" colspan="2">
+                    <div>Ключевые слова (keywords 150). Буз пробелов, через запятую</div>
+                    <textarea style="width:600px;height:80px" name="keywords"><?=$this->request->getVar('keywords', @$result['keywords'])?></textarea>
+                </td>
+            </tr>   
+            <tr>
+                <td class="param" colspan="2">
+                    <div>Краткое описание (meta description 150)</div>
+                    <textarea style="width:600px;height:80px" name="small_desc"><?=$this->request->getVar('small_desc', @$result['small_desc'])?></textarea>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param" colspan="2">
+                    <div>Полное описание</div>
+                    <?=$this->textEditor('desc', @$result['desc']);?>
+                </td>
+            </tr> 
+        </table>
+        <input type="hidden" name="group_id" value="<?=@$result['group_id']?>">
+        <input type="hidden" name="action" value="<?=isset($result['group_id'])?'update':'add';?>">
+        <input type="submit">
+    </form>        
+
+<?    
+    } else { 
+    
+    $url = admin::getTaskLink();
+    foreach ($LANGSINSTALL as $lang) {
+        echo "<a href=\"{$url}&lang={$lang}\">{$lang}</a> ";
+    }
+?>
+<hr>
+<a href="<?=$link?>&state=new">Добавить</a>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&cg-page=%s')?>
+</div>
+
+<table class="report">
+    <tr> 
+        <th>
+            ID
+        </th>
+        <th>
+            Идентификатор
+        </th>
+        <th>
+            Название
+        </th>
+        <th>
+            meta description
+        </th>
+        <th>
+            Удалить
+        </th>
+    </tr>
+<?foreach ($list as $key=>$item) {?>
+    <tr class="<?=(($key%2)?'odd':'')?>">
+        <td>
+            <?=$item['group_id']?>
+        </td>
+        <td>
+            <a href="<?=$link?>&state=edit&group_id=<?=$item['group_id']?>"><?=$item['translit']?></a>
+        </td>
+        <td>
+            <?=$item['name']?>
+        </td>
+        <td>
+            <?=$item['small_desc']?>
+        </td>
+        <td>
+            <a href="<?=$link?>&state=delete&action=delete&group_id=<?=$item['group_id']?>" onclick="return confirm('Вы действительно хотите удалить запись?');">удалить</a>
+        </td>
+    </tr>
+<?}?>    
+</table>    
+<?}?>
+</div>

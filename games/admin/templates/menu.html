@@ -1,0 +1,51 @@
+<?
+    $curTask = trim((@Admin::$task[0]).','.(@Admin::$task[1]));
+?>
+<script type="text/javascript">
+    function showMenuList(menu, visible, anim) {
+        var aList = menu.getChildren('a');
+        var i = 0;
+        aList.each(function(item) {
+            if (anim) {
+                (function() {
+                    item.setStyle('display', visible?'block':'none');
+                }).delay(i * 20);
+                i++;
+            } else item.setStyle('display', visible?'block':'none');
+        });
+        menu.set('show', visible);                    
+    }
+    
+    function onClickMenuItem() {
+        var isShow = this.get('show') == 'true';
+        showMenuList(this, !isShow, true);
+    }    
+    
+    window.addEvent('domready', function() {
+        var menuList = $$('.menu'); 
+        menuList.each(function(menu) {
+            if (menu.getChildren('.current').length > 0)
+                menu.set('show', true);
+            else showMenuList(menu, false, false);
+            
+            menu.getElement('h3').addEvent('click', onClickMenuItem.bind(menu));
+        });
+    });
+</script>
+<?
+    GLOBAL $admin_menu;
+    $submenu = false;
+    foreach ($admin_menu as $task=>$caption) {
+        if (!str_replace('-', '', $task)) {
+            if ($submenu) echo '</div>';
+            echo '<div class="menu"><h3>'.$caption.'</h3>';
+        } else {
+            $class = '';
+            if (strcasecmp($curTask, $task)==0) $class = 'class="current"';                        
+            echo '<a href="?task='.$task.'" '.$class.'>'.$caption.'</a>';
+            $submenu = true;
+        }    
+    }
+?>
+    </div>       
+ 

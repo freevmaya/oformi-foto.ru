@@ -1,0 +1,77 @@
+<div style="display:none">
+    <div id="item-tmpl">
+        <div class="dl">
+            <div class="item-tools" style="margin-left: -72px;">
+                <a class="inject toolButton d-appLink">
+                </a>
+                <a type="image/octet-stream" rel="nofollow" href="" target="_blank" download="" referrerpolicy="origin" class="download_png toolButton d-pngFileURL">
+                </a>
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="noPicture">
+                            <a data-rel="iframeBox" class="d-iframeLink" data-id="tmpl_id">
+                                <img src="" onload="onImgLoad(this)" class="d-previewURL">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a data-rel="iframeBox" class="d-iframeLink" data-id="tmpl_id"><h3 class="d-title">---</h3></a>
+                            <span class="d-desc"></span>
+                            <span class="info d-info"></span>
+                            <span class="info">
+                                <a class="d-pngLink"><?=$locale['DOWNLOADPNG']?></a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?
+GLOBAL $_SERVER;                               
+foreach ($items as $i=>$item) {
+    $tmplId = $item['tmpl_id'];
+    
+    $gid = implode(',', $groupIds);
+    $pngFileURL = sprintf(FRAMES_PNGURL, $tmplId);
+    $tl_name = controller::translit($item['name']);
+    
+    $appLink = MAINURL.'/template/'.$tmplId.','.$gid.'-'.$tl_name.'.html';
+    $pngLink = 'http://'.$_SERVER['HTTP_HOST'].'/template/'.$tmplId.'-png,'.$gid.'-'.$tl_name.'.html';
+    $appJSLink = MAINURL.'/pjjs/'.$tmplId.'.html';  
+    
+    $itemAlt = ($imgAlt?($imgAlt.'. '):'').$firstAlt.($item['name']?($item['name'].'. '):'').$item['desc'];
+    $iframeLink = BASEAPP_URL.'/pjjs/view.php?tid='.$tmplId.'&gid='.$gid.'&lang='.ss::lang().(isset($_GET['dev'])?'&dev=1':'');
+    $appealLink = MAINURL.'/?task=user,appeal&id='.$tmplId.'&uid_autor='.$uid_autor;
+    
+    $titleHTML = $tl_name?('<a href="'.$iframeLink.'" data-rel="iframeBox" data-id="a-'.$tmplId.'">'.textLimit($item['name'], TITLE_LIMIT, 'h3').'</a>'):'';
+    $descHTML = ss::isDefaultLang()?(($item['desc']?(textLimit($item['desc'], DESC_LIMIT, 'span')):'')):'';                                                                
+    if ($item['info']) $descHTML .= "<span class=\"info\">{$item['info']}</span>";
+    if (ss::isHavePNG($tmplId)) $descHTML .= "<span class=\"info\"><a href=\"{$pngLink}\">{$locale['DOWNLOADPNG']}</a></span>";
+    
+    $footerLine = $titleHTML.$descHTML;
+    
+    $img_style = '';
+    if ($item['width'] && $item['height']) {
+        $img_style = ';height:'.round($item['height'] * ($preview_width/$item['width'])).'px';
+    }   
+    
+    echo '<div class="item"><div class="dl">'.
+        '<div class="item-tools">'.
+        '<a href="'.$appLink.'" class="inject toolButton"><div rel="'.
+            $locale['OPENINEDITORDESC'].'" title="'.$locale['OPENINEDITOR'].'" class="tipz"></div></a>'.
+        (ss::isHavePNG($tmplId)?('<a type="image/octet-stream" rel="nofollow" href="'.$pngFileURL.
+        '" target="_blank" download="'.$tmplId.'-oformi-foto.ru.png" referrerpolicy="origin" class="download_png toolButton"><div rel="'.$locale['SAVEPNGDESC'].'" title="'.$locale['SAVEPNGTITLE'].'" class="tipz"></div></a>'):'').
+        '</div>'.
+        ($uid_autor?'<a href="'.$appealLink.'" data-id="t-'.$tmplId.'" title="Пожаловаться" data-rel="iframeBox" class="appeal toolButton"></a>':'').
+        '<table><tr><td class="noPicture">'.
+        '<a data-rel="iframeBox" href="'.$iframeLink.'" data-id="a-'.$tmplId.'"><img src="'.FRAMES_URLPREVIEW.$tmplId.'.jpg" alt="'.$itemAlt.'" onload="onImgLoad(this)" style="'.$img_style.'"></a>'.
+        '</td></tr><tr><td>'.
+        $footerLine
+        .'</td></tr></table></div></div>';
+}
+?>

@@ -1,0 +1,55 @@
+<style type="text/css">
+    .gif-list {
+        text-align: center;
+        margin: 0px auto;
+    }
+    .gif-list td {
+        margin: 10px 0;       
+    }
+</style>
+<?
+    $this->title = 'Как создать GIF анимацию из своих фотографий';
+    $this->description = 'Приложение, редактор GIF файлов для создание анимаций из ваших фотографий';
+    $this->styles[] = SSURL.'controls.css';
+    
+?>
+<h1>Как создать GIF анимацию, сохранить в файл и опубликовать в соц-сетях контакте, мой-мир, одноклассники и т.п.</h1>
+
+
+<div class="post text">
+<div class="right"><?quickLinks('gif-animator');?></div>
+<p><a href="https://ru.wikipedia.org/wiki/GIF" target="_blank">GIF анимация</a> это графический файл который хранит в себе несколько растровых изображений которые в режиме просмотра сменяя друг друга создавая <i>эффект</i> движения, <a href="<?=MAINURL?>/anim.htm">анимации</a>. Обычно <a href="http://oformi-foto.ru/gifavt.htm">GIF</a> файлы небольшого объема и используются для публикации в интернете на сайтах и в соц-сетях. Так как из за малого объема они быстро загружаются и являются незаменимым способом продемонстрировать короткий <a href="<?=MAINURL?>/anim.htm">анимационный сюжет</a>, смешную сценку, кусок <a href="<?=MAINURL?>/kak-sohranit-zhemchuzhiny-vospominanii.html">понравившегося</a> видео.</p>
+<p>На нашем сайте вы можете легко <a href="<?=MAINURL?>/gifavt.htm">создать GIF <a href="<?=MAINURL?>/anim.htm">анимацию</a> из своих фотографий или <b>фотографий</b> своих друзей. Полученный файл вы можете разместить у себя на стене, на сайте, форуме, загрузить в виде аватарки или опубликовать в гостевой друга.</p>
+<p>Что бы начать перейдите на страницу с <a href="<?=MAINURL?>/gifavt.htm">приложением</a>.</p>
+<div class="post-footer">
+    <a href="<?=mainURL?>gifavt.htm" data-rel="<?=MAINURL?>/gifavt.htm" class="ctrl-button app-link">
+        Начать
+    </a>
+</div>
+<div class="clr"></div>
+<h2>Вот несколько примеров как можно преобразовать свое фото в прикольную анимацию</h2>
+<table class="gif-list" cellspacing="0">
+    <tr>
+        <td>
+            <a href="<?=MAINURL?>/gifavt.htm"><img src="<?=mainURL?>/images/gif/afonia.gif" alt="Афоня"></a>
+        </td>
+        <td>
+            <a href="<?=MAINURL?>/gifavt.htm"><img src="<?=mainURL?>/images/gif/balbes kavkazkaya plenica.gif" alt="Балбес, из кавказкой пленницы"></a>
+        </td>
+        <td>
+            <a href="<?=MAINURL?>/gifavt.htm"><img src="<?=mainURL?>/images/gif/doctor zlo.gif" alt="Доктор зло"></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="<?=MAINURL?>/gifavt.htm"><img src="<?=mainURL?>/images/gif/gitarist.gif" alt="Гитарист, кадры из старого фильма"></a>
+        </td>
+        <td>
+            <a href="<?=MAINURL?>/gifavt.htm"><img src="<?=mainURL?>/images/gif/kindza-za.gif" alt="Сюжет из фильма Кин дза дза"></a>
+        </td>
+        <td>
+            <a href="<?=MAINURL?>/gifavt.htm"><img src="<?=mainURL?>/images/gif/plaski s tusemcami.gif" alt="Пляски с туземцами"></a>
+        </td>
+    </tr>
+</table>
+</div>

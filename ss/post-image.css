@@ -1,0 +1,23 @@
+.post-image {
+    text-align: center;    
+}
+
+.post-image img {
+    margin: 0px !important;
+}
+
+.toolbar {
+    position: absolute;
+}
+
+.img-button {
+    float: right;
+    width: 16px;
+    height: 21px;
+    background-image: url(images/up-arrow.jpg);
+    background-position: 0 -21px;   
+}
+
+.up {
+    background-position: 0 0;   
+}

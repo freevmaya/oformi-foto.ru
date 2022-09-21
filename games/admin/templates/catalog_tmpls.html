@@ -1,0 +1,30 @@
+<?
+    $link = Admin::getTaskLink();
+?>
+<h1>Каталог, шаблоны</h1>
+<?
+    $items = $this->request->getVar('items'); 
+    if (($action = $this->request->getVar('action', false)) && isset($result) && $result) {
+        echo '<h3 style="color:red">Успешно!</h3>';
+        if ($action == 'view') $items = $result;
+    }
+?>        
+<div class="report">
+<form method="POST" action="<?=$link?>">
+    <div>Группа</div>
+    <select name="group_id">
+        <option value="0">Все группы</option>
+    <?foreach ($groups as $group) {
+        $select = '';
+        if ($this->request->getVar('group_id') == $group['group_id']) $select = 'SELECTED'; 
+    ?>
+        <option value="<?=$group['group_id']?>" <?=$select?>><?=$group['name']?></option>
+    <?}?>
+    </select><br>
+    <div>Список шаблонов, через запятую</div>
+    <input type="text" name="items" value="<?=$items?>" size="100"><br>
+    <div>Операция</div>
+    <input type="radio" name="action" value="add">Добавить<input type="radio" name="action" value="delete">Удалить<input type="radio" name="action" value="view">Получить<br>
+    <input type="submit">
+</form>
+</div>

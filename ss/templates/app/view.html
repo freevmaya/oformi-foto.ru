@@ -1,0 +1,166 @@
+<?
+    GLOBAL $_GET, $sheme;
+    
+    if (ss::$isPhone) {
+        include_once(MOBILETEMPLATEPATH.'view.html');
+    } else {              
+    
+    define('MODEL_NAME', 'pjf_m8');
+//    ss::$noadv = true;
+    $idDev = $this->getVar('dev');
+//    require_once(SSPATH.'templates/banners.php');
+    if ($idDev) {    
+        $v = rand(1, 1000000);
+        $flashFile = MAINURL.'/pj/dev/pj_mail.swf?v='.$v;
+        $flashFree = MAINURL.'/pj/dev/pj_free.swf?v='.$v;
+    } else {  
+        $flashFile = MAINURL.'/'.$basePath.'/pj_mail.swf?v='.$ver;
+        $flashFree = MAINURL.'/'.$basePath.'/pj_free.swf?v='.$ver;
+    }     
+    
+    $fparams = array('state', 'sid', 'tid', 'gid', 'dev');
+    
+    //$_GET['imageProxy'] = '//oformi-foto.ru/getimage.php?src=';
+    $JSURL = MAINURL.'/'.SSRELATIVE.'/js/';
+    
+//    $this->addMeta('image-from-facebook', array('property'=>'og:image', 'content'=>SSURL.'images/vfb.jpg'));
+    $this->addMeta('page-image', MAINURL.'/images/promo/anim01.jpg');
+    $this->description = 'Здесь можно вставить фото в рамку или сделать прикольный коллаж, фото-открытку, календарь или прикол со своим фото, онлайн и бесплатно. Огромный выбор шаблонов, удобный поиск.';
+    
+    $pjjs_url = MAINURL.'/pjjs/index.php?lang='.ss::lang();
+    require_once(TEMPLATES_PATH.'game_support.html');
+?>
+<div style="height:1px;overflow:hidden;position:absolute;">
+    <?include(TEMPLATES_PATH.'pushall.php');?>
+</div>
+
+<?include(TEMPLATES_PATH.'adv/view_adv_block1.php');?>
+
+<div id="flashAPP" class="app-full">
+    <div id="embed"></div>
+<script type="text/javascript">
+    var objAliase;
+    var app_params = {
+        app_id: '',
+        viewer_id: 0,
+        dev: <?=$this->request->getVar('dev', 0)?>,
+        plugins: '<?=$plugins['free']?>',
+        MODEL_NAME: '<?=MODEL_NAME?>',
+        SFPATH: '<?=MAINURL?>/pj/images/sfimages/',
+        ver: <?=$ver?>
+<?
+    foreach ($fparams as $pName)
+        if (isset($_GET[$pName])) 
+            echo ",\n{$pName}:'".$_GET[$pName]."'";
+?>
+    };
+    
+    function resetHeight(h) {                      
+        $('flashAPP').setStyle('height', h + 'px');
+        $(objAliase).set('height', h + 'px');
+    }
+        
+    function appInit(sfwFile, aliase, flash_vars) {
+        var size = $('flashAPP').getSize();
+        objAliase = aliase;
+        
+        var params = {
+            movie: sfwFile,
+            bgcolor: "#FFFFFF",
+            quality: "high",
+            scale: "noscale",
+            menu: "false",
+            align: "middle",
+            salign: "tl",
+            base: "<?=$basePath?>",
+            wmode: "direct",
+            allowNetworking: "all",
+            allowFullScreen: "true",
+            allowScriptAccess: "always"
+        }
+        
+        var attributes = {
+            id: aliase,
+            name: aliase,
+            salign: "tl"
+        };      
+        
+        swfobject.embedSWF(sfwFile, "embed", '100%', size.y, "10", "expressInstall.swf", flash_vars, params, attributes);
+        
+        callbackObject = $(objAliase); 
+                       
+//        $('flashAPP').set('html', '');
+    }
+    
+    function reload() {
+        document.location.href = document.location.href;
+    }
+    
+    function freeInit(source) {
+        if (source) eval('external = ' + source + '_external');
+        else eval('external = default_external');
+
+        app_params.app_id = 'embed';
+        appInit('<?=$flashFree?>', 'embed', app_params);
+    }
+    
+    function htmlInit() {
+        function resizeHtml() {
+            var h = window.getSize().y - $('footer').getSize().y - $('menu').getSize().y;
+            $('pjjs_frame').setStyle('height', h);
+        }
+        $('flashAPP').set('html', '<iframe id="pjjs_frame" src="<?=$pjjs_url?>"></iframe>')
+        resizeHtml();
+        
+        window.addEvent('resize', resizeHtml);
+    }
+    
+//START SWF TEST    
+    var _okTest;
+    function confirmFlash() {_okTest = true;}
+    function hideTest() {
+        var testFile = "<?=$basePath?>/hideTest.swf?v=<?=rand(1, 10000);?>";
+        swfobject.embedSWF(testFile, "embed", 1, 1, "10", "expressInstall.swf", null, {
+            movie: testFile,
+            wmode: "direct",
+            allowNetworking: "all",
+            allowFullScreen: "true",
+            allowScriptAccess: "always"
+        }, {});
+    }
+//END SWF TEST    
+
+        window.addEvent('login_status', function(e) {
+                callbackObject = $('embed');
+                htmlInit();
+        });
+    
+    /*
+    var flashAPP = $('flashAPP'); 
+    flashAPP.getParent().setStyle('width', '100%');
+    
+    var size = flashAPP.getSize();
+    if (size.x < 500) size.x = 500;
+    else if (size.x > 1500) size.x = 1500;
+    flashAPP.setStyle('width', size.x);
+    */
+</script>
+</div>
+<?
+    if ($tmpl) {
+?>
+    <div class="tmpl_html">
+<?
+        if (isset($tmpl['name'])) echo "<h1>{$tmpl['name']}</h1>"; 
+        if (isset($tmpl['desc'])) echo "<div>{$tmpl['desc']}</div>"; 
+?>    
+        <a href="<?=MAINURL?>/template/<?=$tmpl['tmpl_id']?>-<?=controller::translit($tmpl['name'])?>.html"><img src="<?=$tmpl['preview']?>"></a>
+    </div>
+<?        
+    }
+
+    include(TEMPLATES_PATH.'comments.html');
+    //include(TEMPLATES_PATH.'/social.html');
+//    include(TEMPLATES_PATH.'/coinSupport.html');
+}   
+?>

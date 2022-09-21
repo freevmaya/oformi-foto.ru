@@ -1,0 +1,68 @@
+<?
+    $curTimeA = date('Y-m-d H:i:s');
+    $backTimeA = date('Y-m-d H:i:s', strtotime("-24 HOUR"));
+?>
+<h2>Проверка побед</h2>
+<h3>Текущее время: <a href="<?=Admin::getTaskLink()?>&startDate=<?=$backTimeA?>&endDate=<?=$curTimeA?>"><?=$curTimeA;?></a></h3>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    Период с <input type="text" name="startDate" value="<?=$startDate?>"> по
+    <input type="text" name="endDate" value="<?=$endDate?>">
+    <br>
+    <input type="submit" value="ok">
+</form>
+
+<? if (isset($item)) {?>
+<h3>ID: <?=$item['id']?></h3>
+<div>дата начала: <font color="#00AA00"><?=$startDate?></font>, дата конца: <font color="#00AA00"><?=$endDate?></font></div>
+<div>рейтинг: <font color="#00AA00"><?=$item['rate']?></font>,голоса : <font color="#00AA00"><?=$item['votes']?></font></div>
+<img src="<?=DATA_URL.'clothing/game/preview/'.$item['id'].'.jpg'?>">
+<?}?>
+
+<? if (isset($collages)) {
+    if (isset($item) && ($collages[0]['votes'] < $item['votes'])) {
+?>
+<h2 style="color:#FF0000">Лидер!</h2>
+<?if ($item['noVictory'] != 2) {?>
+<form action="<?=Admin::getTaskLink()?>" method="POST">
+    <input type="hidden" name="id" value="<?=$item['id']?>">
+    <input type="hidden" name="set_victory" value="1">
+    <input type="submit" value="Определить как победителя">
+</form>
+<?    
+    }
+}
+?>
+<h2>Конкуренты:</h2>
+<table class="report">
+    <tr>
+        <th>
+            Время
+        </th>
+        <th>
+            ID
+        </th>
+        <th>
+            uid
+        </th>
+        <th>
+            Превьюшка
+        </th>
+        <th>
+            Рейтинг/Голоса
+        </th>
+        <th>
+            info
+        </th>
+    </tr>
+<? foreach($collages as $item) {?>
+    <tr>    
+        <td><?=$item['time']?></td>
+        <td><?=$item['id']?></td>
+        <td><?=$item['uid']?></td>
+        <td><a href="<?=Admin::getTaskLink().'&id='.$item['id']?>"><img src="<?=DATA_URL.'clothing/game/preview/'.$item['id'].'.jpg'?>"></a></td>
+        <td><?=$item['rate']?>/<?=$item['votes']?></td>
+        <td><?=$item['noVictory']?></td>
+    </tr>
+<?}?>
+</table>
+<?}?>

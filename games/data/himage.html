@@ -1,0 +1,27 @@
+<html>
+<head>
+    <style>
+        .images div {
+            float: left;
+        }                
+        
+        .images span {
+            color: #333366;
+        }
+    </style>
+</head>
+<div class="images">
+    <div><span>64x64</span><img src="64/<?=$baseFileName.$ext.'?v='.rand(10, 1000000)?>" align="left"></div>
+    <div><span>404x200</span><img src="200/<?=$baseFileName.$ext.'?v='.rand(10, 1000000)?>"></div>
+</div>
+<div style="clear:left"></div>
+<?
+if (@$completeLoaded) echo 'Изображение загружено<br>';
+?>
+<form method="POST" action="<?=$url?>" enctype="multipart/form-data">
+    <input type="file" name="image"/>
+    Или URL <input type="text" name="imageURL"/><br>
+    <input type="checkbox" name="rewrite" value="1" CHECKED/>Перезаписать
+    <input type="submit" value="Загрузить"/>
+</form>
+</html>

@@ -1,0 +1,27 @@
+<h2>Логи</h2>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+<table class="report">
+    <tr>
+        <th>Файл</th>
+        <th>Размер</th>
+        <th>Выбор</th>
+    </tr>
+    <?foreach ($files as $key=>$file) {?>
+    <tr>
+        <td><a href="?task=sys,logsViewer&file=<?=$file?>"><?=$file?></a></td>
+        <td><?=round(filesize($file) / 1024)?> Кб</td>
+        <td><input type="checkbox" name="select<?=$key?>" value="<?=$file?>"></td>
+    </tr>
+    <?}?>
+</table>
+<hr>
+Выбранные файлы: <input type="checkbox" name="action[]" value="clear">Очистить
+<br>
+<input type="submit" value="Применить">
+</form>
+<?if (isset($lines)) {?>
+<h3><?=$fileName?></h3>
+<pre>
+    <?=$lines?>
+</pre>
+<?}?>

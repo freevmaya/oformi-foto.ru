@@ -1,0 +1,72 @@
+<?
+    $link = Admin::getTaskLink().'&name_id='.$name_id;
+    $retLink = $this->svar('retLink', '?task=holiday,getNames');
+?>
+<h2>Шаблоны для имени</h2>
+<div>
+    <h3><?=$name['name']?></h3>
+    <a href="<?=$retLink?>">назад к списку</a>
+</div>
+
+<h2>Добавление шаблона</h2>
+<form method="post" action="<?=$link?>">
+    ID шаблона (или несколько шаблонов через запятую):<br>
+    <input type="text" size="90" name="tmpl_id">
+    <input type="submit" value="Добавить">
+</form>
+
+<script type="text/javascript">
+    function tmplClick(tmpl_id) {
+        var params = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=800,height=750';
+        var win = window.open("http://pj.1gb.ru/pjjs/view.php?tid=" + tmpl_id, "mm_view", params);        
+    }
+</script>
+
+<form method="post" action="<?=$link?>">
+    <table class="report">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Картинка
+            </th>
+            <th>
+                Тип
+            </th>  
+            <th>
+                Удалить
+            </th>
+        </tr>
+        <? foreach ($list as $key=>$item) {
+                $id = $item['tmpl_id'];
+        ?>
+            <tr class="<?=(($key%2)?'odd':'')?>">
+                <td>
+                    <?=$item['tmpl_id']?>
+                </td>
+                <td>
+                    <a href="#" onclick="tmplClick(<?=$item['tmpl_id']?>)"><img src="http://fotoprivet.com/pj/preview120/<?=$item['tmpl_id']?>.jpg"></a><br>
+                    <a href="<?=MAINURL?>/games/admin.php?task=catalog,edit&state=edit&tmpl_id=<?=$item['tmpl_id']?>">Редактировать параметры шаблона</a>
+                </td>
+                <td>
+                     <select name="type[]">
+                        <option value="<?=$id?>_0" <?=$item['type']==0?'selected':''?>>День ангела</option>
+                        <option value="<?=$id?>_1" <?=$item['type']==1?'selected':''?>>День рождение</option>
+                        <option value="<?=$id?>_2" <?=$item['type']==2?'selected':''?>>Именная</option> 
+                        <option value="<?=$id?>_3" <?=$item['type']==3?'selected':''?>>Новогодняя</option> 
+                        <option value="<?=$id?>_9" <?=$item['type']==9?'selected':''?>>Другое</option>
+                     </select>
+                </td>
+                <td>
+                     <input type="checkbox" name="delete[]" value="<?=$id?>">
+                </td>
+            </tr>
+        <?}?>  
+         <tr class="<?=((!$key%2)?'odd':'')?>">
+            <td colspan="4">
+                <input type="submit" value="Применить">
+            </td>
+        </tr>  
+    </table>
+</form>

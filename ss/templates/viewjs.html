@@ -1,0 +1,119 @@
+<div>
+<?
+    GLOBAL $sheme; 
+    define('TITLE_LIMIT', 50);
+    define('DESC_LIMIT', 180);
+    
+    $top = 73;
+    if (!ss::$noadv) $top += 90;
+    if (!isset($page)) $page = 0;
+    $bottom = 45;   
+    
+    if ($tmpl) {
+
+        $alt = $locale['PHOTOFRAME'].' '.$tmpl['name'].' '.$this->description;
+?>
+    <div style="text-align:center;" id="tmpl_preview" itemscope itemtype="http://schema.org/ImageObject">
+        <div class="tmpl_html">
+            <div class="post">
+<?
+        if ($this->title) echo "<h1 itemprop=\"name\">{$this->title}</h1>"; 
+        if ($this->description) echo "<p itemprop=\"description\">{$this->description}</p>"; 
+?>  
+            </div>
+            <div class="tmpl-img-block">    
+                <div class="dl"><noindex><span class="loader"><?=$locale['WAITLOADDESC']?></span></noindex></div>
+                <img src="<?=$tmpl['preview']?>" id="tmpl_image" alt="<?=$alt?>" itemprop="contentUrl">
+            </div>
+        </div>
+        <noindex>
+        <iframe id="application" style="border:0;" scrolling="no" border="0">
+        </iframe>
+        </noindex>
+        <div class="info"><?=$tmpl['info']?></div>        
+    </div>
+    <div class="post">
+        <p>На этой странице вы можете вставить в рамку свою фотографию. Чтобы выбрать фото с диска компьютера, кликните на кнопке "Вставить ваше фото" под вырезом в рамке, или сделайте двойной клик на нужном вырезе.</p>
+        <p>Изменять размер и масштабирование фотографии в вырезе, вы можете используя мышь. Нажмите на вырезе ближе к краю клавишу мыши. Удерживая, перемещайте курсор вокруг центра выреза, для того чтобы вращать. И от центра для того чтобы масштабировать.</p>
+        <p>Чтобы двигать фото в вырезе нажмите в центре выреза и удерживая клавишу мыши перемещайте курсор в нужную сторону.</p>
+        <p>Когда все готово, вы можете сохранить полученную открытку на компьютер. Для этого нажмите кнопку с изображением дискеты внизу, слева от рамки.</p>
+        <p>Если вы хотите вставить в рамку свою фотографию из альбомов соцсетей ВКонтакте, Одноклассники, Мой-мир, Facebook воспользуйтесь <a href="<?=MAINURL?>/view.htm" target="_self">приложением</a> на нашем сайте (для этого требуется <a href="<?=MAINURL?>/login.html" target="_self">авторизация</a>). Вы также можете воспользоваться приложением на сайте <a href="<?=$sheme?>ok.ru/game/oformifoto" target="_blank">одноклассники.ру</a>.</p>
+    </div>
+<?      if ($items) {
+            $this->styles[] = SSURL.'sbox/assets/SqueezeBox.css';
+            $this->styles[] = SSURL.'catalog.css';
+            $this->scripts[] = SSURL.'sbox/SqueezeBox.js';
+            $this->scripts[] = SSURL.'js/catalog.js';
+            $preview_width = 300;            
+?>    
+    <style type="text/css">
+        .item span span,
+        .item span h3,
+        .item img,
+        .item td {
+            width: <?=$preview_width?>px;
+        }
+    </style>
+    <script type="text/javascript">
+        var FRAMES_URL = '<?=FRAMES_URL;?>';     
+        var CATALOGSELECTOR = '<?=CATALOGSELECTOR?>';     
+        var MAINURL = '<?=MAINURL?>';
+    </script>
+    <div id="tmpls" style="width:100% !important;">
+    <h2>Популярные рамки в этой категории</h2>
+    <div class="catalog post">
+        <div class="list">
+            <?include_once(TEMPLATES_PATH.'catalog/tmpls.html')?>
+        </div>
+    </div>
+    </div>
+<?
+        }        
+        $qstr = "tid={$tmpl['tmpl_id']}&gid={$tmpl['gid']}".(isset($_GET['dev'])?'&dev=1':'');
+    } else $qstr = $this->request->toString();
+    //include(TEMPLATES_PATH.'/social.html');
+?>
+<script type="text/javascript">
+    var application, tmpl_preview, tmpl_image;
+    
+    function updateAppSize() {
+        var coord  = tmpl_image.getCoordinates();
+        application.setStyles(coord);
+    } 
+    
+    function doWinResize() {
+        var size = window.getSize();
+        updateAppSize();
+    }   
+    
+    function onLoad() {
+        updateAppSize();
+    }
+    
+    function showApp() {
+        application.setStyle('visibility', 'visible');
+        updateAppSize();
+    }
+    
+    function onAppLoad() {
+        showApp();
+    }
+    
+    window.addEvent('domready', function() {
+        <?if ($items) {?>
+        catalogListInit('<?=link::c('templatesA')?>', '<?=link::c('catalog', $groupsStr, '%s')?>', <?=$page?>, '<?=addslashes(str_replace(' ', '_', $groupsStr))?>');
+        <?}?>
+        
+        application = $('application');
+        tmpl_preview = $('tmpl_preview');
+        tmpl_image = $('tmpl_image');
+        window.addEvent('resize', doWinResize);
+        tmpl_image.addEvent('load', onLoad);
+        
+        application.addEvent('load', onAppLoad);
+        doWinResize();
+        application.set('src', '<?=MAINURL?>/pjjs/view.php?<?=$qstr?>');
+        
+    });
+</script>
+</div>

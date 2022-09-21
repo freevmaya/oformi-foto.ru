@@ -1,0 +1,17 @@
+<?
+    GLOBAL $AUXTYPES, $sheme;
+    $this->scripts[] = MAINURL.'/'.SSRELATIVE.'js/external.js';
+    $blockID = 'aux-'.rand(1, 10000); 
+?>
+<div class="action-block">
+    <div id="<?=$blockID?>" class="aux">
+<?foreach ($AUXTYPES as $type) {?>    
+        <div><a><img data-type="<?=$type?>" src="<?=MAINURL.'/images/socials/'.$type.'.png'?>"></a></div>
+<?}?>        
+    </div>  
+</div>
+<script type="text/javascript"> 
+    window.addEvent('domready', function() {
+        loginBlockInit($_DE('<?=$blockID?>'));
+    });           
+</script>

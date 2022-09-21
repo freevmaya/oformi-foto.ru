@@ -1,0 +1,177 @@
+var DEFTMPLURL = PROTOCOL + '://oformi-foto.ru/';
+if (typeof(TMPLURL) == 'undefined') TMPLURL = DEFTMPLURL;
+
+var PJCONST = {
+    TMPLURLPATHFULL     : TMPLURL + 'JPG/',
+    TMPLURLPATHPREVIEW  : TMPLURL + 'jpg_preview/i',
+    MASKURLPATH         : TMPLURL + 'holes/'
+}
+
+var PJEVENTS = {
+    TMPLSELECT      : 'TMPLSELECT',
+    SHOWIMAGEDIALOG : 'SHOWIMAGEDIALOG',
+    STARTLOAD       : 'STARTLOAD',
+    COMPLETE        : 'CANVASCOMPLETE',
+    REQUESTPHOTO    : 'REQUESTPHOTO',
+    PHOTOCOMPLETE   : 'PHOTOCOMPLETE',
+    SHOWCTRLPANEL   : 'SHOWCTRLPANEL',
+    COLORBALANCE    : 'COLORBALANCE',
+    SHOWCOLORPANEL  : 'SHOWCOLORPANEL',
+    IMGFILECOMPLETE : 'IMGFILECOMPLETE'
+}
+
+var PJCanvas = new Class({
+    Extends     : Canvas,
+    _tmplIndex  : 0,
+    _frame      : null,
+    _injectIndex: 0,
+    _images     : null,
+    
+    init: function(inputClass) {
+        this.parent(inputClass);
+    },
+    
+    listenerEvents: function() {
+        this.addEvent(PJEVENTS.COLORBALANCE, this.doChangeColorBalance.bind(this));
+    },
+    
+    doChangeColorBalance: function(color) {
+        this.setColors(color);
+    },
+    
+    setColors: function(color) {
+        var hole = this._frame.currentHole();
+        if (hole) {
+            hole.image.setColors(color); 
+        }
+    },
+    
+    setTemplate: function(tmplIndex, a_images) {
+        if (this._tmplIndex != tmplIndex) {
+            if (a_images) this._images = a_images;
+            this.fireEvent(PJEVENTS.STARTLOAD);
+            (new Asset.javascript(PJCONST.MASKURLPATH + tmplIndex + '/holes.js')).addEvent('load', (function(e) {
+                if (info) {
+                    if (this._frame) this._frame.dispose();
+                    
+                    this._tmplIndex = tmplIndex;
+                    this._frame = this.addChild(new gcHolesImage({
+                        src             : PJCONST.TMPLURLPATHFULL + tmplIndex + '.jpg',
+                        holesURL        : PJCONST.MASKURLPATH + tmplIndex + '/',
+                        holes           : info.holes,
+                        colors          : info.colors,
+                        images          : this._images
+                    }));
+                    
+                    this._frame.addEvents({
+                        HOLESELECT: this._doHoleSelect.bind(this),
+                        IMAGECOMPLETE: this._doImageComplete.bind(this), 
+                        COMPLETE: this._completeTemplate.bind(this)
+                    });
+                } else trace('No found template ' + tmplIndex);
+            }).bind(this));
+        }
+    },
+    
+    _openFileDialog: function() {
+        this.fireEvent(PJEVENTS.SHOWIMAGEDIALOG);
+    },
+    
+    getHolePosition: function() {
+        var hp = this._frame.getPosition();
+        return hp.add(this.getPosition());
+    },
+    
+    getFrame: function() {
+        return this._frame;
+    },
+    
+    injectImageFiles: function(fileList) {
+        var count = 0; 
+        var index = this._injectIndex; 
+        var readFile = (function (file) {
+            var reader = new FileReader();
+            reader.onload = (function(e) {
+                if (this._images) this._images[index] = e.target.result;
+                this._frame._setHoleImage(index, e.target.result);
+                count++;
+                index = (index + 1) & this._injectIndex;
+                this.fireEvent(PJEVENTS.IMGFILECOMPLETE, e.target.result);
+                if (count < fileList.length) readFile(fileList[count]);
+                else fileList.length = 0;
+              }
+            ).bind(this);
+            reader.readAsDataURL(file);
+        }).bind(this);   
+        
+        if (fileList.length > 0) readFile(fileList[count]);     
+    },
+    
+    _doHoleSelect: function(holeIndex) {
+        this.fireEvent(HOLE_EVENTS.HOLESELECT, holeIndex);
+    },
+    
+    _doImageComplete: function(holeIndex) {
+        this.fireEvent(HOLE_EVENTS.IMAGECOMPLETE, holeIndex);
+    },
+    
+    _completeTemplate: function(e) {
+        this.refreshRect();
+        this.fireEvent(PJEVENTS.COMPLETE, this._tmplIndex);        
+    },
+    
+    refreshRect: function() {
+        var aparent = this.getParent();
+        var space   = aparent.getStyle('padding-top').toInt() * 2;
+        if (ads = this.getStyle('margin').toInt() * 2) space += ads; 
+        var size    = aparent.getSize();
+        
+        var rect = new Rectangle(0, 0, size.x - space, size.y - space);
+        if (this._frame && this._frame._imageLoaded) 
+            rect = rect.enterHere(this._frame.getImageSize(), true); 
+        this.setRect(rect);
+    },
+    
+    refreshFrameSize: function() {
+        if (this._frame && this._frame._imageLoaded) {
+            var rect = this.getRect().enterHere(this._frame.getImageSize(), true);
+            this._frame.setRect(rect);
+        }
+    },
+    
+    resize: function(size) {
+        this.parent(size);
+        this.refreshFrameSize();
+    },
+    
+    getFocusHole: function() {
+        return this._frame.hitHole(this._input.cursorPos());   
+    },
+    
+    click: function(e) {
+        this.parent(e);
+        if (this._frame) {
+            var hole = this._frame.hitHole(Utils.globalToLocal(this._input._cursorPos, this));
+            if (hole > -1) {       
+                this._injectIndex = hole;
+                if (e.event.ctrlKey) {
+                    this._openFileDialog();
+                } else {
+                    if (!this._frame._holes[hole].image._imageLoaded) {
+                        this._openFileDialog();
+                        return false;
+                    } 
+                }
+            }
+        }
+    },
+    
+    doubleClick: function(e) {
+        this.parent(e);
+        var hole = this._frame.hitHole(this._input.cursorPos());
+        if (hole > -1) {       
+            this._injectIndex = hole;
+            this._openFileDialog();
+        }
+    }
+});

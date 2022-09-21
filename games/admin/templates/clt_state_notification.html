@@ -1,0 +1,148 @@
+<?
+    function outOptions($list) {
+        foreach ($list as $key=>$item)
+            echo "<option value=\"$item\">$key ($item)</option>\n";
+    }
+?>
+<script type="text/javascript" src="admin/js/mootools-1.2.4-core.js"></script>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        if ($('sendBlock'))
+            $('sendBlock').highlight(['#000', '#FFF']);
+        
+        $$('.aitem').addEvent('click', function(e) {
+            var span = this.getParent().getElement('span');
+            var pre = span.getElement('pre');
+            if (pre) span.innerHTML = pre.innerHTML;
+            else span.innerHTML = '<pre>' + span.innerHTML + '</pre>'
+        });
+    });
+    
+    function onCharSelect(list) {
+        var achar = list.options[list.selectedIndex].get('value');
+        $('text').value += achar;
+    }
+</script>
+<?
+    if (isset($result) && $result) {
+?>
+    <div id="sendBlock" style="padding:10px;">
+        <h2>Отправлено</h2>
+        Код отправления: <?=@$result?><br>
+        Время: <?=@$date?>
+    </div>
+<?    
+    }
+    
+    $gender = @$_POST['gender'];
+?>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    <table width="400" style="params">
+         <tr>
+            <td colspan="2"><input type="checkbox" name="status" value="A" <?=$this->request->getVar('status')?'checked':''?> >Только для администратора
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Приложение
+            </td>
+            <td>
+                <select name="appKey">
+                    <option value="CBAOKEABABABABABA" <?=@($_POST['appKey']=='CBAOKEABABABABABA')?'selected':''?>>Прикольное оформление ваших фотографий</option>
+                    <option value="CBAIKDKCABABABABA" <?=@($_POST['appKey']=='CBAIKDKCABABABABA')?'selected':''?>>Прикольное перевоплощение</option>
+                    <option value="CBAIJJPCEBABABABA" <?=@($_POST['appKey']=='CBAIJJPCEBABABABA')?'selected':''?>>Фото-музыка</option>
+                </select>
+            </td>
+        </tr>
+       <tr>
+            <td>
+                Период начала использования приложения (yyyy.MM.dd-yyyy.MM.dd)
+            </td>
+            <td>
+<!--            <input type="text" name="first_access_range" value="<?=@$_POST['first_access_range']?>">-->
+                <select name="first_access_range">
+                       <?outOptions($first_access_range_list)?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Дни рождения (MM.dd-MM.dd)
+            </td>
+            <td>
+                <input type="text" name="birthday_range" value="<?=@$_POST['birthday_range']?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Возраст (например: 18-20)
+            </td>
+            <td>
+                <!--<input type="text" name="age_range" value="<?=@$_POST['age_range']?>" size="10">-->
+                <select name="age_range">
+                    <?outOptions($age_range_list)?>
+                </select>
+            </td>
+        </tr>
+<!--        
+        <tr>
+            <td>
+                expires
+            </td>
+            <td>
+                <input type="text" name="expires" id="expires" readonly value="<?=date('Y.m.d H:i', strtotime('+2 HOUR'))?>" size="15">
+            </td>
+        </tr>
+-->        
+        <tr>
+            <td colspan="2">
+                <input type="radio" name="gender" value="" <?=(!$gender?'CHECKED':'')?>>Для всех 
+                <input type="radio" name="gender" value="M" <?=($gender=='M'?'CHECKED':'')?>>Для мужчин 
+                <input type="radio" name="gender" value="F" <?=($gender=='F'?'CHECKED':'')?>>Для женщин
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Текст сообщения (максимальная длина текста составляет 200 символов)<br>
+                <textarea cols="60" rows="10" name="text" id="text"><?=@$_POST['text']?></textarea>
+                <br>
+                <div>
+                    <?
+                        foreach ($specchars as $char) {
+                            $a_char = mb_convert_encoding("&#{$char};", 'UTF-8', 'HTML-ENTITIES'); 
+                            echo $a_char.' ';
+                        }
+                    ?>
+                    ❄ ❆ ☀ ☁ ☂ ☔ ☽ ★ ☎ ☘ ☙ ☢ ☑ ☒ ☯ ☗ ☰ ☱ ☲ ☲ ☴ ☵ ☶ ☷ ☻ ♠ ♥ ❤ ♦ ◆ ♨ ♬ ♻ ♼ ⚀ ⚅ ⚈ ⚉ ⚑ ⚫ ▂ ▃ ▅ ▆ ██ ▒▓ ▀▄▀▄ ═ ╬ ╦ ╩ ╦ ❥ ✿ ❋ ✩ ✮ ✯ ✰ ❶ ❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾
+                </div>
+                <a href="http://saney.ru/tools/symbols.html" target="_blank">есче символы</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Отправить">
+            </td>
+        </tr>
+    </table>
+</form>
+${user.first-name}
+<?
+    eval("\$alog=array($log);");
+    $alog = array_reverse($alog);
+?>
+<h2>Лог:</h2>
+<div class="panel">
+    <div style="height:200px;overflow:scroll">
+        <div>
+<?
+    foreach ($alog as $item) {
+        echo "<p><a href=\"javascript:void()\" class=\"aitem\">{$item['time']}: </a><span>{$item['message']}</span></p>";
+    }
+?>
+        </div>
+    </div>
+</div>
+<div>
+</div>

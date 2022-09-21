@@ -1,0 +1,64 @@
+<style type="text/css">
+    .small_view {
+        margin: 5px;
+        padding: 5px;
+        float: left;
+    }
+    
+    .item img {
+        max-width: 300px;
+        max-height: 300px;
+    }
+</style>
+<script type="text/javascript">
+    function updateCat(box) {
+        request({
+            state   : 'set_cat',
+            cat     : <?=$set_cat_id?>,
+            tmpl_id : box.get('value'),
+            is_set  : box.get('checked')?1:0
+        }, function(a_data) {
+            console.log(a_data?'Изменения приняты':'Ошибка!');
+        });
+    }
+    
+    function setRus(box) {
+        request({
+            state   : 'set_rus',
+            tmpl_id : box.get('value'),
+            is_set  : box.get('checked')?1:0
+        }, function(a_data) {
+            console.log(a_data?'Изменения приняты':'Ошибка!');
+        });
+    }
+    
+    function onCopyLink(link, tmpl_link) {
+        var ipt = new Element('input', {type: 'text'});
+        ipt.inject(link.getParent());
+        ipt.set('value', tmpl_link);
+        var range = document.createRange();  
+        range.selectNode(ipt);  
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        ipt.destroy();    
+    }    
+</script>
+<div class="tmplContext">
+<?foreach ($list as $key=>$item) {
+    $tmpl_link = $link.'&state=edit&tmpl_id='.$item['tmpl_id'];
+    $img_link = TEMPLATES120URL.$item['tmpl_id'].'.jpg';
+    ?>
+    <div class="item <?=(($key%2)?'odd':'')?>">
+        <div>
+            <a href="<?=$tmpl_link?>"><img src="<?=$img_link?>"></a>
+        </div>
+        <div>
+            <input type="checkbox" name="set_cat" value="<?=$item['tmpl_id']?>" <?=$item['group_id']?'CHECKED':''?> onchange="updateCat(this)"><?=$set_cat_name?><br>
+            <input type="checkbox" name="set_rus" value="<?=$item['tmpl_id']?>" <?=$item['lang']=='rus'?'CHECKED':''?> onchange="setRus(this)">Русский<br>
+            <a href="https://www.google.ru/imghp?hl=ru&tab=wi" target="_blank" onclick="onCopyLink(this, '<?=$img_link?>'); return true;" title="Копирует ссылку на картинку в буфер обмена и открывает поисковик">поиск</a>
+        </div>
+    </div>
+<?}?>    
+</div>
+<div style="clear:both"></div>

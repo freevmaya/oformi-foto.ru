@@ -1,0 +1,35 @@
+<h1>Управление шаблономи в праздниках</h1>
+<form method="POST" action="<?=admin::getTaskLink()?>">
+    <label for="holiday_id">Праздник</label>
+    <select name="holiday_id" id="holiday_id">
+        <?
+            foreach ($holidays as $holiday) {
+                $selected = '';
+                if ($holiday['holiday_id'] == @$holiday_id) $selected = 'SELECTED';
+                echo "<option value=\"{$holiday['holiday_id']}\" {$selected}>{$holiday['name']}</option>\n";
+            }
+        ?>
+    </select>
+    <br>
+    <label for="tmpls">Список номеров шалонов (через запятую или пробел)</label>
+    <input type="text" name="tmpls" id="tmpls" size="80" value="<?=@$listStr?>">
+    <br>
+    <input type="radio" name="action" value="delete" <?=(@$action=='delete')?'checked':''?>>Удалять<br>    
+    <input type="radio" name="action" value="add" <?=(@$action=='add')?'checked':''?>>Добавлять<br>   
+    <input type="radio" name="action" value="NYCopy" <?=(@$action=='NYCopy')?'checked':''?>>Копировать из поиска
+    <select name="group_id" id="group_id">
+        <option value="0" SELECTED>---</option>
+        <?
+            foreach ($groups as $group) {
+                $selected = '';
+                if ($group['group_id'] == @group_id) $selected = 'SELECTED';
+                echo "<option value=\"{$group['group_id']}\" {$selected}>{$group['name']}</option>\n";
+            }
+        ?>
+    </select>
+    <br>        
+<?if (@$result) {?>
+<h2><font color="red">Успешно!</font></h2>
+<?}?>
+    <input type="submit">
+</form>

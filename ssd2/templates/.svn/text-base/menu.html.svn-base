@@ -1,0 +1,153 @@
+<?
+    GLOBAL $LANGINSTALL;
+    function createMLink($task, $caption) {
+        if (substr($task, 0, 4) == 'http')
+            return '<a href="'.$task.'">'.$caption.'</a>';
+        else return '<a onclick="'.$task.'">'.$caption.'</a>';
+    } 
+    
+    function menuItem($task, $athis, $item) {    
+        $style = 'class="';
+        $isSubmenu = isset($item['submenu']);
+        if (isset($item['align'])) $style .= 'm'.$item['align'];
+        
+        if ($isSubmenu) $style .= ' owner';
+        else if ($athis->isCurrentTask($task)) $style .= ' current';
+        
+        $style .= '"';
+        $result = '<div '.$style.'>'.createMLink($task, $item['caption']);
+        if ($isSubmenu) {
+            $result .= '<div class="submenu">';
+            foreach ($item['submenu'] as $subTask=>$subItem) {
+                if (is_array($subItem))
+                    $result .= menuItem($subTask, $athis, $subItem);
+                else $result .= createMLink($subTask, $subItem);
+            } 
+            $result .= '</div>';
+        }
+        return $result.'</div>';
+    }
+    
+    function outMenu($athis, $menuList) {
+        $result = '';
+        foreach ($menuList as $task=>$item) {
+            $result .= menuItem($task, $athis, $item);
+        }
+        return $result;
+    }
+?>
+<script type="text/javascript">
+    var GMHEIGHT = 68;
+    var SMHEIGHT = 30;  
+    
+    function setLang(lang) {
+        var langa = <?=json_encode($LANGINSTALL);?>;
+        var url_a = document.location.href.split(/(:\/\/|www\.)+/);
+        var url = url_a[2].split('.');
+        if (langa.indexOf(url[0]) > -1) url[0] = lang
+        else url = [lang].concat(url);
+        
+        document.location.href = 'http://' + url.join('.');
+    }
+    
+    function submenuInit(submenu) {
+        if (submenu) {
+            var topitem = submenu.getParent();
+            var parent = topitem.getParent();
+            var isaux = submenu.hasClass('aux');
+            
+            if (submenu.getChildren().length > MAXSUBITEMS) {
+                submenu.setStyles({
+                    height: MAXSUBITEMS * SUBITEMHEIGHT,
+                    'overflow-y': 'scroll'
+                });
+            }
+            submenu.setStyle('opacity', 0);
+            topitem.addEvent('mouseover', function(e) {
+                if (!isaux || (app && app.user)) {
+                    if (parent && parent.hasClass('submenu')) {
+                        var styles = {};
+                        var size = topitem.getSize();
+                        styles['margin-left'] = size.x;
+                        styles['margin-top'] = -size.y;
+                        submenu.setStyles(styles);
+                    }      
+                    submenu.fade(1);
+                }
+            });
+            topitem.addEvent('mouseout', function(e) {submenu.fade(0);});
+        }
+    }
+    
+    function updateHMenu() {
+        var sy = window.getScroll().y;
+        var hmenu = $('hmenu');
+        var bodyArea = $('bodyArea');
+
+        if (hmenu) {
+            if (sy > GMHEIGHT - SMHEIGHT) {
+                hmenu.setStyle('display', 'block');
+                var show = (sy - GMHEIGHT + SMHEIGHT) / SMHEIGHT;
+                if (show <= 1) hmenu.setOpacity(show);
+                else hmenu.setOpacity(1);
+
+                if (!bodyArea.hasClass('below')) bodyArea.addClass('below');
+            } else {
+                hmenu.setStyle('display', 'none');
+                if (bodyArea.hasClass('below')) bodyArea.removeClass('below');
+            }           
+        }             
+    }
+    
+    function refreshAvatar() {
+        $('avatar').setStyle('background', (app.user?('url(' + app.getUserAvatar() + ') no-repeat center center'):''));
+    }
+    
+    window.addEvent('CHANGEAVATAR', refreshAvatar);
+    
+    window.addEvent('userInfo', function(user) {
+        var userBlock = $('user');
+        if (userBlock) { 
+            if (user) {
+                userBlock.getElement('h2').set('text', app.getUserLogin());
+                refreshAvatar();
+            } else {
+                userBlock.getElement('h2').set('text', '');
+                refreshAvatar();
+            }
+        }
+    });
+    
+    window.addEvent('domready', function() {
+        $$('.submenu').each(submenuInit);            
+        
+        updateHMenu();
+    });
+    
+    window.addEvent('scroll', function(e) {
+        updateHMenu();
+    });    
+</script>     
+<div id="hmenu" class="hmenu">
+    <div class="wrapper">
+        <?=outMenu($this, $menuList);?>   
+    </div>
+</div>
+<div id="menu" class="menu">
+    <div class="wrapper">
+        <?=outMenu($this, $menuList);?>
+        <div id="user">
+            <div id="avatar">
+                <div class="submenu aux">
+                    <!--<a href="<?=MAINURL?>?task=addBalance"><?=$locale['ADDBALANCE']?></a>-->
+                    <a href="<?=link::c('user', 'page')?>"><?=$locale['MAINPAGE']?></a>
+                    <a href="#" onclick="app.logout();return false;"><?=$locale['LOGOUT']?></a>
+                </div>
+            </div>
+            <table class="name">
+                <tr><td><h2> </h2></td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="clr"></div>

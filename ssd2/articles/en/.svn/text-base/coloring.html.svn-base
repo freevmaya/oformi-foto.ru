@@ -1,0 +1,31 @@
+<?
+    $imgurl = SSURL.'articles/images/coloring/';
+    $applink = link::c('app', 'coloring');
+    $alt = 'Turn a black and white photo into a color photo';
+//    $this->addMeta('page-image', MAINURL.'/images/share/coloring_share.jpg');
+?>
+<h1 style="margin-top: 20px;"><?=$this->getTitle()?></h1>
+<div class="post">
+    <div class="images">
+        <img src="<?=$imgurl?>1_in.jpg" alt="<?=$alt?>" class="collage">
+        <img src="<?=$imgurl?>1_out.jpg" alt="<?=$alt?>" class="collage">
+        <img src="<?=$imgurl?>2_in.jpg" alt="<?=$alt?>" class="collage">
+        <img src="<?=$imgurl?>2_out.jpg" alt="<?=$alt?>" class="collage">
+        <img src="<?=$imgurl?>3_in.jpg" alt="<?=$alt?>" class="collage">
+        <img src="<?=$imgurl?>3_out.jpg" alt="<?=$alt?>" class="collage">
+    </div>
+    <p>In this <a href="<?=$applink?>">application</a>, you can paint a photo or make a color stylization. You can create interesting works from old photos. If you want to animate an old photo you will need a scanner, our application and a little patience.</p>
+    <h2>How the image in the application is processed.</h2>
+    <p>Working screen or canvas <a href="<?=$applink?>">application</a> consists of several transparent layers placed one above the other. The basis is the image that you downloaded, we will call it the source. With the help of a brush, on layers, in the working area, the user applies strokes forming a kind of zone that colors the source image in this place in the desired color shade. The color shade is common for the selected layer and is adjusted in the layer settings. Thus, within the layer, objects with the same color shade are painted, for example: face, hair, lips, eyes, etc. <a href="<?=$applink?>">Convenience</a> is that you can paint over the desired color areas, and select and adjust shades later in the coloring stage.</p>
+    <h2>Getting Started</h2>
+    <p>To learn and demonstrate the features of the <a href="<?=$applink?>">program</a>, let's try to paint a black and white photo with a face image. We load the image by selecting the item "Open" in the <a href="<?=$applink?>">application</a> menu, or by clicking the" File "menu button once with the mouse. On the right is the tool palette. Select the "Body" layer in the "Layers" rollout. By default, the rollout contains layers with names that are suitable for coloring the face, but you can add new ones and delete existing layers at your discretion. So you have the "Body" layer selected, move the mouse cursor over the face area and fill the face and neck area with small strokes. While not paying attention to the color shade of the layer to be painted, if desired, you can change it later. If you accidentally colored the wrong area, do not hesitate, you can cancel this step by selecting "Cancel" by selecting the appropriate item in the "Editor" menu or by pressing Ctrl + Z on the keyboard. You can also wipe the extra in eraser mode, if you apply strokes with the Ctrl key pressed. You can change the size of the brush spot by rotating the mouse wheel, and if you keep the Ctrl key pressed, the blur of the spot will change.</p>
+    <p>When you prick your face, go to painting the eyes, hair and lips, before choosing the desired layer in the "Layers" rollout.</p>
+    <p>When the layers are painted, you can, by selecting the desired layer, edit its color tint, brightness or contrast by the "Tint Layer" tool from the "Tools" menu. When the work is ready, save it to a file by selecting "Save as ..." from the "File" menu</p>
+    <h2>Technical issues</h2>
+    <p>Layers do not overlap one another. In the process of painting, if you accidentally touched a previously colored layer, the new area will overwrite the existing one. If it is required that the layers are not overwritten, the staining should be done with the Shift key pressed. You can change the sequence of layers by clicking on the arrows on the right side of the layer name in the Layers rollout. It is possible to disable the layer, or more precisely the layer action on the source, for this you need to enable or disable the checkbox to the right of the layer name in the "Layers" rollout.</p>
+    <p>The Image Type tool is designed to load a layer template for this type of image. Subsequently, the layers can be cloned, deleted and changed in sequence.</p>
+    <iframe width="958" height="538" src="//www.youtube.com/embed/_S36iJncFis" frameborder="0" allowfullscreen></iframe>
+    <div style="text-align: right; margin: 10px;">
+        <a href="<?=$applink?>" data-rel="<?=$applink?>" class="ctrl-button app-link">Colorize your photo</a>
+    </div>
+</div>

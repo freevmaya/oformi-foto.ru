@@ -1,0 +1,72 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+
+    $chars = array('-', 'А', 'Б', 'С', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н');    
+?>
+<h2>Даты</h2>
+
+<h2>Добавление даты</h2>
+<form method="post" action="<?=$link?>">
+<table class="report">
+    <tr>
+        <td>Дата </td>
+        <td><input type="text" size="5" name="nh-date" value="<?=$this->svar('nh-date', date('md'))?>"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Имена<br>
+        <textarea style="width:600px; height:100px;" name="names"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="Добавить"></td>
+    </tr>
+</table>    
+</form>
+
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&dpage=%s');?>
+    <?=charPaginator($charPage, $link.'&dchar=%s', $chars);?>
+</div>
+
+<form method="post" action="<?=$link?>">
+<table class="report">
+    <tr>
+        <th>Дата</th>
+        <th>Имя</th>
+        <th>Удалить</th>
+    </tr>
+    <? 
+    $curDate = '';
+    foreach ($list as $key=>$item) {
+            if (!$key) $curDate = $item['date'];
+            if ($curDate != $item['date']) {
+                $curDate = $item['date'];
+    ?>
+        <tr>
+            <td colspan="3"><hr></td>
+        </tr>
+    <?            
+            }
+            
+            $vdate = date('d F', strtotime(substr($item['date'], 2, 2).'.'.substr($item['date'], 0, 2).'.2014'));
+        ?>
+        <tr class="<?=(($key%2)?'odd':'')?>">
+            <td>
+                <?=$vdate?>
+            </td>
+            <td>
+                <?=$item['name']?>
+            </td>
+            <td>
+                <input type="checkbox" name="delete[]" value="<?=$item['date']?>_<?=$item['name_id']?>">
+            </td>
+        </tr>
+    <?}?>    
+    <tr class="<?=((!$key%2)?'odd':'')?>">
+        <td colspan="3">
+            <input type="submit" value="Применить">
+        </td>
+    </tr>  
+</table>
+</form>

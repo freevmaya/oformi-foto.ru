@@ -1,0 +1,44 @@
+<?
+    $autors = array(0=>'Не определен', '8062938299454250872'=>'Вадим', '12700092426321616713'=>'Алена', '14095186048222604222'=>'Анастасия', '1731353195984349210'=>'Светлана');
+?>
+<script type="text/javascript">
+    function showPeriod(period) {
+        var periods = {
+            'mouth': ['<?=date('d.m.Y', strtotime('-1 month'))?>', '<?=date('d.m.Y')?>'],
+            'week': ['<?=date('d.m.Y', strtotime('-1 week'))?>', '<?=date('d.m.Y')?>']
+        }
+        
+        document.location.href='<?=Admin::getTaskLink()?>&startDate=' + periods[period][0] + '&endDate=' + periods[period][1];
+    }
+</script>
+<h1>Отчете по шаблонам</h1>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    Период с: <input type="text" size="10" value="<?=$startDate?>" name="startDate">  по <input type="text" size="10" value="<?=$endDate?>" name="endDate"><br>
+    <div style="margin: 10px;">
+        <input type="button" value="За прошедший месяц" onclick="showPeriod('mouth')">
+        <input type="button" value="За прошедшую неделю" onclick="showPeriod('week')">   
+    </div>
+    Цена за собственную: <input type="text" size="5" name="priceSelf" value="<?=$priceSelf?>"><br> 
+    Цена за авторскую: <input type="text" size="5" name="priceAutor" value="<?=$priceAutor?>"><br> 
+    <input type="submit" value="ok">
+</form>
+<table class="report">
+    <tr>
+        <th>Автор</th>
+        <th>Количество</th> 
+        <th>Авторские</th>
+        <th>Сумма</th>
+        <th>Всего символов</th>
+    </tr>
+<?
+    foreach ($list as $item) {
+?> 
+    <tr>
+        <td><a href="#" title="<?=$item['autor_id']?>"><?=@$autors[$item['autor_id']]?></a></td>
+        <td><?=$item['count']?></td>
+        <td><?=$item['aCount']?></td>
+        <td><?=round($item['aCount'] * $priceAutor) + round(($item['count'] - $item['aCount']) * $priceSelf)?></td> 
+        <td><?=$item['nameChars'] + $item['descChars']?></td> 
+    </tr>
+<?}?>
+</table>

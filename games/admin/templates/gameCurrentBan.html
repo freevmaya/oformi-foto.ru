@@ -1,0 +1,29 @@
+<h3>
+Текущие жалобы
+</h3>
+<table width="100%" cellpadding="5" class="report">
+    <tr>
+        <th>
+        </th>
+        <th>
+            <a href="<?=Admin::getTaskLink()?>&order=ID">ID</a>
+        </th>
+        <th>
+            <a href="<?=Admin::getTaskLink()?>&order=name">Изображение</a>
+        </th>
+        <th>
+            <a href="<?=Admin::getTaskLink()?>&order=count">Отправления</a>
+        </th>
+    </tr>
+<?
+foreach ($list as $item) {
+?>
+    <tr>
+        <td>
+            <img src="<?=$item['name']?>">
+        </td>
+    </tr>
+<?
+} 
+?>
+</table>

@@ -1,0 +1,63 @@
+<?
+    GLOBAL $sheme, $_SERVER;
+    $imageCount = 6;
+    
+    function imageView($x, $y, $pathURL, $imageCount, $alts) {
+        
+        $size = 110;
+        $step = round($size / $imageCount);
+        $result = '';
+        for ($i=0; $i<$imageCount; $i++) {
+            $lx = $x + $i * $step;
+            $ly = $y + $i * $step;
+            $fileName = 'p'.($i + 1).'.jpg';
+            $result .= '<a href="'.$pathURL.'/big/'.$fileName.'" rel="boxed"><img src="'.$pathURL.'/'.$fileName.'" class="e_image" style="margin:'.$ly.'px 0 0 '.$lx.'px;" alt="'.$alts[$i % count($alts)].'" /></a>';
+        }
+        return $result;
+    }
+    
+//    $this->scripts[] = ARTICLESURL.'js/gallery.js';
+    $this->title = 'Foto okvirji na spletu.';
+    $this->description = 'Na tisoče okvirjev na spletu in brezplačno. Kul fotomontaža, kolaži, koledarji, voščilnice z vašo fotografijo za vse praznike. GIF animacija iz vaših fotografij. Barvanje črno-belih fotografij.';
+    
+    $this->styles[] = MAINURL.'/'.SSRELATIVE.'pjjs.css';
+    $pjjs_path = 'pjjs/index.php?lang='.ss::lang();
+    if ($dev = $this->request->getVar('dev', false)) $pjjs_path .= '&dev=1';
+
+    $date = date("Y-m-d 00:00");
+
+    $hl = DB::asArray("SELECT * FROM `gpj_holiday` WHERE `date` >= '{$date}' AND disabled = 0 ORDER BY `date` ASC, `type` ASC LIMIT 2");    
+?>
+<script type="text/javascript">
+    SqueezeBox.parsers.swf = function(preset) {
+    	return (preset || this.url.test(/\.swf/)) ? this.url : false;
+    };
+     
+    SqueezeBox.handlers.swf = function(url) {
+    	var size = this.options.size;
+    	return new Swiff(url, {
+    		id: 'sbox-swf',
+    		width: size.x,
+    		height: size.y
+    	});
+    };
+</script>
+<h1 style="margin-top: 0px;"><?=$this->getTitle()?></h1>
+<?if ($hl) {?>
+<div class="post text">
+<?foreach ($hl as $h) {?>    
+    <div>Fotookvirji in razglednice za praznik <?=date('d.m', strtotime($h['date']))?>, <a href="<?=link::c('holidays', $h['holiday_id'].'-'.controller::translit($h['name']));?>">"<?=$h['name']?>"</a></div>
+<?}?>
+</div>
+<?}?> 
+<?//include(dirname(__FILE__).'/home-blocks/new-year.html')?>
+<?//include(dirname(__FILE__).'/home-blocks/may.html')?>
+<?include(dirname(__FILE__).'/home-blocks/pj-app.html')?> 
+<?include(dirname(__FILE__).'/home-blocks/seo-text.html')?> 
+<?//include(dirname(__FILE__).'/home-blocks/photocollage.html')?>
+<?//include(dirname(__FILE__).'/home-blocks/pj-content.html')?>
+<?include(dirname(__FILE__).'/home-blocks/clothing.html')?>
+<?//include(dirname(__FILE__).'/home-blocks/restore.html')?>
+<?include(dirname(__FILE__).'/home-blocks/tree.html')?>
+//<?include(dirname(__FILE__).'/home-blocks/gifavt.html')?>
+<?include(dirname(__FILE__).'/home-blocks/coloring.html')?>

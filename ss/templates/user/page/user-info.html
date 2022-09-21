@@ -1,0 +1,34 @@
+<h2><?=ss::userName($user)?></h2>
+<table <?if ($isMainPage) {?>style="min-height:50px;"<?}?>>
+<?if (dateEmpty($user['cDate'])) {?>
+    <tr>
+        <td class="ui-param ui-low"><?=$locale['DATEREG']?>: </td><td class="ui-date"><?=$user['cDate']?></td>
+    </tr>
+<?}?>
+<?if (dateEmpty($user['birthday'])) {?>
+    <tr>
+        <td class="ui-param ui-low"><?=$locale['BIRTHDAY']?>: </td><td class="ui-date"><?=$user['birthday']?></td>
+    </tr>
+<?}?> 
+<?if ($extLink) {?>
+    <tr>
+        <td class="ui-param ui-low"><?=$locale['EXTLINK']?>: </td><td class="ui-date"><a href="<?=$extLink?>" target="_blank"><?=$locale['AUTHORIZER'][$user['source']]?></a></td>
+    </tr>
+<?}?>
+    <tr>
+<?if ($user['source'] != 'none') {?>
+        <td class="ui-param ui-low"><?=$locale['SUBSEVENTS']?>: </td><td class="ui-date"><a href="<?=$subsLink?>" target="_blank"><?=$pushall['state']?$locale['SUBSREG']:$locale['SUBSNOREG']?></a></td>
+<?} else if ($isMainPage && !$curUser) {?>
+        <td><?=$locale['TEXTFROMANONYM']?></td>
+<?}?>                
+    </tr>
+<?
+    if (count($vics) > 0) {
+        echo '<tr class="ui-block"><td class="ui-param ui-low">'.($isMainPage?$locale['MAINVICTORYS']:$locale['USERVICTORYS']).'</td><td class="victory">'; 
+        foreach ($vics as $vic) { 
+            echo '<div><a class="game-state" href="'.link::c('game', 'view', $vic).'"></a></div>';
+        }
+        echo '</td></tr>';
+    }
+?>
+</table>

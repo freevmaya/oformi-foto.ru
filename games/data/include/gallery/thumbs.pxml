@@ -1,0 +1,11 @@
+<?='<?xml version="1.0" encoding="utf-8" ?>'?>
+<images>
+    <?
+        foreach ($list as $item) {
+    ?>
+	<photo image="<?=$item->thumb?>">
+	<![CDATA[<?=$item->title?>]]></photo>
+    <?
+        }
+    ?>
+</images>

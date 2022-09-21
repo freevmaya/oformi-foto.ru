@@ -1,0 +1,88 @@
+<?
+    $this->title        = 'Прикольное перевоплощение';
+    $this->description  = 'Перевоплощайтесь в уникальном приложение которое позволяет изменить свой имидж, создать оригинальный коллаж. Подставьте к своему лицу любой костюм и прическу, выберите фон и эффекты!';
+    GLOBAL $_GET;
+    $JSURL = MAINURL.'/'.SSRELATIVE.'/js/';
+    
+    $this->addMeta('page-image', SSURL.'images/cfb.jpg');
+    $this->addScript('is/external.js');
+//    require_once(SSPATH.'templates/banners.php');
+?>
+<div id="flashAPP" style="width: 100%; margin:0 auto;">
+    <div id="embed" style="width: 100%;"></div>
+</div>
+<script type="text/javascript">
+    var app_params = {
+        app_id: '',
+        viewer_id: 0,
+        dev: <?=$this->request->getVar('dev', 0)?>,
+        ver: <?=$ver?>
+        <?
+            if (isset($_GET['state']))
+                echo ", state:'".$_GET['state']."'";
+        ?>
+    };
+    
+    function appInit(sfwFile, aliase, flash_values) {
+        var flashAPP = $('flashAPP'); 
+        var size = flashAPP.getSize();
+        size.y = flash_values.height?flash_values.height:size.y;
+        flashAPP.setStyle('height', size.y);
+        
+        if ($('social')) $('social').setStyle('width', size.x);
+        sfwFile = "<?=$basePath?>/" + sfwFile + "?<?=$ver?>";
+        
+        var params = {
+            movie: sfwFile,
+            quality: "high",
+            scale: "noscale",
+            menu: "false",
+            align: "middle",
+            salign: "tl",
+            base: "<?=$basePath?>",
+            wmode: "direct",
+            allowNetworking: "all",
+            allowFullScreen: "true"
+        }
+        
+        var attributes = {
+            id: aliase,
+            name: aliase,
+            salign: "tl"
+        };
+                
+        swfobject.embedSWF(sfwFile, "embed", size.x, size.y, "10", "expressInstall.swf", flash_values, params, attributes);
+        callbackObject = $('embed');
+//        $('flashAPP').set('html', '');        
+    }
+    
+    function freeInit(source) {
+        /*if (source) eval('external = ' + source + '_external');
+        else*/ eval('external = default_external');
+            
+        appInit('free_clothing.swf', 'embed', {
+            api_id      : '430262',
+            viewer_id   : 1,
+            modelName   : 'clt28',
+            height      : 953
+        });
+    }
+    
+    window.addEvent('login_status', function(e) {
+        if (e.status) freeInit(e.source);
+        else freeInit();
+    });
+    
+    var flashAPP = $('flashAPP'); 
+    flashAPP.getParent().setStyle('width', '100%');
+    
+    var size = flashAPP.getSize();
+    if (size.x < 500) size.x = 500;
+    else if (size.x > 1500) size.x = 1500;
+    size.x -= 20;
+    
+    flashAPP.setStyle('width', size.x);
+</script>
+<?
+    include(TEMPLATES_PATH.'social.html');
+?>

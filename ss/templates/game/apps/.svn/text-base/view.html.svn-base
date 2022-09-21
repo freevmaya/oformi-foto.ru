@@ -1,0 +1,8 @@
+<script>
+    window.addEvent('domready', function() {
+        scene.init($$('.scene')[0], 'view');
+    });
+</script>
+<div class="container">
+    <img src="<?=GAMEURL.$game['group_id'].'/'.$game['game_id']?>.jpg">
+</div>

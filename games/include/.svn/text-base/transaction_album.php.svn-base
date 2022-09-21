@@ -1,0 +1,33 @@
+<?
+
+class transaction_album {
+    function __construct() {
+    }
+    
+    function begin($request) {
+        if ((($request->getVar('service_id', -1) > 0) && ($request->getVar('service_id', 100) <= 10)) ||
+            (($request->getVar('service_id', -1) > 5000) && ($request->getVar('service_id', 100) <= 70535))) {
+            if ($transaction = query_line('SELECT * FROM album_transaction WHERE transaction_id = '.$request->getVar('transaction_id', 0)))
+                return '{"status":"2", "error_code":"703"}';
+            else {    
+                $sms_prices = array(
+                    0=>0,
+                    1=>3300,
+                    3=>9900,
+                    5=>16500
+                );
+                
+                $sms_price = $sms_prices[$request->getVar('sms_price', 0)];
+                $query = "INSERT INTO album_transaction (`transaction_id`, `user_id`, `service_id`, `sms_price`, `other_price`, `debug`) 
+                            VALUES (".$request->getVar('transaction_id').", '".$request->getVar('uid')."', ".$request->getVar('service_id').
+                            ", ".$sms_price.", ".$request->getVar('other_price', 0).
+                            ", ".$request->getVar('debug', 0).")";
+                if (sql_query($query))
+                    return '{"status":"1"}';
+                else return '{"status":"2", "error_code":"703"}';
+            }
+        } else return '{"status":"0", "error_code":"702"}';
+    }
+}
+
+?>

@@ -1,0 +1,9 @@
+<?
+    ss::$nomenu = true;
+    ss::$nofooter = true;
+    ss::$noadv = true;
+?>
+
+<div class="post text">
+    Ваша жалоба принята!
+</div>

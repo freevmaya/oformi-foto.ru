@@ -1,0 +1,28 @@
+<?
+    GLOBAL $locale;
+    $imgurl = SSURL.'articles/images/tree/';
+    $applink = link::c('app', 'tree');
+    $alt = 'Generic, family tree, genealogical tree. Created in the application on our website.';
+    ss::addCSS('.tree-images', 'text-align: center;');
+    ss::addCSS('.tree-images img', 'display:inline-block;padding:0px;margin:3px;max-width: 230px;');
+    $imgCount = 4;
+?>
+<div class="post">
+    <h2>Family Tree</h2>
+    <p>An application for creating a family tree, or a family tree.</p>
+    <p>Here you can recreate your family tree in order to convey the memory of your roots to the descendants. In addition, you will be able to find out about distant relatives that you have never heard of before! To do this, pass a link to the tree to your relatives - cousin, uncle, etc.</p>
+    <p>In the application, you can combine your tree with the trees of relatives, thus creating a whole family tree!</p>
+    <div class="tree-images">
+        <?
+            for ($i=1; $i<=$imgCount; $i++) {
+                echo '<img src="'.$imgurl.'tsh'.$i.'.jpg" alt="'.$alt.'" title="Описание::'.$alt.'" class="tipz">';
+            }
+        ?>
+    </div> 
+     <div class="post-footer">
+        <a href="<?=$applink?>" class="ctrl-button app-link">
+            Create a generic tree
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

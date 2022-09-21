@@ -1,0 +1,15 @@
+<?
+    $this->title = 'Удаление данных пользователя';
+    $this->description = 'Иструкция по удалению данных пользователя.';
+    ss::$noadv = true;
+    
+    $this->other_themes = false;
+    $this->social_block = false; 
+    $this->article_footer  = false;
+
+?>
+<h1><?=$this->title?></h1>
+<div class="post">
+<p>Если вы хотите удалить свои данные с нашего сайта, отправьте сообщение об этом по данному адресу:</p>
+<p><a href="mailto:webmaster@oformi-foto.ru?subject=Запрос пользователя&body=Здравствуйте, я хочу удалить мои данные с сайта <?=MAINURL?>. Мой ID: <?=ss::nauid()?>">webmaster@oformi-foto.ru</a></p>
+</div>

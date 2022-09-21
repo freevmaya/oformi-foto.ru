@@ -1,0 +1,47 @@
+<?
+$pjPath     = 'dev/pj/';
+$basePath   = 'http://vmaya.ru/pj_mm/dev';
+$params     = '';
+$ver        = rand(0, 100000);
+?>
+<div>
+    <h3>Отчет по шаблонам</h3>
+    <script src="admin/js/swfobject.js" type="text/javascript"></script>
+    <script src="admin/js/mootools-1.2.4-core.js" type="text/javascript"></script>
+    <script src="admin/js/tmpl.js" type="text/javascript"></script>
+    <div id="flashAPP">
+    <script>
+        var app = new SWFObject("<?=$basePath?>/pj_report.swf?<?=$ver?>", "mail_pj", "760", "400", "9");
+        app.addParam("movie", "<?=$basePath?>/pj_report.swf?<?=$ver?>");
+        app.addParam("quality", "high");
+        app.addParam("base", "<?=$basePath?>"); 
+        app.addParam("allowscriptaccess", "all");
+        app.addParam("allowNetworking", "all");
+        app.addParam("allowFullScreen", "true");
+        app.addParam("FlashVars", "<?=$params?>");
+        app.write("flashAPP");
+    </script>
+	</div>   
+    <h3>Добавление шаблона</h3>
+    <div id="tmplBox">
+        <table>
+            <tr>
+                <td class="pName">
+                    Стартовый ID:
+                </td>
+                <td id="start_id">
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="pName">
+                    Файл шаблона (png):
+                </td>
+                <td>
+                    <input type="file" size="20" name="tmplFile">
+                </td>
+            </tr>
+        </table>
+    </div> 
+</div>

@@ -1,0 +1,67 @@
+<h3>Принятые шаблоны</h3>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+<table>
+    <tr>
+        <td>
+            Автор:
+        </td>
+        <td>
+            <input type="text" name="other" size="3" value="<?=$this->svar('other', 'NS')?>">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            За период c 
+        </td>
+        <td>
+            <input type="text" name="startDate" size="18" value="<?=$this->svar('startDate', date('Y-m-d 00:00:00'))?>"> по <input type="text" name="endDate" size="18" value="<?=$this->svar('endDate', date('Y-m-d 24:60:60'))?>"> 
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="ok">
+        </td>
+    </tr>
+</table>
+</form>
+
+<?if (isset($list) && (count($list) > 0)) {
+    $hairCount = 0;
+    $gbCount = 0;
+    $clothCount = 0;
+    foreach($list as $item) {
+        if ($item['type'] == 'c') $clothCount++;
+        else if ($item['group'] == 3) $gbCount++;
+        else $hairCount++;
+    }
+?>
+<h3>Всего принято: <?=count($list)?>, костюмов: <?=$clothCount?>, париков: <?=$hairCount?>, гол. уборов: <?=$gbCount?></h3>
+<table class="report">
+    <tr>
+        <th>
+            Номер
+        </th>
+        <th>
+            Время
+        </th>
+        <th>
+            Автор
+        </th>
+        <th>
+            Тип
+        </th>
+    </tr>
+<? foreach($list as $num=>$item) {?>
+    <tr "<?=($num%2==1)?'class="odd"':''?>>
+        <td><?=$num?>
+        </td>
+        <td><?=$item['modifyTime']?>
+        </td>
+        <td><?=$item['autor']?>
+        </td>
+        <td><?=$item['type']?>
+        </td>
+    </tr>
+<?}?>    
+</table>
+<?}?>

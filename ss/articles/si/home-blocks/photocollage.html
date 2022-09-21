@@ -1,0 +1,44 @@
+<?
+    $imgurl = SSURL.'articles/images/coloring/';
+    $applink = link::c('app', 'coloring');
+    $speed = 8;
+    ss::addCSS('#pc-container', 'height: 200px; overflow: hidden; margin: 20px 0;');
+    ss::addCSS('#pc-container img', 'transition: margin-top '.$speed.'s;');
+?>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        var c = $('pc-container'), ig = c.getElement('img'), t = 0, iz, cz;
+        var cf = function() {
+            t = (t + 1) % 2;
+            ig.setStyle('margin-top', -t * (iz.y - cz.y));
+        }
+        
+        var bl = function() {
+            var v = 'visible';
+            if (Math.random() < 0.02) v = 'hidden';
+            ig.setStyle('visibility', v); 
+        }
+
+        ig.addEvent('load', function() {
+            iz  = ig.getSize();
+            cz  = c.getSize();
+            cf(); cf.periodical(<?=$speed * 1000?>);
+            bl.periodical(10);
+        });
+    });
+</script>
+<div class="post">
+    <h2>Eksplozivna foto montaža ali originalni kolaž iz vaše fotografije</h2>
+    <p>Na podlagi vaše fotografije bomo pripravili izvirno zgodbo in naredili foto kolaž, s katerim boste lahko presenetili svoje prijatelje.</p>
+    <a href="<?=link::c('order', 'photocollage');?>" style="text-align: center;">
+        <div id="pc-container">
+            <img style="margin-top: 0px" src="<?=MAINURL?>/images/work_example/pcsmall.jpg" alt="Eksplozivna foto montaža ali originalni kolaž iz vaše fotografije" class="work">
+        </div>
+    </a>
+    <div class="post-footer">
+        <a href="<?=link::c('order', 'photocollage');?>" class="ctrl-button app-link">
+            Več podrobnosti
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

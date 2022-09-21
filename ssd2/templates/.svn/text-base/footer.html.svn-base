@@ -1,0 +1,74 @@
+<?
+GLOBAL $isSocial, $locale, $_SERVER;
+if (!ss::$nofooter) {
+?>
+<div id="footer">
+    <div class="wrapper">
+        <?if (ss::$task[0] == 'app') {?>
+        <div class="adv-footer">
+            <?include('adv/footer.php')?>
+        </div>
+        <?} else {?>
+        <div class="copiright">
+            <span><?=$locale['DEVELOPEDTO']?> <a href="mailto:fwadim@mail.ru">"vmaya"</a> 2011-<?=date('Y')?></span>
+            <span><a href="<?=link::c('article', 'privacy-policy-of')?>"><?=$locale['PRIVACYPOLICY']?></a></span>
+        </div>        
+        <?}?>
+        <div></div>
+    </div>
+    <div style="display:none"><?=$_SERVER['HTTP_REFERER']?></div>
+</div>
+<?}?>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter4524184 = new Ya.Metrika({
+                    id:4524184,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true, 
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+
+    window.addEvent('SAVETOFILE', function(e) {
+        statTarget('save', {});
+    });
+
+    function statTarget(t, p) {
+        if (window.yaCounter4524184)
+           window.yaCounter4524184.reachGoal(t, p);
+    }
+
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/4524184" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<div id="fixed-footer">
+    <div class="wrapper">
+        <a onclick="showThankView()" style="margin-right: 10px;"><?=$locale['THANKYOU']?>!</a>
+        <div id="payList" class="payList">
+            <h3><?=$locale['PAYHISTORYTITLE']?></h3>
+            <p class="note"><?=$locale['PAYHISNODE']?></p>
+            <div class="pl-items">
+                <table>
+                </table>
+            </div>
+            <p class="thank"><?=$locale['THANKYOUDESC']?></p>
+        </div>
+    </div>
+</div>

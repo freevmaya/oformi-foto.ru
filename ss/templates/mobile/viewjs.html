@@ -1,0 +1,119 @@
+<?
+    GLOBAL $_SERVER;
+
+    $viewName = 'view-'.$tmpl['tmpl_id'];
+?>
+
+<script stype="text/javascript">
+    var _app;
+    var DATA_MODEL  = 'pj_modelDev';
+    var LANGUAGE    = 'rus';
+    var HOSTURL     = '<?=$_SERVER['HTTP_HOST'];?>';
+    var VER         = '1'; 
+    var MAXSAVEADV  = 0;
+    
+    function _doInjectPhoto() {
+        _app.openImageDialog();
+        return false;
+    }         
+    
+    function doTemplateComplete() {
+        $('#<?=$viewName?>').show();
+        _app._canvas.removeEvent(PJEVENTS.COMPLETE, doTemplateComplete);
+    }
+
+    function initialize(a_tid) {
+        if (!_app) {
+/*            (()=>{
+                _app.setTemplateID(<?=$tmpl['tmpl_id']?>, _defaultImages);
+            }).delay(2000);*/
+
+            function waitLoadTemplate(tmplId) {
+                let layout = $.mobile.activePage;
+                if (layout) {
+                    let wp = layout.find('.wrapper');
+                    let h = layout.height();
+                    //console.log(h + " " + $(window).height());
+                    if (h < $(window).height()) {
+                        let timer = (function() {
+                            if (h != layout.height()) {
+                                _app.setTemplateID(tmplId, _defaultImages);
+                                clearInterval(timer);
+                            }
+                        }).periodical(100);
+                    } else _app.setTemplateID(tmplId, _defaultImages);
+
+                    toastInit(wp);
+                }
+            }
+
+            waitLoadTemplate.delay(200, this, a_tid);
+            $(document).bind("pagechange", function() {
+                let pageId = $.mobile.activePage.attr('id');
+                let tmplId = parseInt(pageId.substr(1));
+                if (tmplId > 0) waitLoadTemplate(tmplId);
+            });
+        }
+
+        _app = new leftPJApp(0, $('#<?=$viewName?>'));//, {tid: a_tid});
+        _app._canvas.on(PJEVENTS.COMPLETE, doTemplateComplete);
+
+        byrass.localization(LOCALE);
+    }
+
+    $(window).ready(()=>{
+        initialize(<?=$tmpl['tmpl_id']?>);
+    });
+
+</script>
+
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+    <div class="up-stiker"><a href="#" data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"></a></div>
+    <div id="<?=$viewName?>" class="view-jsa">
+        <div id="editor"></div>
+        <div class="toolPanel" id="colorPanel">
+            <a class="close"></a>
+            <h3 class="head">{COLORPANEL}</h3>
+            <div class="advanced slider grayscale">
+              <div class="knob Tips1" rel="tips.GRAYSCALE"></div>
+            </div>
+            <div class="advanced slider bright">
+              <div class="knob Tips1" rel="tips.BRIGHT"></div>
+            </div>
+            <div class="advanced slider contrast">
+              <div class="knob Tips1" rel="tips.CONTRAST"></div>
+            </div>
+            <div class="advanced slider red">
+              <div class="knob Tips1" rel="tips.RED"></div>
+            </div>
+            <div class="advanced slider green">
+              <div class="knob Tips1" rel="tips.GREEN"></div>
+            </div>
+            <div class="advanced slider blue">
+              <div class="knob Tips1" rel="tips.BLUE"></div>
+            </div>
+            <a class="button">{RESET}</a>
+        </div>
+        <div class="wrapper">
+            <div class="buttons" style="bottom: 0px">
+                <a class="saveButton Tips1" accesskey="s" rel="tips.SAVETOFILE" title="titles.HINT">&#128190;</a>
+                <!--<a id="question" href="help.php" target="_blank" class="Tips1" rel="tips.CANVASHELP" title="titles.HINT"></a>-->
+            </div>
+        
+            <a class="saveButton Tips1" accesskey="s" href="#" rel="tips.SAVETOFILE" title="titles.HINT" type="image/jpeg" download></a>
+            <div class="centerBlock">
+                <div class="func_panel">
+                    <div class="fp-m Tips1" rel="tips.MOVEDESC"></div>
+                    <div class="fp-r Tips1" rel="tips.ROLLDESC"></div>
+                    <div class="fp-s Tips1" rel="tips.SCALEDESC"></div>
+                    <div class="fp-c Tips1" rel="tips.COLORDESC"></div>
+                </div>
+                <canvas class="canvas" width="100%" height="100%"></canvas>
+            </div>
+            <div class="injectPhoto"><p class="round" onclick="_doInjectPhoto()">{INSERTYOUPHOTO}</p></div>
+        </div>
+        <div class="block" style="position: absolute; visibility: hidden;">
+            <input type="file" class="openFile" accept="image">
+        </div>
+    </div>    
+</div>    

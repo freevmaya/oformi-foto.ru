@@ -1,0 +1,62 @@
+<?
+    GLOBAL $locale;
+    $this->title = $locale['LOGINTITLE']; 
+?>                                                      
+<script type="text/javascript">
+    (function() {
+        var lstat = false;
+        window.addEvent('login_status', function(e) {
+            $_DE('in_block').setStyle('display', !e.status?'block':'none');
+            $_DE('out_block').setStyle('display', e.status?'block':'none');
+            lstat = true;
+        }); 
+        
+        /*
+        window.addEvent('afterSetUser', function(e) {
+            loadLastEvents($$('.last_events'));
+        });
+        */
+        
+        window.addEvent('domready', function() {
+            if (!document.cookie) (function() {app.alert(locale.WARNING, locale.NOCOOKIEDESC)}).delay(1000);
+            (function() {
+                if (!lstat) $_DE('in_block').setStyle('display', 'block');
+            }).delay(1500);
+        });
+    })();
+</script>
+
+<div id="in_block" class="display_none">
+    <h1><?=$locale['USERLOGINSITE']?></h1>
+    <div class="post login">
+        <p><?=$locale['USERLOGINDESC']?></p>
+        <?include(dirname(__FILE__).'/login_block.html');?>
+    </div>
+    <?include(dirname(__FILE__).'/login_site_block.html');?>
+</div>
+
+<div id="out_block" class="display_none">
+    <h1><?=$locale['USERYOUAUTORISE']?></h1>
+    <div class="post login-block">
+        <div class="left user">
+            <h2 class="" id="user-name"></h2>
+            <img src="" id="user-pic">
+            <div class="quick-links">
+                <!--<div class="aux"><a href="<?=link::c('user', 'page')?>"><?=$locale['MAINPAGE']?></a></div>-->
+                <div class="aux"><a onclick="app.logout();return false;"><?=$locale['LOGOUT']?></a></div>
+                <div><a href="<?=link::c('user', 'page')?>"><?=$locale['MAINPAGE']?></a></div>
+            </div>
+        </div>
+        <div class="left" style="margin-top: 8px;">
+        <?quickLinks('login');?>
+        </div>
+        <div class="clr"></div>
+        <!--
+        <div style="margin-top:30px;">
+        <h2><?=$locale['LASTEVENTS']?></h2>
+        <div class="last_events">
+        </div>
+        </div>
+        -->
+    </div>
+</div>

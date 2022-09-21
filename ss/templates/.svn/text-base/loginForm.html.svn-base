@@ -1,0 +1,25 @@
+<form method="POST" action="admin.php?task=login">
+    <table width="500">
+        <tr>
+            <td>
+                Login:
+            </td>
+            <td>
+                <input type="text" value="<?=$this->request->getVar('login', '')?>" size="20" name="login">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password:
+            </td>
+            <td>
+                <input type="password" value="" size="20" name="password">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="ok">
+            </td>
+        </tr>
+    </table>
+</form>

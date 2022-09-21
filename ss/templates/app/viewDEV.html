@@ -1,0 +1,56 @@
+<?
+    GLOBAL $_GET, $sheme;
+    
+    if (ss::$isPhone) {
+        include_once(MOBILETEMPLATEPATH.'view.html');
+    } else {              
+    
+    define(MODEL_NAME, 'pjf_m8');
+    ss::$noadv = true;
+    $idDev = $this->getVar('dev');
+//    require_once(SSPATH.'templates/banners.php');
+    if ($idDev) {    
+        $v = rand(1, 1000000);
+        $flashFile = MAINURL.'/pj/dev/pj_mail.swf?v='.$v;
+        $flashFree = MAINURL.'/pj/dev/pj_free.swf?v='.$v;
+    } else {  
+        $flashFile = MAINURL.'/'.$basePath.'/pj_mail.swf?v='.$ver;
+        $flashFree = MAINURL.'/'.$basePath.'/pj_free.swf?v='.$ver;
+    }     
+    
+    $fparams = array('state', 'sid', 'tid', 'gid', 'dev');
+    
+    //$_GET['imageProxy'] = '//oformi-foto.ru/getimage.php?src=';
+    $JSURL = MAINURL.'/'.SSRELATIVE.'/js/';
+    
+//    $this->addMeta('image-from-facebook', array('property'=>'og:image', 'content'=>SSURL.'images/vfb.jpg'));
+    $this->addMeta('page-image', MAINURL.'/images/promo/anim01.jpg');
+    $this->description = 'Здесь можно вставить фото в рамку или сделать прикольный коллаж, фото-открытку, календарь или прикол со своим фото, онлайн и бесплатно. Огромный выбор шаблонов, удобный поиск.';
+    
+    $pjjs_url = $sheme.'oformi-foto.ru/pjjs/index.php';
+    require_once(TEMPLATES_PATH.'game_support.html');
+?>
+<div style="height:1px;overflow:hidden;position:absolute;">
+    <?include(TEMPLATES_PATH.'pushall.php');?>
+</div>
+<div id="flashAPP" class="app-full">
+    <object type="application/x-shockwave-flash" id="embed" name="embed" salign="tl" data="<?=$flashFree?>" style="visibility: visible;" width="100%" height="880px"><param name="bgcolor" value="#FFFFFF"><param name="quality" value="high"><param name="scale" value="noscale"><param name="menu" value="false"><param name="align" value="middle"><param name="salign" value="tl"><param name="base" value="pj/dev"><param name="wmode" value="direct"><param name="allowNetworking" value="all"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><param name="flashvars" value="app_id=embed&amp;viewer_id=0&amp;dev=1&amp;plugins=http://192.168.1.63/pj/plugins/dev/free/&amp;MODEL_NAME=pjf_m8&amp;SFPATH=../../images/sfimages/&amp;ver=<?=$v?>"></object>
+</div>
+<?
+    if ($tmpl) {
+?>
+    <div class="tmpl_html">
+<?
+        if (isset($tmpl['name'])) echo "<h1>{$tmpl['name']}</h1>"; 
+        if (isset($tmpl['desc'])) echo "<div>{$tmpl['desc']}</div>"; 
+?>    
+        <a href="<?=MAINURL?>/template/<?=$tmpl['tmpl_id']?>-<?=controller::translit($tmpl['name'])?>.html"><img src="<?=$tmpl['preview']?>"></a>
+    </div>
+<?        
+    }
+
+    include(TEMPLATES_PATH.'comments.html');
+    //include(TEMPLATES_PATH.'/social.html');
+//    include(TEMPLATES_PATH.'/coinSupport.html');
+}   
+?>

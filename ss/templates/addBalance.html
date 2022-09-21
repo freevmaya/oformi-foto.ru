@@ -1,0 +1,47 @@
+<?
+GLOBAL $_SESSION;
+define('SMSCORRECTION', 2);
+
+if (isset($_SESSION['user']) && $_SESSION['user']['uid']) {
+    $uid = $_SESSION['user']['uid'];
+    $smsValues = array(
+        10, 
+        20, 
+        40, 
+        80
+    );
+    
+/*    
+    $smsValues = array(
+        1, 
+        2, 
+        4, 
+        8
+    );*/    
+    
+    $smsDefault = 1;
+?>
+<script type="text/javascript">
+
+    function doSubmitDeluxe() {
+        var form = $('pay');
+        var deluxe = $('deluxe');
+        var jsonRequest = new Request.JSON({url: '//oformi-foto.ru/ss/echo.php', onSuccess: function(result){
+            form.setStyle('display', 'none'); 
+            deluxe.setStyle('display', 'block'); 
+            $('order_id').value = result.response.id;
+            form.submit();
+        }}).get({'task': 'ajax,deluxe', 'status': 'prepare', 'uid': '<?=$uid?>'});
+    }
+</script>
+<div class="articles">
+    <h1>Пополнение баланса</h1>
+    <div class="post">
+        <p>Введенные средства вы можете использовать для оплаты сервиса скачивания открыток на компьютер, в неограниченном количестве и без показа рекламы. А так же покупать платные открытки.</p>
+        <p>Баланс является общим для сайта и приложения в <a href="http://my.mail.ru/apps/441805" target="_blank">«Моем мире»</a>, то есть: пополнив баланс здесь, он у вас измениться и приложении <a href="http://my.mail.ru/apps/441805" target="_blank">«Прикольное оформление ваших фотографий»</a> на сайте «Мой мир».</p>
+    </div>
+    <div class="post">
+        Платежи временно приостановлены
+    </div>     
+</div>
+<?} else require TEMPLATES_PATH.'nouser.html';

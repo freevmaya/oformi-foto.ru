@@ -1,0 +1,23 @@
+<h3>Файл трассировки</h3>
+<form method="POST" action="?task=stateTrace&clear=1">
+    <input type="checkbox" id="refresh" CHECKED>Обновлять через 5 сек.<br>
+    <input type="submit" value="Очистить">
+</form>
+<script type="text/javascript">
+    function checkAndRefresh() {
+        if (document.getElementById('refresh').checked)
+            document.location.href = '?task=stateTrace';
+    }
+    setInterval("checkAndRefresh();", 5000);
+</script>
+<pre>
+<?
+    if (file_exists($traceFile)) {
+        $traceIn = file_get_contents($traceFile);
+        $traceSpace = str_replace("\n", '', $traceIn);
+        eval('$trace = array('.$traceSpace.')');
+        $trace = $trace?$trace:$traceIn;
+        print_r($trace);
+    }
+?>
+</pre>

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'BuxtonSketch';
+    src: url('fonts/BuxtonSketch.eot');
+    src: url('fonts/BuxtonSketch.eot') format('embedded-opentype'),
+         url('fonts/BuxtonSketch.woff2') format('woff2'),
+         url('fonts/BuxtonSketch.woff') format('woff'),
+         url('fonts/BuxtonSketch.ttf') format('truetype'),
+         url('fonts/BuxtonSketch.svg#BuxtonSketch') format('svg');
+}

@@ -1,0 +1,47 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+?>
+<script src="admin/js/mootools-1.2.4-core.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var PJURL = "http://fotoprivet.com/pjjs/view.php?tid=";
+    function showTmpl(id) {
+        var params = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=800,height=750';
+        var win = window.open(PJURL + id, "pjview", params);
+    }
+    
+    function setAll(checkSet) {
+        var items = $$('.chitems');
+        items.each(function(item, i) {
+            item.checked = checkSet.checked;
+        });
+    }
+</script>
+<h1>Все шаблоны</h1>
+<div class="tmplContext">
+<form method="POST" action="<?=$link?>">
+<input type="checkbox" onclick="setAll(this)"> - Выбрать все<br>
+<?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&page=%s');?>
+<?
+    foreach ($list as $item) {
+        $imageURL = "http://fotoprivet.com/pj/preview120/{$item['tmpl_id']}.jpg"; 
+?>
+        <div class="item state<?=$item['weight']?>">
+            <div><span><?=$item['tmpl_id']?></span>
+                <input type="checkbox" name="items[]" value="<?=$item['tmpl_id']?>" class="chitems">
+            </div>
+            <img src="<?=$imageURL?>" onclick="showTmpl(<?=$item['tmpl_id']?>)">
+        </div>
+<?    
+    }
+?>
+<div style="clear: both;"></div>
+<?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&page=%s');?>
+<div>
+    <input type="checkbox" value="1" name="delete"> - Удалить помеченые<br>
+    <input type="checkbox" value="2" name="setRUS"> - Пометить как RUS<br>
+    <input type="checkbox" value="1" name="setANY"> - Пометить для лубого языка<br>
+    <input type="submit">
+</div>
+</form>
+</div>

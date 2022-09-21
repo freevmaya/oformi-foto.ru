@@ -1,0 +1,11 @@
+<?
+    GLOBAL $sheme;
+    $pjjs_path = 'pjjs/index.php';
+    if ($dev = $this->request->getVar('dev', false)) $pjjs_path = 'dev/pjjs_dev/index.php?dev=1';
+?>
+
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+    <div class="app-view">
+        <iframe src="<?=$sheme?>fotoprivet.com/<?=$pjjs_path?>" id="appframe"></iframe>
+    </div>
+</div>

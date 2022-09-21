@@ -1,0 +1,197 @@
+<?
+    $isToAlerts = $this->svar('report_type', 1)==2;
+?>
+<style>
+  .test-case { float: left; text-align: center; margin-right: 50px;}
+  a, a:visited { color: black; }
+  h2 { font-size: 1.2em; clear: both;}
+  table { text-align: left; margin-bottom: 10px;}
+  .graph .label { font-size: 0.8em; }
+  .bar-A { color: #82293B; }
+  .bar-B { color: #E57536; }
+  
+    .show-query textarea {
+        width: 100%;
+        color: #555;
+        border: 1px solid gray;
+        width: 850px;
+        background: #EEE;
+    }
+  
+    .hidden {
+        display: none;
+    }
+    
+    .move_item {
+        color: #663300;
+        font-weight: bold;        
+    }
+    
+    .values_block {
+        padding: 10px;
+    }
+    
+    values_block h3 {
+        margin: 5px;
+    }
+</style>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="admin/js/graph/raphael.js"></script>
+<script type="text/javascript" src="admin/js/graph/jquery.enumerable.js"></script>
+<script type="text/javascript" src="admin/js/graph/jquery.tufte-graph.js"></script>
+<script type="text/javascript">
+     $(document).ready(function () {
+        //$('.show-query').hide();
+        $('.chbox').click(function() {
+            if (this.checked) $('#' + this.name + '_query').show();
+            else $('#' + this.name + '_query').hide();
+        });
+     });
+</script>
+<link rel="stylesheet" href="admin/js/graph/tufte-graph.css" type="text/css" media="screen" charset="utf-8" />
+
+
+<h2>Группы пользователей</h2>
+
+<div class="block">
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    <div class="panel">
+        <div class="block">
+<?foreach ($user_group as $key=>$group) {
+    $select = isset($select_group[$key]) && $select_group[$key];
+    if ($group['query']) {
+?>
+    <div>
+       <input type="checkbox" class="chbox" value="1" name="group<?=$key?>" <?=($select?'CHECKED':'')?>><span><?
+            if (isset($group['move_table']) && $group['move_table'])
+                echo "<span class=\"move_item\">{$group['name']}</span>";  
+            else echo $group['name'];
+        ?></span><br>
+        <div class="show-query <?=(!$select?'hidden':'')?>" id="group<?=$key?>_query">
+            <textarea readonly name="group<?=$key?>_query"><?=$group['query']?></textarea>
+<?
+    if (isset($group['values'])) {
+        $id = 0;
+        echo '<div class="values_block">';
+        foreach ($group['values'] as $name=>$item) { 
+            echo "<div>{$name}</div><select name=\"select_{$key}_{$id}\">";
+            foreach ($item as $value) 
+                echo "<option value=\"{$value}\">{$value}</option>";
+            echo "</select>";
+            $id++;
+        }
+        echo '</div>';
+    }
+?>            
+        </div>
+    </div>
+<?}}?>
+        </div>
+<!--        
+        <div class="block">
+            <input type="radio" name="unionMode" value="1" <?=(($this->svar('unionMode', 1)==1)?'CHECKED':'')?>>Исключать<br>               
+            <input type="radio" name="unionMode" value="2" <?=(($this->svar('unionMode', 1)==2)?'CHECKED':'')?>>Объеденять<br>
+            <input type="radio" name="unionMode" value="3" <?=(($this->svar('unionMode', 1)==3)?'CHECKED':'')?>>Всех кто входит в А но не в ходит в Б<br>               
+            <input type="radio" name="unionMode" value="4" <?=(($this->svar('unionMode', 1)==4)?'CHECKED':'')?>>Всех кто входит в Б но не в ходит в А               
+        </div>
+-->        
+    </div>
+<!--    
+    <div class="panel">
+        <h4>Другой запрос</h4>
+        <div>Например: </div>
+        <textarea style="width:100%" name="otherquery"><?=$otherQuery?></textarea>
+    </div>
+-->                            
+    <div class="panel">
+        <table width="100%">
+            <tr>
+                <td>
+                    Префикс: <input type="text" value="<?=$this->svar('prefix', 'pjok')?>" name="prefix" size="10"><br>
+                    <input type="radio" name="report_type" value="1" <?=($reportType==1?'CHECKED':'')?> onchange="$('#toAlertsBlock').fadeTo(500, 0)">Отчет<br>
+                    <input type="radio" name="report_type" value="2" <?=$isToAlerts?'CHECKED':''?> onchange="$('#toAlertsBlock').fadeTo(500, this.checked?1:0)">Подготовить сообщение<br>
+                    <input type="radio" name="report_type" value="3" <?=($reportType==3?'CHECKED':'')?> onchange="$('#toAlertsBlock').fadeTo(500, 0)"><span class="move_item">Копировать в отдельную таблицу</span><br>
+                    <hr>                    
+                    <input type="checkbox" name="analize" value="1" <?=$analize?'CHECKED':''?>>Анализ запроса<br>
+                    <input type="checkbox" name="showQuery" value="1" <?=$showQuery?'CHECKED':''?>>Показать запрос<br>
+                </td>
+                <td style="opacity:<?=$isToAlerts?'1':'0'?>" id="toAlertsBlock">
+                    <h4>Сообщение в приложении:</h4>
+                    <select name="alert_id">
+                        <?
+                            foreach ($alerts as $alert) {
+                                $checked = ($alert_id == $alert['id'])?'selected':'';
+                                echo "<option value=\"{$alert['id']}\" $checked>{$alert['id']} {$alert['name']}</option>";
+                            }
+                        ?>
+                    </select><br>
+                    Уже подготовленно для <b><?=$alert_count?></b> пользователей.<br>
+                    Тип: <font color="#048"><b><?=$alertTmpl['type']?></b> - <?=$alertTmpl['typeName']?></font>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" value="ok">
+</form>
+</div>
+<div class="panel">
+<?
+if ($analize) {
+?>
+  <h3>Анализ</h3>
+<?
+    $js_data = '';
+    foreach ($select_group as $key=>$item)
+        if ($item['result']) {
+            ?>
+            <div class="block">
+                <b><?=@$item['query']?></b><br><?=print_r($item['result'], true)?>
+            <?if (!$item['result']['key'] || !$item['result']['possible_keys']) {?>
+                <div class="warning">Нет индекса для использования</div>
+            <?}?>
+            </div>
+            <?
+        }
+} else if ($reportType == 1) {
+?>
+  <h3>Отчет</h3>
+<?
+    $js_data = '';
+    foreach ($select_group as $key=>$item)
+        if ($item['result']) {
+            if ($showQuery) echo "<b>{$item['result']}</b> - {$item['name']}<br>"; 
+            else {
+                $count = $item['result']['count'];
+                $js_data .= ($js_data?',':'')."[$count, {label:'{$item['name']}', color:'{$item['color']}'}]";
+                echo "<b>$count</b> - {$item['name']}<br>";
+            }  
+        }
+    if (!$showQuery && (count($select_group) > 1)) {       
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var a_data = [<?=$js_data?>];
+        $('#graph').tufteBar({
+            data: a_data,
+            axisLabel: function(i) { return this[1].label },
+            color:     function(i, stackedIndex) { 
+                return this[1].color || '#82293B'; 
+              }
+        });
+    });
+</script>
+<?}?>
+<div class='test-case'>
+  <div id='graph' class='graph' style='width:600px; height: 300px; margin-top: 30px;'></div>
+</div>
+<?
+} else if ($reportType >= 2) {
+    foreach ($select_group as $key=>$item) {
+        if ($item['result']) 
+            if ($showQuery) echo "{$item['result']}<br>"; 
+            else echo 'Успешно!<br>';
+    }
+}
+?>
+</div>

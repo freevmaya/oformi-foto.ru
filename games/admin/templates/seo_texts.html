@@ -1,0 +1,159 @@
+<h1>Тексты</h1>
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+    if (isset($result) && $result)
+        echo '<h3 style="color:red">Успешно!</h3>'; 
+    if ($state) {
+?>
+    <a href="<?=$link?>">назад</a>
+    <h2><?=($action=='new')?'Новый текст':'Редактирование'?></h2>
+    <?=isset($item['text_id'])?('<h3>ID: '.$item['text_id'].'</h3>'):''?>
+    <form method="POST" action="<?=$link?>">
+        <table>
+            <tr>
+                <td class="param">
+                    Тип текста
+                </td>
+                <td>
+                    <?=$this->getTypesHtml('type', $this->request->getVar('type', @$item['type']))?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param">
+                    Группа
+                </td>
+                <td>
+                    <?=$this->getGroupsHtml($this->request->getVar('group_id', @$item['group_id']))?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param">
+                    Заголовок (100 символов)
+                </td>
+                <td>
+                    <?=$this->inputHtml('title', 60, @$item['title']);?>
+                </td>
+            </tr>  
+            <tr>
+                <td class="param">
+                    Ключевые слова (140 символов)
+                </td>
+                <td>
+                    <?=$this->inputHtml('keywords', 90, @$item['keywords']);?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param">
+                    Краткое описание (150 символов)
+                </td>
+                <td>
+                    <?=$this->inputHtml('description', 90, @$item['description']);?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param">
+                    Транслит
+                </td>
+                <td>
+                    <?=$this->inputHtml('translit', 60, @$item['translit']);?>
+                </td>
+            </tr>  
+            <tr>
+                <td colspan="2">                    
+                    <div>Допустимые теги:<br>
+                    [a <i>ссылка</i>]<i>текст ссылки</i>[/a], [pimg <i>ссылка</i>]<i>то что попадет в alt</i>[/pimg], [img <i>ссылка</i>]<i>то что попадет в alt</i>[/img], [module <i>имя файла</i>][/module]
+                    </div>
+                    <textarea style="width:800px;height:300px" name="text"><?=$this->request->getVar('text', @$item['text'])?></textarea>
+                </td>
+            </tr>  
+            <tr>
+                <td class="param">
+                    Автор
+                </td>
+                <td>
+                    <?=$this->inputHtml('autor', 30, @$item['autor']);?>
+                </td>
+            </tr>  
+            <tr>
+                <td colspan="2">
+                    <label>Отображать в меню</label><input type="checkbox" name="inmenu" <?=@$item['inmenu']?'checked':'';?>>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="text_id" value="<?=@$item['text_id']?>">
+        <input type="hidden" name="action" value="<?=isset($item['text_id'])?'update':'add';?>">
+        <input type="submit">
+    </form>
+<?if ($this->request->getVar('editor', 0) == 1) {?>    
+<script type="text/javascript">
+   tinymce.init({ selector:'textarea', width : 800});
+</script>
+<?
+        }    
+    } else {
+?>
+<a href="<?=$link?>&state=new">Добавить</a>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&page=%s')?>
+</div>
+
+<table class="report">
+    <tr> 
+        <th>
+        </th>
+        <th>
+            ID
+        </th>
+        <th>
+            Тип
+        </th>
+        <th>
+            Дата
+        </th>
+        <th>
+            Транслит<br>
+                    (без редактора)
+        </th>
+        <th>
+            Заголовок<br>
+                    (с редактором)
+        </th>
+        <th>
+            Автор
+        </th>
+        <th>
+            Удалить
+        </th>
+    </tr>
+    <? foreach ($list as $key=>$item) {
+    ?>
+        <tr class="<?=(($key%2)?'odd':'')?> <?=($item['inmenu']?'active':'')?>">
+            <td>
+                <a href="http://oformi-foto.ru/?task=article,viewArticle,<?=$item['translit']?>&target=d2" target="_blank">Показать</a>
+            </td>
+            <td>
+                <?=$item['text_id']?>
+            </td>
+            <td>
+                <?=$item['type']?>
+            </td>
+            <td>
+                <?=date('d.m.Y', strtotime($item['date']))?>
+            </td>
+            <td>
+                <a href="<?=$link?>&state=edit&text_id=<?=$item['text_id']?>&editor=0"><?=$item['translit']?></a>
+            </td>
+            <td>
+                <a href="<?=$link?>&state=edit&text_id=<?=$item['text_id']?>&editor=1"><?=$item['title']?></a>
+            </td>
+            <td>
+                <?=$item['autor']?>
+            </td> 
+            <td>
+                <a href="<?=$link?>&state=delete&text_id=<?=$item['text_id']?>" onclick="return confirm('Вы действительно хотите удалить запись?');">удалить</a>
+            </td>
+        </tr>
+    <?}?>    
+</table>
+<?}?>

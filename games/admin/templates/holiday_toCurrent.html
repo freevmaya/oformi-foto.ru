@@ -1,0 +1,9 @@
+<?
+	include_once(DATA_PATH.'include/holiday_calc.php');
+?>
+<h1>Пересчет прадников на текущий год</h1>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    Текущий год: <input type="text" value="<?=date('Y')?>" name="year"><br><hr>
+    Пасха в этом году: <input type="text" value="<?=holiday_calc::$PAS?>" name="PAS"><br>
+    <input type="submit">
+</form>

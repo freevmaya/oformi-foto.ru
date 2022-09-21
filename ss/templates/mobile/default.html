@@ -1,0 +1,87 @@
+<?
+GLOBAl $locale, $menuList;
+
+if (isset($words) && (count($words) > 0)) {    
+    $this->title = $locale['CATFRAMESTITLE'].': '.$page_ru;
+    $this->description = $locale['SEARCHRESULT'].' '.$this->title;
+?>
+<style type="text/css">
+    .list div.item {
+        visibility: visible !important;
+    }
+</style>
+<script type="text/javascript">
+    var FRAMES_URL = '<?=FRAMES_URL;?>'; 
+    
+    function doSendCads() {
+        var form = $('cadsForm');
+        var catsElems = form.getElements('input');
+        var cats = [];
+        catsElems.each(function(elem) {
+            if (elem.checked) cats.push(elem.value);
+        }); 
+        if (cats.length > 0) {
+            var link = '';
+            cats.each(function(id) {
+                link += (link?'-':'') + id;
+            });
+            
+            form.set('action', '<?=MAINURL?>/catalog/' + link + '.html');
+            return true;
+        }
+        alert('Надо выбрать хотя бы одну категорию');
+        return false;
+    }
+    
+    function onImgLoad(img) {
+        //img.parents('td').removeClass('noPicture');
+    }
+</script>
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+<h1><?=$page_ru?></h1>
+<div class="post">
+<p>Вы искали: <i><?=$page_ru?></i>.</p><p>На нашем <a href="<?=MAINURL?>/home.html">сайте</a> собраны лучшие фото-рамки, фотоэффекты и фото-приколы, по вашему запросу мы вам можем предложить выборку из нашего <b><a href="<?MAINURL?>/catalog/0.html">каталога</a> фото-оформления</b>, здесь вы можете подобрать понравившееся вам <i>фото-оформление</i> а также создать <i>для своего фото</i> наилучшее <b>графическое обрамление</b>, создать оригинальный коллаж, подчеркнуть свою индивидуальность.</p>
+<p>У нас Вы сможете бесплатно сохранить <b>фото-прикол</b> или <i>фото-рамку</i> на <i>рабочий стол</i>, как и остальные выставленные рисунки на предоставленном сайте. Вы искали: <b><?=$page_ru?></b> или <i><?=nextWord($words)?></i>, мы так же советуем побывать в остальных разделах нашего интернет-сайта, какие представлены ниже. 
+Все <a href="<?MAINURL?>/catalog/Fotoramka.html">фото-рамки</a>, <a href="<?MAINURL?>/catalog/Krasochnye.html">фотоэффекты</a> и <a href="<?MAINURL?>/catalog/Prikoly.html">фото-приколы</a> кропотливо отсортированы сообразно тем разделов, потому вы без труда отыщите пригодные изображения на рабочий стол для вашего широкоформатного монитора. Потрудитесь не заблудится в мире высококачественных широкоформатных <a href="<?MAINURL?>/catalog/Fotoramka.html">фото-рамок</a>, прекрасных <b>изображений</b> и ярких фото!;)</p>
+<p>Возможно вас заинтересуют не только <?=nextWord($words)?>, <?=nextWord($words)?> или <?=nextWord($words)?>, но и разделы в нашем каталоге, связанные с этой темой:</p>
+<div class="cat_links">
+<?
+    foreach ($words as $word) {
+        $tword = controller::translit($word);
+        $link = $MAINURL.'/catalog/'.$tword.'.html';
+        echo "<a href=\"$link\">$word</a><br>";
+    }
+?>
+</div>
+<?if (count($tmpls) > 0) {}?>
+</div>
+<?} else {
+    GLOBAL $menuList;
+?>
+<h1>Нет такого раздела</h1>
+<div class="post">
+    <p>Но есть много других интересных разделов и приложений, например:</p>
+    <ul>
+<?
+    $menu_url = MAINURL.'/';
+    foreach ($menuList as $task=>$item) {
+        $style = 'class="m'.$item['align'].'"'; 
+?>
+        <li <?=$style?>><a href="<?=$menu_url.$task?>"><?=$item['caption']?></a>
+<?
+        if (isset($item['submenu'])) {?>
+            <ul><?
+                foreach ($item['submenu'] as $subTask=>$subItem) {
+//                    if ($target) $subTask .= "&target=$target";
+                ?>
+                   <li><a href="<?=$menu_url.$subTask?>"><?=$subItem?></a></li>  
+                <?}                
+            ?></ul>
+        <?}
+?>
+        </li>
+<?}?> 
+    </ul>
+</div>
+<?}?>
+</div>

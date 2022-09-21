@@ -1,0 +1,20 @@
+<?
+    ss::$noadv = true;
+    $this->addMeta('page-image', SSURL.'images/editor.jpg');
+    $this->title = 'Онлайн редактор изображений';
+    $this->description = 'Онлайн редактор изображений';
+    
+    ss::addCSS('#wrapper', 'width: 100%;');
+    ss::addCSS('.editor', 'border: 0;
+        position: absolute;
+        display: block;
+        top: 65px;
+        bottom: 40px;
+        left: 0px;
+        right: 0px;');
+    
+?>
+<div class="editor">
+    <iframe src="https://pixlr.com/editor/" style="width:100%; height:100%; border:0"></iframe>
+</div>
+<?include(TEMPLATES_PATH.'comments.html');?>

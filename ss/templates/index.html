@@ -1,0 +1,44 @@
+<?
+    GLOBAL $menuList, $_SESSION, $target, $sheme, $ver, $description, $title, $_SERVER, $root, $LANGINSTALL;
+    $ref = $_SERVER['HTTP_REFERER'];
+    $outdoorReferer = !$ref || (strpos($ref, $_SERVER['SERVER_NAME']) === false);
+    
+    $controller_head = null;
+    $cacheHeadKey   = $cacheKey.'_head';
+    
+    ss::trace('is_cache_content = '.$is_cache_content);
+    
+    if ($is_cache_content) $controller_head = ss::getCache($cacheHeadKey);
+    
+    if (!$controller_head) {
+        ss::trace(' NO CAHCE HEAD!');
+
+        $path = $_SERVER['PATH_INFO'].$_SERVER['REQUEST_URI'];
+        $uri_page = BASEHOST.$path;
+        $controller_head = '<link rel="alternate" href="'.MAINURL.$path.'" hreflang="x-default"/>'."\n";
+
+        foreach ($LANGINSTALL as $alang) {
+            if ($alang != ss::lang())
+                $controller_head .= '<link rel="alternate" href="'.$sheme.$alang.'.'.$uri_page.'" hreflang="'.$alang.'" />'."\n";
+        }
+
+        $title          = $controller->getTitle();
+        $description    = $controller->getDescription();
+        $keywords       = $controller->getKeywords();
+    
+        ob_start();
+        include(TEMPLATES_PATH.'/controller_'.(ss::$isPhone?'phone_':'').'head.php');
+        $controller_head .= ob_get_contents();
+        ob_end_clean();
+        if ($controller->isCached()) ss::setCache($cacheHeadKey, $controller_head, $controller->cacheExpire());
+
+    }
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=ss::lang()?>" lang="<?=ss::lang()?>" dir="ltr" prefix="og: http://ogp.me/ns#">
+<?
+    if (ss::$isPhone)
+        include_once(TEMPLATES_PATH.'phone_index.html');
+    else include_once(TEMPLATES_PATH.'any_index.html');
+?>
+</html>

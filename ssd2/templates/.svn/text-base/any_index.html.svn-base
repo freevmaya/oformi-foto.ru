@@ -1,0 +1,122 @@
+<?
+    GLOBAL $locale;
+    $game_groups = array(
+        array('group_id'=>1, 'name'=>$locale['ALL'])
+    );
+?>
+<head>
+<?=$controller_head?>    
+    <script type="text/javascript">
+        var MAXSUBITEMS = 30;
+        var SUBITEMHEIGHT = 25;
+        var AVAURL='<?=AVAURL?>';
+        var AVADEFAULTURL = '<?=AVAURL?>default';
+        var SUBSLINK = '<?=$sheme.'//pushall.ru/?fs='.PUSHALLID?>';
+        var APPID = { ok: 'CBAODNHIABABABABA', vk: 3323857, fb: '1626953174227585', mm: { id: '588137', key: 'dfc1eb613808539c17d80fbbf6af11ad' } };    
+        
+        window.addEvent('domready', function() {
+            (function() {
+                new PJApp({URL: '<?=SSURL?>echo.php', user: <?=json_encode($root->getUserAlternate())?>, outdoorReferer: <?=$outdoorReferer?'true':'false'?>});
+                var dp = $$('.dev_panel')[0];
+                
+                (function() {
+                    var keycom = {
+                        clear: function() {
+                            clearCache(dp.get('text')); 
+                        },
+                        dev: function() {
+                            dp.removeClass('display_none');
+                        }
+                    }
+                    
+                    var keybuf = ''; var ktimer;
+                    window.addEvent('keydown', function(e) {
+                        if (ktimer) clearTimeout(ktimer);
+                        keybuf += e.key;  
+                        ktimer = (function() {
+                            if (keycom[keybuf]) keycom[keybuf]();
+                            ktimer = 0;keybuf = '';
+                        }).delay(500);                                  
+                    });
+                })();
+            }).delay(100);
+            
+        	SqueezeBox.assign($$('a.boxed'), {
+        		parse: 'data-video'
+        	});           
+        });
+        
+        window.addEventListener('error', function(e) {
+            if (app && e.filename) {
+                var msg = e.message + ', ' + e.filename + ': ' + e.colno + '/' + e.lineno;
+                var fn = e.filename.split('/');
+                app.request('ajax,js_error', { 
+                    browser_name: Browser.Engine.name,
+                    browser_version: Browser.Engine.version,
+                    message: e.message,
+                    filename: fn[fn.length - 1],
+                    colno: e.colno,
+                    lineno: e.lineno
+                });
+            }
+            return false;
+        });                 
+        
+        window.addEvent('userInfo', function(user) {
+            $_DE('user-name').set('text', app.getUserLogin());
+            $_DE('user-pic').set('src', app.getUserAvatar());
+        });          
+    </script>
+<?include_once(SSPATH.'helpers/pay-list.php');?>
+<?include_once('analytics.google.php')?>
+</head>
+<body>
+<div id="bodyArea" class="task-<?=ss::$task[0]?><?=isset(ss::$task[1])?'-'.ss::$task[1]:''?>">
+    <?if (!ss::$nomenu) include TEMPLATES_PATH.'menu.html'?>
+    <div id="up-panel">
+        <?
+            if ($target) {
+                echo '<div class="session">target: '.$target.'</div>';
+            }
+        ?>
+    </div>
+    
+   <div id="content">
+        <div class="wrapper<?=$is_cache_content?' cache':''?>" id="wrapper">
+            <?
+            $is_block_adv = (ss::$task[0] != 'app')
+            ?>
+            <?if ($is_block_adv) {?>
+            <div class="left-extend-block">
+                <?require(TEMPLATES_PATH.'adv/left.php');?>
+            </div>
+            <div class="right-extend-block">
+                <?require(TEMPLATES_PATH.'adv/right-120.php');?>
+            </div>
+            <?}?>
+            <?  
+                //if (!ss::$noadv) require(TEMPLATES_PATH.'adv/cpazilla.html');
+                if (!ss::$noadv) require(TEMPLATES_PATH.'adv/google-adv-1000.html');
+                
+                //if (!ss::$noadv) require(TEMPLATES_PATH.'cap-h8.html');
+                //include_once(TEMPLATES_PATH.'my-adv-block.html');
+                include_once(TEMPLATES_PATH.'other-adv-block.html');
+            ?>            
+            <?//if (ss::$shared) include_once(TEMPLATES_PATH.'plugins/advtoptoolbat.php');?>
+            <?=$content?>
+        </div>
+    </div>
+    <div class="hide-templates">
+        <div class="alert-form" id="alert-form">
+            <h2></h2>
+            <div class="message">
+            </div>
+            <div>
+                <input type="button" value="Ок" class="ok dialog-button">
+                <input type="button" value="Отмена" class="cancel dialog-button">
+            </div>
+        </div>
+    </div>    
+</div>
+<?include(TEMPLATES_PATH.'footer.html')?>
+</body>

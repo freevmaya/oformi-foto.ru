@@ -1,0 +1,1167 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tra",
+				"transition\tproperty"
+			],
+			[
+				"me",
+				"method"
+			],
+			[
+				"marg",
+				"margin-left\tproperty"
+			],
+			[
+				"conte",
+				"align-content\tproperty"
+			],
+			[
+				"over",
+				"overflow\tproperty"
+			],
+			[
+				"ali",
+				"align-items\tproperty"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"bo",
+				"bottom\tproperty"
+			],
+			[
+				"get",
+				"getElement"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"ma",
+				"margin\tproperty"
+			],
+			[
+				"sho",
+				"box-shadow\tproperty"
+			],
+			[
+				"bac",
+				"background-image"
+			],
+			[
+				"capch",
+				"captcha"
+			],
+			[
+				"ext",
+				"external_"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"cur",
+				"cur_id"
+			],
+			[
+				"accoun",
+				"account_id"
+			],
+			[
+				"account",
+				"account_type"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"exis",
+				"function_exists"
+			],
+			[
+				"crea",
+				"createSender"
+			],
+			[
+				"els",
+				"else"
+			],
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"mysql",
+				"mysql_connect"
+			],
+			[
+				"class",
+				"class_exists"
+			],
+			[
+				"marke",
+				"market_symbol"
+			],
+			[
+				"sen",
+				"send_result"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"mar",
+				"market_id"
+			],
+			[
+				"test",
+				"test_state"
+			],
+			[
+				"je",
+				"json_encode"
+			],
+			[
+				"too",
+				"toogleGraphMethod"
+			],
+			[
+				"se",
+				"sell"
+			],
+			[
+				"itm",
+				"items"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"paddin",
+				"padding"
+			],
+			[
+				"time",
+				"times"
+			],
+			[
+				"tim",
+				"times"
+			],
+			[
+				"marker",
+				"markers"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"magin",
+				"margin-top"
+			],
+			[
+				"te",
+				"table-row"
+			],
+			[
+				"success",
+				"success_report"
+			],
+			[
+				"control",
+				"control_range"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"overf",
+				"overflow-y"
+			],
+			[
+				"про",
+				"продаж"
+			],
+			[
+				"api",
+				"api_name"
+			],
+			[
+				"js",
+				"json_encode"
+			],
+			[
+				"selec",
+				"select"
+			],
+			[
+				"b",
+				"inline-block"
+			],
+			[
+				"lis",
+				"list-style-type"
+			],
+			[
+				"v",
+				"ui-icon-grip-dotted-vertical"
+			],
+			[
+				"jso",
+				"json_encode"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"JSON",
+				"getJSON"
+			],
+			[
+				"p",
+				"padding"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"pas",
+				"passw"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"g",
+				"gpos"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"exmo",
+				"exmo_dataModule"
+			],
+			[
+				"t",
+				"tObj"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"exp",
+				"explode"
+			],
+			[
+				"tri",
+				"trigger_"
+			],
+			[
+				"is_str",
+				"is_string"
+			],
+			[
+				"is_nu",
+				"is_numeric"
+			],
+			[
+				"is_n",
+				"is_numeric"
+			],
+			[
+				"create",
+				"createOrder"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"frame",
+				"frameIndex"
+			],
+			[
+				"et",
+				"ether"
+			],
+			[
+				"balance",
+				"balance"
+			],
+			[
+				"e",
+				"ether"
+			],
+			[
+				"retu",
+				"returns"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "templates/index.html",
+			"settings":
+			{
+				"buffer_size": 1637,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/phone_index.html",
+			"settings":
+			{
+				"buffer_size": 2908,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/controller_phone_head.php",
+			"settings":
+			{
+				"buffer_size": 2990,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/jqphone.js",
+			"settings":
+			{
+				"buffer_size": 1887,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/cat_phone.js",
+			"settings":
+			{
+				"buffer_size": 9381,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/adv/adsbygoogle.js",
+			"settings":
+			{
+				"buffer_size": 533,
+				"line_ending": "Windows",
+				"name": "$(window).ready(()=>{"
+			}
+		},
+		{
+			"file": "styles_phone.css",
+			"settings":
+			{
+				"buffer_size": 19187,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/mobile/viewjs.html",
+			"settings":
+			{
+				"buffer_size": 1886,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/W/html/pjjs/include/viewBody.php",
+			"settings":
+			{
+				"buffer_size": 3316,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/W/html/pjjs/include/viewInitialize.php",
+			"settings":
+			{
+				"buffer_size": 833,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/X/vmaya/ssd2",
+		"/X/vmaya/ssd2/js",
+		"/X/vmaya/ssd2/js/adv",
+		"/X/vmaya/ssd2/templates",
+		"/X/vmaya/ssd2/templates/mobile"
+	],
+	"file_history":
+	[
+		"/X/vmaya/ssd2/styles.css",
+		"/W/html/pjjs/view.php",
+		"/W/html/pjjs/include/viewHeadMini.php",
+		"/W/html/pjjs/include/viewHead.php",
+		"/X/vmaya/ssd2/templates/mobile/menu.html",
+		"/X/vmaya/ssd2/templates/mobile/catalog.html",
+		"/X/vmaya/pjjs/view.php",
+		"/X/vmaya/ssd2/templates/any_index.html",
+		"/X/vmaya/ssd2/templates/footer.html",
+		"/X/vmaya/ssd2/js/app.js",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/language/uk.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/language/en.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/language/ru.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/ss.php",
+		"/X/vmaya/ssd2/controllers/controller.php",
+		"/X/vmaya/ssd2/controllers/ajaxController.php",
+		"/X/vmaya/firebase-messaging-sw.js",
+		"/X/vmaya/firebase_subscribe.js",
+		"/X/vmaya/pjjs/js22/amini.js",
+		"/X/vmaya/games/data/include/base_model.php",
+		"/X/vmaya/tmp/test_push.php",
+		"/X/vmaya/ssd2/language/ru.php",
+		"/X/vmaya/ssd2/language/en.php",
+		"/X/vmaya/ssd2/language/uk.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/articles/en/home-blocks/tree.html",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/pj-app.html",
+		"/X/vmaya/ss/templates/app/view.html",
+		"/X/vmaya/ssd2/templates/adv/view_adv_block1.php",
+		"/X/vmaya/ss/templates/adv/left.php",
+		"/X/vmaya/ssd2/templates/phone_index.html",
+		"/D/documents/numbers.js",
+		"/X/vmaya/ss/templates/adv/view_adv_block1.php",
+		"/X/vmaya/ssd2/templates/adv/left.php",
+		"/X/vmaya/ssd2/templates/index.html",
+		"/X/vmaya/ssd2/templates/adv/left_yandex.php",
+		"/X/vmaya/pj_ok/index.php",
+		"/X/vmaya/pj_ok/index_dev.php",
+		"/X/logs/pay_ok.log",
+		"/C/Users/vmaya/Desktop/Сервера.txt",
+		"/X/vmaya/games/pay_ok.php",
+		"/X/vmaya/pj_ok/js_dev/main.php.js",
+		"/X/vmaya/pj_ok/js3/main.php.js",
+		"/C/Users/vmaya/Desktop/Admin command LINUX.txt",
+		"/D/documents/visa from india.txt",
+		"/X/vmaya/games/data/include/olds_01.php",
+		"/X/vmaya/games/data/include/android/servers.php",
+		"/X/vmaya/games/data/include/childs_01.php",
+		"/X/vmaya/games/data/include/dev_pj_android_childs.php",
+		"/X/vmaya/games/data/include/pj_android_childs.php",
+		"/X/vmaya/games/data/include/pj_android_childs_zh01.php",
+		"/X/vmaya/getimage/getimage.php",
+		"/X/vmaya/ss/ssconfig.php",
+		"/X/vmaya/pj_ok/options.php",
+		"/X/vmaya/ss/helpers/templates.php",
+		"/W/html/games/models/ta_01_model.php",
+		"/W/html/games/models/ta_dev_model.php",
+		"/X/vmaya/ssd2/templates/adv/google-adv-1000.html",
+		"/X/vmaya/ssd2/templates/app/clothing.html",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/templates/adv/left.php",
+		"/X/vmaya/ssd2/templates/app/view.html",
+		"/D/Unity/SCS/data/maps/test.json",
+		"/D/Unity/SCS/data/maps.json",
+		"/X/vmaya/ssd2/articles/ru/home.html",
+		"/X/vmaya/ssd2/templates/article/viewArticle.html",
+		"/X/vmaya/ssd2/templates/adv/left_grattis.php",
+		"/X/vmaya/ssd2/templates/app/view_adv_block1.php",
+		"/X/vmaya/ssd2/articles/index.html",
+		"/X/vmaya/ssd2/articles/articles.html",
+		"/X/vmaya/ads.txt",
+		"/X/ads.txt",
+		"/C/WebServers/home/192.168.1.63/www/chapaev/index.php",
+		"/D/Unity/Chapaev/Assets/Plugins/external.jslib",
+		"/D/Unity/Chapaev/Assets/Plugins/external.jslib.cs",
+		"/X/vmaya/games/data/include/log.php",
+		"/X/vmaya/ssd2/adv.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/helpers/notify_class.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/ssconfig.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/index.php",
+		"/C/WebServers/home/config.php",
+		"/C/WebServers/home/logs/errors.log",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/controllers/catalogController.php",
+		"/X/vmaya/games/admin/templates/catalog_edit.html",
+		"/X/vmaya/games/admin/controllers/catalogController.php",
+		"/X/vmaya/ssd2/controllers/articleController.php",
+		"/X/vmaya/ssd2/helpers/notify_class.php",
+		"/C/WebServers/home/dev.oformi-foto.ru/www/ss/cat_phone.css",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/clothing.html",
+		"/X/vmaya/ssd2/templates/adv/yandex-adv-1000.html",
+		"/X/vmaya/ssd2/templates/adv/cpazilla_728.html",
+		"/X/vmaya/ss/adv.php",
+		"/X/cron/notify/parse_events.php",
+		"/X/vmaya/ssd2/helpers/Event.php",
+		"/X/vmaya/ssd2/templates/app/coloring.html",
+		"/X/vmaya/pj_ok/style/main.css",
+		"/C/WebServers/home/test1.ru/www/wgl/index.html",
+		"/X/vmaya/ssd2/templates/adv/footer.php",
+		"/X/vmaya/ssd2/templates/holidays.php",
+		"/X/vmaya/ssd2/catalog.css",
+		"/X/vmaya/ssd2/templates/menu.html",
+		"/X/cron/notify/parse_events_config.json",
+		"/X/cron/notify/begin.cmd",
+		"/W/http/.htaccess",
+		"/X/vmaya/ssd2/templates/adv/cpazilla_120x600.html",
+		"/X/vmaya/ssd2/templates/adv/right-120.php",
+		"/X/vmaya/ssd2/templates/adv/left-120.php",
+		"/X/vmaya/htaccess",
+		"/X/vmaya/ssd2/templates/adv/cpazilla_760.html",
+		"/X/cron/notify/readme.txt",
+		"/X/notify/pj/notifyServer.php",
+		"/X/notify/pj_cron/notify.log",
+		"/X/vmaya/ssd2/js/adv/popupView.js",
+		"/X/vmaya/pj_ok/include/Browser.php",
+		"/X/vmaya/ssd2/templates/catalog/list.html",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/new-year.html",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/seo-text.html",
+		"/X/vmaya/ssd2/templates/analytics.google.php",
+		"/X/vmaya/ssd2/templates/index_20.02.2015.html",
+		"/X/vmaya/ssd2/ss.php",
+		"/X/vmaya/index.php",
+		"/X/vmaya/games/models/pjok_n25_model.php",
+		"/X/vmaya/ssd2/controllers/catalogController.php",
+		"/X/vmaya/ssd2/templates/discussion/viewDispute.html",
+		"/X/vmaya/ssd2/templates/discussion/discusGameList.html",
+		"/X/vmaya/ssd2/templates/cap-h8.html",
+		"/X/vmaya/ssd2/js/mootools-1.2.6-core-nc.js",
+		"/X/vmaya/ssd2/templates/user/login.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/Полезные запросы.sql",
+		"/X/vmaya/ssd2/templates/adv/arachis.html"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 113.0,
+		"where_history":
+		[
+			"X:\\vmaya\\ssd2\\js",
+			"X:\\vmaya\\pjjs\\js22",
+			"X:\\vmaya\\pjjs\\jsa",
+			"X:\\vmaya\\ssd2\\js",
+			"C:\\WebServers\\home\\dev.oformi-foto.ru\\www\\ss",
+			"C:\\WebServers\\home\\dev.oformi-foto.ru\\www",
+			"X:\\vmaya\\games\\data\\include",
+			"X:\\vmaya\\games\\models",
+			"X:\\vmaya\\games\\data\\include",
+			"W:\\html\\games\\models",
+			"X:\\vmaya\\games\\models",
+			"X:\\vmaya\\ssd2\\controllers",
+			"X:\\vmaya\\ssd2\\templates",
+			"X:\\vmaya\\ssd2\\templates\\catalog",
+			"X:\\vmaya\\ssd2\\templates",
+			"X:\\vmaya\\ssd2\\templates\\catalog",
+			"X:\\vmaya\\ssd2\\controllers",
+			"X:\\vmaya\\ssd2\\js",
+			"X:\\vmaya\\ssd2\\templates",
+			"X:\\vmaya\\ssd2\\js",
+			"X:\\vmaya\\ssd2\\templates",
+			"X:\\vmaya\\ssd2\\js",
+			"X:\\vmaya\\ssd2\\templates"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"viewjsInit",
+			"application",
+			"up-stiker",
+			"share",
+			"ui-page",
+			"adsbygoogle",
+			"ads",
+			"storage_v02",
+			"PROTOCOL",
+			"storage_v02",
+			"uid",
+			"ajax",
+			"sendTokenToServer",
+			"SUB",
+			"$locale =",
+			"$locale",
+			"(19",
+			"left",
+			"adv-block-home-2",
+			"zc-embed",
+			"myAddLog",
+			"onLoad",
+			"API_callback",
+			"js_path",
+			"miner",
+			"miner()",
+			"min",
+			"miner",
+			"miner_init",
+			"Pay",
+			"js_path",
+			"Pay",
+			"FAPI",
+			"showPayment",
+			"showPayment.",
+			"showPayment",
+			"Pay",
+			"$pjjsURL",
+			"pjjsURL",
+			"onLoad",
+			"pay",
+			"UICa",
+			"showPayment",
+			"FAPI.UI.showPayment",
+			"appObject",
+			"pj2",
+			"pjof.ru",
+			"pjof",
+			"RESVSTORAGEURL",
+			"adv-block-home-2",
+			"media",
+			"#social",
+			".adv-block-1",
+			"adv-block-1",
+			"wrapper",
+			"warapper",
+			"adv-block-1",
+			"left-extend-block",
+			"animation",
+			"left-extend-block",
+			"task-app-view",
+			"myAddLog",
+			"FAPIInitJs",
+			"js_path",
+			"include",
+			"FAPIInitJs",
+			"myAddLog",
+			"$autors",
+			"autors",
+			"baseNotifier",
+			"Рамки для фото онлайн",
+			"getTitle",
+			"Рамки для фото онлайн.",
+			"#flashAPP",
+			"flashAPP",
+			"app-full",
+			"40",
+			"footer",
+			".cat",
+			"left-extend-block",
+			"!important",
+			"hdleft",
+			"updateHMenu",
+			"scroll",
+			"CLASSPATH",
+			"goo",
+			"tmpls_header",
+			"пра",
+			"Все пра",
+			"_MT_VcBannerRun",
+			"_MT_jsLoadDelayed",
+			"BROWSER_ANDROID;",
+			"Browser::BROWSER_ANDROID;",
+			"analytics",
+			"page",
+			"template",
+			"adv",
+			"noadv",
+			"options",
+			"http://oformi-foto.ru/discussion/1099176.html",
+			"popupAdvTime",
+			"index",
+			"text",
+			"urls",
+			"prices",
+			"texts",
+			"images",
+			"adv_data",
+			"adv",
+			"dev",
+			"cookie",
+			"close",
+			"layer",
+			"border",
+			"inject",
+			"domready",
+			"addEvent",
+			"popup_layer.html",
+			"service",
+			"ver",
+			"AFLE",
+			"reloadAll",
+			"fotoprivet",
+			"CHECK",
+			"SAVETOFILE",
+			"CHECKSAVE",
+			"yandex",
+			"target"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"(2019",
+			"li"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 7,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "templates/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1637,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1551,
+								1562
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "templates/phone_index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2908,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1205,
+								1205
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "templates/controller_phone_head.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2990,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2803,
+								2803
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 420.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/jqphone.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1887,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/cat_phone.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9381,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7918,
+								7926
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4319.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/adv/adsbygoogle.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								297,
+								297
+							]
+						],
+						"settings":
+						{
+							"auto_name": "$(window).ready(()=>{",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "styles_phone.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19187,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18555,
+								18555
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 17179.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "templates/mobile/viewjs.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1886,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								873,
+								873
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/W/html/pjjs/include/viewBody.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2029,
+								2029
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 720.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/W/html/pjjs/include/viewInitialize.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								127,
+								127
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 120.0
+	},
+	"pinned_build_system": "",
+	"project": "ss.sublime-project",
+	"replace":
+	{
+		"height": 74.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 438.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

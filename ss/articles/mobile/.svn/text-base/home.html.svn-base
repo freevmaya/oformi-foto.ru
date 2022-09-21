@@ -1,0 +1,12 @@
+<?
+    GLOBAL $locale; 
+?>
+<div role="main" class="ui-content jqm-content jqm-fullwidth center">
+
+	<h2>Рамки бесплатно и без регистрации</h2>
+    <div class="img-container"><img src="<?=MAINURL?>/images/free_banner.jpg"></div>
+    <p>Если вы хотите оформить свои фотографии или сделать из них что-то прикольное, то вы зашли по адресу. Здесь вам не понадобится знание Фотошопа, чтобы сделать простой и эффектный фотомонтаж.</p>
+    <a href="<?=link::c('app', 'view')?>" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-btn-icon-left ui-icon-camera"><?=$locale['OFORMITFOTO']?></a>
+    <a href="<?=link::c('catalog', 0)?>" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-btn-icon-left ui-icon-grid"><?=$locale['CATALOG']?></a>
+
+</div>

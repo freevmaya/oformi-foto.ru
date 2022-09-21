@@ -1,0 +1,63 @@
+<?
+    GLOBAL $_SERVER;
+    if ($tmpl) {
+        $qstr = "tid={$tmpl['tmpl_id']}&gid={$tmpl['gid']}";
+    } else $qstr = $this->request->toString();
+    
+    $pid = $this->page_id;
+    
+    $query = parse_url($_SERVER['HTTP_REFERER']);
+    
+    if (isset($query['host']) && (strpos(MAINURL, $query['host']) !== false)) {
+        $topp = 0;
+    } else $topp = 0.17;
+    
+    $tmpl_style = '';
+    $top_style = '';
+    if ($topp > 0) {
+        $top_style = 'top:'.(round(100 * $topp)).'%'; 
+        $tmpl_style = 'style="'.$top_style.'"';
+    }
+?>
+<style type="text/css">
+    <?if ($topp == 0) {?>
+    #<?=$pid?> .ui-header {
+        display: none !important;
+    }
+    <?}?>
+</style>
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+    <script type="text/javascript">
+        viewjsInit('<?=$pid?>', '<?=$sheme?>fotoprivet.com/pjjs/view.php?<?=$qstr?>', $(window).height() * <?=$topp?>);
+    </script>
+    <div style="overflow:hidden;">
+    <?
+        if ($tmpl) {
+    ?>
+        <div style="text-align:center;" class="tmpl_preview">
+<?if ($topp > 0) {?>        
+            <div class="post">
+            <?
+                if ($this->description) echo "<p>{$this->description}</p>"; 
+            ?>  
+            </div>
+<?}?>                    
+            <div class="tmpl_html" <?=$tmpl_style?>>
+    <?
+            //if ($this->description) echo "<p>{$this->description}</p>"; 
+    ?>                        
+                <img src="<?=$tmpl['medium']?>" class="tmpl_image" alt="<?=$alt?>">
+            </div>
+        </div>
+    <?        
+        }
+    ?>
+    <noindex>
+<?if ($topp == 0) {?>    
+    <div class="up-stiker"><a href="#" data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"></a></div>
+<?}?>    
+    <iframe class="application" scrolling="no" border="0">
+    </iframe>
+    </noindex>
+    </div>
+</div>    

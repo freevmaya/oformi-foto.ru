@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    var eindex = 0;
+    var eurls = ['<?=$sheme?>oformi-foto.ru/<?=$pjjs_path?>', '<?=$sheme?>fotoprivet.com/pjjs/left-list.php?group=child'];
+    function swapEditor() {
+        eindex = (eindex + 1) % eurls.length;
+        $('appframe').src = eurls[eindex];
+    }
+</script>
+
+<div class="post">
+    <p><b>Выберите рамку или шаблон</b> для оформления фотографии из списка шаблонов. Когда рамка откроется, вы можете загрузить свое фото. Для этого сделайте двойной клик на вырезе или нажмите кнопку "Вставить ваше фото" рядом с вырезом. Выберите фотографию с компьютера. Используя мышь, отредактируйте положение вашей фотографии в вырезе. Сохраните полученный результат на компьютер, нажмите кнопку со стрелкой, указывающей вниз на прямоугольник, символизирующий контейнер или дискету. Посмотрите 
+    <a href="//www.youtube.com/embed/NCMeTj9f3Sw" class="boxed help" data-video="{url:'//www.youtube.com/embed/NCMeTj9f3Sw',handler:'iframe',size:{x:900,y:506},iframePreload:true}">видео-инструкцию</a></p><p>Если вы предпочитаете старую версию редактора <a href="#old-editor" onclick="swapEditor()">кликните на этой ссылке.</a>, или откройте старую Flash-версию <a href="<?=link::c('app', 'view');?>" onclick="swapEditor()">приложения по этой ссылке</a></p>
+    <div id="pjjs">
+        <?//include(__DIR__.'/pj_app_share.html')?>
+        <iframe src="<?=PJJS_URL.'/'.$pjjs_path?>" id="appframe">
+        </iframe>
+    </div>
+    <div style="text-align: center; margin: 10px;">
+        <a href="<?=mainURL?>view.htm" data-rel="<?=MAINURL?>/pjjs.htm" class="ctrl-button app-link">Хочу больше фоторамок!</a>
+        <a href="#" class="ctrl-button app-link" onclick="showThankView()">Спасибо!</a>
+    </div>
+    <div class="clr"></div>
+    <p>Вы так же можете перейти в <a href="<?=MAINURL?>/view.htm">flash приложение</a>, или в <a href="<?=MAINURL?>/fotoramki.html">каталог фото-рамок</a> и прикольные шаблоны где нужно вставлять своё лицо.</p>
+</div>

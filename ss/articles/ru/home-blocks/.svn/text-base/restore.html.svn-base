@@ -1,0 +1,39 @@
+<?
+    $imgurl = SSURL.'articles/images/coloring/';
+    $applink = link::c('app', 'coloring');
+    $alt = 'Превращаем черно-белое фото в цветную фотографию';
+    ss::addCSS('.images', 'text-align: center;');
+    ss::addCSS('.images img', 'display:inline-block;padding:0px;margin:3px;max-height:180px;');
+?>
+<div class="post">
+    <script type="text/javascript">
+        window.addEvent('domready', function() {
+            var frame = $('res_video');
+            var isplay = false;
+            
+            function checkPlay() {
+                var p = frame.getPosition();
+                var s = window.getScroll();
+                if ((s.y + window.getSize().y) > p.y) {
+                    frame.set('src', '//www.youtube.com/embed/ZiSE0yfyvII?autoplay=1&controls=0&showinfo=0');
+                    isplay = true;
+                }            
+            }
+            window.addEvent('scroll', function() {
+                if (!isplay) checkPlay();
+            });
+            checkPlay();
+        });
+    </script>
+    <h2>Восстанавливаем старые фотографии</h2>
+    <p>Вспомните, у вас наверняка есть старые фотографии родственников, которые для вас бесценны! Старая армейская фотография дедушки, бабушка в санатории, праздничное семейное застолье, фотографии с видами СССР и т.п. Но долгие годы хранения не пощадили хрупкую поверхность фотокарточки. Старая поверхность потрескалась, раскрошилась, появились пятна от случайно попавшей влаги, края фотографии обтрепались или порвались...</p>
+    <p>Все это можно исправить! Мы поможем восстановить старую фотографию, освежить и обновить изображение. Используя различные методы ретуширования, балансировки цвета, коррекционной трансформации и другие приемы восстановления изображения, мы поможем вам сохранить память о своих корнях и передать ее своим детям.</p>
+    <div style="text-align: center;"><iframe id="res_video" frameborder="0" scrolling="no" width="515" height="290" style="width:515px !important;"></iframe>
+        <img style="margin-left: 20px;" src="<?=MAINURL?>/images/work_example/r04_s.jpg"></div>
+    <div class="post-footer">
+        <a href="<?=link::c('order', 'restore');?>" class="ctrl-button app-link">
+            Подробнее
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

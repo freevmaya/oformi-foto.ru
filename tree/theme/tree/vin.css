@@ -1,0 +1,109 @@
+.person_name, person_type, .vin, .vin_img_cont {
+    position: absolute;
+} 
+
+.person_name, .person_type {
+    z-index: 2;
+    width: inherit;
+}    
+
+.persona {
+    position: absolute;
+    text-align: left !important;   
+    cursor: pointer;
+}
+
+.vin {;
+    z-index: 1; 
+}
+
+.vin_image {
+    z-index: 0;
+}
+
+/*--------------------------------*/
+
+.vin-default, .vin-default .vin {
+    width: 256px;
+    height: 269px;
+}
+
+.vin-default .vin_image {
+    margin: 45px 60px;
+    width: 140px;
+}
+
+.vin-default {
+    margin-left: -127px;    
+    margin-top: -135px;
+}
+
+.vin-default .person_name {
+    margin-top: 220px;
+}
+
+.vin-default .person_type {
+    margin-top: 22px;
+}
+
+.vin-default .person_name span, .vin-default .person_type span {
+    text-align: center !important;
+    font-family: BuxtonSketch;
+    font-size: 1em;
+    padding: 0 60px;
+    display: block;
+    line-height: 0.8em;
+}
+
+.vin-default .vin {
+    background: url(images/vin/v04.png);
+}
+
+/*--------------------------------*/
+
+.vin-sv, .vin-sv .vin {
+    width: 206px;
+    height: 250px;
+}
+
+.vin_img_cont {
+    margin: 45px 30px 0px 32px;
+}
+
+.vin_img_cont .crop {
+    width: 140px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.vin-sv .vin_image {
+    width: 140px;
+}
+
+.vin-sv {
+    margin-left: -127px;    
+    margin-top: -125px;
+}
+
+.vin-sv .person_name {
+    -webkit-font-smoothing: none;
+    margin-top: 195px;
+}
+
+.vin-sv .person_type {
+    -webkit-font-smoothing: none;
+    margin-top: 22px;
+}
+
+.vin-sv .person_name span, .vin-sv .person_type span {
+    text-align: center !important;
+    font-family: BuxtonSketch;
+    font-size: 1em;
+    padding: 0 40px;
+    display: block;
+    line-height: 0.8em;
+}
+
+.vin-sv .vin {
+    background: url(images/vin/v04.png) center center no-repeat;
+}

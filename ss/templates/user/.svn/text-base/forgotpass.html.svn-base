@@ -1,0 +1,57 @@
+<?
+    GLOBAL $locale;
+    $this->title = $locale['FORGOTPASS']; 
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+?>
+<script type="text/javascript">
+    var form;
+    function onSubmit(submit) {
+        if (!submit.hasClass('disable')) form.submit();
+    }
+    
+    window.addEvent('domready', function() {
+        form = $('fogotpass');
+        var sb = form.getElement('.ok');
+        new ValidateSimple(form, {
+            inputs: [form.getElement('input[name="email"]')],
+            onValid: function() { 
+                sb.removeClass('disable');
+            },
+            onInvalid: function() { 
+                sb.addClass('disable');
+            },
+            onInputValid: function(input) {
+                input.getParent().removeClass('error');
+            },
+            onInputInvalid: function(input, errors) {
+                if (errors) input.getParent().addClass('error');
+            }
+        });
+    });
+</script>
+<h1><?=$this->title?></h1>
+<div class="post">
+    <?if ($send == 0) {?>
+    <form class="form" id="fogotpass" method="POST" method="<?=link::c('user', 'fogotpass')?>">
+        <table>
+            <tr>
+                <td class="ui-param ui-low">
+                    <?=$locale['EMAIL']?>: 
+                </td>
+                <td>
+                    <input name="email" type="email" placeholder="example@gmail.com" title="<?=$locale['INPUTTITLE']['EMAIL']?>" class="validate-email tipz"><span class="proplem">Некорректный адрес электронной почты</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-left: 180px;">
+                    <a onclick="onSubmit(this); return false;" class="ctrl-button disable ok"><?=$locale['OK']?></a>
+                </td>
+            </tr>
+        </table>                
+    </form>
+    <?} else if ($send==-1) {?>
+    <p><?=$locale['WRONG_RESPONSE']?></p>
+    <?} else {?>
+    <p><?=sprintf($locale['FORGOTPASS_SUCCESS'], $email)?></p>
+    <?}?>
+</div>

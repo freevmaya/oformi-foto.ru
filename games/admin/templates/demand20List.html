@@ -1,0 +1,64 @@
+<?
+    require_once(MODEL_PATH.'pj_model/parser.php');
+?>
+<h3>
+    <?= $date?>
+</h3>
+<table width="100%" cellpadding="5" class="report">
+    <tr>
+        <td colspan="3">
+            <form method="POST" action="?task=demandUser">
+            <label><legend>ID пользователя: </legend>
+                <input type="text" name="uid" value="<?=$id?>">
+            </label><br>
+            <label><legend>Поиск по параметру: </legend>
+            <input type="text" name="email" value="<?=$this->request->getVar('email', '')?>">
+            </label><br>
+            <input type="radio" value="1" name="inBox" <?= ($this->svar('inBox', 1) == 1)?'checked':''?>/>Во входящих<br>
+            <input type="radio" value="2" name="inBox" <?= ($this->svar('inBox', 1) == 2)?'checked':''?>/>В исходящих<br>
+            <input type="checkbox" value="1" name="image_display" />Показывать фото пользователей<br>
+            <input type="submit" value="ok"/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Время
+        </th>
+        <th>
+            Пользователь
+        </th>
+        <th>
+            Адресат
+        </th>
+        <th>
+            Параметры
+        </th>
+        <th>
+            Страница пользователя
+        </th>
+    </tr>
+    <? $num=0; foreach ($cards as $card) { 
+        $num++;
+        $strParams = "sid,{$card['send_id']}";//urlencode(iconv('utf-8', 'windows-1251', $card['params']));
+        $params = cardInfoParse($card['params']);
+    ?>
+    <tr <?= ($num%2==0)?'class="odd"':''; ?>>
+        <td>
+            <?= $card['time']?>
+        </td>
+        <td>
+            <?= $card['uid']?>
+        </td>
+        <td>
+            <?= $card['sendTo']?>
+        </td>
+        <td>
+            <a href="http://my.mail.ru/apps/441805#state=<?=$strParams?>" target="_blank">Посмотреть</a>
+        </td>
+        <td>
+            <a href="<?=$params->userURL?>">Перейти</a>
+        </td>
+    </tr>
+    <?}?>
+</table>

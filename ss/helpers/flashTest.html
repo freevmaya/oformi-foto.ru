@@ -1,0 +1,55 @@
+<script type="text/javascript">
+
+    function flashTestInit() {
+        var flash_values = {test: true};
+        var resultFlashTest = false;
+        function completeFlashTest(a_result) {
+            resultFlashTest = a_result;
+            $('flashTest').destroy();
+            window.fireEvent('FLASHTEST', resultFlashTest);
+            
+            if (!resultFlashTest) {
+                var links = $$('.app-link');
+                links.each(function(item) {
+                    var rel = item.get('data-rel');
+                    if (rel) item.set('href', rel);
+                });
+            }        
+        }
+        (function() {
+            if (!resultFlashTest) completeFlashTest(false);
+        }).delay(1000);
+        
+        function confirmFlash(a_params) {
+            completeFlashTest(a_params.test);
+        }
+        
+        var sfwFile = '<?=MAINURL?>/pj/dev/hideTest.swf';
+        
+        var params = {
+            movie: sfwFile,
+            quality: "high",
+            scale: "noscale",
+            menu: "false",
+            align: "middle",
+            salign: "tl",
+            wmode: "transparent",
+            allowNetworking: "always"
+        }
+        
+        var attributes = {
+            id: "flashTest",
+            name: "flashTest"
+        };      
+                                      
+        swfobject.embedSWF(sfwFile, "flashTest", 1, 1, "10", "expressInstall.swf", flash_values, params, attributes);
+    }
+    
+    if (window.addEvent)
+        window.addEvent('domready', function() {
+            (new Element('div', {id: "flashTest", style: {
+                width:1,height:1,display:'inline-block'
+            }})).inject(document.getElement('body'), 'bottom');
+            flashTestInit();
+        });
+</script>

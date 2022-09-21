@@ -1,0 +1,40 @@
+<?
+    GLOBAL $articleList;
+    
+    $this->title        = $article['title'];
+    $this->description  = $article['description']; 
+    $this->keywords     = $article['keywords'];
+    
+?>
+    <?if (!ss::$isPhone) {?>
+        <div class="article">
+            <div class="share42init" style="float:right;margin:5px 0px -4px 0px"></div><?
+    }?>
+    <?
+        if (isset($article['text'])) {
+            if (($article['type'] == 'file') && file_exists(SSPATH.'/'.$article['text'])) {
+                include_once(SSPATH.'/'.$article['text']);            
+            } else {
+?>
+<h1><?=$article['title']?></h1>
+<div class="post article">
+    <?=parseDesc($article['text'])?>
+    <div class="clr"></div>
+</div>
+<?        
+//        $article_text;
+        }   
+    } else include_once($fileName);
+    
+    if (!ss::$isPhone) {?>
+</div>
+<script type="text/javascript" src="<?=SSURL?>js/share42/share42.js"></script>
+<?if ($this->other_themes) include_once(dirname(__FILE__).'/otherPages.php');?> 
+<?if ($this->social_block) include(TEMPLATES_PATH.'/social.html');?>
+<?if ($this->article_footer) {?>
+<div class="article-footer">
+<?
+include(dirname(__FILE__).'/theme articles.html');
+?>
+</div>
+<?}}?>

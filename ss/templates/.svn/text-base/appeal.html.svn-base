@@ -1,0 +1,88 @@
+<style type="text/css">
+    .phelp {
+        font-size: 11px;
+    }
+</style>
+<img src="<?=ss::getImages()?>copyright.jpg" align="left" style="margin-right:20px;"><h1 style="line-height:100px;">Обращение о нарушении авторского права на произведение</h1>
+<div class="post text">
+    <p>Это изображение создано специально для нашего сервиса, по нашей технологии, с использованием материалов и изображений находящихся в свободном доступе на ресурсах явно указывающих на это.</p>
+    <p>Если вы являетесь правообладателем материалов и изображений которые по недоразумению присутствуют в наших работах, просим незамедлительно сообщить нам об этом в следующей форме. После получения жалобы о нарушении авторских прав на произведение, мы удалим работу в кратчайшие сроки.</p>
+    <?if (isset($error) && $error) {?>
+    <div class="message">
+        <h3>Ошибка ввода данных</h3>
+        <div class="error">
+        <?=$error?>
+        </div>
+    </div>
+    <?} 
+    if (isset($complete) && $complete) {?>
+    <div class="message">
+        Ваше сообщение принято.<br>
+        Спасибо за обращение!<br>
+        <?if ($this->svar('refplace', '')) echo '<a href="'.$this->svar('refplace', '').'">Вернуться назад</a>'?>
+    </div>
+    <?} else {?>
+    <form action="#" method="post" enctype="multipart/form-data" id="appealForm">
+        <table>
+            <tr>
+                <td>
+                <table style="width:620px;">
+                    <tr>
+                        <td class="param">
+                            Ваше имя:
+                        </td>
+                        <td>
+                            <input type="text" name="name" size="40" class="validate-alpha required" value="<?=$this->request->getVar('name', '')?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="param">
+                            Ссылка на ресурс подтверждающий право<div class="phelp">(<b style="color:#E00;">не ваше фото!</b> а страница которая может подвердить ваше АП на этот шаблон)</div>
+                        </td>
+                        <td>
+                            <input type="text" name="url" size="30" value="<?=$this->request->getVar('url', '')?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="param">
+                            или скан документа<div class="phelp">(<b style="color:#E00;">не ваше фото!</b>, на документа который может подтвердить ваше авторское право на этот шаблон)</div>
+                        </td>
+                        <td>
+                            <input type="file" name="image">
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td colspan="2">
+                            <p>Дополнительная информация</p>
+                            <textarea name="comment" style="width:600px;height:80px"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h2>Контактные данные</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="param">
+                            e-mail:
+                        </td>
+                        <td>
+                            <input type="text" name="email" size="40" class="validate-alpha required" value="<?=$this->request->getVar('email', '')?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="hidden" name="send" value="1">
+                            <input type="submit">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <img src="//fotoprivet.com/pj/JPG/<?=ss::$task[2]?>.jpg" style="max-width:280px;">
+            </td>
+            </tr>
+        </table>
+    </form>
+    <?}?>
+</div>

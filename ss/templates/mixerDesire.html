@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="<?=MAINURL.'/'.SSRELATIVE?>mixer.css" type="text/css" media="screen" />
+<script src="<?=MAINURL.'/'.SSRELATIVE?>js/mt-drag-1.2.5.1.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var elems = [
+        
+        {
+            title: 'Богатство',
+            rgb: [0xAA, 0x00, 0x00]
+            
+        },{
+            title: 'Известность',
+            rgb: [0x00, 0x00, 0xAA]
+        },
+        {
+            title: 'Любовь',
+            rgb: [0x00, 0xAA, 0x00]
+        },
+        {
+            title: 'Мудрость',
+            rgb: [0xAA, 0xAA, 0xAA]
+        }/*,
+        {
+            title: 'Дети',
+            color: '#FFFFFF',
+            rgb: [0xAA, 0xAA, 0xAA]
+        },
+        {
+            title: 'Мудрость',
+            color: '#B59C59',
+            rgb: [0xB5, 0x9C, 0x59]
+        },
+        {
+            title: 'Карьера',
+            color: '#9FCCDF',
+            rgb: [0x9F, 0xCC, 0xDF]
+        },
+        {
+            title: 'Путешествия',
+            color: '#F6EB82',
+            rgb: [0xF6, 0xEB, 0x82]
+        }*/
+    ];
+    
+    var mixer = (function() {
+        var bar = $('mixer-bar');
+        var size = bar.getSize();
+        var padding = 10;
+        var helem = (size.y + padding) / elems.length;
+        var welem = size.x / elems.length 
+        
+        function rgbToCss(rgb) {
+            return 'rgb(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ')';
+        }
+        
+        function mixedColor() {
+            var mixColor = [0, 0, 0];
+            var list = bar.getElements('.mixer-element');
+            for (var i=0; i<list.length; i++) {
+                var k = 1 - list[i].getStyle('margin-top').toFloat() / (size.y - helem + padding);
+                var icolor = elems[list[i].get('index')].rgb;
+                mixColor[0] += icolor[0] * k;
+                mixColor[1] += icolor[1] * k;
+                mixColor[2] += icolor[2] * k;
+            }
+            
+            var max = Math.max(Math.max(mixColor[0], mixColor[1]), mixColor[2]);
+            mixColor[0] = (mixColor[0] / max * 256).toInt();
+            mixColor[1] = (mixColor[1] / max * 256).toInt();
+            mixColor[2] = (mixColor[2] / max * 256).toInt();
+            //alert(mixColor);
+            
+            $('mixer-result').setStyle('background', rgbToCss(mixColor));
+            $('mixer-result-text').set('text', mixColor);
+        }
+                
+        function toFront(top) {
+            bar.grab(top);
+        }
+        
+        for (var i=0; i<elems.length; i++) {
+            var item = elems[i];
+            var elem = new Element('div', {
+                'class': 'mixer-element',
+                html: item.title,
+                index: i,
+                styles: {
+                    'background': rgbToCss(item.rgb),
+                    'margin-top': (i * helem).toInt(),
+                    'margin-left': (i * welem).toInt(),
+                    'width': welem.toInt(),
+                    'line-height': helem.toInt() - padding                    
+                },
+                events: {
+                    mousedown: function() {
+                        toFront(this);
+                    }
+                }
+            });   
+            (new Drag(elem, {
+                limit: {
+                    x: [0, 0],
+                    y: [0, size.y - helem + padding]
+                },
+                modifiers: {x: 'x', y: 'margin-top'},
+                onDrag: function() {
+                    mixedColor();
+                }
+            })).attach();
+            elem.inject(bar);
+        }
+        
+        mixedColor(); 
+    });
+    
+    window.addEvent('domready', mixer);
+</script>
+<div class="post">
+    <p>
+        Размести желания в порядке приоритета и узнай ТВОЙ ЦВЕТ ЖЕЛАНИЙ.
+    </p>
+</div>
+<div class="mixer">
+    <div class="mixer-frame">
+        <div id="mixer-bar">
+        </div>
+    </div>  
+    <div id="mixer-result">
+        <div id="mixer-result-text">
+        </div>
+    </div>  
+</div>

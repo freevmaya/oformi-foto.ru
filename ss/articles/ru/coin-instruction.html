@@ -1,0 +1,35 @@
+<?
+	$exmo_link = 'https://exmo.me/?ref=669894';
+?>
+<?if (ss::getUser()) {?>
+<script type="text/javascript">
+	window.addEvent('domready', function() {
+		$('mainemail').set('href', 'mailto:fwadim@mail.ru');
+	});
+
+	function onResponse(e_data) {
+		if (e_data.response)
+			alert('Ваш адрес принят. Ожидайте поступления');
+	}
+
+	function submitDOGEAddress(input) {
+		var v = input.get('value').toUpperCase();
+		if (v && (v.length>=33 ) && (v.substr(0, 1)=='D')) app.request('coin,DOGEAddress', {address: v}, onResponse);
+	}
+</script>
+<?}?>
+<div class="post">
+	<h3>Инструкция вывода монет DOGE</h3>
+	<span>Перевод средств на рубли производиться через обменник <a href="<?=$exmo_link?>" target="_blank">exmo.em</a></span>
+	<p>
+		<ul>
+			<li>Зарегистрируйтесь по <a href="<?=$exmo_link?>" target="_blank">ссылке</a></li>
+			<li>Зайдите в кошелек на <a href="<?=$exmo_link?>" target="_blank">этом сайте</a></li>
+			<li>Нажмите кнопку "пополнить", напротив строки "DOGE"</li>
+			<li>Нажмите "Создать адрес"</li>
+			<li>Скопируйте адрес и бросьте сюда: <input type="text" value="" onchange="submitDOGEAddress(this)" size="40"></li>
+		</ul>
+		Мы переведем премию на ваш счет в течении суток. Вы можете ускорить перевод если сообщите об этом по <a href="" id="mainemail">e-mail</a>.
+		На обменнике вы можете обменять монеты на любую удобную вам валюту!
+	</p>
+</div>

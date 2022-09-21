@@ -1,0 +1,21 @@
+<div style="position:absolute; left:0px;" id="cpazzila">
+<a href="#" onclick="close_cpazzila()" style="text-align:center;padding:5px;color:white;background:#AAA;display:block">Убрать рекламу</a>
+<script type="text/javascript">
+    document.write("<scr"+"ipt type='text/javascript' src='http://elephant.fotostrana.ru/get?gid=72&format=js&place=120x600&data=516e44fe735538ebdb00002c%2F&cache="+Math.random()+"'></scr"+"ipt>");
+    
+    var cpazzila;
+    window.addEvent('domready', function() {
+        cpazzila = $('cpazzila');
+        var rect = cpazzila.getCoordinates();
+        window.addEvent('scroll', function() {
+            var ny = window.getScroll().y;
+            if (ny < rect.top) ny = rect.top;
+            cpazzila.setStyle('top', ny + 'px');
+        });
+    });
+    
+    function close_cpazzila() {
+        cpazzila.dispose();
+    }    
+</script>
+</div>

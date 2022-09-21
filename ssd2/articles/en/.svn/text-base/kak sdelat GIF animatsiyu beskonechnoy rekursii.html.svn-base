@@ -1,0 +1,66 @@
+<?
+    GLOBAL $locale;
+    $this->title = 'How to make GIF animation of infinite recursion photos';
+    
+    $this->addMeta('page-image', MAINURL.'/images/kaksdelatgif/result.gif');
+    $this->og['type'] = 'video.other';
+    $this->og['image'] = MAINURL.'/images/kaksdelatgif/result.gif';
+    $this->og['image:width'] = 500;
+    $this->og['image:height'] = 472;
+?>
+
+
+<h1><?=$this->title?></h1>
+<div class="post text">
+    <h2>Lesson for Photoshop</h2>
+    <div class="right"><?quickLinks('gif-animator');?></div>    
+    <p>If you come here - you probably know what a photo recursion is. If not, then, avoiding boring explanations, I'll just show how it looks.</p>
+    <?=postImage('/images/kaksdelatgif/result.gif', $this->title)?>
+    <p>In this article I will tell you how to create such a GIF animation from your photo using the scripts I created. This lesson is designed for an average level of knowledge of the program Photoshop. If you have a relationship with him strained, and make a hypha from your photo still want to, then it's better to use my other <a href="<?=MAINURL?> /gifavt.htm">free service </a>. Well, if you are still determined to do everything yourself - let's start quickly.</p>
+    <h2>1. Preparation</h2>
+    <p>1.1 The basis of the work is the choice of the source image. For work, I chose this image from free access.</p>
+    <?=postImage('/images/kaksdelatgif/source.jpg', '')?>
+    <p>Since the image must endlessly repeat itself, a photo of a person with a frame in his hands fits perfectly. But it can be not only a frame, but a picture on the wall, a window, a reflection in the mirror - it all depends on your desire to experiment. But for the first time, I recommend using a photo that looks the most like my source. It is important that the frame in the hands was closer to the middle of the entire photograph, and occupied at least 50% of the area of the entire photograph</p>
+    <p>1.2 Create a duplicate background in case of failure, hide it.</p>
+    <?=postImage('/images/kaksdelatgif/stage1.jpg', '')?>
+    <p>1.3 Increase the whole photo by 200%-300%</p>
+    <p>1.4 Crop the image, making it square. You need to crop it so that the frame is closer to the middle. I do this: I increase the Canvas by 200%, mark the center with two lines (Guides).</p>
+    <p>1.5. Correctly position the photo to the center.</p>
+    <?=postImage('/images/kaksdelatgif/stage2.jpg', '')?>
+    <p>On the new layer, cut out the contents of the frame, so that the inside of the frame is transparent.</p>
+    <h2>2. Calculation of future animation parameters</h2>
+    <p>2.1 Clone the resulting layer (Duplicate layer in the context menu, or just drag the layer to the layer icon in the Layers rollout)</p>
+    <p>2.2 We find out how much to reduce and rotate the image so that it appears in the frame.</p>
+    <p>2.3 Select the lower layer-clone, scale and rotate so that this layer is completely in the frame of the top layer. It is advisable to make all the characters present in the photo fit into the frame. Without applying changes, <b>write down the change settings</b>, scaling and rotation angle. In my example, it turned out 54% scaling, 10 degrees. turn. All, now this layer can be deleted.</p>
+    <?=postImage('/images/kaksdelatgif/stage3.jpg', '')?>
+    <h2>3. Create a corridor in depth</h2>
+    <p>3.1 Select the initial layer. Apply the script <a href="<?=MAINURL?>/files/createCorridor.jsx" target="_blank">createCorridor.jsx</a> (see also <a href="<?=MAINURL?>/Kak-ispolnit'-skript-v-photoshop.html">Как исполнить скрипт в photoshop</a>). In the parameters, set a sufficient number of steps, so that the final image was only a few pixels. Other parameters of scaling and angle of rotation set those that were found in the previous step.</p>
+    <p>3.2 Now a little creativity. There is at you the center of the frame does not coincide with the center of the entire image of your project. And this is how the rules are. It is necessary to position the layers alternately from top to bottom so that the image in the frame that you are editing corresponds to what will be outside the frame. (see the figure). Thus, the lowest, small image will be in place of the center of rotation and movement of the entire corridor.</p>
+    <p>3.3 When everything is thoroughly done and checked with the previous steps, all visible layers can be combined. (Ctrl+Shift+E)</p>
+    <?=postImage('/images/kaksdelatgif/stage4.jpg', '')?>
+    <h2>4. Create an infinite animation of the movement deep into the corridor</h2>
+    <p>4.1 Place the Guides so that they intersect at the center of convergence of the corridor's perspective. This will come in handy when you need to position all the layers participating in the animation to position on this center.</p>
+    <?=postImage('/images/kaksdelatgif/stage5.jpg', '')?>
+    <p>4.2 Select a layer, run the script for execution <a href="<?=MAINURL?>/files/createAnimLayers.jsx" target="_blank">createAnimLayers.jsx</a>. In the parameters, enter the number of animation frames, the rotation angle and the percentage of scaling.
+        <ul>
+            <li>The smoothness of the animation depends on the number of frames, the more frames, the smoother the motion. But remember that the size of the GIF file can be too large due to the large number of frames. On average, it is necessary to count so that for a second of the animation there were about 16 frames (in the example I made 16 frames, ie 1 second of animation.)</li>
+            <li>The rotation angle should be set to the one we received in step 2.2 (see above "Calculating the parameters of future animation"), but only with a negative sign.</li>
+            <li>For scaling, we also take the value obtained in step 2.2, divide by 100, and then divide by 100 the resulting value. In my example: 100/(54/100)=185.2</li>
+        </ul>
+    </p>
+    <p>4.3 As a result of the script, we get a few new layers. Each layer corresponds to one frame of the animation.</p>
+    <?=postImage('/images/kaksdelatgif/stage6.jpg', '')?>
+    <p>4.4 Turn on a little patience. Now each newly obtained layer must be positioned so that the center of convergence of the corridor perspective coincides with the previously exposed cross of the auxiliary lines. Those. It is necessary to achieve the fact that on all layers the center of perspective would coincide.</p>
+    <?=postImage('/images/kaksdelatgif/stage7.jpg', '')?>
+    <p>4.5 Open the animation window. For the frame, set the time 1 / number of frames per second. In my example 1/16=0.06</p>
+    <?=postImage('/images/kaksdelatgif/stage8.jpg', '')?>
+    <p>4.6 Select the topmost layer. Create a new animation frame in the animation window, make the top layer invisible. So do for all layers. You should have as many frames as there are layers, for each frame, the next layer behind the top will be visible.</p>
+    <p>4.7 Select the first frame in the animation window and crop (Crop) the image on the first, largest frame.</p>
+    <?=postImage('/images/kaksdelatgif/stage9.jpg', '')?>
+    <h2>5. Final processing</h2>
+    <p>5.1 Animation is ready, now use the "Save for Web & Devices" tool (see the File menu)</p>
+    <?=postImage('/images/kaksdelatgif/stage10.jpg', '')?>
+    <p>5.2 The size of the resulting GIF file is reduced by half (or as much as you increased at the very beginning). The remaining parameters are at your discretion. I will only remind you that the size of the file itself depends on the size of the palette, as well as the quality of the image.</p>
+    <p>As a result of the work, I created a GIF file that you saw at the beginning of the article. The video jerks a bit on the transition, it's because I'm a little carelessly centered convergence of the corridor's perspective. I think this operation will be better for you than for me.</p>
+    <p>It remains to wish you successful work and interesting ideas!</p>
+</div>

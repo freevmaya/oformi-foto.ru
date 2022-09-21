@@ -1,0 +1,20 @@
+<?
+$mrh_login = "oformi-foto";
+$mrh_pass1 = "g84f6F39RmcrQoxgJIVt";
+$inv_id = 0;
+$inv_desc = "Пополнение счета на сайте oformi-foto.ru";
+$out_summ = "8.96";
+$shp_item = 1;
+$in_curr = "";
+$culture = "ru";
+$encoding = "utf-8";
+$crc  = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1:Shp_item=$shp_item");
+<table class="vcenter"><tr><td>
+    <h1><?=$locale['PAY-PAGE']?></h1>
+    <div class="post">
+        <script language=JavaScript src='https://auth.robokassa.ru/Merchant/PaymentForm/FormM.js?MrchLogin=<?=$mrh_login?>&OutSum=<?=$out_summ?>&InvId=<?=$inv_id?>&IncCurrLabel=<?=$in_curr?>&Desc=<?=$inv_desc?>&SignatureValue=<?=$crc?>&Shp_item=<?=$shp_item?>&Encoding=<?=$encoding?>'>
+        </script>
+    </div>
+        </td>
+    </tr>
+</table>

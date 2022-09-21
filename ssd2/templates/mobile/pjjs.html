@@ -1,0 +1,24 @@
+<?
+    GLOBAL $root;
+    include_once(SSPATH.'helpers/teamples.php');
+    
+    $pjjs_path = 'pjjs/index.php';
+    if ($dev = $this->request->getVar('dev', false)) $pjjs_path = 'dev/pjjs_dev/index.php?dev=1';
+                
+    if (isset($this->tid) && $this->tid) $params = 'tid='.$this->tid;
+    else $params = 'group=default';
+    $top = (ss::$task[2]=='phone')?0:68;
+    if (!ss::$noadv) $top += 90;
+?>
+<iframe id="application" style="position:absolute;width:100%;left:0px;right:0px;top:<?=$top?>px;bottom:0px;border:0;" border="0" src="//oformi-foto.ru/pjjs/left-list.php?<?=$params?>">
+</iframe>
+<script type="text/javascript">
+    function doWinResize() {
+        var application = $('application');
+        var size = window.getSize();
+        application.setStyles({height: size.y - <?=$top?>, visibility: 'visible'});
+    }   
+    
+    window.addEvent('resize', doWinResize);
+    doWinResize();
+</script>

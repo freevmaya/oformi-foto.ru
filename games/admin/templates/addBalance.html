@@ -1,0 +1,41 @@
+<h3>Добавление баланса пользователю</h3>
+<? if ($uid) {?>
+<div class="message">
+    Баланс пользователя <?=$this->request->getVar('uid', 0)?> изменен на <?=$this->request->getVar('summ', 0)?> руб.
+</div>
+<?}?>
+<form method="POST" action="?task=addBalance">
+<table width="100%">
+    <tr>
+        <td>
+            Таблица:
+        </td>
+        <td>
+            <input type="balance_table" value="<?=$this->svar('balance_table', 'g_transaction');?>" size="20">
+        </td>
+    </tr>
+    <tr>
+        <td width="150">
+            ID пользователя:
+        </td>
+        <td>
+            <?=$this->html_uidInput()?>
+        </td>
+    </tr>
+    <tr>
+        <td width="150">
+            Добавляемая сумма:
+        </td>
+        <td>
+            <input type="text" name="summ" value="<?=$this->request->getVar('summ', 0)?>" size="10"> (руб.)
+        </td>
+    </tr>
+    <tr>
+        <td width="150">
+        </td>
+        <td>
+            <input type="submit" value="Добавить">
+        </td>
+    </tr>
+</table>
+</form>

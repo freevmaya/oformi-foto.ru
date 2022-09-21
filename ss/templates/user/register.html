@@ -1,0 +1,110 @@
+<?
+    GLOBAL $locale;
+    $this->title = $locale['PAGE-REGISTER']; 
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+?>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        var inputs = [];
+        var elems = {}; 
+        var form, sb;
+        
+        function onSubmit() {
+            if (!sb.hasClass('disable')) {
+                app.request('user,newuser', {
+                    method: 'post',
+                    name: elems['name'].get('value'),
+                    email: elems['email'].get('value'),
+                    pass: MD5.calc(elems['pass'].get('value'))
+                }, 
+                function(a_data) {
+                    if (a_data && (r = a_data.response)) {
+                        if (r.email_exists) { 
+                            app.alert(locale.WARNING, locale.EMAILEXISTS, function() {
+                                location.href = '<?=link::c('user', 'ofin')?>';
+                            }, {isCancel: true});
+                        } else if (r.create) {
+                            app.alert(locale.WARNING, locale.REGOK, function() {
+                                location.href = '<?=link::c('user', 'ofin')?>';
+                            });
+                        } else app.alert(locale.WARNING, locale.WRONG_RESPONSE);   
+                    } else app.alert(locale.WARNING, locale.WRONG_RESPONSE);   
+                });
+            }
+        }
+        
+        ValidateSimple.Validators = $merge(ValidateSimple.Validators, {
+            pass2: {
+                test: function(input){
+                    return input.get('value') == elems['pass'].get('value');
+                }
+            }
+        });
+        
+        form = $('ofin');
+        sb = form.getElement('.ctrl-button');
+        sb.addEvent('click', onSubmit);
+        ['name', 'email', 'pass', 'pass2'].each(function(fn) {inputs.push(elems[fn] = form.getElement('input[name="' + fn + '"]'))});
+        new ValidateSimple($('ofin'), {
+            inputs: inputs,
+            onValid: function() { 
+                sb.removeClass('disable');
+            },
+            onInvalid: function() { 
+                sb.addClass('disable');
+            },
+            onInputValid: function(input) {
+                input.getParent().removeClass('error');
+            },
+            onInputInvalid: function(input, errors) {
+                if (errors) input.getParent().addClass('error');
+            }
+        });
+    });
+</script>
+<h1><?=$this->title?></h1>
+<table class="vcenter"><tr><td>
+    <div class="post ofin">
+        <form class="form" id="ofin">
+            <table>
+                <tr>
+                    <td class="ui-param ui-low">
+                        <?=$locale['NAME']?>: 
+                    </td>
+                    <td>
+                        <input name="name" type="name" placeholder="Имя" title="<?=$locale['INPUTTITLE']['FIRST_NAME']?>" class="validate-name tipz" value="<?=$nick?>"><span class="proplem">Некорректное имя пользователя.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui-param ui-low">
+                        <?=$locale['EMAIL']?>: 
+                    </td>
+                    <td>
+                        <input name="email" type="email" placeholder="example@gmail.com" title="<?=$locale['INPUTTITLE']['EMAIL']?>" class="validate-email tipz" value="<?=$email?>"><span class="proplem">Некорректный адрес электронной почты</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui-param ui-low">
+                        <?=$locale['PASSWORD']?>: 
+                    </td>
+                    <td>
+                        <input name="pass" type="password" placeholder="******" title="<?=$locale['INPUTTITLE']['PASSWORD']?>" class="validate-text tipz" data-min-length="5" value="<?=$this->getVar('pass', '');?>"><span class="proplem">Некорректный пароль. Требуется не менее 6 символов</span>
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="ui-param ui-low">
+                        <?=$locale['PASSWORD-REPEAT']?>: 
+                    </td>
+                    <td>
+                        <input name="pass2" type="password" placeholder="******" title="<?=$locale['INPUTTITLE']['PASSWORD']?>" class="validate-pass2 tipz" data-min-length="5"><span class="proplem">Пароли не совпадают</span>
+                    </td>
+                </tr> 
+                <tr>
+                    <td colspan="2" style="padding-left: 180px;">
+                        <a class="ctrl-button disable"><?=$locale['REGCAPTION']?></a>
+                    </td>
+                </tr>
+            </table>                
+        </form>
+    </div>
+</td></tr></table>        

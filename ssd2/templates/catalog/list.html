@@ -1,0 +1,136 @@
+<?
+    GLOBAL $locale;
+    include_once(SSPATH.'helpers/flashTest.html');
+    $isNGPage = @ss::$task[2] == 'Novyjgod';
+    $uid_autor = @$_SESSION['autor-appeal'];
+    
+    define('TITLE_LIMIT', 50);
+    define('DESC_LIMIT', 180);
+    
+    $preview_width = PREVIEW_WIDTH;
+    
+    $this->styles[] = MAINURL.'/'.SSRELATIVE.'catalog'.($holidays?'_h':'').'.css';
+    ss::addCSS('.item span span,.item span h3,.item img,.item td', "width: {$preview_width}px;"); 
+?>
+<script type="text/javascript">
+    var FRAMES_URL = '<?=FRAMES_URL;?>';     
+    var CATALOGSELECTOR = '<?=CATALOGSELECTOR?>';     
+    var MAINURL = '<?=MAINURL?>'; 
+    <?if (!$holidays) {?>
+        window.addEvent('domready', function() {
+            catalogListInit('<?=link::c('templatesA')?>', '<?=link::c('catalog', addslashes($groupsStr), '%s')?>', <?=$page?>, '<?=addslashes(str_replace(' ', '_', $groupsStr))?>');
+        });
+    <?}?>
+
+    //popupViewCreate(<?=json_encode(require(TEMPLATES_PATH.'adv/adv_list.php'));?>);
+</script>
+<div class="catalog">
+    <div class="cats left magnetTop" rel="tmpls">        
+        <?include(dirname(__FILE__).'/left-block.html');?>
+    </div>
+    <div class="right" id="tmpls">
+        <?
+if (!$isNGPage) { 
+        ?>
+<?}?>        
+        <div class="tmpls_header">
+            <h1><?=$tmpl_header?></h1>
+<?            
+            if (isset($groups) && (count($groups) > 0)) {
+?>
+                <div class="groups desc" style="margin-bottom: 10px;">
+                    <h3>Так же мы нашли похожие категории:</h3>
+                    <?
+                        foreach ($groups as $group) 
+                            echo '<a href="'.link::c('catalog', str_replace(' ', '+', $group['translit']))."\">{$group['name']}</a>"; 
+                    ?>
+                </div>
+<?          }?>            
+        </div>
+        <div class="desc">
+        <?
+            if ($holiday) {?> 
+                <div>
+                    <h3><?=todayDate($holiday['date']);?></h3>
+                    <img src="<?=holidayImage($holiday, true, false)?>" style="margin:10px auto;display:block" alt="<?=$holiday['name'];?>">
+                </div>
+            <?}
+            echo parseDesc($fullDesc);
+        ?>
+            <div class="clr"></div>
+        </div>
+        <div style="text-align: center; margin: 10px;">
+            <?
+               /* if (rand(1, 100) > 50) require(TEMPLATES_PATH.'adv/engme.html'); // Оключил свою рекламу
+                else */ require(TEMPLATES_PATH.'adv/google-adv-728.html');
+            ?>
+        </div>
+                 
+        <a href="<?=link::c('holidays')?>" style="right" target="_self"><?=$locale['ALLHOLIDAYS']?></a>
+        <div>
+            <div class="search_adv"></div>
+            <?include(dirname(__FILE__).'/search-block.html');?>
+        </div>
+        <div>
+            <?=$pageTool?>
+            <div class="clr"></div>
+        </div>
+        <div class="list">
+        
+<?
+    if (isset($items) && (count($items)>0)) {
+        if ($holidays === true) {
+            foreach ($items as $i=>$item) {
+                $tmplId = $item['defTmplID']?$item['defTmplID']:$item['tmpl_id'];
+                $itemAlt = ($item['name']?($item['name'].'. '):'').$item['desc'];
+                $imageLink = FRAMES_URL.$tmplId.'.jpg';
+                $iframeLink = BASEAPP_URL.'/pjjs/view.php?tid='.$tmplId.'&gid='.implode(',', $groupIds).(isset($_GET['dev'])?'&dev=1':'');
+                $appLink = link::c('holidays', $tmplId.'-'.controller::translit($item['name']));//MAINURL.'/template/'.$tmplId.'-'.controller::translit($item['name']).'.html';
+                $appJSLink = MAINURL.'/pjjs/'.$tmplId.'.html';
+                $holidayLink = link::c('holidays', 'holiday', $item['holiday_id'].'-'.controller::translit($item['hName']));// MAINURL.'/holidays/holiday-'.$item['holiday_id'].'-'.controller::translit($item['hName']).'.html';
+                $today = isToday($item['date']);
+                $isnear = isset($near_holiday_id) && ($item['holiday_id'] == $near_holiday_id);                  
+                ?>
+                <div class="item holiday<?=($today?' today':'').($isnear?' near':'')?>">
+                    <div class="hInfo">
+                        <a class="hName" href="<?=$holidayLink?>"><?=$item['hName']?></a>
+                        <div class="hDesc">
+                            <b><?=todayDate($item['date'])?></b>
+                            <p><?=limitWords(strip_all_tags($item['hDesc']), 33)?></p>
+                        </div>
+                    </div>
+                    <div class="hTmpl">
+                        <a href="<?=$iframeLink?>" data-rel="iframeBox" data-id="a-<?=$tmplId?>"><img src="<?=FRAMES_URLPREVIEW.$tmplId?>.jpg" alt="<?=$itemAlt?>" onload="onImgLoad(this)"></a>
+                    </div>
+                </div>                
+                <?
+            }
+?>
+        <div class="clr"></div>    
+<?            
+        } else {
+            if ($holiday) {?>
+                <h2>Фоторамки и эффекты к празднику</h2>        
+            <?}
+            include_once(dirname(__FILE__).'/tmpls.html');
+        }
+        include(TEMPLATES_PATH.'comments.html');    
+    } else {
+?>   
+<span class="warning">На ваш запрос нет данных. Попробуйте выбрать более мягкие критерии поиска.</span>       
+<?
+    }
+?>      
+        </div>                                                     
+        <?if ($holidays !== true) {?><div class="v-indicator panel clr loader"><?=$locale['WAITCOMPLETE']?></div><?}?>
+    </div>
+    <?if ($holidays === true) {?>
+    <div>
+        <?if (count($items) > MINITEMCOUNT) {?>
+        <div class="share42init"></div>
+        <?}?>
+        <?=$pageTool?>
+        <div class="clr"></div>    
+    </div>
+    <?}?>
+</div>

@@ -1,0 +1,75 @@
+<form method="POST" action="<?=Admin::getTaskLink()?>" id="form">
+    <table>
+        <tr>
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td style="width:270px">
+                            Путь к файлам:
+                        </td>
+                        <td>
+                            <input type="text" size="50" value="<?=$this->request->getVar('sourcePath', SRCPATH);?>" name="sourcePath">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Путь для результата:
+                        </td>
+                        <td>
+                            <input type="text" size="50" value="<?=$this->request->getVar('destPath', RESULTPATH);?>" name="destPath">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Степень сжатия для картики:
+                        </td>
+                        <td>
+                            <input type="text" size="10" value="<?=$this->request->getVar('quality', IMAGEQUALITY);?>" name="quality">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Степень сжатия для маски:
+                        </td>
+                        <td>
+                            <input type="text" size="10" value="<?=$this->request->getVar('maskQuality', MASKQUALITY);?>" name="maskQuality">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Максимальный размер превьюшки:
+                        </td>
+                        <td>
+                            <input type="text" size="20" value="<?=$this->request->getVar('previewSize', PREVIEWSIZE);?>" name="previewSize">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Максимальный полный размер:
+                        </td>
+                        <td>
+                            <input type="text" size="20" value="<?=$this->request->getVar('resultSize', RESULTSIZE);?>" name="resultSize">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="ok" id="submitButton">
+            </td>
+        </tr>
+    </table>
+</form>
+<?if (isset($result)) {?>
+    <h3>Результат</h3>
+<?  
+    print_r($result);
+}
+?>

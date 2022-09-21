@@ -1,0 +1,23 @@
+<?
+    $link = Admin::getTaskLink();
+?>
+<h1>Sitemap генератор</h1>
+<form method="POST" action="<?=$link?>">
+    <table class="report">
+        <tr>
+            <td>Prefix</td>
+            <td><input type="text" value="<?=$prefix?>" name="prefix"></td>            
+        </tr>
+        <tr>
+            <td>Lang</td>
+            <td><input type="text" value="<?=$lang?>" name="lang"></td>            
+        </tr>
+    </table>
+    <input type="hidden" name="send" value="1">
+    <input type="submit" value="generate">
+</form>
+<?if (isset($result)) {?>
+<textarea style="width:900px;height:600px;">
+<?=htmlentities($result)?>
+</textarea>
+<?}?>

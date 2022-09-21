@@ -1,0 +1,80 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+?>
+<style type="text/css">
+    #weightForm {
+        width: 300px;
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    
+    function onClick() {
+        var form = $('weightForm');
+        form.inject(this.getParent());
+        form.setStyle('display', 'block');
+        
+        $('weight_value').value = this.get('text');
+        $('host_value').value = this.get('data');
+        $('word_value').value = this.get('rel');
+        return false;
+    }
+    
+    window.addEvent('domready', function() {
+        $items = $$('.weight');
+        $items.each(function(item) {
+            item.addEvent('click', onClick.bind(item));
+        });
+    });
+</script>
+<h1>Запросы, ключевые фразы</h1>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&page=%s')?>
+</div>
+
+<table class="report">
+    <tr>
+        <th>
+            Поисковик
+        </th>
+        <th>
+            Поисковая фраза
+        </th>
+        <th>
+            Количество запросов
+        </th>
+        <th>
+            Вес
+        </th>
+    </tr>
+    <? foreach ($list as $key=>$item) {
+            $url = "http://{$item['host']}";
+            if (isset($finders[$item['host']])) 
+                $url .= $finders[$item['host']].$item['text'];
+            else $url .= '/?q='.$item['text']; 
+    ?>
+        <tr class="<?=(($key%2)?'odd':'')?>">
+            <td>
+                <a href="<?=$url?>" target="_blank"><?=$item['host']?></a>
+            </td>
+            <td>
+                <?=$item['text']?>
+            </td>
+            <td>
+                <?=$item['count']?>
+            </td>
+            <td>
+                <a href="<?=$link?>" class="weight" rel="<?=$item['text']?>" data="<?=$item['host']?>"><?=$item['weight']?></a>
+            </td>
+        </tr>
+    <?}?>    
+</table>
+<div id="weightForm">
+    <form method="POST" action="<?=$link?>">
+        <input type="text" size="10" name="weight" id="weight_value"/>
+        <input type="hidden" name="word" id="word_value"/>
+        <input type="hidden" name="host" id="host_value"/>
+        <input type="submit">
+    </form>
+</div>

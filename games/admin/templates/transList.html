@@ -1,0 +1,94 @@
+<h3>Пользователь: <?=$id?> все транзакции</h3>
+<table class="report">
+    <tr>
+        <th>
+            <a href="<?=$this->link('transaction_id')?>">ID</a>
+        </th>
+        <th>
+            <a href="<?=$this->link('service_id')?>">Код операции</a>
+        </th>
+        <th>
+            <a href="<?=$this->link('time')?>">Время</a>
+        </th>
+        <?if (!$id) {?>
+        <th>
+            <a href="<?=$this->link('user_id')?>">Пользователь</a>
+        </th>
+        <?}?>
+        <th>
+            <a href="<?=$this->link('sms_price')?>">СМС платеж</a>
+        </th>
+        <th>
+            <a href="<?=$this->link('other_price')?>">Платежные системы</a>
+        </th>
+        <th>
+            <a href="<?=$this->link('other_price')?>">За операцию</a>
+        </th>
+        <?if (!$id) {?>
+        <th>
+            Открытки пользователя
+        </th>
+        <?}?>
+    </tr>
+    <?  $num=0; 
+        foreach ($trans as $item) { 
+            $num++;
+            $transTime = strtotime($item['time']);
+            if ($cur_time <= $transTime) $class = "warning";
+            else $class = "line";
+    ?>
+    <tr class="<?=$class.(($num%2==0)?' odd':'')?>">
+        <td>
+            <?= $item['transaction_id']?>
+        </td>
+        <td>
+            <?= $item['service_id']?>
+        </td>
+        <td>
+            <?= date('d.m.Y h:i:s', $transTime)?>
+        </td>
+        <?if (!$id) {?>
+        <td>
+            <a href="<?=$this->link('', $item['user_id'])?>"><?= $item['user_id']?></a>
+        </td>
+        <?}?>
+        <td>
+            <?= number_format($item['sms_price'], 2)?>
+        </td>
+        <td>
+            <?= $item['other_price']>0?number_format($item['other_price'], 2):'';?>
+        </td>
+        <td>
+            <?= $item['other_price']<0?number_format($item['other_price'], 2):'';?>
+        </td>
+        <?if (!$id) {?>
+        <td>
+            <a href="?task=demandUser&uid=<?=$item['user_id']?>">Показать</a>
+        </td>
+        <?}?>
+    </tr>
+    <?}
+        $sms_sum = array_sum_key($trans, 'sms_price');
+        $other_price = array_sum_key($trans, 'other_price');
+    ?>
+    <tr style="text-align:center">
+        <?if (!$id) {?>    
+        <td colspan="4">
+        </td>
+        <?} else {?>
+        <td colspan="3">
+        </td>
+        <?}?>
+        <td>
+            <?=number_format($sms_sum, 2)?>
+        </td>
+        <td colspan="2">
+            <?=number_format($other_price, 2)?>
+        </td>
+    </tr>
+</table>
+
+<div style="font-size:22px;text-align:right">
+    Итого остаток: <?=number_format($sms_sum + $other_price, 2)?> руб.
+</div>
+<span>Время московское</span>

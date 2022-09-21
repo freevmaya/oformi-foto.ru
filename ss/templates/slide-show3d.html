@@ -1,0 +1,188 @@
+<?
+    GLOBAL $controller;
+    
+    $controller->addScript(SSURL.'js/three/three.min.js');
+    $controller->addScript(SSURL.'js/three/Detector.js');
+    $controller->addScript(SSURL.'js/three/frame_demo.js');
+?>
+<style>
+    
+    .desc {
+        max-height: 600px !important;
+    }
+    
+	#info {
+		position: absolute;
+		top: 0px; width: 100%;
+		padding: 5px;
+	}
+    
+    .arrow {
+        margin-top: 155px; 
+        width: 50px;
+        height: 87px;
+        background: url(<?=MAINURL?>/images/arrows.png) no-repeat;
+        cursor: pointer;
+        opacity: 0.2;
+    }
+    
+    .arrow:hover {
+        opacity: 0.6;
+    }
+    
+    .left {
+        float: left;
+    }
+    .right {
+        background-position: -50px;
+        float: right;
+    }
+    
+    #con-overlay {
+        overflow: hidden;                
+    }
+    
+    #fd-container, #con-overlay, .fc-frame {
+        position: absolute;
+    }
+    
+    #slider3d, #fd-container, #con-overlay, .fc-frame {
+        width:400px;
+        height:400px;
+    }
+    
+    #fc-clickarea {
+        position: absolute;
+        margin-left: 100px;
+        width:400px;
+        height:400px;
+        cursor: pointer;
+    }
+    
+    #slider3d {
+        visibility: hidden;
+        overflow: hiddeh;
+    }
+    
+    #fc-title, #fc-desc {
+        text-align: left;
+        font-family: Arial, Tahoma;
+        position: absolute;
+        color: white;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: default;
+    }
+    
+    #fc-title {
+        line-height: 34px;
+        max-height: 34px;
+        font-size: 19px;
+        margin: 5px 0 0 15px;
+        overflow: hidden;
+    }
+    
+    #fc-desc {
+        margin: 40px 0 0 15px;
+        font-size: 13px;
+        width: 300px;
+    }
+    
+    .fc-frame {
+        position: absolute;
+        /*background: url(<?=MAINURL?>/images/frame01.png);*/
+    }
+    
+    .fc-alternative {
+        display: block;
+        height: 298px;
+        width: 794px;
+        margin-bottom: 10px;
+        background: url(<?=SSURL?>/images/ng2016_e.jpg) center center no-repeat;
+    }
+    
+    .slider-div {
+        display: inline-block;
+        margin-right: 20px;
+        float: left;
+    }
+    
+    .slider-div .helper {
+        color:#78A;
+        text-align:right;
+        font-size: 11px;
+    }
+</style>
+<script type="x-shader/x-vertex" id="vertexShader">
+	varying vec3 vWorldPosition;
+
+	void main() {
+
+		vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+		vWorldPosition = worldPosition.xyz;
+
+		gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+	}
+
+</script>
+<script type="x-shader/x-fragment" id="fragmentShader">
+
+	uniform vec3 topColor;
+	uniform vec3 bottomColor;
+	uniform float offset;
+	uniform float exponent;
+
+	varying vec3 vWorldPosition;
+
+	void main() {
+
+		float h = normalize( vWorldPosition + offset ).y;
+		gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+	}
+</script>
+
+<div class="slider-div" style="text-indent: 0px !important;">
+    <div id="slider3d">
+    	<div id="fd-container"></div>
+        <div id="con-overlay">
+            <div class="fc-frame"></div>
+            <div id="fc-title"></div>
+            <div id="fc-desc"></div>
+            <div id="fc-left" class="arrow left"></div>
+            <div id="fc-right" class="arrow right"></div>
+            <div id="fc-clickarea"></div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    <div class="helper">Кликните на бирке чтобы начать</div>
+</div>
+<script>
+    fdemo([{
+        url     : "<?=MAINURL?>/models/23906.js",
+        title   : 'Бирка для подарка',
+        desc    : 'Такая простая вещь поможет сделать подарок уникальным. Достаточно вставить фото в шаблон бирки',
+        link    : '<?=MAINURL?>/template/23906-novogodniekolokol\'chiki.html'
+    },{
+        url     : "<?=MAINURL?>/models/23907.js",
+        title    : 'Бирка в форме ёлки',
+        desc    : 'Простые и маленькие подарки с индивидуальной, сделанной лично вами биркой',
+        link    : '<?=MAINURL?>/template/23907-novogodnyayaelochka.html'
+    },{
+        url     : "<?=MAINURL?>/models/23909.js",
+        title   : 'Бирка симметричной формы',
+        desc    : 'Это маленький красочный кусочек картона, привязанный к упаковке красивой ленточкой или шнурком',
+        link    : '<?=MAINURL?>/template/23909-podarkinanovyjgod.html'
+    },{
+        url     : "<?=MAINURL?>/models/23915.js",
+        title   : 'Новогодняя этикетка',
+        desc    : 'Бирка с новым годом',
+        link    : '<?=MAINURL?>/template/23915-podarkinanovyjgod.html'
+    }], 300, 300, '<a href="<?=MAINURL?>/Novyjgod.html" class="fc-alternative" alt="2016 Новый год, фоторамка"></a>');
+</script>

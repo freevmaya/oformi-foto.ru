@@ -1,0 +1,59 @@
+<h3>Удачные старты приложения за последние <?=$hour?> часов</h3>
+<table class="report">
+    <tr>
+        <th>
+            Параметр
+        </th>
+        <th>
+            Значение
+        </th>
+        <th>
+            Процент
+        </th>
+    </tr>
+    <? foreach($result as $app) {?>
+    <tr>
+        <th colspan="3">
+            Приложение: <?=$app['app_id']?>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            Всего стартов:
+        </td>
+        <td>
+            <?=$app['fullCount']?>
+        </td>
+        <td>
+            100%
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Незавершенные:
+        </td>
+        <td>
+            <?=$app['badCount']?>
+        </td>
+        <td>
+            <?=round($app['badCount']/$app['fullCount']*100)?>%
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Удачные:
+        </td>
+        <td>
+            <?=$app['sucCount']?>
+        </td>
+        <td>
+            <?=round($app['sucCount']/$app['fullCount']*100)?>%
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <a href="?task=utils,badBrowser&app_id=<?=$app['app_id']?>">Агенты неудачных стартов</a>
+        </td>
+    </tr>
+    <?}?>
+</table>

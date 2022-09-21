@@ -1,0 +1,14 @@
+<?
+    include_once(SSPATH.'controllers/catalog/list.php');
+    $catalog = catalogFromMenu();
+    $transition = 'data-transition="flip"';
+?>
+<ul data-role="listview">
+    <li data-icon="carat-l"><a href="#" data-rel="close">Скрыть меню</a></li>
+    <li data-icon="camera"><a href="<?=link::c('app', 'view')?>" <?=$transition?>>Приложение</a></li>
+    <li data-icon="star"><a href="<?=link::c('holidays')?>" <?=$transition?>>Праздники</a></li>
+<?
+    foreach ($catalog as $link=>$name) 
+        echo "<li><a href=\"{$link}\" {$transition}>{$name}</a></li>";
+?>    
+</ul>

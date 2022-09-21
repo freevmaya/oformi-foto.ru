@@ -1,0 +1,58 @@
+<?
+    $link = Admin::getTaskLink().'&holiday='.$holiday_id;
+    $retLink = $this->svar('retLink', '?task=holiday,getList');
+?>
+<h2>Шаблоны к празднику</h2>
+<div>
+    <h3><?=$holiday['name']?></h3>
+    <a href="<?=$retLink?>">назад к списку</a>
+</div>
+
+<h2>Добавление шаблона</h2>
+<form method="post" action="<?=$link?>">
+    ID шаблона (или несколько шаблонов через запятую):<input type="text" size="50" name="tmpl_id">
+    <input type="submit" value="Добавить">
+</form>
+
+<form method="post" action="<?=$link?>">
+    <table class="report">
+        <tr>
+            <th>
+                Поумолчанию
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                Картинка
+            </th> 
+            <th>
+                Удалить
+            </th>
+        </tr>
+        <? foreach ($list as $key=>$item) {
+                $img = "https://oformi-foto.ru/pj/preview120/{$item['tmpl_id']}.jpg";
+                $imgBig = "https://oformi-foto.ru/JPG/{$item['tmpl_id']}.jpg";
+        ?>
+            <tr class="<?=(($key%2)?'odd':'')?>">
+                <td>
+                    <input type="radio" <?=($item['tmpl_id']==$holiday['deftml_id'])?'CHECKED':''?> name="default_id" value="<?=$item['tmpl_id']?>">
+                </td>
+                <td>
+                    <?=$item['tmpl_id']?>
+                </td>
+                <td>
+                    <a href="<?=$imgBig?>" target="_blank"><img src="<?=$img?>" style="max-height: 200px;"></a>
+                </td>
+                <td>
+                     <input type="checkbox" name="delete[]" value="<?=$item['tmpl_id']?>">
+                </td>
+            </tr>
+        <?}?>  
+         <tr class="<?=((!$key%2)?'odd':'')?>">
+            <td colspan="4">
+                <input type="submit" value="Применить">
+            </td>
+        </tr>  
+    </table>
+</form>

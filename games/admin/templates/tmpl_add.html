@@ -1,0 +1,57 @@
+<?
+    GLOBAL $_SESSION, $sheme;
+    $basePath = '';
+    if ($this->request->getVar('dev', false))
+         $swfFileName    = 'admin/swf/dev/pj_tmplAdd.swf';
+    else $swfFileName    = 'admin/swf/v03/pj_tmplAdd.swf';
+    $fileDate       = filectime('/home/oformi-foto.ru/games/'.$swfFileName);
+    $src = $swfFileName.'?t='.$fileDate;
+    $flashParams = $_GET;
+    
+    $flashParams['user'] = $_SESSION['user'];
+    $flashParams['user-data'] = json_encode($_SESSION['user-data']);
+?>
+<script type="text/javascript" src="admin/js/mootools-1.2.4-core.js"></script>
+<script src="admin/js/swfobject.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+     
+    function createSWF() {
+        embed = $('tmplAdd');
+        
+        var flashVars = <?=json_encode($flashParams);?>;
+        var params = {
+            movie: '<?=$src?>',
+            quality: 'high',
+            base: '<?=$basePath?>',
+            scale: 'noscale',
+            salign: 'tl',
+            wmode: 'direct',
+            allowNetworking: 'all',
+            allowFullScreen: 'true',
+            AllowScriptAccess: 'always'
+        }
+        
+        var size = window.getSize();
+        size.x -= 240;
+        size.y -= 20;       
+            
+        var attributes = {
+            id: "tmplAdd",
+            name: "tmplAdd",
+            style: 'width:' + size.x + 'px;margin:0 auto;display:block',
+            salign: 'tl'
+        };
+        
+        swfobject.embedSWF("<?=$src?>", "tmplAdd", size.x + 'px', size.y + 'px', "10", "admin/js/expressInstall.swf", flashVars, params, attributes);
+    }
+        
+    window.addEvent('domready', function() {
+        createSWF();
+    });
+</script>
+<div>
+    <div id="tmplAdd">
+    </div>
+    <a href="<?=$sheme?>docs.google.com/document/d/1XgNADaL-N4TBMJX8azUwTBarziuUiqSGYHKvQ0tKEt0/edit#heading=h.98u79mmlw2d4" target="_blank">Readme</a>
+</div>

@@ -1,0 +1,309 @@
+.catalog {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.cats {
+    margin: 0px 0px 30px;
+}
+
+#tmpls {
+    width: 820px
+}
+
+.catalog .cats {
+    width: 180px;
+}
+
+.cats a {
+    display: inline-block;
+    padding: 4px;
+    font-size: 13px;
+    color: #656565 !important;
+}
+
+.cats a:hover {
+    color: white !important;
+}
+
+.cats span {
+    display: block;
+    font-size: 13px;
+}
+
+.cats h3 {
+    font-weight: bold;
+    color: #776;
+}
+
+.cats h2 {
+    margin: 15px 5px;
+}
+
+.item h3 a {
+    color: #444 !important;
+}
+
+.cats span input {
+    margin: 5px 5px 0px 5px;
+}
+
+.item span, .item span a {
+    color: #555 !important;
+}
+
+.item span.info {
+    padding: 5px;
+    color: #666 !important;
+}
+
+.cats .current {
+    background: #AAA;
+    color: #FFF;
+}
+
+.catalog .list {
+    margin: 0 auto;
+}
+
+.list div.item {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.item .dl {
+    margin: 0px 5px 5px 0px;
+    padding: 5px;
+    border: 1px solid #DDD;
+    background: #FFF; 
+     -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+
+.item span {
+    display: block;
+}
+
+.item span span,
+.item span h3,
+.item img,
+.item td {
+    overflow: hidden;
+}
+
+.item span span {
+    font-size: 9px;
+/*    padding: 3px; */
+    color: #444;
+    display: block;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.item span h3 {
+    font-size: 14px;
+    height: 17px;
+}
+
+.item td {
+    border-spacing: 0px;
+}
+
+.catalog .list td {
+    text-align: center;
+}
+
+.noPicture {
+    background-image: url(images/nopicture.jpg) center center no-repeat;
+}
+
+.item-tools {
+    position: absolute;
+    display: inline-block;
+    z-index: 1;
+    height: 27px;
+    margin-left: -72px;
+    background: white;
+    border: 1px solid #DDD;
+     -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px; 
+}
+
+.toolButton {
+    display: inline-block;
+    width: 26px;
+    height: 23px; 
+    cursor: pointer;
+    margin: 2px;
+}
+
+.toolButton .tipz {
+    height: 23px; 
+}
+
+.near {
+    border: 2px solid #F8F !important;
+    background: white !important; 
+}
+
+/*
+.list div.item .toolButton {
+    visibility: hidden;
+}
+
+.list div.item:hover .toolButton {
+    visibility: visible;
+}
+*/
+
+.zoom {
+    background: url(images/zoom.gif) center center no-repeat;
+}
+
+.inject {
+    background: url(images/inject.gif) center center no-repeat;
+}
+
+.download_png {
+    background: url(images/download_png.gif) center center no-repeat;
+}
+
+.appeal {
+    margin: -2px 0px 0px 58px;
+    background: url(images/appeal.gif) center center no-repeat;
+}
+
+.desc {
+    color: #808080;
+    font-size: 1.2em;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    padding: 10px;
+    text-indent: 30px;
+}
+
+.desc img {
+    margin: 5px 15px 5px 5px;
+}
+
+.desc a {
+    color: #33A;
+    text-decoration: underline !important;
+}
+
+.desc .quick-links h3 {
+    margin: 5px 0px 5px 23px !important;
+}
+
+.currentHoliday a {
+}          
+
+.currentHoliday img {
+    max-width: 170px;
+    margin: 0 auto;
+}
+
+.share42init {
+    float:left;
+    width: 300px;
+    margin: 5px 0px -2px 2px;
+}
+
+.tmpls_header {
+}
+
+#tmpls h2 {
+    display: block;
+    width: 450px;
+}
+
+#tmpls .search_block {
+    float: right;
+    width: 350px;
+}
+
+.gsc-control-cse {
+    padding: 0px;
+}
+
+
+.item .adv {
+    color: #555;
+    text-align: center;    
+} 
+
+.search_adv {
+    position: absolute;
+}
+
+.holiday {
+    float:none !important;
+}
+
+.hTmpl {
+    float: right;
+}
+
+.hInfo {
+    float: left;
+    width: 640px;
+}
+
+.hName {
+    font-size: 16px;
+    margin: 10px;
+    display: block;
+    color: black;
+    text-decoration: underline;
+}
+
+.today {
+    background: #FEA !important;
+}
+
+.today b {
+    color: red;    
+}
+
+.sbox-content-iframe iframe {
+    border: 0;
+    overflow:hidden;
+}
+
+.groups a { 
+    display: block;
+    padding: 5px 20px;
+    font-size: 14px;
+}
+
+.below .hdleft {
+    top: 35px !important;
+}
+
+.hdleft {
+    padding: 5px;
+    background: #FFF;
+    border: 1px solid #DDD;
+    position: fixed;
+    top: 75px;
+    padding: 10px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    width: 280px;
+    overflow: hidden;
+    z-index: 2;
+    transition: top 0.5s;
+}
+
+.hdleft h2 {
+    text-align: right;
+    margin: 5px;
+}

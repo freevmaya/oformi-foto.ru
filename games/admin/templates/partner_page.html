@@ -1,0 +1,22 @@
+<?
+    $ref_link = 'https://ok.ru/app/oformifoto?ref='.$ref_id;
+?>
+<h1>Страница партнера</h1>
+<div>
+    <form action="" method="POST">
+        <span>Текущая дата: </span><input type="text" value="<?=$curDate?>" name="curDate"><br><br>
+        <input type="submit">        
+    </form>
+</div>
+<?
+    echo $this->showTable($result);
+?>
+<div>
+    <h2>Реферальная ссылка</h2>
+    <a href="<?=$ref_link?>"><?=$ref_link?></a><br>
+    <div class="message">
+        <h3>Внимание!</h3>
+        <p>При расчете заработка учитываются пользователи установившие приложение по этой ссылке.<br>
+        Если пользователь установил приложение по другой ссылке, то его установка не будет учитываться при расчете вашего заработка.</p>
+    </div>
+</div>

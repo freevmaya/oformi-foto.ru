@@ -1,0 +1,93 @@
+<script type="text/javascript">
+    function onHSelect(select) {
+        var val = select.get('value').split('_');
+        var msg = $('message');
+        msg_texts = msg.get('value').split('/');
+        
+        if (parseInt(val[3]) > 2) catVal = parseInt(val[0]) + 14200008;
+        else catVal = '""';
+        if (val.length > 1) {
+            msg.set('value', msg_texts[0] + '/{"cat":' + catVal + ',"title":"' + val[2] + '","template_id":' + val[1] + '}');
+        } else msg.set('value', msg_texts[0]);
+        
+    }
+    
+    function selectApp(select) {
+        document.location.href = '<?=Admin::getTaskLink()?>&appIndex=' + select.selectedIndex;        
+    }
+
+<?if ($waitMls > 0) {?>
+    function checkAndRefresh() {
+        if (document.getElementById('waitMls').value > 0) {
+            document.getElementById('send_form').submit();
+        }
+    }
+    setInterval("checkAndRefresh();", <?=$waitMls?>);
+<?}?>
+</script>
+<h3>
+    Оповещение пользователей
+</h3>
+<?
+    if (isset($response)) {
+        $result = json_decode($response);
+        //unset($result->results);
+        echo 'send count: '.count($devices).'<br>';
+        echo 'result: <pre>'.print_r($result, true).'</pre>';
+    }
+?>
+<form action="<?=Admin::getTaskLink()?>" method="POST" id="send_form">
+    <input type="checkbox" name="admin_only" <?=($admin_only?'CHECKED':'')?>/>Только администатору<br>
+    <select name="admin_key">
+        <?foreach ($admins as $item) {?>
+        <option value="<?=$item['GCM_ID']?>" <?=$admin_key==$item['GCM_ID']?'SELECTED':''?>><?=$item['lastDate'].' '.substr($item['GCM_ID'], 0, 10)?>...</option>
+        <?}?>
+    </select><br>
+    Приложение: <select name="appIndex" onchange="selectApp(this);">
+        <?foreach ($config as $index=>$cfg_item) {?>
+             <option value="<?=$index?>" <?=$index==$appIndex?'SELECTED':''?>><?=$cfg_item['title']?></option>
+        <?}?>
+    </select>
+    <h3>Режим</h3>
+    <select name="mode">
+        <option value="update" <?=($mode=='update')?'selected':''?>>Обновление или URL</option>
+        <option value="app"<?=($mode=='app')?'selected':''?>>Приложение</option>
+        <option value="extend"<?=($mode=='extend')?'selected':''?>>Расширенный</option>
+    </select>    
+     <h3>Фильтр по дате последнего входя в приложение</h3>                                           
+     <input type="text" name="last" value="<?=$last?>" size="30">
+    <h3>Заголовок</h3>
+    <input type="text" name="title" value="<?=$title?>" size="30">
+    <h3>Текст сообщения</h3>
+    <div>Через слеш, можно отправлять URL в режиме обновление или JSON</div>
+    <input type="text" name="message" id="message" value="<?=htmlspecialchars($message)?>" size="60">
+    <h3>К празднику</h3>
+    <select name="holiday" onchange="onHSelect(this)">
+        <option value="0">---</option>
+<?
+    foreach ($holidays as $holiday) {
+        $name = substr($holiday['name'], 0, 80);
+        echo "<option value=\"{$holiday['holiday_id']}_{$holiday['deftml_id']}_{$holiday['name']}_{$holiday['tmplCount']}\">{$holiday['fdate']} ({$holiday['tmplCount']}) {$name}</option>";
+    }
+?>    
+    </select>
+    <h3>Limit</h3>
+    <input type="text" name="limit" value="<?=$limit?>" size="30"> 
+    <h3>Язык</h3>
+    <input type="text" name="lang" value="<?=$this->request->getVar('lang', "ru")?>" size="10">
+    <h3>ID сообщения</h3>
+    <input type="text" name="id_message" value="<?=$this->request->getVar('id_message', date('dm'))?>" size="10">
+    <input type="hidden" name="send" value="1">
+    <div style="margin-top: 30px">
+        <input type="submit">
+    </div>
+    
+    <div>
+        <span>Повторить через млс. </span><input type="text" value="<?=$waitMls?>" name="waitMls" id="waitMls" size="8"> 
+    </div>
+    <div class="message">
+        JSON для примера:<br>
+        {"cat":14200146,"title":"День семьи!","template_id":14182}<br> 
+        Праздники передаются так "cat": 14200008 + ID праздника        
+    </div>
+</form>

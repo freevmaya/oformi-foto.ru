@@ -1,0 +1,105 @@
+<style type="text/css">
+</style>
+<script type="text/javascript">
+    function onHSelect(select) {
+        var val = select.get('value').split('_');
+        var params = $('params');
+        var catVal = 0;
+        if (val.length > 1) {
+            if (parseInt(val[3]) > 2) catVal = parseInt(val[0]) + 14200008;
+            else catVal = '""';
+            
+            params.set('value', '{"cat":' + catVal + ',"title":"' + val[2] + '","template_id":' + val[1] + '}');
+        } else params.set('value', '');
+    }
+</script>
+<?if (isset($list)) {?>
+<h3>Список автоматических оповещения</h3>
+<div>Тек. время: <?=date('d.m.Y H:i')?></div>
+<div>
+    <table class="report">
+        <tr>
+            <th>Дата</th>
+            <th>Время</th>
+            <th>admin</th>
+            <th>Заголовок</th>
+            <th>Текст</th>
+            <th>Состояние</th>
+            <th>Время отпр.</th>   
+            <th></th>
+        <tr>
+    <?foreach ($list as $i=>$item) {
+        $ioptions = json_decode($item['options']);
+    ?>
+        <tr class="<?=(($i%2)?'odd':'').($item['active']==0?' noactive':'')?>">
+            <td><?=$item['date']?></td>
+            <td>с <?=$item['start_hour']?> по <?=$item['end_hour']?></td>
+            <td><?=$item['admin_key']?'*':''?></td>
+            <td><a href="<?=Admin::getTaskLink()?>&dialog_mode=edit_form&notify_id=<?=$item['notify_id']?>"><?=$item['title']?></a></td>
+            <td><?=$item['text']?></td>
+            <td><?=((($item['active'] == 1) && $ioptions && !@$ioptions->stop && (@$ioptions->total > @$ioptions->start))?(ceil($ioptions->start/$ioptions->total * 100).'%'):'')?></td>
+            <td><?=@$ioptions->last_time?></td>
+            <td><a href="<?=Admin::getTaskLink()?>&dialog_mode=delete&notify_id=<?=$item['notify_id']?>" onclick="return confirm('Удалить запись?')">удалить</a></td>
+        </tr>    
+    <?}?>
+    <input type="button" value="добавить" onclick="document.location='<?=Admin::getTaskLink()?>&dialog_mode=add_form'"/>
+</div>
+<?} 
+if ($isEdit || ($dialog_mode == 'add_form')) {?>
+<h3>
+<?=($isEdit?'Редактирование':'Добавление')?> автоматического оповещения
+</h3>
+<div id="add_form">
+    <form action="<?=Admin::getTaskLink()?>" method="POST" id="send_form">
+        <input type="checkbox" name="admin_only" <?=($admin_only?'CHECKED':'')?>/>Только администатору<br>
+        <!--<input type="text" name="admin_key" value="<?=$admin_key?>" size="80"><br>-->
+        <select name="admin_key">
+            <?foreach ($admins as $item) {?>
+            <option value="<?=$item['GCM_ID']?>"><?=$item['lastDate'].' '.substr($item['GCM_ID'], 0, 10)?>...</option>
+            <?}?>
+        </select><br>
+        Активно <input type="checkbox" name="active" <?=($active==1?'CHECKED':'')?>/>
+        <h3>Дата</h3>
+        <input type="text" name="date" value="<?=$date?>" size="10">
+        <h3>Режим</h3>
+        <select name="mode">
+            <option value="update" <?=($mode=='update')?'selected':''?>>Обновление или URL</option>
+            <option value="app"<?=($mode=='app')?'selected':''?>>Приложение</option>
+            <option value="extend"<?=($mode=='extend')?'selected':''?>>Расширенный</option>
+        </select>    
+         <h3>Фильтр по дате последнего входа в приложение</h3>                                           
+         <input type="text" name="last" value="<?=$last?>" size="30">
+        <h3>Заголовок</h3>
+        <input type="text" name="title" value="<?=$title?>" size="30">
+        <h3>Текст сообщения</h3>
+        <input type="text" name="message" value="<?=htmlspecialchars($message)?>" size="60">
+        <h3>Параметры</h3>
+        <input type="text" name="params" id="params" value="<?=htmlspecialchars($params)?>" size="80">
+        <h3>Период</h3>
+        С <input type="text" name="start_hour" value="<?=$start_hour?>" size="10"> по <input type="text" name="end_hour" value="<?=$end_hour?>" size="10"> часов
+        <h3>К празднику</h3>
+        <select name="holiday" onchange="onHSelect(this)">
+            <option value="0">---</option>
+    <?
+        foreach ($holidays as $holiday) {
+            $name = substr($holiday['name'], 0, 80);
+            echo "<option value=\"{$holiday['holiday_id']}_{$holiday['deftml_id']}_{$holiday['name']}_{$holiday['tmplCount']}\">{$holiday['fdate']} ({$holiday['tmplCount']}) {$name}</option>";
+        }
+    ?>    
+        </select>
+        <h3>Язык</h3>
+        <input type="text" name="lang" value="<?=$lang?>" size="10">
+        <input type="hidden" name="dialog_mode" value="add_notify"> 
+        <?if (isset($notify_id) && $notify_id) {?><input type="hidden" name="notify_id" value="<?=$notify_id?>"><?}?>
+        <div style="margin-top: 30px">
+            <input type="submit" value="Отправить">
+        </div>
+        
+        <div class="message">
+            JSON для примера:<br>
+            {"cat":14200146,"title":"День семьи!","template_id":14182}<br> 
+            Праздники передаются так "cat": 14200008 + ID праздника        
+        </div>
+    </form>
+</div>
+<?}?>

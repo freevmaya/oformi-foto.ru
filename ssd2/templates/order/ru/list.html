@@ -1,0 +1,126 @@
+<div>
+<?
+    GLOBAL $root;
+    $this->noindex = true;
+    $state_ru = array('wait'=>'Ожидание', 'process'=>'В процессе', 'success'=>'Готово');
+    $user = ss::getUserAlternate();
+    
+    if ($su = ss::$task[3]) {
+        $su = explode('-', $su);    
+        $su = array('source'=>$su[0], 'uid'=>$su[1]);
+    } else $su = $user;
+    
+    if (($user && $user['uid']) || $root::isDev()) {
+        if ((ss::$isAdmin) && ($su['uid'] == $user['uid'])) 
+            $query = "SELECT o.*, u.url FROM of_orders o LEFT JOIN of_users u ON u.uid=o.uid AND u.source=o.user_source WHERE o.state='wait' OR o.state='process'"; 
+        else $query = "SELECT * FROM of_orders WHERE uid={$su['uid']} AND user_source='{$su['source']}'";
+        
+        $list = DB::asArray($query);
+    
+   // ss::addCSS('');
+   if (count($list) > 0) {
+        if (ss::$isAdmin) {   
+        
+        ss::addCSS('.state_list li', 'list-style: none;');
+        ss::addCSS('.state_list input', 'margin-right: 10px;');
+?>
+<h1>Неподтвержденные заявки</h1>
+<div class="post scene">
+    <form method="POST" action="<?=link::c('order', 'list')?>">
+    <table class="order-list">
+        <tr>
+            <th></th>
+            <th>Состояние</th>
+            <th>Номер</th>
+            <th>Тип</th>
+            <th>Дата</th>
+            <th>UID</th> 
+            <th>Заказчик</th> 
+            <th>email</th>
+            <th>Комментарий</th> 
+            <th>Исходник</th>
+            <th>Работа</th>
+        </tr>
+<?foreach ($list as $order) {
+    $fileName = $order['order_id'].'.'.$order['ext']; 
+    $imgURL = ORDERURL.'/'.$fileName;
+    
+    if (file_exists(ORDERPATH.'/result/'.$fileName))
+        $workURL = ORDERURL.'/result/'.$fileName;
+    else $workURL = ''; 
+    $url = $order['url']?$order['url']:(link::c('user', page, $order['user_source'].'-'.$order['uid']));
+    $userListURL = link::c('order', 'list', $order['user_source'].'-'.$order['uid']);
+    
+?>
+        <tr class="<?=$order['state']?>">
+            <td><input type="checkbox" name="orders[]" value="<?=$order['order_id']?>"></td>
+            <td><?=$state_ru[$order['state']]?></td>
+            <td><a href="<?=$userListURL?>"><?=$order['order_id']?></a></td>
+            <td><?=$order['order_type']?></td>
+            <td><?=$order['date']?> <?=$order['time']?></td>
+            <td><a href="<?=$url?>" target="_blank"><?=$order['uid'].':'.$order['user_source']?></a></td> 
+            <td><a href="<?=$url?>" target="_blank"><?=$order['name']?></a></td> 
+            <td><a href="mainto:<?=$order['email']?>" target="_blank"><?=$order['email']?></a></td> 
+            <td><?=$order['message']?></td> 
+            <td><a href="<?=$imgURL?>" target="_blank"><img src="<?=$imgURL?>"></a></td>
+            <td><?if ($workURL) {?><a href="<?=$workURL?>" target="_blank"><img src="<?=$workURL?>"></a><?}?></td>
+        </tr>
+<?}?>        
+    </table>
+        <h3>Пометить как</h3>
+        <ul class="state_list">
+            <li><input type="radio" name="state" value="success">Обработанные</li>
+            <li><input type="radio" name="state" value="process">В процессе</li>
+            <li><input type="radio" name="state" value="wait">Ожидающие</li>
+        </ul>
+        <input type="submit">
+    </form>
+</div>
+<?} else {?>
+<h1>Ваши заказы</h1>
+<div class="post scene">
+    <table class="order-list">
+        <tr>
+            <th>Состояние</th>
+            <th>Номер</th>
+            <th>Тип</th>
+            <th>Дата</th>
+            <th>Комментарий</th> 
+            <th>Исходник</th>
+            <th>Результат</th>
+        </tr>
+<?
+    foreach ($list as $order) {
+        $fileName = $order['order_id'].'.'.$order['ext']; 
+        $imgURL = ORDERURL.'/'.$fileName;
+        
+        if (file_exists(ORDERPATH.'/result/'.$fileName))
+            $workURL = ORDERURL.'/result/'.$fileName;
+        else $workURL = ''; 
+?>
+        <tr class="<?=$order['state']?>">
+            <td><?=$state_ru[$order['state']]?></td>
+            <td><?=$order['order_id']?></td>
+            <td><?=$order['order_type']?></td>
+            <td><?=$order['date']?> <?=$order['time']?></td>  
+            <td><?=$order['message']?></td>
+            <td><a href="<?=$imgURL?>" target="_blank"><img src="<?=$imgURL?>"></a></td>
+            <td><?if ($workURL) {?><a href="<?=$workURL?>" target="_blank"><img src="<?=$workURL?>"></a><?}?></td>
+        </tr>
+<?}?>        
+    </table>
+</div>
+<?}} else echo 'Список пуст';
+} else {?>
+<div class="post login">    
+    <h1>Требуется авторизация</h1>
+    <?include(TEMPLATES_PATH.'/user/login_block.html');?>
+</div>    
+<?}?>
+</div>
+<script type="text/javascript">
+    comments('<?=link::c('comment', 'ajax')?>', 'order-list-<?=$su['source'].'-'.$su['uid']?>');
+</script>
+<div class="tmpl-login">
+<?include(TEMPLATES_PATH.'user/login_block.html')?>    
+</div>

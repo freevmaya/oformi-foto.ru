@@ -1,0 +1,128 @@
+<?
+    define('WORKIMAGEURL', MAINURL.'/images/work_example/');
+    
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+    $maxsize    = min(intval(ini_get('upload_max_filesize')), 10); 
+    $name       = $user?$user['nick']:'';
+    $email      = $user?$user['email']:'';
+    
+    if (isset($works[0]))
+        $this->setPageImage(WORKIMAGEURL.$works[0][0]);
+?>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        var inputs = [];
+        var elems = {}; 
+        var mail = 'order@oformi-foto.ru';
+        
+        $('email').set('text', mail);
+        $('email').set('href', 'mailto:' + mail);
+        
+        var form = $('order').getElement('form');
+        var sb = form.getElement('.ctrl-button');
+        
+        function onSubmit() {
+            if (!sb.hasClass('disable')) 
+                form.submit();
+        }
+        
+        function onCheckFile(e) {
+            var error = checkFile(e.target);
+            if (error !== true) alert(error);
+        }
+        
+        function checkFile(input) {
+            if (input.files.length > 0) {
+                var f = input.files[0];
+                if (!f.type.match('image.*')) {
+                    return locale.WRONGIMAGEONFY;
+                }
+                
+                if (f.size > <?=$maxsize * 1024 * 1024?>) {
+                    return locale.FILEBIG;
+                }
+                
+                return true;
+            } else return false;
+        }
+        
+        ValidateSimple.Validators.image.test = function(input) {
+            return checkFile(input) === true;
+        }
+        
+        sb.addEvent('click', onSubmit);
+        var file = form.getElement('input[type="file"]');
+        if (file) file.addEvent('change', onCheckFile);
+        
+        new ValidateSimple(form, {
+            inputs: form.getElements('.f_param'),
+            onValid: function() { 
+                sb.removeClass('disable');
+            },
+            onInvalid: function() { 
+                sb.addClass('disable');
+            },
+            onInputValid: function(input) {
+                input.getParent().removeClass('error');
+            },
+            onInputInvalid: function(input, errors) {
+                if (errors) input.getParent().addClass('error');
+            }
+        });
+        return false;
+    });
+</script>
+<table class="vcenter article"><tr><td>
+    <h1><?=$this->title?></h1>
+    <div class="post order">
+        <p><?=$this->description?></p>
+        <?
+            foreach ($works as $work) {
+        ?>
+            <div>
+                <div class="image_hint"><?=$work[1]?></div>
+                <img src="<?=WORKIMAGEURL.$work[0]?>" alt="<?=$work[1]?>" class="work">
+            </div>
+        <?}?>
+        <div class="order-desc"><?=$ext_desc?></div>
+        <p>Ориентировочная стоимость <b><?=$price_str?></b></p>
+        <div class="form" id="order">
+            <form method="POST" action="<?=ss::currentUrl()?>" onsubmit="return this.check();" enctype="multipart/form-data">
+                <table style="text-align: left;">
+                    <tr>
+                        <td class="ui-param ui-low">Ваше имя</td>
+                        <td>
+                            <input placeholder="Имя" maxlength="64" type="text" title="<?=$locale['INPUTTITLE']['FIRST_NAME']?>" class="validate-name tipz f_param" value="<?=$name?>" name="name" style="width: 200px;"><span class="proplem">Некорректное имя пользователя.</span>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td class="ui-param ui-low">Ваш e-mail</td>
+                        <td><input placeholder="example@gmail.com" maxlength="100" title="<?=$locale['INPUTTITLE']['EMAIL']?>" type="text" class="validate-email tipz f_param" value="<?=$email?>" name="email"><span class="proplem">Некорректный адрес электронной почты</span></td>
+                    </tr> 
+                    <tr>
+                        <td class="ui-param ui-low">Выберите фото</td>
+                        <td><input  class="validate-image tipz f_param" title="<?=$locale['INPUTTITLE']['IMAGE']?>" type="file" name="image"><span class="proplem">Некорректное изображение</span>
+                        <div class="hint">Размер файла не более <?=$maxsize?> Mb, размер изображения не менее 1024 пик. по большей стороне</div>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td class="ui-param ui-low">Ваши пожелания</td>
+                        <td><textarea class="f_param" name="message"></textarea></td>
+                    </tr> 
+                    <tr>
+                        <td class="param">
+                            <input type="hidden" name="order_type" value="<?=$orderType?>">
+                        </td>
+                        <td><a class="ctrl-button disable"><?=$locale['SEND']?></a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <p>Мы сразу вас уведомим о получении заявки. На любой вопрос мы ответим по e-mail: <a href="" id="email" target="_blank"></a></p>
+        <div class="company">
+            <p>Наша компания с 2011 года осуществляет деятельность в сфере разработки приложений для оформления фотографий. Проект "Прикольное оформление ваших фотографий” был запущен в 2012 году. В рамках этого проекта существуют два приложения в двух соцсетях, два приложения под операционную систему Android и данный сайт.</p>
+            <p>ИП Фролов Вадим Валерьевич, ОГРН 310745006100014</p>
+        </div>
+    </div>
+</td></tr></table>    
+<?include_once(TEMPLATES_PATH.'comments.html')?>

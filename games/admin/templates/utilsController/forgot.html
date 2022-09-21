@@ -1,0 +1,58 @@
+<?
+$subject='Группа разработчиков приложения "Прикольное оформление ваших фотографий"';
+?>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+</head>
+<body>
+<table width="100%" bgcolor="#EEE" cellpadding="40px">
+    <tbody>
+    <tr>
+        <td align="center">
+            <table width="768px" cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                <tr>
+                    <td height="32px" background="http://oformi-foto.ru/mailimage/top.jpg"></td>
+                <tr>    
+                <tr>
+                    <td bgcolor="#FFF" background="http://oformi-foto.ru/mailimage/cn.jpg">
+                            <table width="100%" cellpadding="0" cellspacing="40" border="0">
+                                <tbody>
+                                <tr>
+                                    <td><img src="http://oformi-foto.ru/mailimage/pj60x60.png"></td>
+                                    <?if ($item['inCount'] > 0) {?>
+                                    <td>
+                                        <font size="4" color="#775" face="Lucida Grande,Arial,Verdana,Tahoma,Sans Serif"><b>У вас <?=$item['inCount']?> новых открыток  во входящих!</b></font>
+                                    </td>
+                                    <?}?>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+<h1><font face="Georgia">Здравствуйте уважаем<?=($item['sex']==0?'ый':'ая')?> <?=$item['first_name'].' '.$item['last_name']?></font></h1>
+<font face="Lucida Grande,Arial,Verdana,Tahoma,Sans Serif" size="2">
+<p>Прежде вы проявляли интерес к приложению "<a href="http://my.mail.ru/apps/441805">Прикольное оформление ваших фотографий</a>", поэтому спешим сообщить Вам, что со времени Вашего последнего посещения 
+<?if ($item['inCount'] > 0) {?><b>Вам пришло <?=$item['inCount']?> открыток</b>. Кроме того<?}?> у нас появилось множество новых шаблонов открыток, рамок и приколов. Общее количество шаблонов в приложении на данный момент составляет более 6000!</p>
+<p>Напоминаем, что Вы можете создать в приложении открытку, поздравление, красиво оформить свои фотографии, отправить открытку другу в соц-сети или по почте, сохранить в фотоальбом или на компьютер.</p>
+<p>Так же рады вам сообщить что приложение теперь доступно на сайте ОДНОКЛАССНИКИ <a href="http://www.odnoklassniki.ru/app/oformifoto">http://www.odnoklassniki.ru/app/oformifoto</a></p>
+<p>Ждем Вашего посещения! С уважением и любовью группа разработчиков приложения "<a href="http://my.mail.ru/apps/441805">Прикольное оформление ваших фотографий</a>"</p>
+<hr>
+<p><font color="#AAA">Просим прощения,  если это письмо  пришло не по назначению. Кликните <a href="http://oformi-foto.ru/unsubscribe.php?uid=<?=$item['uid']?>">здесь</a> , если Вы хотите отписаться от данной рассылки. Это письмо сформировано автоматически и на него отвечать не нужно.</font></p>
+</font>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="32px" background="http://oformi-foto.ru/mailimage/bt.jpg"></td>
+                <tr>    
+                </tbody>
+            </table>       
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

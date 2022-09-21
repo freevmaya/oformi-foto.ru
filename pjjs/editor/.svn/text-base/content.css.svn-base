@@ -1,0 +1,110 @@
+@font-face {
+    font-family: "Beer";
+    src: url("fonts/BeerRegular.eot");
+    src: url("fonts/BeerRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/BeerRegular.woff") format("woff"),
+    url("fonts/BeerRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Aaargh";
+    src: url("fonts/AaarghRegular.eot");
+    src: url("fonts/AaarghRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/AaarghRegular.woff") format("woff"),
+    url("fonts/AaarghRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "AC Line";
+    src: url("fonts/ACLineRegular.eot");
+    src: url("fonts/ACLineRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/ACLineRegular.woff") format("woff"),
+    url("fonts/ACLineRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}  
+
+@font-face {
+    font-family: "Adine Kirnberg";
+    src: url("fonts/AdineKirnbergRegular.eot");
+    src: url("fonts/AdineKirnbergRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/AdineKirnbergRegular.woff") format("woff"),
+    url("fonts/AdineKirnbergRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+    font-size: 5em;
+}  
+
+@font-face {
+    font-family: "Arabskij";
+    src: url("fonts/ArabskijRegular.eot");
+    src: url("fonts/ArabskijRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/ArabskijRegular.woff") format("woff"),
+    url("fonts/ArabskijRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Asia";
+    src: url("fonts/AsiaASNormal.eot");
+    src: url("fonts/AsiaASNormal.eot?#iefix")format("embedded-opentype"),
+    url("fonts/AsiaASNormal.woff") format("woff"),
+    url("fonts/AsiaASNormal.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+} 
+
+@font-face {
+    font-family: "Bickham Script Two";
+    src: url("fonts/BickhamScriptTwoRegular.eot");
+    src: url("fonts/BickhamScriptTwoRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/BickhamScriptTwoRegular.woff") format("woff"),
+    url("fonts/BickhamScriptTwoRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}  
+
+@font-face {
+    font-family: "Boom Boom";
+    src: url("fonts/BoomBoomRegular.eot");
+    src: url("fonts/BoomBoomRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/BoomBoomRegular.woff") format("woff"),
+    url("fonts/BoomBoomRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+} 
+
+@font-face {
+    font-family: "Alexander";
+    src: url("fonts/AlexanderRegular.eot");
+    src: url("fonts/AlexanderRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/AlexanderRegular.woff") format("woff"),
+    url("fonts/AlexanderRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+} 
+
+@font-face {
+    font-family: "Anfisa Grotesk";
+    src: url("fonts/AnfisaGroteskRegular.eot");
+    src: url("fonts/AnfisaGroteskRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/AnfisaGroteskRegular.woff") format("woff"),
+    url("fonts/AnfisaGroteskRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+.meditor {margin: 0px !important; font-family: Arial,Tahoma,Verbana;}
+
+.meditor h1 {font-size: 48px;}
+.meditor h2 {font-size: 32px;}
+.meditor h3 {font-size: 28px;}
+.meditor h4 {font-size: 22px;}
+.meditor h5 {font-size: 18px;}
+.meditor p {font-size: 16px;}

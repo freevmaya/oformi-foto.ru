@@ -1,0 +1,79 @@
+#pjjs {
+}
+
+#pjjs iframe {
+    width: 958px;
+    height: 473px;
+    border: 0; 
+}
+
+#pjjs_share {
+    width: 83px;
+    height: 31px;
+    margin-left: 875px;
+    position: absolute;
+    cursor: pointer;    
+}
+
+#share_layer {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 110;
+}
+
+#share_layer a {
+    cursor: pointer;    
+}
+
+#share_layer h2 {
+    text-align: center;
+    margin: 20px 0px 40px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#share_layer .close-label {
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0;
+}
+
+#share_layer .page {
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    background: white;
+    padding: 40px;
+    box-shadow: 2px 2px 10px black;
+}
+
+#share_layer .fb-button {
+    position: absolute !important;
+    margin: 27px 0px 0px 44px;
+    width: 115px;
+    height: 30px;
+    background: url(images/share/fb-share-bt.gif);
+    cursor: pointer; 
+} 
+
+#ok_shareWidget {
+    position: absolute !important;
+    margin: 26px 0px 0px 40px;
+}
+
+#vk_like {
+    position: absolute !important;
+    margin: 26px 0px 0px 20px;
+}
+
+.vk-share table {
+    position: absolute !important;
+    margin: 30px 0px 0px 50px;
+}

@@ -1,0 +1,51 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    
+    GLOBAL $AUTORS;
+    $link = Admin::getTaskLink();
+?>
+
+<script src="admin/js/loader-copy-mailru.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+    var MAILAPPID = '588137';
+    var MAILAPPKEY = 'dfc1eb613808539c17d80fbbf6af11ad';
+    
+    window.addEvent('domready', function() {
+        mailru.loader.require('api', function() {
+            mailru.connect.init(MAILAPPID, MAILAPPKEY);
+            
+            mailru.connect.getLoginStatus(function(result) {
+                if (result.vid) {   
+                    if (result.vid == '8062938299454250872') {             
+                        $('submit_button').setStyle('display', 'block');
+                        $('autor_id').set('value', result.vid);
+                    }
+                }
+            });
+            
+        });    
+    });
+    
+    function doLoadImage(input) {
+        alert(input);
+    }
+</script>
+<h1>Загрузка нового шаблона</h1>
+(В разработке)
+<form action="<?=$link?>&state=update" method="POST">
+    <table class="report">
+        <tr>
+            <td class="param">
+                Изображение:
+            </td>
+            <td><input type="file" name="image" onload="doLoadImage(this)"></td>
+        </tr>
+        <tr>
+            <td class="param" colspan="2">
+                <input type="hidden" name="autor_id" id="autor_id" value="0">
+                <input type="submit" id="submit_button" style="display:none">
+                <div>Если нет кнопки, <a href="//oformi-foto.ru/login.html">Авторизуйтесь пользователем mail.ru</a></div>
+            </td>
+        </tr>
+    </table>
+</form>

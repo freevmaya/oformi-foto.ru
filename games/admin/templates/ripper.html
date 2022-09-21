@@ -1,0 +1,15 @@
+<?
+    if ($this->request->getVar('dev', false))
+         $swfFileName    = 'admin/swf/dev/imageRipper.swf';
+    else $swfFileName    = 'admin/swf/v01/imageRipper.swf';
+    $fileDate       = filectime('//home/vmaya/games/'.$swfFileName);
+?>
+<embed src="<?=$swfFileName?>?t=<?=$fileDate?>" quality="high" bgcolor="#ffffff"
+	width="1600" height="1024" name="imageRipper" align="middle"
+	play="true"
+	loop="false"
+	quality="high"
+	allowScriptAccess="sameDomain"
+	type="application/x-shockwave-flash"
+	pluginspage="http://www.adobe.com/go/getflashplayer">
+</embed>

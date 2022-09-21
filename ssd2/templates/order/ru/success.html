@@ -1,0 +1,20 @@
+<?
+    $this->title = 'Заявка принята!';
+    $name = $user?$user['nick']:'';
+    $email = $user?$user['email']:'';
+?>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        var mail = 'order@oformi-foto.ru';
+        $('email').set('text', mail);
+        $('email').set('href', 'mailto:' + mail);
+    });
+</script>
+<table class="vcenter article"><tr><td>
+    <h1><?=$this->title?></h1>
+    <div class="post order">
+        <p>Номер вашей заявки: <b><?=$orderID?></b>. Указывайте этот номер при обращении в техподдержку: <a href="" id="email" target="_blank"></a></p>
+        <p>В ближайшее время с вами свяжется специалист, для уточнения деталей заказа.</p>
+        <p>Вы также можете отслеживать состояние заявки в списке <a href="<?=link::c('order', 'list')?>">Ваших заказов</a></p>
+    </div>
+</td></tr></table>    

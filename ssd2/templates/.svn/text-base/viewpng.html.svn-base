@@ -1,0 +1,71 @@
+<div>
+<?
+    GLOBAL $sheme; 
+    define('TITLE_LIMIT', 50);
+    define('DESC_LIMIT', 180);
+    
+    $top = 73;
+    if (!ss::$noadv) $top += 90;
+    if (!isset($page)) $page = 0;
+    $bottom = 45;   
+    
+    if ($tmpl) {
+        $alt = $locale['PHOTOFRAME'].' '.$tmpl['name'].' '.$this->description;
+        $fileURL = sprintf(FRAMES_PNGURL, $tmpl_id);
+?>
+    <div style="text-align:center;" id="tmpl_preview">
+        <div class="tmpl_html">
+            <div class="post">
+<?
+        if ($this->title) echo "<h1>{$this->title}</h1>"; 
+        if ($this->description) echo "<p>{$this->description}</p>"; 
+?>  
+            <div class="info"><?=$tmpl['info']?>, <?=$locale['ADDTIME'].': '.rusDate($tmpl['insertTime'])?>
+            </div>
+            <div>
+                <a href="<?=$fileURL?>" class="download" download="<?=$tmpl['tmpl_id']?>-<?=BASEHOST?>.png"><?=$locale['DOWNLOADPNG']?></a>
+            </div>
+            </div>
+            <div class="tmpl-img-block">    
+                <img src="<?=$fileURL?>" id="tmpl_image" alt="<?=$alt?>">
+            </div>
+        </div>
+    </div>
+<?      if ($items) {
+            $this->styles[] = SSURL.'sbox/assets/SqueezeBox.css';
+            $this->styles[] = SSURL.'catalog.css';
+            $this->scripts[] = SSURL.'sbox/SqueezeBox.js';
+            $this->scripts[] = SSURL.'js/catalog.js';
+            $preview_width = 300;            
+?>    
+    <style type="text/css">
+        .item span span,
+        .item span h3,
+        .item img,
+        .item td {
+            width: <?=$preview_width?>px;
+        }
+    </style>
+    <script type="text/javascript">
+        var FRAMES_URL = '<?=FRAMES_URL;?>';     
+        var CATALOGSELECTOR = '<?=CATALOGSELECTOR?>';     
+        var MAINURL = '<?=MAINURL?>';
+        window.addEvent('domready', function() {
+            catalogListInit('<?=link::c('templatesA')?>', '<?=link::c('catalog', $groupsStr, '%s')?>', <?=$page?>, '<?=addslashes(str_replace(' ', '_', $groupsStr))?>');        
+        });                                 
+    </script>
+    <div id="tmpls" style="width:100% !important;">
+    <h2>Популярные рамки в этой категории</h2>
+    <div class="catalog post">
+        <div class="list">
+            <?include_once(TEMPLATES_PATH.'catalog/tmpls.html')?>
+        </div>
+    </div>
+    </div>
+<?
+        }        
+        $qstr = "tid={$tmpl['tmpl_id']}&gid={$tmpl['gid']}";
+    } else $qstr = $this->request->toString();
+    //include(TEMPLATES_PATH.'/social.html');
+?>
+</div>

@@ -1,0 +1,8 @@
+Хочу обратить ваше внимание что на нашем <a href="<?=MAINURL?>">сайте</a> есть еще несколько приложений, просвещенных <b>обработки фотографий</b>
+<ul>
+    <li><a href="<?=MAINURL?>/view.htm">Прикольное оформление ваших фотографий</a></li> 
+    <li><a href="<?=MAINURL?>/gifavt.htm">GIF аниматор</a></li>
+    <li><a href="<?=MAINURL?>/pjjs.htm">Фоторамки</a></li>
+    <li><a href="<?=MAINURL?>/clothing.htm">Коллаж, переодевание</a></li>
+    <li><a href="<?=MAINURL?>/anim.htm">Видео-клип из ваших фото</a></li>
+</ul>

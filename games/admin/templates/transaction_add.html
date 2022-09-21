@@ -1,0 +1,55 @@
+<?
+    $link = Admin::getTaskLink();
+    
+    if (isset($result) && $result) {
+        echo '<h2 style="color:red">Операция успешно добавлена!</h2>';
+    }
+?>
+<h3>Добавление транзакции</h3>
+<form method="POST" action="<?=$link?>">
+    <table>
+        <tr>
+            <td>
+                Пользователь<br>
+                Можно несколько UID через<br>
+                пробел или рапятую
+            </td>
+            <td>
+                <?=$this->html_uidInput(@$uid)?>
+            </td>
+        </tr> 
+        <tr>
+            <td>
+                Сервис:
+            </td>
+            <td>
+                <select name="service_id">
+                <?foreach ($this->services as $key=>$service) {?>
+                    <option value="<?=$key?>" <?=(@$service_id==$key)?'selected':''?>><?=$service?></option>
+                <?}?>
+                </select>
+            </td>
+        </tr>  
+        <tr>
+            <td>
+                Сумма:
+            </td>
+            <td>
+                <input name="price" value="<?=$price?>" size="10">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Дополнительные параметры
+            </td>
+            <td>
+                <input name="params" value="<?=@$params?>" size="50">
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <input type="submit">
+            </td>
+        </tr>
+    </table>
+</form>

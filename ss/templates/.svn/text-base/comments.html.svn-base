@@ -1,0 +1,7 @@
+<?//include(TEMPLATES_PATH.'user/login_block.html');?>
+<script type="text/javascript">
+    comments('<?=link::c('comment', 'ajax')?>');
+</script>
+<div class="tmpl-login">
+<?include(TEMPLATES_PATH.'user/login_block.html')?>    
+</div>

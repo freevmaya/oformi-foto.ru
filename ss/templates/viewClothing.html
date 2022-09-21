@@ -1,0 +1,37 @@
+<?
+    GLOBAL $sheme;
+    
+    define('BASEFRAMESURL', $sheme.'oformi-foto.ru');
+    define('FRAMES_URLPREVIEW', BASEFRAMESURL.'/pj/preview120/');
+    define('FRAMES_URL', BASEFRAMESURL.'/pj/JPG/');
+    
+    include_once(TEMPLATES_PATH.'/paginator.php');
+    $imgAlt = '';
+    $groupDesc = '';
+    foreach ($menu as $item) {
+        $gid = $item['group_id'];
+        if (in_array($item['group_id'], $groupIds)) {
+            $imgAlt .= ($imgAlt?', ':'').$item['name'];
+            $groupDesc .= ($groupDesc?', ':'').$item['desc']; 
+        }                     
+    }
+    
+    $this->title = 'Каталог одежды и причесок, '.($imgAlt?$imgAlt:'виртуальное переодевание. Последнее обновление').'.';
+    $this->description = $groupDesc?$groupDesc:'В каталоге рамок для фотографий вы можете быстро выбрать нужную для вас фото-рамку, оформление или эффект.';
+    
+    $pageTool = paginator($page, $totalPages, MAINURL.'/catalog/'.($groupsStr?$groupsStr:'0').'/%d.html');
+    
+    $this->styles[] = SSURL.'sbox/assets/SqueezeBox.css';
+    $this->scripts[] = SSURL.'sbox/SqueezeBox.js';
+    $this->scripts[] = SSURL.'js/mootools-1.2.5.1-tips.js';
+    
+    function textLimit($text, $count, $tag) {
+        $result = "<$tag>$text</$tag>";
+        if (strlen($text) + 4 > $count) {
+            $result = "<$tag class=\"tipz pointer\" title=\"Полный текст::$text\">".substr($text, 0, $count).'...'."</$tag>";
+        }            
+        
+        return $result;
+    }
+    include(TEMPLATES_PATH.'/catalogList.html');    
+?>

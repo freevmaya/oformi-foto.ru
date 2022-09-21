@@ -1,0 +1,42 @@
+<h3>
+    Уведомления
+</h3>
+<div>
+    <form method="POST" action="?task=userNotify" name="sendForm">
+        <h3>Текст уведомления</h3>
+        Время последней отправки уведомлений: <input type="text" name="time" value="<?=trim($this->request->getVar('time', date('Y-m-d 00:00:00' , strtotime('-2 DAY'))));?>"/><br>
+        <textarea name="notifyText" cols=60 rows=10><?=trim($this->request->getVar('notifyText', ''));?></textarea><br>
+        <input type="checkbox" name="auto" <?=($this->request->getVar('auto', 0)?'CHECKED':'')?>>Автоматически повторять запрос<br>
+        <input type="checkbox" name="test" <?=($this->request->getVar('test', '')?'CHECKED':'')?>>Тест, отправляются только мне и Свете<br>
+        <input type="submit"/>
+    </form>
+</div>
+<? if (isset($n_users)) {?>
+<?if ($this->request->getVar('auto', 0)) {?>
+<script type="text/javascript">
+    setTimeout("document.forms['sendForm'].submit();", 1000);
+</script>
+<?}?>
+<table class="report">
+    <tr>
+        <th>
+            Пользователь
+        </th>
+        <th>
+            Результат
+        </th>
+    </tr>
+    <? foreach ($n_users as $user) {?>
+        <tr>
+            <td>
+                <?= $user['uid']?>
+            </td>
+            <td>
+                <?= ($user['notify']==1)?'уведомлен':(
+                    ($user['notify']==-1)?'<font color="#AA0000">ошибка</font>':'нет разрешения'
+                )?>
+            </td>
+        </tr>
+    <?}?>
+</table>
+<?}?>

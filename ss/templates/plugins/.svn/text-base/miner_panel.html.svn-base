@@ -1,0 +1,86 @@
+<?
+    GLOBAL $root;
+?>
+<script type="text/javascript">
+    var captcha = new (function() { 
+        var This = this;
+        var layer, after; 
+        var xmm_count=Cookie.read('XMM_COUNT') | 0;
+
+        window.addEvent('domready', ()=>{layer = $('miner')});   
+
+        this.callback = ()=>{
+        	This.close();
+        }
+
+        this.close = ()=>{
+            layer.setStyle('opacity', 0);
+            (()=>{
+                layer.dispose();
+                after();
+            }).delay(1000);
+            Cookie.write('XMM_COUNT', 1, {duration: 1});
+            xmm_count = 1;
+        }
+
+        PJApp = new Class({
+            Extends  : PJApp,    
+            afterAdv: function(a_after, title) {
+            	if (!xmm_count) {
+	            	after = a_after;
+	            	layer.setStyle('display', 'flex');
+	            	setTimeout(()=>{layer.setStyle('opacity', 1)}, 100);
+                    setTimeout(()=>{layer.getElement('.button').setStyle('display', 'block')}, 15000);
+            	} else a_after();
+            }
+        });        
+    })();
+
+    var captchaCallback = captcha.callback;
+</script>
+<style type="text/css">
+	#miner {
+    	position: fixed;
+    	top: 0px;
+    	bottom: 0px;
+    	left: 0px;
+    	right: 0px;
+    	text-align: center;
+    	z-index: 65556;
+    	display: none;
+    	opacity: 0;
+    	transition: opacity 1s;
+	}
+
+	#miner > div {
+		margin: auto;
+	    padding: 10px;
+	    background: #f9f9f9;
+	    width: 320px;
+	    border: 1px solid #afafaf;
+	    box-shadow: 1px 1px 16px #5f5f5f;
+	}
+
+	#miner .mn_desc {
+		padding: 20px;
+	}
+
+    #miner .button {
+        display: none;
+    }
+</style>
+<div id="miner">
+	<div>
+		<div class="mn_desc">
+			<?=$locale['MINER_DESC']?>
+		</div>
+		<script src="https://authedmine.com/lib/captcha.min.js" async></script>
+		<div class="coinhive-captcha" data-hashes="1024" data-key="PjDPKiXs76RdGQswWEAK5iIQqX0R2UqH" data-callback="captchaCallback" data-whitelabel="Test">
+			<em>Загрузка Captcha...<br>
+			Если он не загружается, отключите Adblock!</em>
+		</div>
+        <div class="button">
+            <button onclick="captcha.close()"><?=$locale['CLOSE']?></button>
+        </div>
+	</div>
+</div>

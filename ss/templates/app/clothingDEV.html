@@ -1,0 +1,81 @@
+<?
+    GLOBAL $_GET, $sheme;
+//    require_once(SSPATH.'templates/banners.php');
+    $relativePath = 'clothing/dev';
+    $basePath     =  MAINURL.'/'.$relativePath;
+    
+    $flashFile = $basePath.'/clothing.swf';
+    $ver = filemtime(MAINPATH.$relativePath.'/clothing.swf');
+    $flashFile = $flashFile.'?v='.$ver;
+    
+    $this->addScript(SSURL.'js/external.js');
+?>
+<h1>"Прикольное перевоплощение"</h1>
+<div id="clothingApp" style="width:1060px;">
+    <div style="text-align:center">
+        <a href="<?=$sheme?>oformi-foto.ru/?task=user,login">авторизуйтесь</a> как пользователь "Моего мира"
+<!--        <object data="<?=$sheme?>oformi-foto.ru/clothing/dev/clothing.swf?v=<?=$ver?>" name="clothing" id="clothing" type="application/x-shockwave-flash" height="1300" width="1060"><param value="high" name="quality"><param value="noscale" name="scale"><param value="false" name="menu"><param value="middle" name="align"><param value="tl" name="salign"><param value="<?=$sheme?>oformi-foto.ru/clothing/dev" name="base"><param value="direct" name="wmode"><param value="all" name="allowNetworking"><param value="true" name="allowFullScreen"><param value="window_id=CometName_a8df82bd4f0808d94ae23aa538abc7cf&amp;sig=ce8cae7a0af58c34dd8bc451ceae82b3&amp;vid=8062938299454250872&amp;state=&amp;ss=35d334ff120407df3baaa829c0c4adc2&amp;session_key=0e8784eed6a6df93475059872dd07ce4&amp;oid=8062938299454250872&amp;is_app_user=1&amp;ext_perm=notifications,stream,photos,guestbook,messages&amp;exp=1445328179&amp;app_id=588137&amp;ver=<?=$ver?>&amp;dev=1&amp;sex=1&amp;game_id=0" name="flashvars"></object>
+-->        
+    </div>                                      
+</div>
+<script type="text/javascript">
+    var app_params = {
+        app_id: '',
+        viewer_id: '<?=ss::getUserID()?>',
+        dev: <?=$this->request->getVar('dev', 0)?>,
+        ver: <?=$ver?>,
+        sex: <?=isset($_GET['game_id'])?$_GET['game_id']:0?>,
+        game_id: <?=isset($_GET['game_id'])?$_GET['game_id']:0?>,
+        UPLOAD_URL: '<?=$sheme?>oformi-foto.ru/games/index.php'
+        <?
+            if (isset($_GET['state']))
+                echo ", state:'".$_GET['state']."'";
+        ?>
+    };
+    
+    function appInit(sfwFile, aliase, flash_values) {
+        var size = {
+            x: 1060,
+            y: 1300
+        };
+        
+        var params = {
+            movie: sfwFile,
+            quality: "high",
+            scale: "noscale",
+            menu: "false",
+            align: "middle",
+            salign: "tl",
+            base: "<?=$basePath?>",
+            wmode: "direct",
+            allowNetworking: "all",
+            allowFullScreen: "true",
+            allowscriptaccess: "always",
+            flashvars: flash_values
+        }
+        
+        var attributes = {
+            id: aliase,
+            name: aliase,
+            salign: "tl"
+        };
+                
+                                      
+        swfobject.embedSWF(sfwFile, "clothingApp", size.x, size.y, "10", "expressInstall.swf", flash_values, params, attributes);
+        callbackObject = $('embed');        
+    }
+    
+    window.addEvent('login_status', function(e) {
+        checkFlash(function() {
+            if (e.source == 'mm') {
+                if (e.status) {
+                    appInit('<?=$flashFile?>', 'clothing', $merge(e.session, app_params));
+                } else freeInit();
+            } else {
+                if (e.source) eval('external = ' + e.source + '_external');
+                else eval('external = default_external');
+                appInit('<?=$flashFile?>', 'clothing', $merge({'source': 'of'}, app_params));
+            }
+        });    
+    });
+</script>

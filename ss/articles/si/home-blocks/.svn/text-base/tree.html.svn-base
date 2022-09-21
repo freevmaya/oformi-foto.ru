@@ -1,0 +1,28 @@
+<?
+    GLOBAL $locale;
+    $imgurl = SSURL.'articles/images/tree/';
+    $applink = link::c('app', 'tree');
+    $alt = 'Родовое, родословное, генеалогическое древо. Создано в приложении на нашем сайте.';
+    ss::addCSS('.tree-images', 'text-align: center;');
+    ss::addCSS('.tree-images img', 'display:inline-block;padding:0px;margin:3px;max-width: 230px;');
+    $imgCount = 4;
+?>
+<div class="post">
+    <h2>Родовое Древо</h2>
+    <p>Приложение для создания родословного, или генеалогического дерева.</p>
+    <p>Здесь вы сможете воссоздать свою родословную, чтобы передать потомкам память о своих корнях. Кроме того, вы сможете узнать о дальних родственниках, о которых прежде даже не слышали! Для этого передайте ссылку на дерево своим родственникам - двоюродной сестре, дяде и т.д.</p>
+    <p>В приложении можно объединять свое дерево с деревьями родственников, создавая таким образом целый родословный лес!</p>
+    <div class="tree-images">
+        <?
+            for ($i=1; $i<=$imgCount; $i++) {
+                echo '<img src="'.$imgurl.'tsh'.$i.'.jpg" alt="'.$alt.'" title="Описание::'.$alt.'" class="tipz">';
+            }
+        ?>
+    </div> 
+     <div class="post-footer">
+        <a href="<?=$applink?>" class="ctrl-button app-link">
+            Создать родовое древо
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

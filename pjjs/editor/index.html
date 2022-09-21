@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="content.css" rel="stylesheet" />  
+    <link href="main.css" rel="stylesheet" />  
+    <script src="../jsa/mootools-core-1.4.5-c.js"></script>
+    <script src="tinymce/tinymce.min.js"></script>
+    <script src="html2canvas/html2canvas.min.js"></script>
+    <script>
+        function Editor(element, size, inhtml, onComplete) {
+            function apply(html) {
+                var result = new Element('div', {'class':'meditor', html: html});
+                result.inject(element);
+                
+                html2canvas(result, {
+                    onrendered: function(canvas) {
+                        onComplete(canvas);
+                        result.destroy();
+                    }
+                });
+            }
+             
+            tinymce.init({ 
+                selector    : 'textarea#editor',
+                language    : 'ru',
+                content_css : 'content.css',
+                menubar     : false,
+                statusbar   : false,
+                toolbar     : "bold italic | alignleft aligncenter alignright alignjustify | formatselect fontselect fontsizeselect | apply",
+                body_class  : 'meditor',
+                font_formats: 'Arial=arial,helvetica,sans-serif;Beer=Beer;Aaargh=Aaargh;AC Line=AC Line;Adine Kirnberg=Adine Kirnberg;Asia=Asia;Bickham Script Two=Bickham Script Two;' +
+                'Boom Boom=Boom Boom',
+                fontsize_formats: '10pt 12pt 14pt 18pt 24pt 36pt 48pt 64pt',
+                width       : size.x,
+                height      : size.y,
+                setup: function (editor) {
+                    editor.addButton('apply', {
+                      text: 'Готово',
+                      icon: false,
+                      onclick: function () {
+                        apply(editor.getContent());
+                      }
+                    });
+                }
+            });
+            
+            var editor = new Element('textarea', {id: 'editor', html: inhtml});
+            editor.inject(element);
+        }
+        
+        window.addEvent('domready', function() {
+            Editor($('editorLayer'), {x: 500, y: 400}, 'Это <b>типа</b> <span style="font-family: Beer;">текст</span>', function(result) {
+                document.body.appendChild(result);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="editorLayer">
+    </div>
+</body>
+</html>

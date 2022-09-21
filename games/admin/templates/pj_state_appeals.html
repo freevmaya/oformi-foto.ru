@@ -1,0 +1,40 @@
+<h2>Обращения по нарушению авторских прав на произведение</h2>
+<form action="<?=admin::getTaskLink()?>" method="POST">
+<table>
+<tr>
+    <th>
+        Дата
+    </th>
+    <th>
+        Дата
+    </th>
+    <th>
+        Имя
+    </th>
+    <th>
+        Документ
+    </th>
+    <th>
+        Контекст
+    </th> 
+    <th>
+        e-mail
+    </th>  
+    <th>
+        refplace
+    </th>
+</tr>
+<?foreach ($list as $item) {?>
+<tr>
+    <td><input type="checkbox" name="id[]" value="<?=$item['id']?>"></td>
+    <td><?=$item['date']?></td>
+    <td><?=$item['name']?></td>
+    <td><img src="http://oformi-foto.ru/images/appeal-docs/<?=$item['id']?>.jpg" height="100px"><br><?=$item['url']?></td>
+    <td><img src="http://fotoprivet.com/pj/jpg_preview/i<?=$item['content']?>.jpg" height="100px"><br><?=$item['content']?></td>
+    <td><?=$item['email']?></td>
+    <td><?=$item['refplace']?></td>
+</tr>    
+<?}?>
+</table>
+    <input type="submit" value="Удалить">
+</form>

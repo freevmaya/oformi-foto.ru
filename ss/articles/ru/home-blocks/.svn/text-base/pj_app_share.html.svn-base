@@ -1,0 +1,46 @@
+<?
+    $this->addScript(MAINURL.'/'.SSRELATIVE.'js/share-layer.js'); 
+    $siurl = MAINURL.'/'.SSRELATIVE.'/images/share/';
+    $this->styles[] = MAINURL.'/'.SSRELATIVE.'open-door.css.php';
+?>
+<div id="pjjs_share" onclick="showShareView()"></div>
+<div id="share_layer">
+    <div id="fb-root"></div>
+    <div class="page">
+        <h2>Помогите нам сделать сайт лучше для Вас и ваших друзей!</h2>
+        <div class="buttons">
+            <div class="item">
+                <div class="info-wrap">
+                    <div class="fb-button" onclick="fb_shareDialog()"></div>
+                    <div class="info">
+                        <a class="info-front" style="background-color:#336699; background-image: url(<?=$siurl?>fb.gif)"></a>
+                        <a class="info-back" style="background-color: #c2ddb6;"></a>
+                    </div>
+                </div>
+            </div> 
+            <div class="item">
+                <div class="info-wrap">
+                    <div id="ok_shareWidget"></div>
+                    <div class="info">
+                        <a class="info-front" style="background-color:#FF9933; background-image: url(<?=$siurl?>ok.gif)"></a>
+                        <a class="info-back" style="background-color: #c2ddb6;"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="info-wrap vk-share">
+                    <script type="text/javascript">
+                        document.write(VK.Share.button(false,{type: "round_nocount", text: "Поделиться"}));
+                    </script>
+                    <div class="info">
+                        <a class="info-front" style="background-color:#336699; background-image: url(<?=$siurl?>vk.gif)"></a>
+                        <a class="info-back" style="background-color: #c2ddb6;"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close-label">
+            <a onclick="closeShareView()">Спасибо, я уже с вами!</a>
+        </div>
+    </div>
+</div>

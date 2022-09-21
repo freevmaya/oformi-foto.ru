@@ -1,0 +1,102 @@
+<?
+    GLOBAL $sheme, $locale, $_SESSION;
+    
+    include_once(TEMPLATES_PATH.'/paginator.php');
+    
+//    $defaultDesc = 'Найти идеальную <b>рамку для фото</b> совсем не сложно! Воспользуйтесь нашим каталогом. Здесь фоторамки и рамки для оформления текста разделены по самым разным темам. Вы сможете вставить <a href="'.MAINURL.'/view.htm">фото в рамку онлайн</a>, выбрав одну из категорий в меню слева экрана.Коллажи, открытки, <a href="'.MAINURL.'/view.htm">фотоэффекты онлайн</a> - все это поможет превратить любую фотографию в произведение искусства!<br>Выберите любую <a href="'.MAINURL.'/pjjs.htm">рамку для оформления текста</a> и оформите свое поздравление в креативный дизайн';
+    
+    $imgAlt = '';
+    $groupDesc = '';
+    $pageTool = '';
+    ss::$noadv = true;
+    $fullDesc = '';
+    $pageDesc = (($page > 1)?(' страница '.$page):'');
+    $tmpl_header = 'Последнее обновление';    
+    
+    function addDesc($desc, $addDesc) {
+        $lw = limitWords($addDesc, 8, ''); 
+        return $desc.(($lw && $desc)?', ':'').$lw;
+    }
+        
+    if ($holiday) {              // Праздник
+        $this->title = 'Праздники: '.$holiday['name'].$pageDesc;
+        $imgAlt = $holiday['name'];
+        $tmpl_header = 'Праздник "'.$holiday['name'].'"'; 
+        
+        $fullDesc = $this->description = $holiday['desc'].$pageDesc;
+        $this->addMeta('page-image', holidayImage($holiday));
+        
+        //echo link::c(HOLIDAYSSELECTOR, 'holiday', $holiday['holiday_id'].'-'.controller::translit($holiday['name']), '%s');
+        $pageTool = paginator($page, $totalPages, link::c('holidays', 'holiday', $holiday['holiday_id'].'-'.controller::translit($holiday['name']), '%s'));
+        
+    } else if (!isset($searchStr)) {  // Обычный каталог, или праздничные шаблоны
+        $this->description = '';
+        $isGroups = count($groupIds) > 1;
+        $this->noindex = $isGroups;
+        
+        foreach ($menu as $item) {
+            $gid = $item['group_id'];
+            if (in_array($item['group_id'], $groupIds)) {
+                $imgAlt .= ($imgAlt?', ':'').$item['name'];
+                $groupDesc .= ($groupDesc?', ':'').$item['desc'];
+//                $keywords[] = $item['name'];
+                $smdesc = $item['small_desc']?$item['small_desc']:$item['desc'];
+                $this->description = $isGroups?addDesc($this->description, $smdesc):$smdesc;
+                if ($item['keywords']) $this->keywords = $isGroups?addDesc($this->keywords, $item['keywords']):$item['keywords'];
+            }                     
+        }
+        
+        if (!$groupDesc) {
+            $default = defaultCat();
+            $groupDesc = $default['desc'];
+            $imgAlt = $default['name']; 
+            $smdesc = $default['small_desc']?$default['small_desc']:$default['desc'];
+            $this->description = $isGroups?addDesc($this->description, $smdesc):$smdesc;
+        }
+    
+        if ($holidays === true) {
+            $imgAlt = $locale['ALLHOLIDAYS'];
+            $tmpl_header = $locale['ALLHOLIDAYS'];
+                         
+            $this->title = $locale['ALLHOLIDAYS'].$pageDesc;;
+            $fullDesc = 'Список всех праздников. Здесь вы можете на любой <b>праздник</b> подобрать интересующий вас шаблон фото-рамки, эффекта или фото-коллажа. Выберите из списка нужный <i>праздник</i> и перейдите на страницу списка фото-рамок к празднику, кликнув на ссылке в названии.';
+        } else {
+            $firstAlt = 'Рамка, фотоэффект: ';
+            $tmpl_header = $imgAlt;
+            
+            $this->title = $locale['CATFRAMESTITLE'].', '.($imgAlt?$imgAlt:'фото-оформления и фотоэффекты. Последнее обновление').'.'.$pageDesc;
+            $fullDesc = $groupDesc;
+                                               
+            $imageRelative = '/images/catalog/'.str_replace(' ', '+', $groupEng[$groupIds[0]]).'.jpg';
+            if (file_exists(MAINPATH.$imageRelative))
+                $this->addMeta('page-image', MAINURL.$imageRelative);
+        }            
+//        $this->addMeta('page-image',MAINURL.'/images/share/catalog2.jpg'); 
+
+        $pageTool = paginator($page, $totalPages, link::c('catalog', urlencode($groupsStr?$groupsStr:'0'), '%d'));
+        
+        if (!$this->description) $this->description = $fullDesc;
+        $this->description .= $pageDesc;
+    } else { // Поиск
+        $firstAlt = 'Найдены рамки: '.$searchStr.' ';
+        $tmpl_header = '<noindex>Найдены рамки: </noindex>'.$searchStr.' ';
+        $imgAlt = $firstAlt;
+        $article = t($task2);
+        $this->title = $locale['CATFRAMESTITLE'].', '.$firstAlt.$pageDesc;
+        $this->noindex = true;
+        $fullDesc = $this->description = ($article?$article['text']:'В каталоге рамок для фотографий вы можете быстро выбрать нужную для вас фото-рамку, оформление или эффект.').$pageDesc;
+//        $this->addMeta('page-image', SSURL.'images/catalog2.jpg');
+        
+//        $pageTool = paginator($page, $totalPages, MAINURL.'/fotoramki/'.$task2.'/%d.html'); 
+        $pageTool = paginator($page, $totalPages, link::c(FINDSELECTOR, $groupsStr, '%d'));
+    }                                 
+    
+    $this->styles[] = SSURL.'sbox/assets/SqueezeBox.css';
+    $this->scripts[] = SSURL.'sbox/SqueezeBox.js';
+    $this->scripts[] = SSURL.'js/catalog.js';
+/*    
+    $this->addMeta('canonical-url', array('property'=>'og:url', 'content'=>$this->getLink()));
+    &this->addMeta('image-from-facebook', array('property'=>'og:image', 'content'=>SSURL.'images/catalog.jpg'));
+*/    
+    include(TEMPLATES_PATH.'catalog/list.html');    
+?>

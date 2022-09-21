@@ -1,0 +1,12 @@
+<h2>Экспорт шаблонов</h2>
+<?if (isset($fileURL)) {?>
+<a href="<?=$fileURL?>" target="_blank">скачать архив</a>
+<?} else {?>
+<form action="<?=Admin::getTaskLink()?>" method="POST">
+<div>
+    Список шаблонов (пример: [123,45,1432])
+</div>
+<input name="list" value="<?=$this->request->getVar('list')?>" size="160"><br>
+<input type="submit">
+</form>
+<?}?>

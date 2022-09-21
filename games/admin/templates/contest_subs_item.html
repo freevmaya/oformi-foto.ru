@@ -1,0 +1,91 @@
+<?
+    
+?>
+<h1>Подписка</h2>
+<h2><?=$subs['first_name'].' '.$subs['last_name']?></h2>
+<div>ID: <a href="https://pushall.ru/admin" target="_blank"><?=$subs['subs_id']?></a>, тек. время: <?=date('<b>d.m</b> H:i')?></div>
+<table class="report" style="min-width: 100px !important;">
+    <tr>
+        <td class="param a-right">Время последнего входа</td><td><?=$subs['last_time']?></td>
+    </tr>
+    <tr>
+        <td class="param a-right">Всего коллажей</td><td><?=$subs['game_count']?></td>
+    </tr>
+    <tr>
+        <td class="param a-right">Ожидает коллажей</td><td><?=$subs['game_wait']?></td>
+    </tr>
+    <tr>
+        <td class="param a-right">Активных коллажей</td><td><?=$subs['game_active']?></td>
+    </tr>
+    <tr>
+        <td class="param a-right">Победителей коллажей</td><td><?=$subs['game_victory']?></td>
+    </tr>
+</table>
+<?if (count($games) > 0) {?>
+<h2>Текущие коллажи</h2>
+<table class="report" style="min-width: 200px !important;">
+    <tr>
+        <th>Дата</th>
+        <th>game_id</th>
+        <th>голосов</th> 
+        <th>мак,голосов</th> 
+        <th>Коментариев</th>
+    </tr>
+<?foreach ($games as $game) {?>    
+    <tr>
+        <td><?=$game['date']?></td>
+        <td><a href="<?=$game['url']?>" target="_blank"><img src="<?=MAINURL?>/images/game/<?=$game['group_id'].'/440/'.$game['game_id']?>.jpg"><?=$game['game_id']?></a></td>
+        <td><?=$game['votes']?$game['votes']:''?></td>
+        <td><?=$game['max_votes']?></td>
+        <td><?=$game['comment_count']?$game['comment_count']:''?></td>
+    </tr>
+<?}?>    
+</table>
+<?}?>
+
+<?if (count($sents) > 0) {?>
+<h2>Отправленые уведомления</h2>
+<table class="report" style="min-width: 200px !important;">
+    <tr>
+        <th>Время</th>
+        <th>callback</th>
+        <th>Тип</th> 
+        <th>Данные</th>
+    </tr>
+<?foreach ($sents as $sent) {?>    
+    <tr>
+        <td><?=$sent['sent_time']?></td>
+        <td><a href="<?=$sent['сallback']?>" target="_blank"><?=$sent['сallback']?></a></td>
+        <td><?=$sent['type']?></td>
+        <td><?=$sent['data']?></td>
+    </tr>
+<?}?>    
+</table>
+<?}?>
+
+<h2>Уведомление</h2>
+<?if (isset($isSent)) {?>
+<div class="message">
+    <?=$isSent?'Отправлено!':'Ошибка при отправке'?>
+</div>
+<?}?>
+<form action="?task=contest,subs_item&subs_id=<?=$subs['subs_id']?>" method="POST">
+    <table class="report">
+        <tr>
+            <td class="param a-right">URL:</td>
+            <td><input type="text" name="url" size="80" value="<?=$url?>"></td>
+        </tr>
+        <tr>
+            <td class="param a-right">Заголовок</td>
+            <td><input type="text" name="title" size="80" value="<?=$title?>"></td>
+        </tr>
+        <tr>
+            <td class="param a-right">Сообщение</td>
+            <td><textarea name="text" style="width:586px; height: 70px"><?=$text?></textarea></td>
+        </tr>
+        <tr>
+            <td class="param a-right"></td>
+            <td><input type="submit"></td>
+        </tr>
+    </table>
+</form>

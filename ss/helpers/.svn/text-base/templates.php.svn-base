@@ -1,0 +1,53 @@
+<?
+    GLOBAL $sheme, $_SESSION;
+    define('IMAGEMEDWIDTH', 385);
+    
+    define('BASEFRAMESURL', BASESTORAGEURL); 
+    define('STORAGEFILEURL', DATA_PATH.'storage.json');
+    
+    $isHTTPS = isset($_SERVER['HTTP_HTTPS']);   
+//    define('STORAGEFILEURL', MAINPATH.'games/data/phones.xml');   
+    
+    if (($storage = json_decode(file_get_contents(STORAGEFILEURL))) &&
+        (is_object($storage->options))) {
+        $_SESSION['JPG_URL']        = ($isHTTPS?($_SERVER['HTTP_HOST'].'/JPG'):$storage->options->JPG_URL).'/';
+        $_SESSION['previewURL']     = $storage->options->PREVIEW_URL.'/i'; 
+        $_SESSION['previewURL120']  = $storage->options->PREVIEW_URL120.'/';
+        //Пока имитировать полную загрузку основного сервера 
+        $_SESSION['LOWLOADOVERAGE'] = false;//($storage->state[0] <= 1) && ($storage->state[1] <= 1);
+    }
+    
+//    define('FRAMES_URLPREVIEW', $sheme.'.com/pj/preview120/');
+    define('FRAMES_URL', $sheme.$_SESSION['JPG_URL']);
+    
+    if (ss::$isPhone) {
+        define('PREVIEW_WIDTH', 120);
+        if ($isHTTPS) {
+            define('FRAMES_URLPREVIEWMED', BASESTORAGEURL.'/'.IMAGEMEDWIDTH.'/');
+        } else {
+            define('FRAMES_URLPREVIEWMED', RESVSTORAGEURL.'/'.IMAGEMEDWIDTH.'/');
+        }
+        define('FRAMES_URLPREVIEW', $sheme.$_SESSION['previewURL120']);
+/*        
+        define('PREVIEW_WIDTH', IMAGEMEDWIDTH);
+        if ($_SESSION['LOWLOADOVERAGE']) {
+            define('FRAMES_URLPREVIEWMED', BASESTORAGEURL.'/'.IMAGEMEDWIDTH.'/');
+        } else {
+            define('FRAMES_URLPREVIEWMED', RESVSTORAGEURL.'/'.IMAGEMEDWIDTH.'/');
+        }
+        define('FRAMES_URLPREVIEW', FRAMES_URLPREVIEWMED);
+*/        
+    } else {
+        if ($isHTTPS) {
+            define('PREVIEW_WIDTH', IMAGEMEDWIDTH);
+            define('FRAMES_URLPREVIEWMED', BASESTORAGEURL.'/'.PREVIEW_WIDTH.'/');
+            define('FRAMES_URLPREVIEW', FRAMES_URLPREVIEWMED);
+        } else {
+            define('PREVIEW_WIDTH', IMAGEMEDWIDTH);
+            define('FRAMES_URLPREVIEWMED', RESVSTORAGEURL.'/'.PREVIEW_WIDTH.'/');
+            define('FRAMES_URLPREVIEW', FRAMES_URLPREVIEWMED);
+        }
+    } 
+    
+//    define('FRAMES_SMALLPREVIEW', $sheme.$_SESSION['previewURL']);
+?>

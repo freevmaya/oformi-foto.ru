@@ -1,0 +1,8 @@
+#!/bin/bash
+cat mootools-core-1.4.5-c.js mootools-more-1.4.0.1.js mootools-tips.js debug.js base64.js events.js canvasSave.js geom/matrix.js geom/vector.js geom/rectangle.js canvas/utils.js canvas/draw-object.js canvas/draw-object-more.js canvas/gcanvas.js canvas/holes-image.js pjApp/pjcanvas.js pjApp/baseapp.js pjApp/leftPJApp.js pjApp/partsList.js pjApp/baseTmplList.js locale/bypass.js controls/click-panel.js mootools-slider.js controls/drag.js controls/basePanel.js controls/color-panel.js input/base-input.js input/pc-input.js input/tablet-input.js canvas/filters/baseFilter.js canvas/filters/colorTransform.js pjApp/textEditor.js pjApp/toast.js pjApp/defImages.js> __prepare__.js
+
+rm -f amini.js
+java -jar /usr/share/yuicompressor-2.4.8.jar __prepare__.js -o amini.js
+rm -f __prepare__.js
+chown vmaya:apache amini.js
+chmod +x amini.js

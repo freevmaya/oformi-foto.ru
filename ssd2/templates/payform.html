@@ -1,0 +1,24 @@
+<?
+    GLOBAL $_SESSION, $_GET;
+    if (isset($_SESSION[SESUSER]) && $_SESSION[SESUSER]['source']) {
+        $pay_code = $_SESSION[SESUSER]['source'].'-'.$_SESSION[SESUSER]['uid'];
+        $target_pay = 'Пополнение:'.$pay_code;
+        
+        $_SESSION[SESUSER]['pay_code'] = $pay_code;
+        
+        $after_pay = 'http://oformi-foto.ru/pay/after-'.$pay_code.'.html';
+        if (isset($_GET['target'])) $after_pay .= '&target='.$_GET['target'];
+?>
+<div class="wrapper" style="width:450px; margin: 30px auto;">
+<!--    <iframe style="margin: 20px auto;" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=410011797400320&quickpay=shop&payment-type-choice=on&writer=seller&targets=<?=$target_pay?>&targets-hint=&default-sum=200&button-text=01&mail=on&successURL=<?=$after_pay?>" width="450" height="200"></iframe>
+-->
+    <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=410011797400320&quickpay=shop&payment-type-choice=on&writer=seller&targets=%D0%9F%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5+%D1%81%D1%87%D0%B5%D1%82%D0%B0&targets-hint=&default-sum=200&button-text=01&fio=on&mail=on&successURL=http%3A%2F%2Foformi-foto.ru%2Fpay%2Fafter.html" width="450" height="200"></iframe>
+    <span>Если в процессе платежа у вас возникли трудности, пожалуйста сообщите по <a href="mailto:fwadim@mail.ru">e-mail</a> или соц-сетях, пользователю: <a href="http://ok.ru/freevmaya" target="_blank">Одноклассники.ru</a>, <a href="http://ok.ru/freevmaya" target="_blank">Вконтакте</a> или <a href="https://www.facebook.com/vadim.frolow" target="_blank">Facebook.com</a></span>
+</div>
+<?
+} else {
+?>
+<div class="post" id="loginHelp">
+    <h3>Чтобы совершить <b>оплату</b> нужно <a href="http://oformi-foto.ru/?task=user,login">авторизоваться</a></h3>
+</div>
+<?}?>

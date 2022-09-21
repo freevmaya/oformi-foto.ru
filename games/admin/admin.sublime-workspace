@@ -1,0 +1,714 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"tr",
+				"target\tAttr"
+			],
+			[
+				"time",
+				"last_time"
+			],
+			[
+				"bac",
+				"background-position"
+			],
+			[
+				"jso",
+				"json_encode"
+			],
+			[
+				"back",
+				"background-position"
+			],
+			[
+				"padding-",
+				"padding-left"
+			],
+			[
+				"wi",
+				"window"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"create",
+				"createOrder"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"frame",
+				"frameIndex"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"et",
+				"ether"
+			],
+			[
+				"balance",
+				"balance"
+			],
+			[
+				"e",
+				"ether"
+			],
+			[
+				"retu",
+				"returns"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "controllers/clt_stateController.php",
+			"settings":
+			{
+				"buffer_size": 15563,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "admin.php",
+			"settings":
+			{
+				"buffer_size": 3409,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/X/vmaya/ss/helpers/link.php",
+			"settings":
+			{
+				"buffer_size": 1497,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/seoController.php",
+			"settings":
+			{
+				"buffer_size": 10066,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/clt_state_VIPactions.html",
+			"settings":
+			{
+				"buffer_size": 352,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "<div>"
+			}
+		},
+		{
+			"file": "templates/clt_state_notification.html",
+			"settings":
+			{
+				"buffer_size": 5156,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/X/vmaya/games/admin",
+		"/X/vmaya/games/admin/controllers",
+		"/X/vmaya/ss",
+		"/X/vmaya/ss/language",
+		"/X/vmaya/ss/language/ru"
+	],
+	"file_history":
+	[
+		"/X/vmaya/sitemaps/sitemap-2017-09-21.xml",
+		"/D/documents/numbers.js",
+		"/C/Users/vmaya/Desktop/Сервера.txt",
+		"/X/secrects.inc",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/coinController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/page.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/js/app.js",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/ssconfig.php",
+		"/C/Users/vmaya/Desktop/query_of.TXT",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/coin info.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/coin info userpage.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/page/coin-info.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/page/user-info.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/coin.json",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/coinSupport.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/pjjs/jsa/mootools-core-1.4.5.js",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/other-adv-block.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/any_index.html",
+		"/X/vmaya/games/admin/controllers/clt_stateController.php",
+		"/X/vmaya/games/admin/user-type-0.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/app/view.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/styles.css",
+		"/X/vmaya/pj_ok/index.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/home.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/language/js/ru.js",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/js/mootools-1.2.6-core-nc.js",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/language/ru.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/userController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/coin-instruction.html",
+		"/C/Users/vmaya/Downloads/_request.sql",
+		"/X/vmaya/ss/controllers/appController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/app/viewDEV.html",
+		"/C/WebServers/home/logs/errors.log",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/ss.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/ajaxController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/appController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/app/clothing.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/helpers/link-data.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/helpers/link.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/appeal.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/apps.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/banners_15.04.2013.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/coinSupport.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/course.json",
+		"/C/Users/vmaya/Desktop/КАК УПРАВЛЯТЬ.txt",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/catalogController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/login.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/page/game-info.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/controller.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/register.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/addBalance.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/index.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/ofin.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/menu.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/commentController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/clothingController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/index.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/privacy policy.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/privacy policy of.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/index.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/footer.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/catalog/list.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/home-blocks/gifavt.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/articles/ru/home-blocks/actualy.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/controllers/articleController.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/.htaccess",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/cat_phone.css",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/redirect.php",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/privacypolicy.html",
+		"/C/WebServers/home/192.168.1.63/www/oformi-foto.ru/ss/templates/user/privacy_policy.html",
+		"/V/cron/currency/get_exmo_orders.php",
+		"/V/vmaya/trade/js/pingpong.js",
+		"/V/vmaya/trade/modules/trade_json.php",
+		"/V/vmaya/trade/modules/pingpong.php",
+		"/V/vmaya/trade/modules/orders.php",
+		"/V/vmaya/trade/modules/trade.php",
+		"/V/vmaya/trade/modules/trades_json.php",
+		"/V/vmaya/trade/modules/graph.php",
+		"/X/config.php",
+		"/V/vmaya/trade/js/hmac-sha512.js",
+		"/X/vmaya/pj_ok/options.php",
+		"/D/documents/blablabla.js",
+		"/V/vmaya/trade/include/utils.php",
+		"/V/vmaya/trade/index.php",
+		"/C/WebServers/home/trade.local/www/index.php",
+		"/C/WebServers/home/trade.local/www/modules/pingpong.php",
+		"/V/vmaya/trade/js/external.js",
+		"/V/vmaya/trade/real_trade.php",
+		"/V/vmaya/trade/modules/pingpong_real.php",
+		"/V/vmaya/trade/modules/graph_json.php",
+		"/V/vmaya/trade/modules/orders_json.php",
+		"/D/Ether/Codes/autor_prava",
+		"/D/Ether/Codes/AdvToken.js",
+		"/D/Ether/Codes/minimal_token.solidity",
+		"/D/Ether/Codes/Код криптомонеты на Solidity.txt",
+		"/D/Ether/Codes/minimal_token.sol"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"6278400",
+			"OKServer",
+			"appKey",
+			"OKServer",
+			"CCLIMIT",
+			"var Cookie",
+			"cookie.",
+			"cookie",
+			"callcount",
+			"sendCoin",
+			"afterAdv",
+			"viboom",
+			"$output_link",
+			"coin",
+			"LAST_SOURCE",
+			"last_time",
+			"LAST_SOURCE",
+			"request",
+			"send",
+			"NOTENOUGHBALANCE",
+			"user",
+			"finfo",
+			".menu",
+			"cookie",
+			"close_button",
+			"dev",
+			"fiewEvent",
+			"createController",
+			"form",
+			"of",
+			"user",
+			"getUserAlternate",
+			"fixed-footer",
+			"#footer .wrapper",
+			"footer",
+			"<a",
+			"link::с",
+			"repulse",
+			"alowed",
+			"freePos",
+			"framePos",
+			"freePos",
+			"curBound",
+			"reset",
+			"curBound",
+			"var",
+			"$.extend",
+			"data",
+			"sprv",
+			"bottomPrice",
+			"topPrice",
+			"time",
+			"bid",
+			"a_bid",
+			"bid",
+			"ишв",
+			"ишв\\",
+			"orderCreator",
+			"TIMESTDQUANTUM",
+			"setValues",
+			"prev_time",
+			"Date",
+			"time()",
+			"purchase.pus",
+			"purchase",
+			"setData",
+			"getData",
+			"getPurchase",
+			"purchase",
+			"topPrice",
+			"purchase",
+			"topPrice",
+			"freePos",
+			"setValue",
+			"trend",
+			"graphic",
+			"purchase",
+			"purch",
+			"<style type=\"text/css\">\nsell =",
+			"sell =",
+			"spring",
+			"setData",
+			"data",
+			"toChart",
+			"list",
+			"buyZone",
+			"start_date",
+			"trend",
+			"trendStart",
+			"list",
+			"trendSmoon",
+			"min",
+			"toChart",
+			"trade_url",
+			"totalProfit",
+			"attr",
+			"totalProfit",
+			"info",
+			"purchase",
+			"fireEvent",
+			"buy =",
+			"on",
+			"sellMinPrice",
+			"trend",
+			"ppgarea",
+			"buy",
+			"sell",
+			"profit",
+			"buy(",
+			"trend",
+			"buy",
+			"$pair",
+			"trend",
+			"var orderLogClass = function() {\nvar orderLogClass = function() {\nbuyVolume",
+			"var orderLogClass = function() {\nbuyVolume",
+			"buyVolume",
+			"onBound",
+			"slen",
+			"isBound",
+			"checkBoa",
+			"шыИщфт",
+			"pause",
+			"reqVolume",
+			".max",
+			"minProfitPercent",
+			"min",
+			"buyZone",
+			"buyVolume"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"_data",
+			"ask",
+			"options"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "controllers/clt_stateController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15563,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15434,
+								15434
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 602.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "admin.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								775,
+								775
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/X/vmaya/ss/helpers/link.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								53,
+								53
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "controllers/seoController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10066,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8735,
+								8735
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1304.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/clt_state_VIPactions.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 352,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								259,
+								255
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<div>",
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/clt_state_notification.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1140,
+								1163
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 324.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "admin.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 347.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

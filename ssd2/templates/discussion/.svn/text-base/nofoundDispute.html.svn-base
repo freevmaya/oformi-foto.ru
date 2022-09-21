@@ -1,0 +1,4 @@
+<?
+    GLOBAL $locale;
+?>
+<h2 style="text-align: center; margin-top: calc(50% - 90px);"><?=$locale['COLLAGENOFOUND']?></h2>

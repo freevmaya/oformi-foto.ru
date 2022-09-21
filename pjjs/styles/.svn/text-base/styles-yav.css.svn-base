@@ -1,0 +1,229 @@
+html, body	{
+    height:100%; 
+}
+
+body {
+    font-family: tahome, arial, verbana;
+    margin: 0px;
+    background: #FFF;
+    visibility:hidden;
+    opacity:0;
+}
+
+#wrapper {
+    position: absolute;
+    left    : 0px;
+    right   : 0px;
+    top     : 0px;
+    bottom  : 0px;
+    padding : 0px;
+    overflow    : hidden;   
+}
+
+#categories {
+    top: 0px;
+    position: absolute;
+    margin: 1px 20px 0px 20px;
+    height: 20px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#categories a {
+    margin-top: 2px; 
+    padding: 1px 9px 2px 9px;
+    margin-right: 2px;
+    font-size: 13px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    cursor: pointer;
+    color: #AAA;
+    text-decoration: none;
+    background: #444;
+}
+
+#categories a.current {
+    color: #333;
+    background: #EEE;
+}
+
+#loader p, .tip-wrap, .tip-title, .tip-text {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}        
+
+#loader, #injectPhoto {
+    position: absolute;
+    top: 60%;
+    margin-left: 50%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#loader p, #injectPhoto p {
+    box-shadow:  2px 2px 6px #000;
+    display: inline-block;
+}
+
+#loader p {
+    border  : 1px solid gray;
+    padding : 16px;
+    margin-left: -150px;
+    bottom  : 0px;
+    background: #FFF;
+}
+
+#injectPhoto p {
+    border  : 2px solid white;
+    padding : 12px;
+    margin-left: -92px;
+    bottom  : 0px;
+    background: #EEE;
+    cursor: pointer;
+}
+
+.round, .tip-wrap {
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+.dragRect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+} 
+
+.dragRect .rect {
+    border: 1px solid gray;
+}
+
+/*Buttons*/
+.buttons {
+    position : absolute;
+    width: 100%;
+    height: 32px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 2px;    
+}
+
+.buttons span, .buttons a  {
+    display: block;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    margin-right: 3px;
+}
+
+#saveButton {
+    background: url(../buttons/save.gif) top left no-repeat;
+    float: left;
+}
+
+#question {
+    background: url(../buttons/question.gif) top left no-repeat;
+    float: left;
+} 
+
+#edit {
+    background: url(../buttons/edit.gif) top left no-repeat;
+    float: left;
+}  
+
+#up {
+    background: url(../buttons/up.gif) top left no-repeat;
+    float: right;
+}
+
+#cats {
+    display: block;
+    width: 130px;
+    margin-top: 6px;
+    margin-left: 5px;
+    float: right;
+}
+
+#centerBlock {
+/*    margin: 0 91px;*/
+    height: 100%;
+    text-align: center;
+    background: #FDA;    
+}
+
+#centerBlock canvas {
+    position: absolute;
+    display: block;
+    margin: auto auto;
+    z-index: 1;
+    margin: -2px;
+    border: 2px solid white;
+}
+
+#listWindow {
+    position: absolute;
+    top: -105%;
+    left: 0px;
+    right: 0px; 
+    height: 100%;
+    background: #AAA;
+    overflow-y: scroll;
+    z-index: 1001;
+    border: 5px solid gray;
+}
+
+.listArea {
+    clear: both;
+    text-align: center;
+}
+
+.listItem {
+    display: inline-block;
+    margin: 0px 2px;
+    border: 1px solid gray;
+    text-align: center;
+    cursor: pointer;
+    background-color: #FFF;
+}
+
+.loaded {
+    width: auto !important;
+    background: #888 !important;
+}
+
+.listItem td {
+    width: 94px;
+    height:94px;
+    background: url(../images/loader_32.gif) center center no-repeat;
+}
+
+.listItem img {
+}
+
+/* -----TIPS---- */
+.tip-wrap {
+	z-index: 13000;
+    background: #666;
+    border: 1px solid #AAA;
+    padding: 4px;
+    opacity: 0.8;
+}
+ 
+.tip-title {
+	font-weight: bold;
+	font-size: 11px;
+	margin: 0;
+	color: #9FD4FF;
+	padding: 4px 4px 2px;
+	background: url(bubble.png) top left;
+}
+ 
+.tip-text {
+	font-size: 9px;
+    color: #FFF;
+    max-width: 150px;
+	padding: 2px 4px 4px;
+	background: url(bubble.png) bottom right;
+}

@@ -1,0 +1,57 @@
+.slider, .knob {
+    height: 22px;
+}
+
+.knob {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.slider {
+    padding: 1px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.slider {
+    background: #CCC;
+    border: 1px solid gray;
+    touch-action: none;
+}
+
+.slider .knob {
+    background: white;
+    width: 40px;
+    touch-action: none;
+}
+
+.advanced {
+    margin: 5px 16px;
+    background: #CCC;
+}
+
+.advanced .knob {
+    cursor: pointer;
+}
+
+.contrast .knob {
+    background: black;
+}
+
+.red .knob {
+    background: red;
+}
+
+.green .knob {
+    background: green;
+}
+
+.blue .knob {
+    background: blue;
+} 
+
+.grayscale .knob {
+    background: url(../images/grayscale.gif) center no-repeat;
+}

@@ -1,0 +1,915 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"applicat",
+				"searchApplicantOffer"
+			],
+			[
+				"p",
+				"pdo"
+			],
+			[
+				"bac",
+				"background-image"
+			],
+			[
+				"capch",
+				"captcha"
+			],
+			[
+				"ext",
+				"external_"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"cur",
+				"cur_id"
+			],
+			[
+				"accoun",
+				"account_id"
+			],
+			[
+				"account",
+				"account_type"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"exis",
+				"function_exists"
+			],
+			[
+				"crea",
+				"createSender"
+			],
+			[
+				"els",
+				"else"
+			],
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"mysql",
+				"mysql_connect"
+			],
+			[
+				"class",
+				"class_exists"
+			],
+			[
+				"marke",
+				"market_symbol"
+			],
+			[
+				"sen",
+				"send_result"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"mar",
+				"market_id"
+			],
+			[
+				"test",
+				"test_state"
+			],
+			[
+				"je",
+				"json_encode"
+			],
+			[
+				"too",
+				"toogleGraphMethod"
+			],
+			[
+				"se",
+				"sell"
+			],
+			[
+				"itm",
+				"items"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"paddin",
+				"padding"
+			],
+			[
+				"time",
+				"times"
+			],
+			[
+				"tim",
+				"times"
+			],
+			[
+				"marker",
+				"markers"
+			],
+			[
+				"over",
+				"overflow"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"magin",
+				"margin-top"
+			],
+			[
+				"te",
+				"table-row"
+			],
+			[
+				"success",
+				"success_report"
+			],
+			[
+				"control",
+				"control_range"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"overf",
+				"overflow-y"
+			],
+			[
+				"про",
+				"продаж"
+			],
+			[
+				"api",
+				"api_name"
+			],
+			[
+				"js",
+				"json_encode"
+			],
+			[
+				"selec",
+				"select"
+			],
+			[
+				"b",
+				"inline-block"
+			],
+			[
+				"lis",
+				"list-style-type"
+			],
+			[
+				"bo",
+				"box-shadow"
+			],
+			[
+				"v",
+				"ui-icon-grip-dotted-vertical"
+			],
+			[
+				"jso",
+				"json_encode"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"tra",
+				"transition"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"JSON",
+				"getJSON"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"pas",
+				"passw"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"g",
+				"gpos"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"exmo",
+				"exmo_dataModule"
+			],
+			[
+				"t",
+				"tObj"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"exp",
+				"explode"
+			],
+			[
+				"tri",
+				"trigger_"
+			],
+			[
+				"is_str",
+				"is_string"
+			],
+			[
+				"is_nu",
+				"is_numeric"
+			],
+			[
+				"is_n",
+				"is_numeric"
+			],
+			[
+				"create",
+				"createOrder"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"frame",
+				"frameIndex"
+			],
+			[
+				"et",
+				"ether"
+			],
+			[
+				"balance",
+				"balance"
+			],
+			[
+				"e",
+				"ether"
+			],
+			[
+				"retu",
+				"returns"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "include/viewBody.php",
+			"settings":
+			{
+				"buffer_size": 3374,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "view.php",
+			"settings":
+			{
+				"buffer_size": 615,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "include/viewHead.php",
+			"settings":
+			{
+				"buffer_size": 3442,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "jsa/pjApp/pjcanvas.js",
+			"settings":
+			{
+				"buffer_size": 5843,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/D/documents/numbers.js",
+		"/X/vmaya/pjjs/jsa/canvas/holes-image.js",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/City.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/Vacancycat.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/Vacancy.php",
+		"/C/WebServers/home/dev.rabota7.local/cmd-feed.txt",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/makefeed.cmd",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/feed_query.sql",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/controllers/SiteController.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/Response.php",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/feedcreate.cmd",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/Makefeed.cmd",
+		"/D/dev/import-export/рабочая/1705/ОстаткиТМЦ.dat",
+		"/D/dev/import-export/рабочая/1705/Касса.dat",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/query.sql",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/feed.xml",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/result.xml",
+		"/C/WebServers/usr/local/mysql-5.6.35/query.sql",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/views/response/viewApplicantOffer.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/config/main-dev.rabota7.local.php",
+		"/C/WebServers/usr/local/mysql-5.6.35/my.ini",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/widgets/TopVacancies.php",
+		"/C/Users/vmaya/AppData/Local/Temp/Rar$DIa0.867/readme.txt",
+		"/C/WebServers/usr/local/mysql-5.6.35/bin/feed.cmd",
+		"/C/WebServers/usr/local/mysql-5.5/bin/result.xml",
+		"/C/WebServers/usr/local/mysql-5.5/my.ini",
+		"/C/Users/vmaya/AppData/Local/Temp/Rar$DIa0.868/readme.txt",
+		"/V/cron/currency_dev/auto_trade.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/User.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/views/layouts/_user_applicant.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/web/CActiveDataProvider.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/ApplicantOfferProvider.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/web/CSqlDataProvider.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/zii/widgets/CBaseListView.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/db/CDbCommand.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/UnionProvider.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/zii/widgets/grid/CGridView.php",
+		"/X/vmaya/pj_ok/index.php",
+		"/W/html/phpMyAdmin/config.inc.php",
+		"/W/html/phpMyAdmin/config.sample.inc.php",
+		"/D/documents/Doc1.htm",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/yiilite.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/vendors/TextHighlighter/Text/sql.xml",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/messages/ca/yii.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/web/CDataProvider.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/Area.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/views/response/viewApplicantResponse.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/Controller.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/controllers/VacanciesController.php",
+		"/C/WebServers/usr/log/mysql/log-slow-queries.log",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/modules/mobile/views/layouts/main.php",
+		"/C/WebServers/usr/local/apache/conf/httpd.conf",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/views/vacancies/_form/_create.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/db/ar/CActiveRecord.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/db/CDbConnection.php",
+		"/C/WebServers/usr/local/apache/conf/vhosts.conf",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/config/main-dev.rabota7.ru.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/config/main-rabota7.ru.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/db/ar/CActiveFinder.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/ProjectActiveRecord.php",
+		"/C/WebServers/home/dev.rabota7.local/www/.htaccess",
+		"/C/WebServers/home/dev.rabota7.local/www/_htaccess",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/runtime/application.log",
+		"/C/WebServers/tmp/README.txt",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/controllers/VacanciesSubcatsController.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/widgets/views/city.php",
+		"/C/WebServers/home/dev.rabota7.local/www/webroot/js/script.js",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/views/templates/leftColumn.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/SubcatsToSubcats.php",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/web/widgets/CTreeView.php",
+		"/C/WebServers/home/dev.rabota7.local/www/index.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/controllers/RegionController.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/widgets/views/cityTabs/regions.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/components/widgets/CityMenu.php",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/config/main.php",
+		"/C/WebServers/usr/local/php5/php.ini",
+		"/C/web_php7/usr/local/php5/php.ini",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/views/resume/word.php",
+		"/C/WebServers/usr/local/mysql-5.5/bin/jobnews.sql",
+		"/C/WebServers/home/dev.rabota7.local/www/protected/models/Seo.php",
+		"/C/web_php7/var/log/mysql/log-slow-queries.log",
+		"/C/WebServers/home/dev.rabota7.local/www/framework/db/schema/mssql/CMssqlPdoAdapter.php",
+		"/C/web_php7/home/dev.rabota7.local/www/protected/config/main-rabota7.ru.php",
+		"/C/web_php7/usr/local/mysql-5.7/my.ini",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/coloring.html",
+		"/X/vmaya/ssd2/articles/ru/home.html",
+		"/X/vmaya/ssd2/helpers/link-data.php",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/may.html",
+		"/X/vmaya/ssd2/js/app.js",
+		"/C/web_php7/home/dev.rabota7.local/www/index.php",
+		"/C/Users/vmaya/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.IE5/O41627ZS/app.js",
+		"/X/vmaya/ssd2/templates/app/view.html",
+		"/C/web_php7/home/dev.rabota7.local/www/framework/db/CDbCommand.php",
+		"/C/web_php7/home/dev.rabota7.local/www/test.php",
+		"/C/web_php7/denwer/CONFIGURATION.txt",
+		"/C/web_php7/usr/local/mysql-5.7/data/vmaya-pc.err",
+		"/C/web_php7/home/dev.rabota7.local/www/framework/yiilite.php",
+		"/C/web_php7/var/log/mysql/mysql-slow.log",
+		"/D/tmp/jobnews/jobnews.sql",
+		"/X/vmaya/ssd2/styles.css",
+		"/X/vmaya/ssd2/templates/plugins/miner_panel.html",
+		"/X/vmaya/clothing/ok/index.php",
+		"/X/vmaya/ssd2/articles/ru/download frames all.html",
+		"/X/vmaya/ssd2/templates/plugins/vidoom_adv.html",
+		"/X/vmaya/ssd2/articles/ru/home-blocks/pj-app.html",
+		"/X/vmaya/ssd2/templates/other-adv-block.html",
+		"/X/vmaya/ssd2/templates/app/viewDEV.html",
+		"/X/vmaya/ssd2/templates/coinSupport.html",
+		"/X/vmaya/pj_ok/style/main.css",
+		"/X/vmaya/pj_ok/include/Browser.php",
+		"/X/vmaya/ssd2/helpers/pay-list.php",
+		"/X/vmaya/ssd2/templates/app/clothing.html",
+		"/X/vmaya/pj_ok/index_dev.php",
+		"/X/vmaya/ssd2/controllers/articleController.php",
+		"/X/vmaya/ssd2/articles/ru/support yandex.html",
+		"/X/vmaya/ssd2/templates/any_index.html",
+		"/X/vmaya/ssd2/templates/menu.html",
+		"/X/vmaya/ssd2/articles/ru/list.php",
+		"/X/vmaya/ssd2/articles/ru/board troubleshooting.html",
+		"/X/vmaya/ssd2/articles/ru/manual.html",
+		"/X/vmaya/ssd2/articles/ru/siteInfo.html",
+		"/X/vmaya/ssd2/articles/ru/about.html",
+		"/X/vmaya/download.php",
+		"/X/vmaya/ssd2/ss.php",
+		"/X/vmaya/index.php",
+		"/X/vmaya/ssd2/controllers/appController.php",
+		"/X/vmaya/ssd2/controllers/downloadController.php",
+		"/X/vmaya/ssd2/templates/data.html"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 110.0,
+		"where_history":
+		[
+			"X:\\vmaya\\pjjs\\jsa",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\framework",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\framework",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected\\views",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected\\controllers",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected\\models",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www\\framework",
+			"C:\\WebServers\\home\\dev.rabota7.local\\www",
+			"C:\\web_php7\\home\\dev.rabota7.local\\www",
+			"C:\\web_php7\\home\\dev.rabota7.local\\www\\protected",
+			"C:\\web_php7\\home\\dev.rabota7.local\\www"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"PJCONST",
+			"_holesURL",
+			"holes",
+			"TMPLURL",
+			"DEFTMPLURL",
+			"creation-date",
+			"filterData",
+			"city0",
+			"filterData",
+			"employment",
+			"'",
+			"\\r",
+			"\\term",
+			"/t",
+			"\\t",
+			"\\t\\t",
+			"'\\t",
+			"\"",
+			"city",
+			"vip_i",
+			"vip_image",
+			"intag",
+			"intag\\",
+			"intag",
+			"in",
+			"type",
+			"vacancies_to_cats",
+			"categories",
+			"city_id",
+			"categories",
+			"Vacancycat",
+			"Makefeed",
+			"City0",
+			"City",
+			"secure-file-priv",
+			"bin",
+			"plugin",
+			"plugin_dir",
+			"Makefeed",
+			"Site",
+			"Makefeed",
+			"TopVacancies",
+			"Select vacancies_subcats.name, vacancies_subcats.name_english, vacancies_subcats.id, count(vacancies.id) as cnt, sum(if(vacancies.date_created> DATE_SUB( NOW() , INTERVAL 1 DAY",
+			"city_id",
+			"vacancies",
+			"user-panel-menu",
+			"response/viewApplicantOffer",
+			"$this->sql",
+			"getTotalItemCount",
+			"__",
+			"pagination",
+			"pagina",
+			"paginator",
+			"CGridView",
+			"CPagination",
+			":userId",
+			"t.",
+			"t",
+			"vacancy",
+			"salaryText",
+			"attributeLabels",
+			"attributeLa\nattributeLa",
+			"vacancy_search",
+			"vacancy_title",
+			"UNION",
+			"vacancy_search",
+			"searchApplicantOffer",
+			"phone",
+			"applicantOfferCount",
+			"invite",
+			"searchApplicantOffer",
+			"viewApplicantResponse",
+			"cache",
+			"getLimitAll",
+			"getPayVacation",
+			"Превышен",
+			"Превышен доступный бесплатный лимит вакансий.",
+			"vacancies_to_cats",
+			"searchApplicantOffer",
+			"resume",
+			"status-resume-sidebar-link",
+			"Мои резюме",
+			"getPayVacation",
+			"getVacationInCity",
+			"getLimit",
+			"limit",
+			"vacancy",
+			"Уважаемый работодатель, размещение вакансии в выбранном городе",
+			"forCreateAndUpdate",
+			"update",
+			"user-panel",
+			"include",
+			"dev",
+			"include",
+			"viewApplicantOffer",
+			"searchApplicantOffer",
+			"t.create_user_id = ",
+			"DATE",
+			"create_user_id",
+			"COUNT(DISTINCT `t`.`id`)",
+			"className",
+			"CStatRelation",
+			"COUNT(DISTINCT `t`.`id`)",
+			"CStatRelation",
+			"joinType",
+			"CStatRelation",
+			"mergeWith",
+			"CStatRelation",
+			"addRelation",
+			"getActiveFinder",
+			" *\n",
+			" *\ngetActiveFinder",
+			"getActiveFinder",
+			"getRelated",
+			"addRelation",
+			"defaultValue",
+			"relations",
+			"addRelation",
+			"CBaseActiveRelation",
+			"mergeWith",
+			"__get",
+			"get",
+			"Response",
+			"searchApplicantResponse",
+			"rules",
+			"defaultValue",
+			"relation",
+			"relations"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\"",
+			"\\n",
+			"CHAR(9), '",
+			"'",
+			"98031",
+			"t2.",
+			"t1.",
+			"t1"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "include/viewBody.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3374,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1277,
+								1277
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "view.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "include/viewHead.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								394,
+								394
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "jsa/pjApp/pjcanvas.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5843,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14,
+								4
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 120.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 120.0
+	},
+	"pinned_build_system": "",
+	"project": "project.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 361.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

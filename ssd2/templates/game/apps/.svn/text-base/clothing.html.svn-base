@@ -1,0 +1,8 @@
+<script>
+    window.addEvent('domready', function() {
+        scene.init($$('.scene')[0], 'clothing');
+    });
+</script>
+<div class="container">
+    <img src="<?=GAMEURL.$game['group_id'].'/'.$game['game_id']?>.png">
+</div>

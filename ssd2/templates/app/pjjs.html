@@ -1,0 +1,35 @@
+<?
+    GLOBAL $root;
+    
+    $this->banners = TEMPLATES_PATH.'nobanners.html';
+    $params = '';
+    if (isset($this->user) && $this->user) {
+?>
+    <div class="user-image">
+        <img src="//oformi-foto.ru/pjjs/images/users/<?=$this->user?>.jpg?<?=rand(1,10000000);?>">
+    </div>
+    
+<!-- Put this script tag to the place, where the Share button will be -->
+<script type="text/javascript"><!--
+document.write(VK.Share.button(false,{type: "custom", text: "<img src=\"//vk.com/images/share_32.png\" width=\"32\" height=\"32\" />"}));
+--></script>    
+<?    
+    } else {
+        if (isset($this->tid) && $this->tid) $params = 'tid='.$this->tid;
+        else $params = 'group=default';
+        $top = (ss::$task[2]=='phone')?0:68;
+        if (!ss::$noadv) $top += 90;
+?>
+<iframe id="application" style="position:absolute;width:100%;left:0px;right:0px;top:<?=$top?>px;bottom:0px;border:0;" border="0" src="//<?=BASEHOST?>/pjjs/index.php?<?=$params?>#TEMPLATES=0">
+</iframe>
+<script type="text/javascript">
+    function doWinResize() {
+        var application = $('application');
+        var size = window.getSize();
+        application.setStyles({height: size.y - <?=$top?>, visibility: 'visible'});
+    }   
+    
+    window.addEvent('resize', doWinResize);
+    doWinResize();
+</script>
+<?  }?>

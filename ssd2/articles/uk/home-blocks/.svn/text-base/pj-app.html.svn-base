@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    var eindex = 0;
+    var eurls = ['<?=$sheme?>oformi-foto.ru/<?=$pjjs_path?>', '<?=$sheme?>fotoprivet.com/pjjs/left-list.php?group=child'];
+    function swapEditor() {
+        eindex = (eindex + 1) % eurls.length;
+        $('appframe').src = eurls[eindex];
+    }
+</script>
+
+<div class="post">
+    <p><b>Виберіть рамку або шаблон</b> для оформлення фотографії зі списку шаблонів. Коли рамка відкриється, ви можете завантажити своє фото. Для цього зробіть подвійний клік на вирізі або натисніть кнопку "Вставити ваше фото" поруч з вирізом. Виберіть фотографію з комп'ютера. Використовуючи миша, відредагуйте положення вашої фотографії в вирізі. Збережіть отриманий результат на комп'ютер, натисніть кнопку зі стрілкою, що вказує вниз на прямокутник, що символізує контейнер або дискету. Подивіться 
+    <a href="//www.youtube.com/embed/NCMeTj9f3Sw" class="boxed" data-video="{url:'//www.youtube.com/embed/NCMeTj9f3Sw',handler:'iframe',size:{x:900,y:506},iframePreload:true}">відео-інструкцію</a></p><p>Якщо ви віддаєте перевагу стару версію редактора, <a href="#old-editor" onclick="swapEditor()">клікніть по цьому посиланню.</a></p>
+    <div id="pjjs">
+        <?//include(__DIR__.'/pj_app_share.html')?>
+        <iframe src="<?=PJJS_URL.'/'.$pjjs_path?>" id="appframe">
+        </iframe>
+    </div>
+    <div style="text-align: center; margin: 10px;">
+        <a href="<?=mainURL?>view.htm" data-rel="<?=MAINURL?>/pjjs.htm" class="ctrl-button app-link">Хочу більше фоторамок!</a>
+        <a href="#" class="ctrl-button app-link" onclick="showThankView()">Спасибо!</a>
+    </div>
+    <div class="clr"></div>
+    <p>Ви так само можете перейти в <a href="//oformi-foto.ru/view.htm">flash приложение</a>, або в <a href="http://oformi-foto.ru/fotoramki.html">каталог фото-рамок</a> і прикольні шаблони де потрібно вставляти своє обличчя.</p>
+</div>

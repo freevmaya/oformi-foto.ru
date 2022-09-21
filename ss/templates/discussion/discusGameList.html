@@ -1,0 +1,91 @@
+<?
+/*
+    include(TEMPLATES_PATH.'/part_close_wait.html');
+    return;
+*/
+    GLOBAL $locale;    
+    $this->styles[] = SSURL.'dispute.css';
+    $this->addScript(SSURL.'js/mootools-1.2.5.1-tips.js');
+    $this->addScript(SSURL.'js/rate-bar.js');
+    $this->addScript(SSURL.'js/dispute.js');
+//    $this->addScript(SSURL.'js/game.js');
+    $this->addScript(SSURL.'js/mrequest.js');
+    
+    function userName($user) {
+        if (is_numeric($user)) return $user;
+        else return $user['first_name'].' '.$user['last_name'];
+    }
+    
+    function userBlock($user) {      
+        if (is_numeric($user)) {
+            $result = '<div class="ds-user" rel="'.$user.'">
+                <div class="ds-user-name"></div>
+                <a class="ds-user-link" href="" target="_blank"><img class="ds-user-pic" src="" rel=""></a>
+                <div class="ds-user-info"></div>        
+            </div>';
+        } else {
+            $s_name = userName($user);
+            $a_data = $user['name']?$user['name']:$s_name;
+            $result = '<div class="ds-user" rel="'.$user['uid'].'">'.
+                '<div class="ds-user-name">'.$a_data.'</div>'.
+                '<a class="ds-user-link" href="'.$user['url'].'" target="_blank"><img class="ds-user-pic" src="'.($user['pic']?$user['pic']:DEFAULTUSERIMAGE).'" rel="'.($user['pic']?1:0).'" alt="'.$a_data.'"></a>';
+    
+            if ($s_name != $a_data) $result .= '<div class="ds-user-info">'.$s_name.'</div>';
+            $result .= '</div>';
+        }
+        
+        return $result;
+    }
+    
+    include_once(TEMPLATES_PATH.'/paginator.php');
+    $paginator = paginator($page, $totalPages, link::c('discussion', ss::$task[2], '%s'));//MAINURL.'/discussion/'.ss::$task[2].'/%d.html');
+?>
+
+<script type="text/javascript">
+    discusListInit('<?=$this->isDev()?'discus_dev_model':'discus_model'?>');
+    //game.init(<?=CMDDLGGROUPS?>, '<?=link::c('game', 'ajax')?>');
+    //popupViewCreate(<?=json_encode(require(TEMPLATES_PATH.'adv/adv_list.php'));?>);
+</script>
+<h1><?=$this->title?></h1>
+<div>
+    <div style="height:30px;"><?=$paginator?></div>
+<?
+    if ($result['list'])
+        foreach ($result['list'] as $item) {
+            $clname = ($item['name']?$item['name']:$locale['COLLAGE']).' '.userName($item['user']);
+?>
+    <div class="ds-leader">
+        <div class="leader-image">
+            <a href="<?=link::c((intval($item['best'])==1)?'best-collage':'discussion', $item['id'])?>" <?=($item['noVictory'] == 0)?'rel="nofollow"':''?>><img src="<?=$this->collageURL($item['id']);?>" alt="<?=$clname?>" title="<?=$clname?>"></a>
+        </div>
+        <div class="ds-info">
+            <h2><?=$item['name']?></h2>
+            <table>
+                <tr class="ds-param">
+                    <td><?=$locale['NUMCOLLAGE']?></td><td class="right"><?=$item['id']?></td>
+                </tr>
+                <tr class="ds-param">
+                    <td><?=$locale['RATE']?></td><td class="right" id="rate-<?=$item['id']?>"><?=$item['rate']?></td>
+                </tr>
+                <tr class="ds-param-small">
+                    <td><?=$locale['ADDTIME']?></td><td class="right tipz" title="<?=$locale['INFO']?>::<?=$this->collageInfo($item)?>"><?=$this->collageStartTime($item)?></td>
+                </tr> 
+                <tr class="ds-param-small">
+                    <td colspan="2"><div class="rate tipz" data-id="<?=$item['id']?>" title="<?=$locale['TOTALVOICES']?>: <?=$item['rate']?>::<?=$locale['DICSREFRESHPAGE']?>"></div></td>
+                </tr>
+            </table>
+            <div id="ds-autor">
+                <h3><?=$locale['AUTOR']?></h3>
+                <?=userBlock($item['user']);?>
+            </div>
+        </div>
+    </div>
+<?}?>
+    <div style="height:30px;"><?=$paginator?></div>
+</div>
+<?include(dirname(__FILE__).'/_templates.html');?>
+<div class="tmpl-login login">
+<?include_once(TEMPLATES_PATH.'user/login_block.html')?>
+<?include(TEMPLATES_PATH.'user/login_site_block.html');?>
+</div>    
+<?include(TEMPLATES_PATH.'comments.html');?>

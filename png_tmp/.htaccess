@@ -1,0 +1,7 @@
+Options All -Indexes
+Deny from all
+
+<FilesMatch ~ "\.(png)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>

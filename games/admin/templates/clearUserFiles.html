@@ -1,0 +1,33 @@
+<h2>Время: <?= date('d.m.Y H:i');?></h2>
+<div>
+    Всего в открытках используются: <?= $_count?> файлов.<br>
+    Всего пропущено: <?= $_r_count?> файлов.<br>
+    <?=$del_result?>
+</div>
+<table width="100%" cellpadding="5" class="report">
+    <tr>
+        <th>
+            Состояние
+        </th>
+        <th>
+            Файл
+        </th>
+        <th>
+        </th>
+    </tr>
+<? foreach ($result as $file) {?>
+    <tr>
+        <td>
+            <?= $file['state']?>
+        </td>
+        <td>
+            <?= $file['path']?>
+        </td>
+        <td>
+        <? if (isset($file['params'])) {?>
+            <a target="_blank" href="http://my.mail.ru/cgi-bin/my/app-canvas?appid=441805&state=<?= urlencode(iconv('utf-8', 'windows-1251', $file['params']))?>">Посмотреть</a>
+        <?}?>
+        </td>
+    </tr>
+<? }?>    
+</table>

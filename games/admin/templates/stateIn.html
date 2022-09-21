@@ -1,0 +1,11 @@
+<?
+    $strData = '';
+    $maxData = 0;
+    for ($i=0;$i<count($data);$i++) {
+        $strData = $data[$i].($strData?',':'').$strData;
+        if ($maxData < $data[$i]) $maxData = $data[$i];
+    }
+    $strData = 't:'.$strData;
+?>
+<h3><?=$varName?></h3>
+<iframe style="width:600px; height:300px; border: none;" src="http://chart.apis.google.com/chart?chxr=0,0,<?=$maxData?>&chxt=y&chs=600x300&cht=lc&chco=0AF144&chd=<?=$strData?>&chds=0,<?=$maxData?>&chg=14.3,-1,1,1&chls=2,4,0&chm=B,C5D4B5BB,0,0,0&chtt=%C4%E8%ED%E0%EC%E8%EA%E0+%EF%EE%F1%E5%F9%E5%ED%E8%E9"></iframe>

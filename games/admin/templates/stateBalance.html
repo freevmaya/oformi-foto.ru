@@ -1,0 +1,108 @@
+<?
+    $ndsk = 100/118;
+    $cur_time = strtotime('now');
+?>
+<h3>
+    <?= date('d.m.Y', $cur_time)?>
+</h3>
+<div>
+    <form action="" method="POST">
+        <h4>Таблица: </h4>
+        <input type="text" name="balance_table" value="<?=$this->svar('balance_table', 'g_transaction');?>" size="20"><br>
+        <input type="radio" name="listType" <?=(($this->svar('listType', 1)==2)?'CHECKED':'');?>  value="2">Показывать только платежи
+        <input type="radio" name="listType" <?=(($this->svar('listType', 1)==1)?'CHECKED':'');?>  value="1">Все транзакции
+        <br>
+        <input type="submit">
+    </form>
+</div>
+<table class="report">
+    <tr>
+        <th>
+        </th>
+        <th>
+            Дебет
+        </th>
+        <th>
+            Кредит
+        </th>
+        <th>
+            СМС платежи
+        </th>
+        <th>
+            Платежные системы
+        </th>
+        <th>
+            Баланс
+        </th>
+    </tr>
+    <tr>
+        <td>
+        с НДС
+        </td>
+        <td>
+            <?= number_format($balance['debet'], 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['credit'], 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['sms_pay'], 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['pay_system'], 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['debet'] + $balance['credit'], 2)?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        без НДС
+        </td>
+        <td>
+            <?= number_format($balance['debet'] * $s_nds, 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['credit'] * $s_nds, 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['sms_pay'] * $s_nds, 2)?>
+        </td>
+        <td>
+            <?= number_format($balance['pay_system'] * $s_nds, 2)?>
+        </td>
+        <td>
+            <?= number_format(($balance['debet'] + $balance['credit'])  * $s_nds, 2)?>
+        </td>
+    </tr>
+</table>
+<h3>Транзакции за период</h3>
+<form action="?task=balance" method="POST">
+<table>
+    <tr>
+        <td align="right">
+            За период:
+        </td>
+        <td>
+            <input type="text" name="period" value="<?=$this->svar('period', 2)?>" size="10"> часов.
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            Пользователь:
+        </td>
+        <td>
+            <?=$this->html_uidInput()?>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+        </td>
+        <td>
+            <input type="submit" value="ok">
+        </td>
+    </tr>
+</table>
+</form>
+
+<?require(dirname(__FILE__).'/transList.html')?>

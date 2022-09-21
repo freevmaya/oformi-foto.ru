@@ -1,0 +1,55 @@
+<?
+    $this->title = 'О нас';
+    ss::$noadv = true;
+?>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        (function() {
+            var mail = 'webmaster@oformi-foto.ru';
+            var vk = 'https://vk.ru/fwadim';
+            var ok = 'https://ok.ru/freevmaya';
+            $('email').set('text', mail);
+            $('email').set('href', 'mailto:' + mail);
+            $('vk').set('text', vk);
+            $('vk').set('href', vk);   
+            $('ok').set('text', ok);
+            $('ok').set('href', ok);
+        }).delay(500);
+    });
+</script>
+<h1><?=$this->title?></h1>
+<div class="post center">
+    <p>Наша компания осуществляет деятельность в сфере разработки приложений для оформления фотографий с 2011 года. Мы также занимаеся обработкой изображений в приложениях Photoshop, Corel и т.п.</p> 
+    <p>Проектом "Прикольное оформление ваших фотографий" занимаемся с 2012 года. В рамках этого проекта существуют два приложения в двух соц-сетях, два приложения под операционную систему Android и данный сайт.</p>
+    <h2>Наши реквизиты:</h2>
+    <table style="margin: 0px auto;">
+        <tr>
+            <td class="ui-param">Наименование:</td>
+            <td>ИП Фролов Вадим Валерьевич</td>
+        </tr>
+        <tr>
+            <td class="ui-param">ОГРН:</td>
+            <td>310745006100014</td>
+        </tr> 
+        <tr>
+            <td class="ui-param">ИНН:</td>
+            <td>745004166339</td>
+        </tr> 
+    </table>
+    <h2>Наши контакты:</h2>
+    <table style="margin: 0px auto;">
+        <tr>
+            <td class="ui-param">e-mail</td>
+            <td><a id="email" target="_blank"></a></td>
+        </tr>  
+        <tr>
+            <td class="ui-param">В вконтакте</td>
+            <td><a id="vk" target="_blank"></a></td>
+        </tr>   
+        <tr>
+            <td class="ui-param">В одноклассниках</td>
+            <td><a id="ok" target="_blank"></a></td>
+        </tr>
+    </table>
+    <p>Мы с радостью ответим на любой ваш вопрос в сообщениях ниже. Либо пишите нам на эл. почту, или в сообщениях в соц-сетях.</p>
+</div>

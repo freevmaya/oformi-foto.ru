@@ -1,0 +1,6 @@
+<script type="javascript">
+    
+</script>
+<embed src="//oformi-foto.ru/gifavt/dev/of_gifavt.swf?v=<?=$ver;?>" quality="high" bgcolor="#ffffff" width="760" height="976" name="of_gifavt" 
+align="middle" salign="tl" type="application/x-shockwave-flash" pluginspage="//www.macromedia.com/go/getflashplayer">
+</embed>

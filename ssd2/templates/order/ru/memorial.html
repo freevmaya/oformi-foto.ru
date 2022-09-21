@@ -1,0 +1,17 @@
+<?
+    $this->title = 'Заявка изготовления фотографии на памятник';
+    $this->description = 'Мы можем специально для вас произвести ретуширование и восстановление фотографии.';
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+    
+    $price_str  = 'от 100 руб.';
+    $ext_desc   = '<span>Сообщите нам свои пожелания</span>, загрузите фото, и мы расчитаем стоимость и срок изготовления. Качеством работы вы останетесь довольны, мы работаем <span>до утверждения результата!</span>';
+    $maxsize    = ini_get('upload_max_filesize'); 
+    
+    $name       = $user?$user['nick']:'';
+    $email      = $user?$user['email']:'';
+    $orderType  = 'memorial';
+    $works = array(
+        array('r02.jpg', 'Пример реставрации фотографии. Ретушь, удаление трещин и загрезнений методом клонирования.')
+    );
+    include_once(dirname(__FILE__).'/order_tmpl.html');                                                             
+?>

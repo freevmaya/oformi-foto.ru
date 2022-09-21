@@ -1,0 +1,65 @@
+/*BACKGROUND*/
+.ctrl-button {
+    background: #729fcf;
+}
+
+/*BORDER*/
+.ctrl-button {
+    border: 3px solid #8e3400;
+}
+
+.ctrl-button {
+    cursor: pointer;
+    display: inline-block;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    padding: 7px 20px;
+    text-align: center;
+    text-shadow: #333 -1px -1px; 
+}
+
+.ctrl-button {
+    color: #EFF !important;
+}
+
+a.ctrl-button:hover {
+    color: #FFEEEE;
+    background: #CC0000;
+    border: 3px solid #844;
+}
+
+.ctrl-button dt,
+.album dt,
+.tool-botton {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background-image: url(images/ics.png);
+    background-repeat: no-repeat;
+}
+
+.ctrl-button dt {
+    margin: -7px 5px -7px -10px;
+}
+
+.b-add dt {
+    background-position: -23px 0px;
+}
+
+.b-edit {
+    background-position: -207px -154px;
+}
+
+.b-delete {
+    background-position: -138px -44px;
+}
+
+.disable {
+    cursor: default;
+    opacity: 0.5; 
+}
+
+.disable:hover {
+    background: #729fcf !important;
+}

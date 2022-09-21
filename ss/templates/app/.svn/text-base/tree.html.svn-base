@@ -1,0 +1,56 @@
+<?
+    GLOBAL $locale;
+    ss::$noadv = true;
+    ss::$nofooter = true;
+    if ($id = $this->getVar('id', 0))
+        $this->setPageImage(TREEURL."theme/tree/images/share/{$id}.jpg");
+    
+    $this->title = $locale['TREETITLE'];  
+    $this->description = $locale['TREEDESC'];
+    ss::addCSS('#menu', 'background: #9f7659 !important;');
+    ss::addCSS('.submenu', 'background: rgb(101, 74, 54);');
+    ss::addCSS('#pj_adv', 'background-color: #9f7659 !important;');   
+    ss::addCSS('#pj_adv', 'background-color: #9f7659 !important;');   
+    ss::addCSS('.menu a, .hmenu a, .header span', 'color: #f1e7d1 !important;');
+    
+    
+    $this->title = $locale['TREETITLE'];
+    $this->description = $locale['TREEDESC'];
+    $this->setPageImage(SSURL.'images/pi-tree.jpg');
+?>
+
+<script type="text/javascript">
+    (function() {
+        var td;
+        window.addEvent('userInfo', function(e) {
+            td = $('tree_display');
+            td.setStyle('display', 'block');
+            
+            td.set('src', '<?=TREEURL?>index.php?source=anysocial&nopayed=1&uid=' + app.nauid + '&avatar=' + app.user.avatar + '&gender=' + (app.user.gender=='male'?0:1) + 
+                '&first_name=' + app.user.first_name + '&last_name=' + app.user.last_name + '&birthday=' + app.user.birthday + '&id=' + '<?=$id?>');
+
+            eval('external = ' + app.user.source + '_external');
+                
+        });
+        
+        setTimeout(function() {
+            if (!td) {
+                var tv = $$(".tree-preview")[0];
+                tv.setStyle('display', 'block');  
+                tv.fade('in');
+            }    
+        }, 2000);
+    })();
+</script>
+<div class="tree-cap" style="background: url(<?=TREEURL?>/theme/tree/images/back_all.jpg) center center;">
+     <div class="tree-preview">
+        <div class="post">
+            <p><?=$locale['PLEASELOGIN']?></p>
+            <?include_once(TEMPLATES_PATH.'user/login_block.html')?>
+            <?include(TEMPLATES_PATH.'user/login_site_block.html');?>            
+        </div>
+    </div>
+</div>
+<iframe id="tree_display">
+</iframe>
+<?include_once(TEMPLATES_PATH.'comments.html')?>

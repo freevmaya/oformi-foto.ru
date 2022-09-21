@@ -1,0 +1,50 @@
+#viboom {
+    position: absolute;
+    z-index: 1001;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: none;
+    background: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+#viboom > .rtp-wrapper {
+    margin: 0px auto;
+    margin-top: 0px;
+    transition: margin-top .6s cubic-bezier(1, 0, .79, .97);
+}
+
+.vdshow {
+    display: block !important;
+}
+
+.viboom-title, .viboom-footer {
+    width: 550px;
+    margin: 0px auto;
+    background: white;    
+}
+
+.viboom-footer a {
+    display: none;
+    opacity: 0;
+    transition: opacity .6s;
+    cursor: pointer;
+    color: red;
+    text-shadow: 0px 0px 1px black;
+}
+
+.canclose a {
+    display: block;            
+    opacity: 1;
+}
+
+.viboom-title {
+    margin-top: 0px;
+    transition: margin-top .6s;
+}
+
+.canclose .viboom-title {
+    margin-top: -20px !important;
+}

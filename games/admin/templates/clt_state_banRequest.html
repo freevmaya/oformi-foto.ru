@@ -1,0 +1,74 @@
+<h3>Список жалоб</h3>
+<style type="text/css">
+    .ch1 td {
+        background: #DDD;
+    } 
+</style>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    <div>
+        <h3>Показывать</h3>
+        <input type="radio" name="banTypeView1" value="1" CHECKED>Текущие жалобы
+        <input type="radio" name="banTypeView1" value="2">Временные баны
+        <input type="radio" name="banTypeView1" value="3">Постоянные баны
+    </div>
+    <div>
+        <input type="checkbox" name="banTypeView2" value="4" CHECKED>Показывать жалобы на коллажи
+    </div>
+    <table class="report">
+        <tr>
+            <th>
+                Дата
+            </th> 
+            <th>
+                Контекст
+            </th>
+            <th>
+                Виновник
+            </th>
+            <th>
+                Текст сообщения/коллаж
+            </th>
+            <th>
+                Выбрать
+            </th>
+        </tr>
+        <?
+            foreach ($list as $key=>$item) {
+                $curTrClass = ($key % 2)?'ch1':'ch2';
+        ?>
+        <tr class="<?=$curTrClass?>">
+            <td>
+                <?=$item['banDate']?>
+            </td> 
+            <td>
+                <?=$item['content_id']?>
+            </td>
+            <td>
+                <?=$item['uid']?>
+            </td>
+            <td>
+                <?
+                    $imageURL = COLLAGEURL.$item['game_id'].'.jpg';
+                    if ($item['game_id']) {
+                        echo '<a href="'.$imageURL.'" target="_blank"><img src="'.$imageURL.'" width="200px" onmouseover="onOver(this)"></a>';
+                    } else {
+                        echo $this->textCnv($item['message']);
+                    }
+                ?>
+            </td>
+            <td>
+                <input type="checkbox" value="<?=$item['uid']?>_<?=$item['comment_id']?>_<?=$item['game_id']?>" name="items[]">
+            </td>
+        </tr>
+        <?}?>
+        <tr>
+            <td colspan="4">
+                <input type="radio" name="banType" value="-1" CHECKED>Удалить сообщения/коллажи
+                <input type="radio" name="banType" value="0">Отклонить жалобы
+                <input type="radio" name="banType" value="2">Забанить до <input type="text" name="banDate" value="<?=date('Y-m-d', strtotime('+10 DAY'))?>" size="10">
+                <input type="radio" name="banType" value="3">Забанить навсегда
+            <td>
+        </tr>
+    </table>
+    <input type="submit" value="Применить">    
+</form>

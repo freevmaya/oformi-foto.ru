@@ -1,0 +1,36 @@
+<form action="#" onsubmit="return doSendCads();" id="cadsForm" method="POST">
+        <?
+            if (!$holidays)
+                include_once(TEMPLATES_PATH.'/holidays.php');
+        ?>
+<h2><?=$locale['CATFRAMES']?></h2>
+        <?  
+        if (count($groupIds) > 0) {
+            $defCat = (isset($default) && $default)?$default:defaultCat();
+            echo '<span><a href="'.link::c('catalog', 0).'" title="'.$locale['DESCRIPTION'].'::'.limitWords(strip_all_tags($defCat['desc'])).'" class="tipz">'.$defCat['name'].'</a></span>';         
+        }
+        $part = '';
+        foreach ($menu as $item) {
+            $class = '';
+            $gid = str_replace(' ', '+', $item['translit']);
+            $desc = limitWords(strip_all_tags($item['desc']), 20);
+            if ($part != $item['part']) {
+                $part = $item['part'];                
+                echo '<h3>'.$part.'</h3>';                     
+            }
+            
+            if (in_array($gid, $groupIds)) {
+                $in = $item['name'];
+                $class = 'class="current"';
+            } else {
+                $idLink = isset($groupEng[$gid])?urlencode($groupEng[$gid]):$gid;
+                $in = '<a href="'.link::c('catalog', $idLink).'" '.($desc?('title="'.$locale['DESCRIPTION'].'::'.$desc.'" class="tipz"'):'').'>'.$item['name'].'</a>';
+            }            
+            
+            echo '<span '.$class.'><input type="radio" value="'.$gid.'" name="'.$part.'">'.$in.'</span>';                     
+        }
+?>    
+        <div style="height:40px">
+            <div class="submitLayer magnetBottom panel" rel="tmpls"><div style="margin: 5px;"><input type="submit" value="<?=$locale['APPLYSEARCH']?>"></div></div>
+        </div>
+</form>

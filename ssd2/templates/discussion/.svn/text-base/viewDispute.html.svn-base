@@ -1,0 +1,235 @@
+<?
+/*
+    include(TEMPLATES_PATH.'/part_close_wait.html');
+    return;
+*/
+GLOBAL $locale;
+ 
+if ($disput) {
+
+    $this->styles[] = SSURL.'sbox/assets/SqueezeBox.css';
+    $this->styles[] = SSURL.'dispute.css'; 
+    
+    $this->scripts[] = SSURL.'sbox/SqueezeBox.js';
+    $this->addScript(SSURL.'js/external.js');
+    $this->addScript(SSURL.'js/dispute.js');
+    $this->addScript(SSURL.'js/rate-bar.js');
+    $this->addScript(SSURL.'js/mrequest.js');
+    $this->addScript(SSURL.'js/editor.js');
+    $this->addScript(SSURL.'js/mootools-1.2.5.1-tips.js');
+    $this->addScript(SSURL.'js/sharebuttons_panel.js');
+    ss::$shared = 0;
+    
+    
+/*    
+    function userBlock($user) {
+        $s_name = $user['first_name'].' '.$user['last_name'];
+        $result = '<div class="ds-user" rel="'.$user['uid'].'">'.
+            '<div class="ds-user-name">'.$user['name'].'</div>'.
+            '<a class="ds-user-link" href="'.$user['url'].'" target="_blank"><img class="ds-user-pic" src="'.($user['pic']?$user['pic']:DEFAULTUSERIMAGE).'" rel="'.($user['pic']?1:0).'"></a>';
+
+        if ($s_name != $user['name']) $result .= '<div class="ds-user-info">'.$s_name.'</div>';
+        $result .= '</div>';
+        return $result;
+    }
+*/    
+    function userName($user) {
+        if (is_numeric($user)) return $user;
+        else return $user['first_name'].' '.$user['last_name'];
+    }
+    
+    function userBlock($user) {
+        if (is_numeric($user)) {
+            $result = '<div class="ds-user" rel="'.$user.'">
+                <div class="ds-user-name"></div>
+                <a class="ds-user-link" href="" target="_blank"><img class="ds-user-pic" src="" rel=""></a>
+                <div class="ds-user-info"></div>        
+            </div>';
+        } else {
+            $s_name = userName($user);
+            $a_data = $user['name']?$user['name']:$s_name;
+            $result = '<div class="ds-user" rel="'.$user['uid'].'">'.
+                '<div class="ds-user-name">'.$a_data.'</div>'.
+                '<a class="ds-user-link" href="'.$user['url'].'" target="_blank"><img class="ds-user-pic" src="'.($user['pic']?$user['pic']:DEFAULTUSERIMAGE).'" rel="'.($user['pic']?1:0).'"></a>';
+    
+            if ($s_name != $a_data) $result .= '<div class="ds-user-info">'.$s_name.'</div>';
+            $result .= '</div>';
+        }
+        
+        return $result;
+    }
+    
+    function ConcurentInfo($a_this, $collage, $item) {
+        GLOBAL $locale;
+        $con = '';
+        $r = $item['votes'] - $collage['votes'];  
+        if ($r > 0) $con = sprintf($locale['BEFORECOLAGEDESC'], $r);
+        else if ($r < 0) $con = sprintf($locale['AFTERCOLAGEDESC'], $r); 
+        if (isset($item['user']))
+            $result = $locale['CONCURENT'].'::'.$locale['AUTOR'].': '.$a_this->getUserName($item['user']).'<br>'.$con;
+        else $result = $locale['CONCURENT'].'::'.$con;
+        return $result;
+    }
+    
+    function collageAlt($collage) {
+        GLOBAL $locale;
+        $result = '';
+        if (isset($collage['user'])) $result .= $locale['AUTOR'].': '.userName($collage['user']);
+        if ($collage['name'] > '') $result .= ($result?', ':'').$locale['COLLAGE'].': '.$collage['name'];
+        return $result;
+    }
+    
+    $createTimeMLS = strtotime($collage['time']);
+    $startTime = date('d.m.Y H:i:s', $createTimeMLS);
+    $endTime = date('d.m.Y H:i:s', strtotime("+1 day", $createTimeMLS));
+    
+    $countSec = strtotime($endTime) - strtotime('NOW');
+    $collageInfo = $locale['DISCENDTIME'].":<br><b>$endTime</b>";
+    if ($countSec >= 0) {
+        $min = floor($countSec / 60);
+        $hour = floor($min / 60);
+        $dmin =  $min % 60;
+        $collageInfo .= "<br>{$locale['DISCTOENDTIME']}:<br><b>$hour ч. $dmin мин.</b>";
+    } else $collageInfo = '<br'.$locale['DISCSTOP'].'.';
+    
+    $collageInfo .= '<br>'.$locale['CURSERVTIME'].':<br><b>'.date("d.m.Y H:i:s").'</b>';
+    $alt = '';
+    if ($autor) $alt .= $locale['AUTOR'].': '.userName($autor);
+    if ($collage['name']) $alt .= ', '.$locale['COLLAGE'].': '.$collage['name']; 
+?>
+<script type="text/javascript">
+    SqueezeBox.initialize();
+    SERVERURL = '<?=MAINURL?>';
+    Discus.init(<?=json_encode($disput)?>, '<?=$this->isDev()?'discus_dev_model':'discus_model'?>');
+    //popupViewCreate(<?=json_encode(require(TEMPLATES_PATH.'adv/adv_list.php'));?>);
+</script>
+<div id="discus">
+    <div id="ds-content">
+        <?//GOOGLE ADV?> 
+        <div id="gadv">       
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 320x100 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:320px;height:100px"
+             data-ad-client="ca-pub-8187394655464689"
+             data-ad-slot="1095713658"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>        
+        </div>
+        <?//\GOOGLE ADV?>        
+        <div id="ds-image">
+            <div class="share-panel hidden">
+                <div class="share42init"></div>
+            </div>              
+            <img src="<?=$disput['url']?>" alt="<?=$alt?>">
+            <div id="ds-content-footer">
+                <div class="add-comment button" id="addComment"></div>
+            </div>            
+        </div>    
+        <div id="ds-header">
+            <div id="ds-info">
+                <?
+                    if (ss::$isAdmin) {
+                ?>
+                    <div class="admin">
+                        <?if (intval($collage['best']) == 1) {
+                            print_r($collage['best']);
+                        ?>
+                            BEST <a href="#" rel="setBest,0">un best</a>
+                        <?} else {?>
+                            <a href="#" rel="setBest,1">set best</a>
+                        <?}?>
+                    </div>
+                <?                    
+                    }
+                ?>
+                <h2><?=$collage['name']?></h2>
+                <table>
+                    <tr class="ds-param">
+                        <td><?=$locale['NUMCOLLAGE']?></td><td class="right"><?=$collage['id']?></td>
+                    </tr>
+                    <tr class="ds-param">
+                        <td><?=$locale['RATE']?></td><td class="right pointer tipz" title="<?=$locale['INFO']?>::<?=$locale['DISCRATEHINT']?>"><?=$collage['rate'].'/'.$collage['votes']?></td>
+                    </tr>
+                    <tr class="ds-param-small">
+                        <td><?=$locale['ADDTIME']?></td><td class="right pointer tipz" title="<?=$locale['INFO']?>::<?=$collageInfo?>"><?=$startTime?></td>
+                    </tr>
+                </table>
+                <div id="ds-autor">
+                    <h3><?=$locale['AUTOR']?></h3>
+                    <?=userBlock(isset($autor)?$autor:$disput['uid']);?>
+                </div>
+            </div>
+        </div>
+        <div id="ds-concurent">
+            <div id="ds-conc-list">
+            <div id="ds-conc-area">
+<?
+    foreach ($collage['concuren'] as $item) {                                                                                    
+        $vote_delta = $collage['votes'] - $item['votes'];
+?>
+        <div class="ds-conc-item <?=($vote_delta<0)?'ds-more':(($vote_delta>0)?'ds-litle':'')?>">
+            <a href="<?=$this->collageLink($item)?>"><img src="<?=$this->collagePreview($item['id'])?>" class="tipz" 
+                title="<?=ConcurentInfo($this, $collage, $item);?>" alt="<?=collageAlt($item)?>"></a>
+            <span><?=$item['votes']?></span>
+        </div>
+<?    
+    }
+?>        
+            <div class="clr"></div>
+            </div>
+           </div>
+        </div>
+    </div>    
+    <div id="ds-list">
+<?foreach ($notices as $item) {?>
+    <div class="ds-item round" rel="<?=$disput['id'].'_'.$item['id']?>">
+        <?=userBlock($item['user']);?>                
+        <div class="ds-item-not">
+            <div class="ds-item-title"><?=$item['time']?></div>
+            <div class="ds-item-desc"><?=$this->to_link($item['text'])?></div>
+        </div>
+        <div class="clr"></div>
+    </div>     
+<?}?>    
+    </div>
+    <div id="ds-footer">
+    </div>
+</div>
+<?
+}
+?>
+      
+<div style="display: none">
+    <div class="ds-item round" id="notify-tmpl">
+        <?=userBlock('')?>                
+        <div class="ds-item-not">
+            <div class="ds-item-title"></div>
+            <div class="ds-item-desc"></div>
+        </div>
+        <div class="clr"></div>
+    </div>
+    <div class="ds-editor round">
+        <form method="POST" action="<?=$this->getLink();?>">
+            <div class="close-button"></div>
+            <h1>Новое сообщение</h1>
+            <div class="clr"></div>
+            <div class="text">
+                <span class="input-demo">Текст сообщения</span>
+                <textarea name="message"></textarea>
+            </div>
+            <div style="text-align:right;">
+                <input type="hidden" name="id" value="<?=$disput['id']?>">
+                <input type="hidden" name="user" value="">
+                <input class="send-button" type="button" value="Отправить" onclick="Discus.sendComment(); return false;">
+            </div>
+        </form>
+    </div>
+</div>
+<?include(dirname(__FILE__).'/_templates.html');?>
+<div class="tmpl-login login">
+<?include_once(TEMPLATES_PATH.'user/login_block.html')?>
+<?include(TEMPLATES_PATH.'user/login_site_block.html');?>
+</div>
+<script type="text/javascript" src="<?=SSURL?>js/share42/share42.js"></script>

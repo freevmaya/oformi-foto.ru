@@ -1,0 +1,19 @@
+                                                                                                                        <?
+    $this->title = 'Заглушка!';
+    $name = $user?$user['nick']:'';
+    $email = $user?$user['email']:'';
+?>
+<script type="text/javascript">
+    window.addEvent('domready', function() {
+        var mail = 'order@oformi-foto.ru';
+        $('email').set('text', mail);
+        $('email').set('href', 'mailto:' + mail);
+    });
+</script>
+<table class="vcenter article"><tr><td>
+    <h1><?=$this->title?></h1>
+    <div class="post order">
+        <p>Мы временно не принимаем заказы такого типа</p>
+        <p>Попробуйте создать заявку позже. Извините за доставленное неудобство.</p>
+    </div>
+</td></tr></table>    

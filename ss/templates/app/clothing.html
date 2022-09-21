@@ -1,0 +1,92 @@
+<?
+    if (ss::$isPhone) {
+        header("Location: ".MAINURL);
+        die();
+    }
+    $this->title        = 'Прикольное перевоплощение';
+    $this->description  = 'Перевоплощайтесь в уникальном приложение которое позволяет изменить свой имидж, создать оригинальный коллаж. Подставьте к своему лицу любой костюм и прическу, выберите фон и эффекты!';
+    GLOBAL $_GET;
+    
+    $this->addMeta('page-image', SSURL.'images/cfb.jpg');
+    require_once(TEMPLATES_PATH.'game_support.html');
+    $this->addScript(SSURL.'js/external.js');
+?>
+<div style="height:1px;overflow:hidden;position:absolute;">
+    <?include(TEMPLATES_PATH.'pushall.php');?>
+</div>
+
+<?include(TEMPLATES_PATH.'adv/view_adv_block1.php');?>
+<div id="flashAPP" style="margin:0 auto;">
+    <div id="embed"></div>
+</div>
+<script type="text/javascript">
+    var app_params = {
+        app_id: '',
+        viewer_id: 0,
+        dev: <?=$this->request->getVar('dev', 0)?>,
+        ver: <?=$ver?>
+        <?
+            if (isset($_GET['state']))
+                echo ", state:'".$_GET['state']."'";
+        ?>
+    };
+    
+    function appInit(sfwFile, aliase, flash_values) {
+        var flashAPP = $('flashAPP'); 
+        var size = flashAPP.getSize();
+        size.y = flash_values.height?flash_values.height:size.y;
+        flashAPP.setStyle('height', size.y);
+        
+        //if ($('social')) $('social').setStyle('width', size.x);
+        sfwFile = "<?=$basePath?>/" + sfwFile + "?<?=$ver?>";
+        
+        var params = {
+            movie: sfwFile,
+            quality: "high",
+            scale: "noscale",
+            menu: "false",
+            align: "middle",
+            salign: "tl",
+            base: "<?=$basePath?>",
+            wmode: "direct",
+            allowNetworking: "all",
+            allowFullScreen: "true"
+        }
+        
+        var attributes = {
+            id: aliase,
+            name: aliase,
+            salign: "tl"
+        };
+                
+        swfobject.embedSWF(sfwFile, "embed", size.x, size.y, "10", "expressInstall.swf", flash_values, params, attributes);
+        callbackObject = $('embed');
+//        $('flashAPP').set('html', '');        
+    }
+    
+    function freeInit(source) {
+        if (source) eval('external = ' + source + '_external');
+        else eval('external = default_external');
+            
+        appInit('free_clothing.swf', 'embed', {
+            api_id      : '430262',
+            viewer_id   : 1,
+            modelName   : 'clt28',
+            height      : 953
+        });
+    }
+    
+    function onLoginStatus(e) {
+        checkFlash(function() {
+            if (e.status) freeInit(e.source);
+            else freeInit();
+        });
+        window.removeEvent('login_status', onLoginStatus);
+    }
+    
+    window.addEvent('login_status', onLoginStatus);
+</script>
+<?
+    include(TEMPLATES_PATH.'/social.html');
+//    include(TEMPLATES_PATH.'/coinSupport.html');
+?>

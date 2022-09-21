@@ -1,0 +1,30 @@
+<?
+    $sitems = array();
+    $gid = implode(',', $groupIds);
+    
+    foreach ($items as $i=>$item) {
+        
+        $appLink = link::c('template', $item['tmpl_id'].'-'.controller::translit($title));
+        
+        if ($holidays) {
+            $hLink = link::c('holidays', 'holiday', $item['holiday_id'].'-'.controller::translit($item['hName']));
+            $sitems[] = array(
+                'link'=>$appLink,
+                'hlink'=>$hLink,
+                'name'=>$item['hName'],
+                'desc'=>limitWords(strip_all_tags($item['hDesc']), 20),
+                'date'=>todayDate($item['date']),
+                'tmpl_id'=>$item['defTmplID']?$item['defTmplID']:$item['tmpl_id']
+            );
+        } else {
+            $title = limitWords($item['name'], 5);
+            $sitems[] = array(
+                'link'=>$appLink,
+                'name'=>$title,
+                'tmpl_id'=>$item['tmpl_id']
+            );
+        }
+    }
+
+    echo json_encode($sitems);
+?>

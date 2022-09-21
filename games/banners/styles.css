@@ -1,0 +1,49 @@
+#myapps {
+    display: block;
+    width: 760px;
+    height: 100px;
+    margin: 0 auto;
+    font-family: tahoma, arial, verbana;
+    background: #FFECBA;
+}
+
+#myapps .maw {
+    padding: 5px 5px 0px 5px;
+    border: 3px solid #FACB5F;
+}
+
+#myapps h2 {
+    color: #B74100;
+    font-size: 13px;
+    margin: 0px;
+    border-bottom: 1px solid #FACB5F;
+}
+
+#myapps table {
+    border-spacing: 0px;
+}
+
+#myapps table td {
+    text-align  : center;
+    font-size   : 11px;
+    padding-top : 5px;
+    vertical-align: top;
+}
+
+#myapps a {
+    color: #0857AD;
+}
+
+#myapps a div {
+    display: block;
+    width: 120px;
+    margin: 0 auto;
+}
+
+#myapps a img {
+    border: 2px solid #FACB5F;
+}
+
+#myapps a:hover img {
+    border: 2px solid red;
+}

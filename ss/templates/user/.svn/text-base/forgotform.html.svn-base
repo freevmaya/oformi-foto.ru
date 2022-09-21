@@ -1,0 +1,91 @@
+<?
+    GLOBAL $locale;
+    $this->title = $locale['FORGOTFORM']; 
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+?>
+<script type="text/javascript">
+    (function() {
+        var form, sb;
+        
+        function getInput(name) {
+            return form.getElement('input[name="' + name + '"]');
+        }
+        
+        function onSubmit(submit) {
+            if (!sb.hasClass('disable')) {
+                app.request('user,forgot_success', {
+                    method: 'post',
+                    code: getInput('code').get('value'),
+                    pass: MD5.calc(getInput('pass').get('value'))
+                }, 
+                function(a_data) {
+                    if (a_data && (r = a_data.response) && r.result) {
+                        app.alert(locale.CONGRATULATION, locale.ACCESS_RESTORE, function() {
+                            location.href='<?=link::c('user', 'ofin')?>';
+                        });
+                        form.addClass('display_none');
+                    } else app.alert(locale.WARNING, locale.WRONG_RESPONSE);   
+                });        
+            }
+        }
+            
+        ValidateSimple.Validators = $merge(ValidateSimple.Validators, {
+            pass2: {
+                test: function(input){
+                    return input.get('value') == getInput('pass').get('value');
+                }
+            }
+        });
+        
+        window.addEvent('domready', function() {
+            form = $('ofin');
+            sb = form.getElement('.ok');
+            sb.addEvent('click', onSubmit);
+            new ValidateSimple($('ofin'), {
+                inputs: [getInput('pass'), getInput('pass2')],
+                onValid: function() { 
+                    sb.removeClass('disable');
+                },
+                onInvalid: function() { 
+                    sb.addClass('disable');
+                },
+                onInputValid: function(input) {
+                    input.getParent().removeClass('error');
+                },
+                onInputInvalid: function(input, errors) {
+                    if (errors) input.getParent().addClass('error');
+                }
+            });
+        });
+    })();
+</script>
+<h1><?=$this->title?></h1>
+<div class="post ofin">
+    <form class="form" id="ofin">
+        <table>
+            <tr>
+                <td class="ui-param ui-low">
+                    <?=$locale['PASSWORD-NEW']?>: 
+                </td>
+                <td>
+                    <input name="pass" type="password" placeholder="******" title="<?=$locale['INPUTTITLE']['PASSWORD']?>" class="validate-text tipz" data-min-length="5" value=""><span class="proplem">Некорректный пароль. Требуется не менее 6 символов</span>
+                </td>
+            </tr> 
+            <tr>
+                <td class="ui-param ui-low">
+                    <?=$locale['PASSWORD-REPEAT']?>: 
+                </td>
+                <td>
+                    <input name="pass2" type="password" placeholder="******" title="<?=$locale['INPUTTITLE']['PASSWORD']?>" class="validate-pass2 tipz" data-min-length="5"><span class="proplem">Пароли не совпадают</span>
+                </td>
+            </tr> 
+            <tr>
+                <td colspan="2" style="padding-left: 180px;">
+                    <input type="hidden" name="code" value="<?=$code?>">
+                    <a class="ctrl-button disable ok"><?=$locale['OK']?></a>
+                    <a href="'<?=link::c('user', 'register')?>'" class="ctrl-button"><?=$locale['REGISTER']?></a>
+                </td>
+            </tr> 
+        </table>                
+    </form>
+</div>

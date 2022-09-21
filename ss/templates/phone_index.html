@@ -1,0 +1,37 @@
+<head>
+    <link rel="icon" href="<?=MAINURL?>/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?=MAINURL?>/favicon.png" type="image/png">
+    <?=$controller_head?>
+    <script type="text/javascript">
+        if ($.mobile && $.mobile.page) 
+            $.mobile.page.prototype.options.domCache = true;        
+    </script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos ui-responsive-panel" data-title="<?=$title?>" <?=$controller->page_id?(' id="'.$controller->page_id.'"'):''?>>
+    <div>
+        <div>
+            <div data-role="header">
+                <h1><?=$title?></h1>
+                <a href="#nav-panel<?=$controller->page_id?>" data-icon="bars" data-iconpos="notext">Меню</a>
+            </div>                                                  
+            <div class="content">
+                <?=$content?>
+            </div>
+        </div>
+    	<div data-role="panel" data-display="push" data-theme="b" id="nav-panel<?=$controller->page_id?>" style="left: auto !important">
+            <?include_once(MOBILETEMPLATEPATH.'menu.html');?>
+    	</div>
+        <div class="min-nav">
+            <div class="totop sbtn"><a href="#" class="ui-icon-carat-u ui-btn-icon-notext ui-corner-all ui-btn"></a></div>
+            <div class="smartmbtn sbtn"><a href="#" class="ui-icon-bars ui-btn-icon-notext ui-corner-all ui-btn"></a></div>
+        </div>
+    </div>
+</div>
+<?
+    foreach ($controller->getMobilePages() as $page)
+        include_once(MOBILETEMPLATEPATH.$page);
+        
+    include_once('analytics.google.php')
+?>
+</body>

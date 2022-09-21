@@ -1,0 +1,33 @@
+<h3>
+    Первые <?= $numFromPage?>
+</h3>
+<table class="report">
+    <tr>
+        <th>
+            Пользователь
+        </th>
+        <th>
+            Уведомлен
+        </th>
+        <th>
+            Неполучено
+        </th>
+    </tr>
+    <? foreach ($n_users as $user) {?>
+        <tr>
+            <td>
+                <?= $user['sendTo']?>
+            </td>
+            <td>
+                <?= $user['notify']?'да':'нет'?>
+            </td>
+            <td>
+                <?= $user['count']?>
+            </td>
+        </tr>
+    <?}?>
+</table>
+
+<script type="text/javascript">
+    setTimeout('document.location.href = document.location.href', 5000);
+</script>

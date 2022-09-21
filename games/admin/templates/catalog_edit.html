@@ -1,0 +1,305 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    
+    GLOBAL $AUTORS;
+    $link = Admin::getTaskLink();
+    $elink = $link.'&state=edit&tmpl_id='.$this->request->getVar('tmpl_id', 0);
+?>
+<style type="text/css">
+    #filter h3 {
+        cursor: pointer;
+    }
+    
+    #filter {
+        overflow: hidden;
+        padding: 20px;
+    }
+</style>
+<script src="admin/js/loader-copy-mailru.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+    var MAILAPPID = '588137';
+    var MAILAPPKEY = 'dfc1eb613808539c17d80fbbf6af11ad';
+
+
+    function showBig(link) {
+        var win = window.open(link.href, 'Шаблон', "menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=800,height=800");
+        return false;
+    }
+    
+    function doChangeArea(area, max_size) {
+        var right_size = max_size - area.get('value').length;
+        var hlabel = area.getParent().getElement('.hlabel');
+        hlabel.set('text', 'осталось: ' + right_size);
+        return true;
+    }
+    
+    
+    window.addEvent('domready', function() {
+        mailru.loader.require('api', function() {
+            mailru.connect.init(MAILAPPID, MAILAPPKEY);
+            
+            mailru.connect.getLoginStatus(function(result) {
+                if (result.vid) {   
+                    if (submit_button = $('submit_button')) {
+    //                    if (result.vid == '8062938299454250872') {             
+                        submit_button.setStyle('display', 'inline');
+                        if ($('autor_id').get('value') == 0)
+                            $('autor_id').set('value', result.vid);
+    //                    }
+                    }
+                }
+            });
+            
+        });    
+        
+        if (filter = $('filter')) {
+            var ftable = filter.getElement('table');
+            var size = ftable.getSize();
+            var header = filter.getElement('h3');
+            
+            ftable.setStyle('display', 'none');
+            header.addEvent('click', function() {
+                ftable.setStyle('display', 'block');
+                ftable.tween('height', 0, size.y);
+            });
+        }
+    });
+    
+    function request(params, a_onSuccess) {
+        var jsonRequest = new Request.JSON({url: '<?=$link?>&ctype=json', onSuccess: a_onSuccess}).get(params);
+    }
+    
+</script>
+<h1>Каталог, шаблоны</h1>
+<div>
+<form action="<?=$link?>&state=edit" method="POST">
+<span>Редактировать шаблон под номером:</span><input type="text" name="tmpl_id" value="<?=$this->request->getVar('tmpl_id', 0)?>"><input type="submit" value="ага">
+</form>
+</div>
+<?if ($state == 'edit') {
+    $item = $result['item'];
+    $cats = $result['cats'];
+?>
+<a href="<?=$link?>">назад</a><br><br>
+<div>
+<a href="?task=catalog,edit&state=edit&tmpl_id=<?=$this->request->getVar('tmpl_id', 0) - 1?>">Предыдущий</a>
+<a href="?task=catalog,edit&state=edit&tmpl_id=<?=$this->request->getVar('tmpl_id', 0) + 1?>">Следующий</a>
+</div>
+<div>
+    <script type="text/javascript">
+        function onChangeTypeImage() {
+            document.location.href="<?=$elink?>&bigImage=<?=$bigImage?0:1?>"
+        }
+    </script>
+    <input type="checkbox" name="bigImage" <?=$bigImage?'CHECKED':''?> onchange="onChangeTypeImage()">Показывать большое изображение
+</div>
+<?if ($item && $item['tmpl_id']) {?>
+<form action="<?=$elink?>" method="POST" enctype="multipart/form-data">
+    <div class="block">
+        <table class="report">
+            <tr>
+                <td class="param">
+                    Изображение:
+                </td>
+                <td><a href="<?=TEMPLATESFULLURL.$item['tmpl_id']?>.jpg" onclick="return showBig(this)">
+                    <img src="<?=$bigImage?(FRAMEPREVIEWURL.$item['tmpl_id']):(TEMPLATES120URL.$item['tmpl_id'])?>.jpg" style="max-width:400px;max-height:400px">
+                </a></td>
+            </tr>
+            <tr>
+                <td class="param">
+                    Язык
+                </td>
+                <td>
+                    <select name="lang">
+                    <?foreach ($LANG_LABELS as $key=>$label) {
+                        $lang = $LANGS[$key];
+                    ?>
+                        <option value="<?=$lang?>" <?=(($item['lang']==$lang)?'selected="SELECTED"':'')?>><?=$label?></option>
+                    <?}?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="param">
+                    Активен
+                </td>
+                <td>
+                    <input type="checkbox" name="active" <?=($item['active']==1)?'checked':''?>>
+                    (Разрешить выдавать в поиске, а так же в каталоге на сайте)
+                </td>
+            </tr>
+            <!--  
+            <tr>
+                <td class="param">
+                    <?if (isset($result['files']['psd'])) {?>
+                        <a href="<?=FILE_URL.'psd/'.$item['tmpl_id']?>.png">Исходник PSD</a>
+                    <?} else {?>
+                        Исходник PSD
+                    <?}?>
+                </td>
+                <td>
+                    <input type="file" name="filePSD">
+                </td>
+            </tr>  
+            <tr>
+                <td class="param">
+                    <?if (isset($result['files']['png'])) {?>
+                        <a href="<?=FILE_URL.'png/'.$item['tmpl_id']?>.png">Исходник PNG</a>
+                    <?} else {?>
+                        Исходник PNG
+                    <?}?>
+                </td>
+                <td>
+                    <input type="file" name="filePNG" accept="image/png">
+                </td>
+            </tr>
+            -->
+            <tr>
+                <td class="param">
+                    Название (40 символов)
+                </td>
+                <td>
+                    <span class="hlabel"></span>
+                    <input type="text" name="name" value="<?=$item['name']?>" size="45" maxlength="40" onkeydown="return doChangeArea(this, 40)">
+                </td>
+            </tr> 
+            <tr>
+                <td class="param" colspan="2">
+                    Описание (180 символов) <span class="hlabel"></span><br>
+                    <textarea type="text" name="desc" style="width:650px;height:80px;" onkeydown="return doChangeArea(this, 180)"><?=$item['desc']?></textarea>
+                </td>
+            </tr>            
+            <tr>
+                <td>Информация о вырезах
+                </td>
+                <td><?
+                        if ($result['holes'] == 'none') {
+                        ?>
+                            <input type="checkbox" name="hole_visible"> показывать
+                        <?
+                        } else {
+                            if ($result['holes']) echo $result['holes'];
+                            else echo 'Нет файла вырезов!';
+                        }
+                    ?><br>
+                    <a href="<?=Admin::sheme()?>://oformi-foto.ru/pj/imgLoad.php?id=<?=$item['tmpl_id']?>&reset=1" target="_blank">Refresh holes</a>
+                </td>
+            </tr> 
+            <tr>
+                <td>Превью
+                </td>
+                <td>
+                    <a href="<?=Admin::sheme()?>://oformi-foto.ru/pj/preview.php?id=<?=$item['tmpl_id']?>&width=385&path=/home/oformi-foto.ru/385&reset=1" target="_blank">Refresh preview 385</a><br>
+                    <a href="<?=Admin::sheme()?>://oformi-foto.ru/pj/preview.php?id=<?=$item['tmpl_id']?>&width=120&path=/home/oformi-foto.ru/pj/preview120&reset=1" target="_blank">Refresh preview 120</a><br>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="block">
+        Автор шаблона:
+        <select name="aid" onchange="$('uid').set('value', '')">
+            <option value="0">--Я--</option>
+            <?foreach ($result['autors'] as $autor) {?>
+                <option value="<?=$autor['autor_id']?>" <?=($autor['autor_id']==$item['aid']?'SELECTED':'')?>><?=$autor['name']?></option>
+            <?}?>
+        </select>
+        <input type="text" name="uid" id="uid" size="10" value="<?=$item['aid']?>">
+        <input type="hidden" value="<?=$item['tmpl_id']?>" name="tmpl_id">
+        <input type="hidden" name="autor_id" id="autor_id" value="<?=$item['autor_id']?>">
+        <input type="hidden" name="update" value="1">
+        <input type="submit" id="submit_button" style="display: none;height: 60px;width: 200px;" value="ok">
+        <input type="button" value="Отмена" style="height: 60px;" onclick="document.location.href='<?=$link?>'">
+        <div>Если нет кнопки, <a href="//oformi-foto.ru/login.html">Авторизуйтесь пользователем mail.ru</a></div>
+    </div>
+    <div class="block">        
+        <table>
+            <tr>
+                <td class="param">
+                    Категории
+                </td>
+                <td>
+                    <?include(dirname(__FILE__).'/catalog/cats_box.php');?>
+                </td>
+            </tr> 
+        </table>
+    </div>
+</form>
+<?}
+} else {
+    if ($result) echo '<h2 style="color:blue;">Успешно!</h2>';
+    else if ($state) echo '<h2 style="color:red;">Неудача!</h2>'; 
+?>
+<div>
+    Вид: <a href="<?=$link?>&view_mode=medium">таблица</a>, <a href="<?=$link?>&view_mode=small">предпросмотр</a> 
+</div>
+<div class="report">
+<div>
+    <div id="filter" class="block">
+        <h3>Фильтр</h3>
+        <form action="<?=$link?>" method="POST">
+            <table class="report">
+                <tr>
+                    <td>Язык</td>
+                    <td>
+                        <select name="filter_lang[]" multiple>
+                            <?foreach ($LANGS as $i=>$landItem) {
+                                $selected = in_array($landItem, $filter_lang)?'SELECTED':'';
+                            ?>
+                                <option value="<?=$landItem?>" <?=$selected?>><?=$LANG_LABELS[$i]?></option>
+                            <?}?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="childOnly" <?=$childOnly?'CHECKED':''?> value="1"/> Только детские
+                    </td>
+                </tr>
+                <tr>
+                    <td class="param">
+                        Категории
+                    </td>
+                    <td colspan="2">
+                        <?include(dirname(__FILE__).'/catalog/cats_box.php');?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="param">
+                        Операнд
+                    </td>
+                    <td colspan="2">
+                        <input type='radio' value="OR" name="operand" <?=($operand=='OR')?'CHECKED':''?>>ИЛИ
+                        <input type='radio' value="AND" name="operand" <?=($operand=='AND')?'CHECKED':''?>>И 
+                        <input type='radio' value="NOT" name="operand" <?=($operand=='NOT')?'CHECKED':''?>>НЕ 
+                    </td>
+                </tr> 
+                <tr>
+                    <td>Автор</td>
+                    <td colspan="2">
+                        <select name="autor">
+                            <option value="0">Все</option>
+                            <?foreach ($autors as $autor) {
+                                $selected = '';
+                                $selected = ($cur_autor == $autor['autor_id'])?'SELECTED':'';
+                            ?>
+                                <option value="<?=$autor['autor_id']?>" <?=$selected?>><?=$autor['name']?></option>
+                            <?}?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="ok"></td>
+                    <td colspan="2">Сбросить фильтр <input type="checkbox" name="clearFilter"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&ce-page=%s')?>
+</div>
+<?include(dirname(__FILE__).'/catalog/list_'.$view_mode.'.html')?>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&ce-page=%s')?>
+</div>
+</div>
+<?}?>

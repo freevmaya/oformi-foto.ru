@@ -1,0 +1,87 @@
+<?
+    ss::$noadv = true;
+    $this->addScript(MAINURL.'/'.SSRELATIVE.'js/external.js');
+    $this->addMeta('viewport', array('content'=>'width=device-width, user-scalable=no'));    
+?>
+
+<script type="text/javascript">
+    var MAXSIZE         = 2600;
+    var query           = <?=json_encode($_GET)?>;
+    var ver             = (query.dev)?("?v=" + Math.random()):'?v=9';
+    var coptions = {
+        duration: 365
+    }
+    
+    function CookieUID(uid) {
+        if (query.uid != uid)
+            Cookie.write('uid', uid, coptions);
+    }
+    
+/*            
+    function pluginList() {
+        return [{
+            url             : 'http://oformi-foto.ru/test/collagesPlugins/base_effects.swf' + ver,
+            completeWait    : true
+        }];
+    }
+*/  
+
+    function domReady() {
+        
+        var div = $('wrapper');
+        var size = div.getSize();
+        
+        if (!query.flash) query.flash = query.dev?'dev/coloring':'v01/coloring';
+        
+        if (query.flash) {            
+            if (!query.data) query.data = 'data.json,vmaya/data.json';
+            
+            var params = {
+                quality                     : "high",
+                bgcolor                     : "0",
+                allowscriptaccess           : "sameDomain",
+                allowfullscreen             : "true",
+                allowFullScreenInteractive  : "true",
+                wmode                       : "opaque",
+                scale                       : 'noscale',
+                menu                        : 'false',
+                salign                      : 'tl',
+                base                        : '<?=MAINURL?>/coloring/'
+            };
+            
+            var attributes = {
+                id      : query.flash,
+                name    : query.flash,
+                align   : 'middle',
+                scale   : 'noscale',
+                menu    : 'false',
+                salign  : 'tl'
+            };
+            
+/*            
+            var size = window.getSize();
+            size.y -= $('menu').getSize().y + $('footer').getSize().y;
+            
+            $$('body').setStyle('overflow', 'hidden');
+            $('wrapper').setStyle('width', '100%');
+            
+            swfobject.embedSWF(params.base + query.flash + '.swf' + ver, "flashGame", size.x, size.y, "11", "expressInstall.swf", query, params, attributes);
+*/            
+            swfobject.embedSWF(params.base + query.flash + '.swf' + ver, "flashGame", '100%', '100%', "11", "expressInstall.swf", query, params, attributes);
+            
+            callbackObject = $(query.flash);
+        }
+    }
+    window.addEvent('domready', domReady);
+    window.addEvent('login_status', function(e) {
+        if (e.source && e.status) eval('external = ' + e.source + '_external');
+        else eval('external = default_external');
+    });
+</script>
+
+<div style="text-align: center; position: absolute;left:0px;top:60px;bottom:40px;right:0px" id="wrapper">
+    <div id="flashGame">
+   		<h3>Для работы приложения установите Flash Player</h3>
+      	<a href="http://www.adobe.com/go/getflashplayer"><img src="<?=SSURL?>/images/chrome_plugin.jpg" alt="Создай лучший коллаж" /></a>
+	</div>
+</div>

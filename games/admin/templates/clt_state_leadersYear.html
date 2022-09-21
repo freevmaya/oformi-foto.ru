@@ -1,0 +1,31 @@
+<style type="text/css">
+    .report img {
+        height: 100px;
+    }
+</style>
+<form action="<?=Admin::getTaskLink()?>" method="POST">
+    <select name="year">
+        <?foreach ($years as $c_year) {?>
+            <option value="<?=$c_year?>" <?=(($c_year==$year)?'SELECTED':'')?>><?=$c_year?></option>
+        <?}?>
+    </select>
+    <input type="submit">
+</form>
+<h2>Двадцатка лидеров <?=$year?> года</h2>
+<table class="report">
+    <tr>
+        <th>Пользователь</th>
+        <th>Годовой рейтинг</th>
+        <th>Всего побед</th>
+    </tr>
+<?foreach ($list as $item) {?>
+    <tr class="old">
+        <td>
+            <a href="<?=$item['user']->url_profile?>" target="_blank"><?=$item['user']->name?></a><br>
+            <a href="<?=$item['user']->pic640x480?>" target="_blank"><img src="<?=$item['user']->pic128x128?>"></a>
+        </td>
+        <td><?=$item['sum_rate']?></td>
+        <td><a href="<?=Admin::getTaskLink()?>&uid=<?=$item['uid']?>&year=<?=$year?>"><?=$item['vic_count']?></a></td>
+    </tr>
+<?}?>    
+</table>

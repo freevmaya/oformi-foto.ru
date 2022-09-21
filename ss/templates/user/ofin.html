@@ -1,0 +1,83 @@
+<?
+    GLOBAL $locale;
+    $this->title = $locale['LOGIN']; 
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+?>
+<script type="text/javascript">
+    var form;
+    function onSubmit(submit) {
+        if (!submit.hasClass('disable')) {
+            app.request('user,oflog', {
+                method: 'post',
+                email: form.getElement('input[name="email"]').get('value'),
+                pass: MD5.calc(form.getElement('input[name="pass"]').get('value'))
+            }, 
+            function(a_data) {
+                console.log(a_data);
+                if (a_data.response) {
+                    if (!a_data.response.is_user) app.alert(locale.WARNING, locale.USERNOFOUND);
+                    else location.href = '<?=link::c('user', 'login')?>'; 
+                }
+            });
+        }
+    }
+    
+    function onRegister() {
+        form.set('action', '<?=link::c('user', 'register')?>');
+        form.submit();
+    }
+    
+    window.addEvent('domready', function() {
+        form = $('ofin');
+        var sb = form.getElement('.ok');
+        new ValidateSimple($('ofin'), {
+            inputs: [form.getElement('input[name="email"]'), form.getElement('input[name="pass"]')],
+            onValid: function() { 
+                sb.removeClass('disable');
+            },
+            onInvalid: function() { 
+                sb.addClass('disable');
+            },
+            onInputValid: function(input) {
+                input.getParent().removeClass('error');
+            },
+            onInputInvalid: function(input, errors) {
+                if (errors) input.getParent().addClass('error');
+            }
+        });
+    });
+</script>
+<h1><?=$this->title?></h1>
+<div class="post ofin">
+    <form class="form" id="ofin" method="POST">
+        <table>
+            <tr>
+                <td class="ui-param ui-low">
+                    <?=$locale['EMAIL']?>: 
+                </td>
+                <td>
+                    <input name="email" type="email" placeholder="example@gmail.com" title="<?=$locale['INPUTTITLE']['EMAIL']?>" class="validate-email tipz"><span class="proplem">Некорректный адрес электронной почты</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="ui-param ui-low">
+                    <?=$locale['PASSWORD']?>: 
+                </td>
+                <td>
+                    <input name="pass" type="password" placeholder="******" title="<?=$locale['INPUTTITLE']['PASSWORD']?>" class="validate-text tipz" data-min-length="5" value=""><span class="proplem">Некорректный пароль. Требуется не менее 6 символов</span>
+                </td>
+            </tr> 
+            <tr>
+                <td colspan="2" style="padding-left: 180px;">
+                    <a onclick="onSubmit(this); return false;" class="ctrl-button disable ok"><?=$locale['OK']?></a>
+                    <a onclick="onRegister()" class="ctrl-button"><?=$locale['REGISTER']?></a>
+                </td>
+            </tr> 
+            <tr>
+                <td colspan="2" style="padding-left: 180px;">
+                    <a href="<?=link::c('user', 'forgotpass')?>"><?=$locale['FORGOTPASS']?></a>
+                </td>
+            </tr>
+        </table>                
+    </form>
+</div>

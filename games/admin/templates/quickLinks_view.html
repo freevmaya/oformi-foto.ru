@@ -1,0 +1,92 @@
+<h1>Быстрые ссылки</h1>
+<div>
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+    if ($this->request->getVar('action', false) && isset($result) && $result)
+        echo '<h3 style="color:red">Успешно!</h3>';
+    if (($state == 'new') || ($state == 'edit')) {
+?>
+    <a href="<?=$link?>">назад</a>
+    <h2><?=($state=='new')?'Новая ссылка':'Редактирование'?></h2>
+    <?=isset($result['id'])?('<h3>ID: '.$result['id'].'</h3>'):''?>
+    <form method="POST" action="<?=$link?>&state=update">
+        <table>
+            <tr>
+                <td class="param">
+                    Текст ссылки (60)
+                </td>
+                <td>
+                    <?=$this->inputHtml('name', 60, @$result['name']);?>
+                </td>
+            </tr> 
+            <tr>
+                <td class="param">
+                    Атрубит "title" (60)
+                </td>
+                <td>
+                    <?=$this->inputHtml('title', 60, @$result['title']);?>
+                </td>
+            </tr>  
+            <tr>
+                <td class="param">
+                    URL (80)
+                </td>
+                <td>
+                    <?=$this->inputHtml('url', 80, @$result['url']);?>
+                </td>
+            </tr> 
+        </table>
+        <input type="hidden" name="id" value="<?=@$result['id']?>">
+        <input type="hidden" name="action" value="<?=isset($result['id'])?'update':'add';?>">
+        <input type="submit">
+    </form>        
+
+<?    
+    } else { 
+?>
+<a href="<?=$link?>&state=new">Добавить</a>
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&page=%s')?>
+</div>
+
+<table class="report">
+    <tr> 
+        <th>
+            ID
+        </th>
+        <th>
+            Текст
+        </th>
+        <th>
+            атрибут: title
+        </th>
+        <th>
+            URL
+        </th>
+        <th>
+            Удалить
+        </th>
+    </tr>
+<?foreach ($list as $key=>$item) {?>
+    <tr class="<?=(($key%2)?'odd':'')?>?>">
+        <td>
+            <?=$item['id']?>
+        </td>
+        <td>
+            <a href="<?=$link?>&state=edit&id=<?=$item['id']?>"><?=$item['name']?></a>
+        </td>
+        <td>
+            <?=$item['title']?>
+        </td>
+        <td>
+            <a href="<?=MAINURL.'/'.$item['url']?>" target="_blank"><?=$item['url']?></a>
+        </td>
+        <td>
+            <a href="<?=$link?>&state=delete&action=delete&id=<?=$item['id']?>" onclick="return confirm('Вы действительно хотите удалить запись?');">удалить</a>
+        </td>
+    </tr>
+<?}?>    
+</table>    
+<?}?>
+</div>

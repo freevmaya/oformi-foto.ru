@@ -1,0 +1,50 @@
+<?
+//    $catalog = array(0=>'Поздравительные', 20='Поиск', 21='Поиск');
+?>
+<div>
+    <h3>Общая статистика</h3>
+    <div>С <?=$dates['min_date']?> по <?=$dates['max_date']?></div>
+    <div><input type="checkbox" name="as_graph" <?=$as_graph?'CHECKED':''?> value="1" onchange="document.location.href='<?=Admin::getTaskLink()?>&as_graph=' + (this.checked?1:0)">В виде графиков</div>
+    
+    <div class="state">
+        <a href="<?=Admin::getTaskLink()?>&type=1">Контекст</a>
+        <a href="<?=Admin::getTaskLink()?>&type=2">Каталог</a> 
+        <a href="<?=Admin::getTaskLink()?>&type=3">Поиск</a>  
+        <a href="<?=Admin::getTaskLink()?>&type=4">Самые отправляемые</a>  
+        <a href="<?=Admin::getTaskLink()?>&type=12">Состоятельность</a>  
+        <a href="<?=Admin::getTaskLink()?>&type=14">Источники</a>
+    <div>
+<?
+    if ($as_graph) {
+        
+?>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart() {
+        
+            var data = google.visualization.arrayToDataTable(<?=json_encode(array_merge(array($fields), $result))?>);
+            
+            var options = {
+                title: 'Статистика по дням',
+                hAxis: {title: 'Дата',  titleTextStyle: {color: '#333'}},
+                vAxis: {minValue: 0},
+                height: 300,
+                legend: {position: 'top', maxLines: 3}
+            };
+            
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+    <div class="result" id="chart_div" style="top:20px; width: 700px;"></div>
+<?} else {?>    
+    <div class="result" style="top: 20px;">
+        <?=$this->showTable($result, $refs);?>
+    </div>
+<?}?>    
+</div>    

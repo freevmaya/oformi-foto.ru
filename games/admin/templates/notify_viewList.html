@@ -1,0 +1,83 @@
+<style type="text/css">
+    .param {
+        font-weight: bold;
+        width: 160px;
+        display: inline-block;
+    }
+</style>
+<h3>
+</h3>
+<?
+    $titles = array('pj'=>'Прикольное оформление на "Одноклассники"', 'mmpj'=>'Прикольное оформление в "Моем мире"', 
+                    'okclt'=>'Прикольное перевоплощение на "Одноклассники"', 'mmclt'=>'Прикольное перевоплощение в "Моем мире"');
+    foreach ($items as $item) {
+        $conf = $item['config'];
+?>
+<div class="item block">
+    <h2><?=$titles[$item['path']]?></h2>
+    <form method="POST" action="<?=Admin::getTaskLink()?>">
+        <span class="param">Состояние:</span> <?=$item['state']?><br>
+        <span class="param">Настройки:</span>
+        <div class="panel">
+        <table>
+            <tr>
+                <td class="param">Активно</td>
+                <td><input type="checkbox" name="enabled" value="1" <?=$conf->enabled?'CHECKED':'';?>></td>
+            </tr>        
+            <tr>
+                <td class="param">Номер записи</td>
+                <td><input type="text" name="count" value="<?=$item['count']?>"></td>
+            </tr>
+            <tr>
+                <td class="param">Задержка MLS</td>
+                <td><input type="text" name="wait_mls" value="<?=$conf->wait_mls?>" size="10"></td>
+            </tr>
+            <tr>
+                <td class="param">Запрос</td>                
+                <td>
+                <?
+                    $curQuery = $conf->query?$conf->query:$conf->default_query;
+                    if ($item['query_list']) {?>
+                    <select name="query">
+                        <?foreach ($item['query_list'] as $query) {?>
+                        <option value="<?=$query['query'].'|'.$query['table']?>" <?if (strcasecmp($curQuery, $query['query']) == 0) echo 'SELECTED'?>><?=$query['name']?></option>
+                        <?}?>
+                    </select>
+                <?} else {?>
+                    <textarea style="width:800px;height:60px" type="text" name="query"><?=$curQuery?></textarea>
+                <?}?>
+                </td>
+            </tr>
+            <tr>
+                <td class="param">Сообщения</td>
+                <td>
+                    <table>
+                    <?foreach ($conf->messages as $key=>$mitem) {?>
+                        <tr>
+                            <td><?=$key?></td><td><input type="text" name="<?=str_replace('.', '_', $key);?>" value="<?=$mitem?>" size="120"></td>
+                        </tr>
+                    <?}?>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" value="<?=$item['path']?>" name="path">
+        <input type="submit" value="Применить">
+        </div>
+        </form>
+    <pre>
+        <?
+            if (isset($item['log']) && (count($item['log']) > 0)) {
+        ?>
+<span class="param">Последняя строка лога:</span>
+        <?
+                print_r($item['log'][count($item['log']) - 1]);
+            }
+        ?>
+    </pre>
+    <form method="POST" action="<?Admin::getTaskLink()?>">
+        <input type="hidden" value="<?=$item['path']?>" name="reset">
+        <input type="submit" value="Рестарт">
+    </form>
+</div>
+<?}?>

@@ -1,0 +1,55 @@
+<?
+	include_once(CONTROLLERS_PATH.'coinController.php');
+	GLOBAL $coinData;
+	$balance = coinController::getBalance();
+	$notenough = $balance < $coinData['MINLIMIT'];
+	$user = ss::getUser();
+
+	if ($user) {
+		if ($notenough) {
+			$output_title = sprintf($locale['NOTENOUGHBALANCE'], $coinData['MINLIMIT']);
+		} else {
+			$output_title = '';
+		}
+	} else {
+		$output_title = '';
+	}
+?>
+<script type="text/javascript">
+	function showInstr() {
+		var ois = $('output-inst');
+		ois.setStyle('display', 'table-cell');
+		(()=>{ois.getElement('div').setStyle('height', 300)}).delay(200);
+	}
+</script>
+<h2><?=$locale['COININFO']?></h2>
+<table class="coin">
+	<tr>
+		<td class="ui-param"><?=$locale['BALANCELABEL']?></td>
+		<td class="balance DOGE money"><?=number_format($balance, 8)?> <b>DOGE</b></td>
+		<td>
+			<?if ($user) {?>
+			<a href="#" title="<?=$output_title?>" onclick="<?=$notenough?'alert(\''.$output_title.'\');':'showInstr();'?> return false;"><?=$locale['OUTPUT']?></a>
+			<?} else {?>
+			<a href="<?=link::c('user', 'login')?>" title="<?=$output_title?>" onclick="showInstr(); return false;"><?=$locale['LOGINREQUIRECOIN']?></a>
+			<?}?>
+		</td>
+	</tr>
+	<?if ($user) {?>
+	<tr>
+		<td colspan="3" id="output-inst">
+			<div>
+				<?include(SSPATH.'articles/'.ss::lang().'/coin-instruction.html')?>
+			</div>
+		</td>
+	</tr>
+	<?}?>
+	<tr>
+		<td class="ui-param"><?=$locale['CURCURSE']?></td>
+		<td class="money"><?=number_format($coinData['DOGE_RUB'], 8)?> <b>DOGE/RUB</b></td>
+		<td></td>
+	</tr>
+</table>
+<?
+	if (file_exists($file_path = SSPATH.'articles/'.ss::lang().'/coin info userpage.html')) include($file_path);
+?>

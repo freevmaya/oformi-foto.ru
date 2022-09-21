@@ -1,0 +1,68 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    
+    $link = Admin::getTaskLink();
+?>
+<h3>Список операция по пользователю</h3>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+    <table>
+        <tr>
+            <td>
+                Пользователь:
+            </td>
+            <td>
+                <?=$this->html_uidInput($uid)?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <input type="submit">
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&uid='.$uid.'&'.$page_field.'=%s')?>
+</div>
+<table class="report">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Время
+        </th>
+        <th>
+            Код сервиса
+        </th>
+        <th>
+            Название сервиса
+        </th>
+        <th>
+            Цена
+        </th>
+        <th>
+            Параметры
+        </th>
+    </tr>
+    <? 
+        foreach ($list as $key=>$item) {
+    ?>
+        <tr class="<?=(($key%2)?'odd':'')?>">
+            <td><?=$item['transaction_id']?>
+            </td>
+            <td><?=$item['time']?>
+            </td>
+            <td><?=$item['service_id']?>
+            </td>
+            <td><?=$item['service_name']?>
+            </td>
+            <td><?=$item['price']?>
+            </td>
+            <td><?=$item['params']?>
+            </td>
+        </tr>
+    <?}?> 
+</table>

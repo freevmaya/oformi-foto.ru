@@ -1,0 +1,7 @@
+<h2>Еще статьи по теме:</h2>
+<?
+    foreach ($articleList as $article) {
+        if (ss::$task[2] != str_replace('+', ' ', $article['link']))
+            echo "<a href=\"".mainURL.$article['link']."\">".$article['title']."</a>";
+    }
+?>

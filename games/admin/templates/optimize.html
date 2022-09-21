@@ -1,0 +1,54 @@
+<h3>Оптимизация таблиц</h3>
+<?if ($this->request->getVar('optimize', 0)) {?>
+<div>
+<table class="report">
+    <tr>
+        <th>
+            Таблица
+        </th>
+        <th>
+            Результат
+        </th>
+    </tr>
+    <?foreach ($result as $item) {?>
+    <tr>
+        <td>
+            <?=$item['Table']?>
+        </td>
+        <td>
+            <?=$item['Msg_text']?>
+        </td>
+    </tr>
+    <?}?>
+</table>    
+</div>
+<?} else {?>
+<form method="POST" action="?task=utils,optimize&optimize=1">
+<table class="report">
+    <tr>
+        <th>
+            Оптимизировать
+        </th>
+        <th>
+            Имя таблицы
+        </th>
+    </tr>
+    
+    <?foreach ($tables as $key=>$table) {?>
+    <tr>
+        <td align="right">
+            <input type="checkbox" name="cht[<?=$key?>]" value="<?=$table?>" checked>
+        </td>
+        <td>
+            <?=$table?>
+        </td>
+    </tr>
+    <?}?>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Оптимизировать">
+        </td>
+    </tr>
+</table>
+</form>
+<?}?>

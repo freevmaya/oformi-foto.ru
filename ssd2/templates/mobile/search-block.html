@@ -1,0 +1,15 @@
+<script type="text/javascript">
+     function sendSearch(form) {
+        var text = form.getElement('.searchText').get('value').trim();
+        text = translit(text.replace(/\s+/g, '+'));
+        if (text) {
+            form.set('action', form.get('action') + text + '.html');
+            return true;
+        } else return false;        
+     }                                                                                    
+</script>
+<div id="search">
+    <form method="POST" action="<?=MAINURL.'/naydeny-ramki/'?>" onsubmit="return sendSearch(this);">
+        <label for="searchText"><?=$locale['SEARCHLABEL']?></label><input class="searchText" type="text" name="searchText" value="<?=$this->request->getVar('searchText');?>"/><input type="submit" value=""/>
+    </form>
+</div>

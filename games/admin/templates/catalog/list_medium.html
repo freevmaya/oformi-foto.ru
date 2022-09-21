@@ -1,0 +1,52 @@
+<table class="report">
+    <tr> 
+        <th>
+            ID
+        </th>
+        <th>
+            Дата
+        </th>
+        <th>
+            Предпросмотр
+        </th>
+        <th>
+            Название
+        </th>
+        <th>
+            Описание
+        </th>
+        <th>
+            Автор
+        </th>
+        <th>
+            Удалить
+        </th>
+    </tr>
+<?foreach ($list as $key=>$item) {
+    $tmpl_link = $link.'&state=edit&tmpl_id='.$item['tmpl_id'];
+    ?>
+    <tr class="<?=(($key%2)?'odd':'')?>">
+        <td>
+            <?=$item['tmpl_id']?>
+        </td>
+        <td>
+            <?=date('d.m.y', strtotime($item['insertTime']))?>
+        </td>
+        <td>
+            <a href="<?=$tmpl_link?>"><img src="<?=TEMPLATESURL.$item['tmpl_id']?>.jpg"></a>
+        </td>
+        <td>
+            <a href="<?=$tmpl_link?>"><?=$item['name']?></a>
+        </td>
+        <td>
+            <?=$item['desc']?>
+        </td>
+        <td>
+            <?=@(($item['autor_name']?($item['autor_name'].'-'):'').$AUTORS[$item['autor_id']])?>
+        </td>
+        <td>
+            <a href="<?=$link?>&state=delete&tmpl_id=<?=$item['tmpl_id']?>" onclick="return confirm('Вы действительно хотите удалить запись?');">удалить</a>
+        </td>
+    </tr>
+<?}?>    
+</table>

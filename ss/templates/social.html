@@ -1,0 +1,46 @@
+<?
+GLOBAL $isSocial;
+
+if (ss::$socialfooter) {
+    $isSocial = true;
+?>
+
+<div id="social">
+<?
+GLOBAL $root, $sheme;  
+$ssource = $root->getSocialSource();
+if (!$ssource) {
+    include_once(TEMPLATES_PATH.'comments.html');
+} else if ($ssource == 'vk') {
+?>
+    <?include_once(TEMPLATES_PATH.'comments.html')?>
+<?} else if ($ssource == 'fb') {?>
+<!--    <div class="fb-like" data-href="<?=ss::currentURL();?>" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>-->
+    <?include_once(TEMPLATES_PATH.'comments.html')?>
+<?} else if ($ssource == 'ok') {?>
+    <div id="ok_shareWidget" style="margin:0 auto;"></div>
+    <?include_once(TEMPLATES_PATH.'comments.html')?>
+    <script>
+        !function (d, id, did, st) {
+          var js = d.createElement("script");
+          js.src = "<?=$sheme?>connect.ok.ru/connect.js";
+          js.onload = js.onreadystatechange = function () {
+          if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+            if (!this.executed) {
+              this.executed = true;
+              setTimeout(function () {
+                    OK.CONNECT.insertShareWidget(id,did,st);
+              }, 0);
+            }
+          }};
+          d.documentElement.appendChild(js);
+        }(document,"ok_shareWidget",document.URL,"{width:310,height:50,st:'oval',sz:45,ck:2}");
+    </script>
+<?} else if ($ssource == 'mm') {?>
+    <div style="height:45px;">    
+        <span class="share-mm" onclick="mm_shareClick(); return false;">Нравится</span>
+    </div>
+    <?include_once(TEMPLATES_PATH.'comments.html')?>
+<?} else include_once(TEMPLATES_PATH.'comments.html');?>
+</div>
+<?}?>

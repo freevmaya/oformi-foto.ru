@@ -1,0 +1,130 @@
+<?
+    GLOBAL $locale, $sheme;     
+    if ($user) {    
+    $this->title    = ss::userName($user).', '.$locale['PAGEUSERTITLE'];
+    $this->description = $locale['PAGEUSERTITLE'].' '.ss::userName($user).', '.$locale['PAGEUSERDESC'];
+    
+    $extLink    = ss::extUserLink($user);
+    $subsLink   = $sheme.'//pushall.ru/?fs='.PUSHALLID;
+    $avatar = ss::avatar($user);
+?>
+<script>
+    
+    function onComplete_remove(id, a_data) {
+        if (a_data.toInt() == 1) {
+            $('g-' + id).removeClass('active').addClass('remove');   
+        }
+        console.log(a_data);
+    }
+    
+    function confirm_remove(onOk) {
+        app.removeConfirm(onOk); 
+    } 
+    
+    function confirm_subsgame(onOk) {
+        puahhAllHtml = $$('.pushall-widget')[0];
+        app.alert(locale.SUBSCRIBE, puahhAllHtml.get('html'), function() {
+            location.href = SUBSLINK;
+        }, {width: 360, isCancel: true}); 
+    }
+
+    function onClick(e) {
+        var action = e.target.get('data-action');
+        var id = e.target.get('data-id');
+        function doAction() {
+            app.request('game,' + action, {id: id}, function(a_data) {
+                window['onComplete_' + action](id, a_data.response);             
+            });
+        }
+        var ca = window['confirm_' + action];
+        if (ca) ca(doAction)
+        else doAction();
+        e.stopPropagation();
+        return false;
+    }
+    
+    window.addEvent('domready', function() {
+        $$('.games .submenu a').each(function(elem) {
+            elem.addEvent('click', onClick);            
+        })
+    });
+    
+<?if ($isMainPage || ss::$isAdmin) {?>
+    function onCompleteAvatar(a_data) {
+        if (a_data) $('page_avatar').set('src', a_data);
+        else app.alert(locale.ERROR, locale.WRONG_RESPONSE);
+    }
+    
+    function doUnion() {
+        app.request('user,union', {
+            nauid: '<?=$user['nauid']?>' 
+        }, function(a_data) {
+            if (a_data.response && a_data.response.result) {
+                app.alert(locale.SUCCESS, locale.UNIONSUCCESS);
+                (function() {
+                    location.href = '<?=link::c('user', 'page')?>';
+                }).delay(2000);
+            } else app.alert(locale.ERROR, locale.WRONG_RESPONSE);
+        });
+    }
+<?}?>    
+</script>
+<div class="post user-page">
+    <?if ($isMainPage) {?>
+    <div style="height:1px;overflow:hidden;position:absolute;">
+        <?include(TEMPLATES_PATH.'pushall.php');?>
+    </div>
+    <?}?>
+    <table>
+        <tr>
+            <td class="user-info ui-top-text">
+                <div>
+                    <?if ($isMainPage) {?>
+                        <div class="submenu">
+                            <a href="#" onclick="app.changeAvatar(onCompleteAvatar);return false;"><?=$locale['CHANGEAVATAR']?></a>
+                            <?if ($user['source'] == 'of') {?>
+                            <a href="<?=link::c('user', 'options')?>"><?=$locale['EDITPROFILE']?></a>
+                            <?}?>
+                        </div>
+                    <?}?>
+                    <img src="<?=$avatar?>" id="page_avatar">
+                </div>
+                <?if (($isMainPage || ss::$isAdmin) && ($user['uid'] > 0) && ($user['source'] == 'none') && $curUser) {?>
+                <div class="a-center">
+                    <a title="<?=$locale['INFO']?>::<?=$locale['UNIONUSERDESC']?>" class="ctrl-button tipz" onclick="doUnion()"><?=$locale['UNIONUSER']?></a>
+                </div>
+                <?}?>
+                <?if ($naUsers) {?>
+                    <h3 class="ui-low"><?=$locale['LINKEDUSERS']?></h3>
+                    <div class="quick-links ui-low">
+                    <?
+                        foreach ($naUsers as $otuser) {
+                    ?>
+                    <a href="<?=ss::userLink($otuser)?>" class="tipz" title="<?=$locale['ACCAUNT']?>::<?=$locale['AUTHORIZER'][$otuser['source']]?>"><?=ss::userName($otuser)?></a>
+                <?}?>
+                </div>
+                <?}?> 
+            </td>
+            <td class="ui-top-text user-params">
+                <?include(dirname(__FILE__).'/page/user-info.html')?>
+                <?if ($isMainPage) include(dirname(__FILE__).'/page/coin-info.html')?>
+                <?//include(dirname(__FILE__).'/page/game-info.html')?>
+            </td>
+        </tr>
+    </table>    
+</div>
+<div id="social">
+    <script type="text/javascript">
+        comments('<?=link::c('comment', 'ajax')?>', 'user-page-<?=$user['source'].$user['uid']?>', function(comment, answer_to) {
+            app.SendEvent('PG-COMM', <?=$user['uid']?>, <?=$user['nauid']?>, '<?=$user['source']?>');
+            if (answer_to)
+                app.SendEvent('PA-COMM', answer_to[1], answer_to[0], answer_to[2], '<?=$user['uid']?>', '<?=$user['source']?>');
+        }, function(data_cm) {
+            app.SendEvent('PCM-LIKE', data_cm[1], <?=$user['uid']?>, data_cm[2], data_cm[0]);
+        });
+    </script>
+    <div class="tmpl-login">
+        <?include_once(TEMPLATES_PATH.'user/login_block.html')?>    
+    </div>
+</div>
+<?}?>

@@ -1,0 +1,83 @@
+<?
+	include_once(CONTROLLERS_PATH.'/coinController.php');
+	GLOBAL $coinData;
+?>
+<script type="text/javascript">
+	(function() {
+		var cointInfo;
+
+		function sendCoin(onResponse) {
+			app.afterAdv(function() {
+				app.request('coin,send', {value: <?=$coinData['PRICE']?>, service: 1}, onResponse);
+			}, locale.COINADVTITLE);
+		}
+
+		function e$(ne) {
+			return cointInfo.getElement(ne);
+		}
+
+		function showInfo() {
+	        cointInfo.setStyle('display', 'block');
+	        (function() {cointInfo.setStyle('left', 5)}).delay(100);
+		}
+
+		function closeInfo() {
+	    	cointInfo.setStyle('left', -cointInfo.getSize().x);
+	    	(function() {cointInfo.setStyle('display', 'none')}).delay(1000);
+	    }
+
+	    function clearNoCoinInfo() {
+			Cookie.write('NOCOININFO', 0);	    	
+	    }
+
+	    function extInit() {
+	    	cointInfo = $('coinInfo');
+
+		    e$('.ficlose').addEvent('click', closeInfo);
+		    e$('.fullclose').addEvent('click', function() {
+		    	Cookie.write('NOCOININFO', 1);
+		    	closeInfo();
+		    });
+
+    		window.addEvent('SAVETOFILE', function(e) {
+    			sendCoin(showInfo);
+    		});
+	    }
+
+	    function smallInit() {
+	    	cointInfo = $('coinSmall');
+
+    		window.addEvent('SAVETOFILE', function(e) {
+    			sendCoin(function() {
+	    			showInfo();
+				    setTimeout(closeInfo, 4000);
+    			});
+    		});
+	    }
+
+		window.addEvent('domready', function() {
+			if (Cookie.read('NOCOININFO') != 1) extInit(); else smallInit();
+			//setTimeout(showInfo, 4000);
+		});
+
+	})();
+</script>
+<div id="coinInfo">
+	<h2 class="DOGE">Информация</h2>
+	<div style="color:cadetblue">
+		Спасибо, что пользуетесь этим приложением! Впервые в истории интернета мы платим вам за использование наших продуктов. За текущую операцию <b style="color:rgb(146, 86, 31);">вы получаете <?=$coinData['PRICE']?> DOGE!</b> - оплата производится в криптовалюте. 
+<br>
+		Что такое криптовалюта? Это электронная валюта, которая не привязана ни к одной банковской или государственной системе. На данный момент курс валюты DOGE составляет <?=$coinData['DOGE_RUB']?> рублей. Вы ее можете обменять на рубли или доллары в <a href="<?=$coinData['REFLINK']?>" target="_blank">обменнике</a>.
+	<?if (ss::getUser()) {?>
+	<?} else {
+	}?>
+	</div>
+	<div class="finfo">
+		<a href="<?=link::c('article', 'coin-info')?>">Подробней</a>
+		<a class="ficlose">Закрыть</a>
+		<a class="fullclose">Больше не показывать</a>
+	</div>
+</div>
+<div id="coinSmall">
+	<a href="<?=link::c('article', 'coin-info')?>"><div class="DOGE S32"></div></a>
+</div>

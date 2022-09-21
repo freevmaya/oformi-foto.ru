@@ -1,0 +1,111 @@
+<?
+    $this->title        = 'GIF аниматор';
+    $this->description  = 'Уникальное приложение, позволяет создать GIF файл из ваших фотографий';
+    GLOBAL $_GET, $_SESSION;
+    $JSURL = MAINURL.'/'.SSRELATIVE.'js/'; 
+    
+    $this->addMeta('page-image', SSURL.'images/afb.jpg');
+//    require_once(SSPATH.'templates/banners.php');
+?>
+<div style="margin-bottom: 10px;">
+<h1>GIF аниматор</h1>
+<p>Сделайте гиф-анимацию из ваших фотографий</p>
+</div>
+<div id="flashAPP" style="width: 1000px; margin:0 auto;">
+    <div id="embed" style="width: 1000px"></div>
+</div>
+<?echo tHtml('opisanie-givavt');?>
+<div class="post">
+    <?include(TEMPLATES_PATH.'/apps.html')?>
+</div>
+<script src="<?=$JSURL?>external.js?v=<?=$ver?>" type="text/javascript"></script>
+<script type="text/javascript">
+//    <?if ($source) echo "external = {$source}_external;\n"?>
+
+    var cur_source = 'none';
+    
+    var app_params = {
+        app_id: '',
+        viewer_id: 0,
+        dev: <?=$this->request->getVar('dev', 0)?>,
+        ver: <?=$ver?>
+        <?
+            if (isset($_GET['state']))
+                echo ", state:'".$_GET['state']."'";
+        ?>
+    };
+    
+    function appInit(sfwFile, aliase, flash_values) {
+        var flashAPP = $('flashAPP'); 
+        var size = flashAPP.getSize();
+        var sfwPath = "<?=$basePath?>/" + sfwFile + "?<?=$ver?>";
+                
+        size.y = flash_values.height?flash_values.height:size.y;
+        
+        flashAPP.setStyle('height', size.y);
+        
+        $('social').setStyle('width', size.x);
+        
+        
+        var params = {
+            movie: sfwPath,
+            quality: "high",
+            scale: "noscale",
+            menu: "false",
+            align: "middle",
+            salign: "tl",
+            base: "gifavt/",
+            wmode: "transparent",
+            allowNetworking: "all",
+            allowFullScreen: "true"
+        }
+        
+        var attributes = {
+            id: aliase,
+            name: aliase
+        };      
+        swfobject.embedSWF(sfwPath, aliase, size.x, size.y, "10", "expressInstall.swf", flash_values, params, attributes);
+/*        
+        var objectValue = '<object data="gifavt/dev/of_gifavt.swf?<?=$ver?>" name="gifavt" id="embed" type="application/x-shockwave-flash" height="905" width="1000"><param value="high" name="quality"><param value="noscale" name="scale"><param value="false" name="menu"><param value="middle" name="align"><param value="tl" name="salign"><param value="gifavt" name="base"><param value="transparent" name="wmode"><param value="all" name="allowNetworking"><param value="true" name="allowFullScreen"><param value="window_id=CometName_a8df82bd4f0808d94ae23aa538abc7cf&amp;sig=523f66fc78610c49f37f54085303390d&amp;vid=8062938299454250872&amp;state=&amp;ss=29290a390e2b63ac65fe6c3eaca7f222&amp;session_key=1f40a8aa8f89af8f1886ec4811dbb6da&amp;oid=8062938299454250872&amp;is_app_user=1&amp;ext_perm=notifications&amp;exp=1424429073&amp;app_id=588137&amp;viewer_id=8062938299454250872&amp;ver=8983956&amp;dev=1&amp;sex=1&amp;game_id=0&amp;height=905&amp;ImageProxy=<?=$ImageProxy?>" name="flashvars"></object>'; 
+        $('flashAPP').set('html', objectValue);
+*/        
+        
+        callbackObject = $('embed');
+    }
+    
+    function freeInit() {
+        external = default_external;
+        appInit('of_gifavt.swf', 'embed', {
+            api_id      : '588137',
+            height      : 905
+        });
+    }
+    
+    window.addEvent('login_status', function(e) {
+        if (cur_source != e.source) {
+            if (e.status && e.source) {
+                var params = {height: 905};
+                if (e.source == 'mm') params.ImageProxy = '//oformi-foto.ru/getimage.php?src=';
+                
+                eval('external = ' + e.source + '_external');
+                appInit('of_gifavt.swf', 'embed', params);
+            } else {
+                eval('external = default_external');
+                freeInit();
+            }
+            cur_source = e.source;
+        }
+    });
+/*    
+    var flashAPP = $('flashAPP'); 
+    flashAPP.getParent().setStyle('width', '760');
+    
+    var size = flashAPP.getSize();
+    if (size.x < 500) size.x = 500;
+    else if (size.x > 1500) size.x = 1500;
+    flashAPP.setStyle('width', size.x);
+*/    
+</script>
+<?
+    include(TEMPLATES_PATH.'/social.html');
+?>

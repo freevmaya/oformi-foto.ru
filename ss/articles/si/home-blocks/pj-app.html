@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    var eindex = 0;
+    var eurls = ['<?=$sheme?>oformi-foto.ru/<?=$pjjs_path?>', '<?=$sheme?>oformi-foto.ru/pjjs/left-list.php?group=child'];
+    function swapEditor() {
+        eindex = (eindex + 1) % eurls.length;
+        $('appframe').src = eurls[eindex];
+    }
+</script>
+
+<div class="post">
+    <p><b>Izberite okvir ali predlogo</b> za okrasitev fotografije s seznama predlog. Ko se okvir odpre, lahko naložite svojo fotografijo. Če želite to narediti, dvokliknite izrez ali pritisnite gumb "Vstavi svojo fotografijo" poleg izreza. V računalniku izberite fotografijo. Z miško uredite položaj fotografije v izrezu. Shranite rezultat v računalnik, kliknite gumb s puščico, usmerjeno navzdol proti pravokotniku, ki simbolizira vsebnik ali disketo. Poglej
+    <a href="//www.youtube.com/embed/NCMeTj9f3Sw" class="boxed help" data-video="{url:'//www.youtube.com/embed/NCMeTj9f3Sw',handler:'iframe',size:{x:900,y:506},iframePreload:true}">video navodila</a></p><p>Če imate raje starejšo različico urejevalnika <a href="<?=link::c('app', 'view');?>" onclick="swapEditor()">odprite aplikacije s te povezave</a></p>
+    <div id="pjjs">
+        <?//include(__DIR__.'/pj_app_share.html')?>
+        <iframe src="<?=PJJS_URL.'/'.$pjjs_path?>" id="appframe">
+        </iframe>
+    </div>
+    <div style="text-align: center; margin: 10px;">
+        <a href="<?=mainURL?>view.htm" data-rel="<?=MAINURL?>/pjjs.htm" class="ctrl-button app-link">Želim več okvirjev za fotografije!</a>
+        <a href="#" class="ctrl-button app-link" onclick="showThankView()">Hvala vam!</a>
+    </div>
+    <div class="clr"></div>
+    <p>Lahko tudi obiščete <a href="<?=MAINURL?>/view.htm">flash приложение</a>, ali v <a href="<?=MAINURL?>/fotoramki.html">katalogu fotookvirjev</a> in kul predlog, kamor morate vstaviti obraz.</p>
+</div>

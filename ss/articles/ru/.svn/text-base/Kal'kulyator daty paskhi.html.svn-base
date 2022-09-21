@@ -1,0 +1,96 @@
+<?
+    $this->title = 'Калькулятор даты пасхи';
+    $this->description = 'Тысяча фоторамок онлайн и бесплатно. Прикольный фотомонтаж, коллажи, приколы с фото, календари, поздравительные открытки с вашим фото ко всем праздникам и многое другое!';
+    $curYear = date('Y');
+    $startYear = date('Y', strtotime('-15 year'));
+    $ycount = 50;
+    $pasList = DB::asArray("SELECT * FROM `gpj_holiday` WHERE `func` LIKE '%PAS%' ORDER BY `date`");
+    
+    $jsList = '';
+    foreach($pasList AS $i=>$item) {
+        $iday = explode(',', $item['func']);
+        $jsList .= ($i>0?',':'')."{id: {$item['holiday_id']},name: '{$item['name']}', iday: {$iday[1]}}";
+    }    
+?>
+<style type="text/css">
+    .calc-result {
+        font-size: 16px;
+        padding: 20px;
+        color: #777;        
+    }
+    
+    .calc-result .gen a {
+        color: black !important;
+        font-size: 18px !important;
+    }
+    
+    .calc-result a {
+        display: inline-block;
+        width: 430px;
+        padding: 5px;
+    }
+    
+    .calc-result span {
+        margin-left: 20px;
+    }
+</style>
+<script type="text/javascript">
+    var plist = [<?=$jsList?>];
+    var msperday = 8.64e+7;
+    function onYearSelect() {
+        var year = this.options[this.selectedIndex].value;
+        var a = year % 19;
+        var b = year % 4;
+        var c = year % 7;
+        var d = (19 * a + 15) % 30;
+        var e = (2 * b + 4 * c + 6 * d + 6) % 7;     
+        var f = d + e;                 
+        var day = f;
+        var month = 2;
+        
+        if ((d == 29) && (e == 6)) {
+            day = 19;
+            month = 3;
+        } else if (f <= 9) day = 22 + f;
+        else {
+            day = f - 9;
+            month = 3;
+        }
+        
+        var date = new Date((new Date(year, month, day)).getTime() + 13 * msperday);
+        
+        var html = '';
+        for (var i=0; i<plist.length; i++) {
+            var iday = plist[i].iday;
+            dclass = '';
+            if (iday == 0) dclass = 'class="gen"';
+            var pd = new Date(date.getTime() + iday * msperday);
+            html += '<div ' + dclass + '><a href="<?=MAINURL?>/holidays/holiday-' + plist[i].id + '-hpas.html" title="Найти фоторамки к празднику">' + plist[i].name + '</a><span>' + pd.toLocaleFormat('%d.%m.%Y') + '</span></div>'
+        }
+        
+        $('result').set('html', html);
+    }
+    
+    window.addEvent('domready', function() {
+        var yearSelect = $('year');
+        yearSelect.addEvent('change', onYearSelect.bind(yearSelect));
+        
+        onYearSelect.bind(yearSelect)();
+    });
+</script>
+<h1><?=$this->title?></h1>
+<div class="post text">
+    <p>Предлагаем вашему вниманию простой и очень быстрый калькулятор даты празднования <b>Православной пасхи</b></p>
+    <div>
+        <span>Выберите год</span>
+        <select name="year" id="year">
+            <?for ($i=0; $i<$ycount; $i++) {
+                $year = $startYear + $i;
+            ?>
+                <option value="<?=$year?>" <?=(($curYear==$year)?'SELECTED':'')?>><?=$year?></option>
+            <?}?>
+        </select>
+    </div>
+    <div class="calc-result" id="result">
+    </div>
+</div>    

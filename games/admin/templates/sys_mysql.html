@@ -1,0 +1,39 @@
+<h1>Лист процессов</h1>
+<?
+    if (isset($killResult)) {
+?>
+    <div class="message">Процесс <?=$id?> удален!</div>
+<?    
+    }
+?>
+<table class="report">
+    <tr>
+        <th>Id</th>
+        <th>Info</th>
+        <th>State</th> 
+        <th>Time</th>  
+        <th></th>
+    </tr>
+<?
+    $index = 0;
+    foreach ($list as $item) {
+        if ($item['Info']) {
+            $class = ($index%2)?'':'odd';
+?>
+    <tr class="<?=$class?>">
+        <td><?=$item['Id']?></td>
+        <td><?=$item['Info']?></td>
+        <td><?=$item['State']?></td>
+        <td><?=$item['Time']?></td> 
+        <td>
+            <?if ($item['Time'] > 5) {?>
+            <a href="<?=Admin::getTaskLink()?>&id=<?=$item['Id']?>">удалить</a>
+            <?}?>
+        </td>
+    </tr>
+
+<?
+            $index++;
+        }
+    }
+?>

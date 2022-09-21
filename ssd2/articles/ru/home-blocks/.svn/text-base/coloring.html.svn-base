@@ -1,0 +1,29 @@
+<?
+    $imgurl = SSURL.'articles/images/coloring/';
+    $applink = link::c('app', 'coloring');
+    $alt = 'Превращаем черно-белое фото в цветную фотографию';
+    ss::addCSS('.images', 'text-align: center;');
+    ss::addCSS('.images img', 'display:inline-block;padding:0px;margin:3px;max-height:180px;');
+?>
+<div class="post">
+    <h2>Превращаем черно-белое фото в цветную фотографию.</h2>
+    <p>Сделайте фотографию более привлекательной или раскрасьте старую черно-белую фотографию! Теперь это можно сделать при помощи нового <a href="<?=$applink?>">инструмента</a> цветовой стилизации.</p>
+    <p>В данном <a href="<?=$applink?>">приложении</a> вы можете раскрасить фотографию или произвести цветовую стилизацию. Можно создать интересные работы из старых фотографий. Если вы хотите оживить старое фото, вам потребуется сканер, наше <a href="<?=$applink?>">приложение</a> и немного терпения.</p>
+    <div class="images">
+        <img src="<?=$imgurl?>1_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>1_out.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>2_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>2_out.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>3_in.jpg" alt="<?=$alt?>">
+        <img src="<?=$imgurl?>3_out.jpg" alt="<?=$alt?>">
+    </div>
+    <div class="post-footer">
+        <a href="<?=link::c('article', 'raskraska-cherno-belykh-fotografiy');?>" class="ctrl-button app-link">
+            Подробнее
+        </a>
+        <a href="<?=$applink?>" class="ctrl-button app-link">
+            Начать раскрашивать
+        </a>
+    </div>
+    <div class="clr"></div>
+</div>

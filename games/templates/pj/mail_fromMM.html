@@ -1,0 +1,30 @@
+<?
+    global $_SERVER;
+/*    define('mainURL', 'http://oformi-foto.ru/index_dev.php');
+    $sid = 3;*/
+    $cardLink =  'http://'.$_SERVER['SERVER_NAME'].'?state=sid,'.$sid;
+?>
+<table width="100%" style="font:Arial,Tahoma; font-size:14px">
+    <tr>
+        <td>
+            <a href="<?=$cardLink?>" target="_blank"><img src="http://<?=$_SERVER['SERVER_NAME']?>/pj/images/75x75_cat.png" style="border:0"></a>
+        </td>
+        <td>
+        <div style="color:#666666;font-size:13px">
+            К вам из приложения <a href="http://my.mail.ru/apps/441805" style="text-decoration: none" target="_blank">"Прикольное оформление ваших фотографий"</a> пришла открытка от <b><?=$userName?></b><br>
+            <a href="<?=$cardLink?>" target="_blank"><b>Посмотреть открытку</b></a><br>
+        </div>
+        <h4>Текст сообщения:</h4>
+        <div style="">
+            <?=$description?><br><br>
+            <a href="<?=$cardLink?>" target="_blank"><b>Посмотреть открытку</b></a>
+        </div>
+        <div style="font-family: Tahoma, Arial; font-size:11px">Это ссылка на вашу открытку: <?=$cardLink?></div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="color:#999999;font-size:11px">
+        Это письмо сформировано автоматически, на него отвечать не нужно.
+        </td>
+    </tr>
+</table>

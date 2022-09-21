@@ -1,0 +1,107 @@
+<?
+    define('PREVIEWURLSERVER', 'https://oformi-foto.ru/games/data/himage.php?name=');
+?>
+<script type="text/javascript" src="admin/js/mootools-1.2.4-core.js"></script>
+<script type="text/javascript">
+    function domReadyHoliday() {
+        $('func').addEvent('blur', function() {
+            $('iframe-image').src = '<?=PREVIEWURLSERVER?>' + this.value.replace('.', '');
+        });
+    }
+    
+    function deleteHoliday(id) {
+        if (confirm("Вы действительно хотите удалить праздник?")) {
+            document.location.href = '?task=holiday,getList&delete=' + id;
+        }
+    }
+    window.addEvent('domready', domReadyHoliday);
+</script>
+<?if ($item['holiday_id']) {?>
+<h1>Редактирование праздника №<?=$item['holiday_id']?></h1>
+<?} else {?>
+<h1>Добавление праздника</h1>
+<?}?>
+<a href="?task=holiday,getList">Назад</a>
+<style type="text/css">
+    .panel b {
+        color: #00A;
+    }
+</style>
+<form method="POST" action="<?=Admin::getTaskLink()?>">
+<div class="panel">
+    <table class="report">
+        <tr>
+            <td class="params">Название</td>
+            <td><input type="text" size="80" name="name" value="<?=$item['name']?>"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Описание:<br>
+                <textarea style="width: 577px; height: 100px;" name="desc"><?=$item['desc']?></textarea>
+            </td>
+        </tr> 
+        <tr>
+            <td>Тип</td>
+            <td><select name="type">
+                <option value="1" <?=$item['type']==1?'SELECTED':''?>>Важные</option>
+                <option value="2" <?=$item['type']==2?'SELECTED':''?>>Менее важные</option>
+                <option value="3" <?=$item['type']==3?'SELECTED':''?>>Профессиональные</option>
+                <option value="4" <?=$item['type']==4?'SELECTED':''?>>Религиозные</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Функция</td>
+            <td><input type="text" size="10" name="func" id="func" value="<?=$item['func']?>">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">            
+            <div>Может иметь формат: месяц.дата<br>
+            или следующие <b>методы расчета даты праздника</b>
+            <ul>
+                <li><b>dayWeek</b>:  Номер дня в неделе (пример: второе вс. марта = dw,7,2,3)</li>
+                <li><b>lastMounth</b>: Последний день недели в месяце (пример: последнее вс. марта = lm,7,3)</li>
+                <li><b>dayYear</b>: День в году (пример 256-й день в году = dy,256)</li>
+                <li><b>dayConst</b>:  День, неделя и т.п. от константы (пример: первый четверг перед пасхой= dc,-3,PAS , седьмое вс. перед пасхой f,-49,PAS)</li>
+                <li><b>date</b>: Дата по строке (например: last Sun Nov - последнее вс. ноября)</li>
+            </ul>
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Текст поздравления от приложения (100 символов):<br>
+                <textarea style="width: 577px; height: 40px;" name="congratulation2"><?=$item['congratulation2']?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Текст поздравления от пользователя (120 символов):<br>
+                <textarea style="width: 577px; height: 40px;" name="congratulation"><?=$item['congratulation']?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Название файл изображения (произвольное название на латинице, не больше 10 символов)<br>
+                <input type="text" name="image" size="20" value="<?=$item['image']?>">
+            </td>
+        </tr>  
+        <?
+            $image = $item['image']?$item['image']:($item['func']?str_replace('.', '', $item['func']):null);
+            if ($image) {
+        ?>
+        <tr>
+            <td colspan="2">
+                <h3>Изоборажение</h3>
+                <iframe id="iframe-image" border="0" src="<?=PREVIEWURLSERVER.$image?>" style="width:700px;height:300px;border:0px;"></iframe>
+            </td>
+        </tr>        
+        <?}?>
+        <tr>
+            <td colspan="2">
+            <input type="hidden" name="holiday_id" value="<?=$item['holiday_id']?>">
+            <input type="submit" value="Применить">
+            <?if ($item['holiday_id']) {?>
+                <input type="button" value="Удалить" onclick="deleteHoliday(<?=$item['holiday_id']?>)">            
+            <?}?>
+        </tr>
+    </table>
+</div>
+</form>

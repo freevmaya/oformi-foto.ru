@@ -1,0 +1,12 @@
+<?
+    $sitems = array();
+    $gid = implode(',', $groupIds);
+    
+    foreach ($items as $item) {
+        $ext = $this->extendItem($groupIds, $item);
+        
+        $sitems[] = $ext;
+    }
+
+    echo json_encode($sitems);
+?>

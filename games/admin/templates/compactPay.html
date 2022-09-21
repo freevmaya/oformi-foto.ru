@@ -1,0 +1,144 @@
+<script type="text/javascript" src="admin/js/mootools-1.2.4-core.js"></script>
+<script type="text/javascript" src="admin/js/cycle-form.js"></script>
+
+<h3>Свертка транзакций</h3>
+<div>
+    <form action="<?=Admin::getTaskLink()?>" method="POST">
+        <table>
+            <tr>
+                <td>Таблица свертки:
+                </td>
+                <td><input type="text" value="<?=$cptable?>" name="cptable" size="40">
+                </td>
+            </tr>
+            <tr>
+                <td>Свернуть по дату:
+                </td>
+                <td><input type="text" value="<?=$cpdate?>" name="cpdate">
+                </td>
+            </tr>
+            <tr>
+                <td>Начиная с пользователя №:
+                </td>
+                <td><input type="text" value="<?=$cpstart?>" name="cpstart">
+                </td>
+            </tr>
+            <tr>
+                <td>Количество сверток №:
+                </td>
+                <td><input type="text" value="<?=$cpcount?>" name="cpcount">
+                </td>
+            </tr> 
+            <tr>
+                <td>UID, через запятую (опционально)
+                </td>
+                <td><input type="text" value="<?=$a_uids?>" name="uids">
+                </td>
+            </tr>  
+            <tr>
+                <td>Services, через запятую (опционально)
+                </td>
+                <td><input type="text" value="<?=$str_services?>" name="services">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" value="1" name="compact" <?=($this->request->getVar('compact', 0))?'CHECKED':''?> >Свернуть сразу<br>
+                    <input type="checkbox" value="1" name="notviewresult" <?=($this->request->getVar('notviewresult', 0))?'CHECKED':''?> >Не показывать список свертки
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" value="1" name="begin">
+                    <input type="submit" value="Подготовить">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<?if (isset($result)) {
+    if ($result) {
+        if (!$this->request->getVar('notviewresult', 0)) {
+?>    
+<h3>
+    Результат свертки
+</h3>
+<table class="report">
+    <tr>
+        <th>№
+        </th>
+        <th>Пользователь
+        </th>
+        <th>Сумма
+        </th>
+    </tr>
+<?
+foreach ($uids as $key=>$user) {
+?>
+    <tr>
+        <td><?=$key?>
+        </td>
+        <td><?=$user['uid']?>
+        </td>
+        <td><?=$user['sum']?>
+        </td>
+    </tr>
+<?}?>
+</table>
+<?
+        } else echo '<h3>Свертка произведена успешно!</h3>';
+    } else echo 'Ошибка при свертке!';
+} else {
+    if (isset($list)) {  
+?>
+<h3>Результат подготовки</h3>
+<form action="<?=Admin::getTaskLink()?>" method="POST">
+    <table class="report">
+        <tr>
+            <td colspan="3">
+                <input type="hidden" value="<?=$cptable?>" name="cptable">
+                <input type="hidden" value="<?=$cpdate?>" name="cpdate">
+                <input type="hidden" value="<?=$cpstart?>" name="cpstart">
+                <input type="hidden" value="<?=$cpcount?>" name="cpcount">
+                <input type="hidden" value="1" name="compact">
+                <input type="submit" value="Свернуть">
+            </td>
+        </tr>
+        <tr>
+            <th>№
+            </th>
+            <th>
+            </th>
+            <th>
+                Кол-во транзакций
+            </th>
+            <th>
+                Пользователь
+            </th>
+            <th>
+                Сумма
+            </th>
+        </tr>
+    <?foreach ($list as $key=>$item) {?>
+        <tr>
+            <td><?=$key?>
+            </td>
+            <td>
+                <input type="checkbox" name="uid[]" value="<?=$item['uid']?>" <?=(($item['count']>1)?'CHECKED':'')?>>
+            </td>
+            <td>
+                <?=$item['count']?>
+            </td>
+            <td>
+                <?=$item['uid']?>
+            </td>
+            <td>
+                <input type="text" name="sum_<?=$item['uid']?>" value="<?=$item['sum']?>" size="20" readonly="1" style="border:none">
+            </td>
+        </tr>
+    <?}?>
+    </table>
+</form>
+<?}
+}
+?>

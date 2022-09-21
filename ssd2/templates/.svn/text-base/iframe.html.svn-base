@@ -1,0 +1,59 @@
+<?
+    GLOBAL $menuList, $_SESSION, $target, $sheme, $ver, $description, $title, $_SERVER, $root, $isAndroid;
+    $ref = $_SERVER['HTTP_REFERER'];
+    $outdoorReferer = !$ref || (strpos($ref, $_SERVER['SERVER_NAME']) === false);
+    
+    $controller_head = null;
+    $cacheHeadKey = $cacheKey.'_head';
+    if ($is_cache_content) $controller_head = ss::getCache($cacheHeadKey);
+    
+    if (!$controller_head) {
+        $title = $controller->getTitle();
+        $description = $controller->getDescription('', 25);
+        $keywords = $controller->getKeywords();
+    
+        ob_start();
+        include(TEMPLATES_PATH.'/controller_head.php');
+        $controller_head = ob_get_contents();
+        ob_end_clean();
+        if ($controller->isCached()) ss::setCache($cacheHeadKey, $controller_head, $controller->cacheExpire());
+    }    
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=ss::lang()?>" lang="<?=ss::lang()?>" dir="ltr" prefix="og: http://ogp.me/ns#">
+<head>
+<?=$controller_head?>    
+    <script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var MAXSUBITEMS = 30;
+        var SUBITEMHEIGHT = 25;
+        
+        window.addEvent('domready', function() {
+            (function() {
+                new PJApp({URL: '<?=SSURL?>echo.php', user: <?=json_encode($root->getUser())?>, outdoorReferer: <?=$outdoorReferer?'true':'false'?>});
+            }).delay(100);
+        });
+        
+        window.addEvent('login_status', function(e) {
+            if (!e.status) {
+                with (new Ya.Metrika(5639515)) {
+                    clickmap(true);
+                    hit(document.location.href);
+                }
+            } 
+        });
+    </script>    
+</head>
+<body>
+<div id="bodyArea">
+   <div id="content">
+        <div id="wrapper">
+            <?include_once(TEMPLATES_PATH.'check_android.php')?>
+            <?=$content?>
+            <?//require(TEMPLATES_PATH.'clodoWords.html')?>
+        </div>
+    </div>
+</div>
+<!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter4524184 = new Ya.Metrika({ id:4524184, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/4524184" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+</body>
+</html>

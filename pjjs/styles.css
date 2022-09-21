@@ -1,0 +1,202 @@
+html, body	{
+    height:100%; 
+}
+
+body {
+    font-family: tahome, arial, verbana;
+    margin: 0px;
+    background: #FFF;
+}
+
+#wrapper {
+    border: 1px solid gray;
+    position: absolute;
+    left    : 10px;
+    right   : 10px;
+    top     : 20px;
+    bottom  : 10px;
+    padding : 10px;
+    background  : #EEE;
+    overflow    : hidden;   
+}
+
+#categories {
+    top: 0px;
+    position: absolute;
+    margin: 1px 20px 0px 20px;
+    height: 20px;
+    overflow: hidden;
+}
+
+#categories a {
+    margin-top: 2px; 
+    padding: 1px 9px 2px 9px;
+    margin-right: 2px;
+    font-size: 13px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    cursor: pointer;
+    color: #AAA;
+    text-decoration: none;
+    background: #444;
+}
+
+#categories a.current {
+    color: #333;
+    background: #EEE;
+}
+
+#loader p, .tip-wrap, .tip-title, .tip-text {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}        
+
+#loader, #injectPhoto {
+    position: absolute;
+    /*
+    top: 50%;
+    width: 100%;
+    */
+    text-align: center;
+}
+
+#loader p {
+    border  : 1px solid gray;
+    padding : 16px;
+    bottom  : 0px;
+    display: inline-block;
+    background: #FFF;
+}
+
+#injectPhoto p {
+    border  : 2px solid white;
+    padding : 12px;
+    bottom  : 0px;
+    display : inline-block;
+    background: #EEE;
+    cursor  : pointer;
+    box-shadow:  2px 2px 6px #000;
+}
+
+.round, .tip-wrap {
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+.dragRect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+} 
+
+.dragRect .rect {
+    border: 1px solid gray;
+}
+
+.button {
+    border  : 1px solid gray;
+    width   : 140px;
+    height  : 40px;
+    background  : #888;
+    display     : block;
+    font-size   : 12px;
+}
+
+#saveButton, #tmplsButton {
+    display: block;
+    position: absolute;
+    opacity: 0.3;
+}
+
+#tmplsButton {
+    top: 0px;
+    width: 70px;
+    height: 64px;
+/*    background: url(images/save-n.gif) top left no-repeat;*/
+    background: url(images/frames.gif) top left no-repeat;
+}
+
+#saveButton {
+    bottom: 0px;
+    width: 69px;
+    height: 69px;
+/*    background: url(images/save-n.gif) top left no-repeat;*/
+    background: url(images/save-f.gif) top left no-repeat;
+    position: absolute;
+}
+
+#saveButton:hover, #tmplsButton:hover {
+    opacity: 1;
+}
+
+#centerBlock {
+/*    margin: 0 91px;*/
+    height: 100%;
+    text-align: center;
+}
+
+#listWindow {
+    position: absolute;
+    top: -202px;
+    left: 10px;
+    right: 10px; 
+    height: 200px;
+    background: #AAA;
+    border: 1px solid gray;
+    overflow-y: scroll;
+}
+
+.listArea {
+    clear: both;
+    text-align: center;
+}
+
+.loaded {
+    width: auto !important;
+    background: #888 !important;
+}
+
+.listItem {
+    display: inline-block;
+    margin: 0px 2px;
+    border: 1px solid gray;
+    text-align: center;
+    cursor: pointer;
+    background: url(images/loader_32.gif) center center no-repeat;
+    background-color: #FFF;
+}
+
+.listItem td {
+    width: 90px;
+    height:90px;
+}
+.listItem img {
+}
+
+/* -----TIPS---- */
+.tip-wrap {
+	z-index: 13000;
+    background: #666;
+    border: 1px solid #AAA;
+    padding: 14px;
+    opacity: 0.8;
+}
+ 
+.tip-title {
+	font-weight: bold;
+	font-size: 14px;
+	margin: 0;
+	color: #9FD4FF;
+	padding: 8px 8px 4px;
+	background: url(bubble.png) top left;
+}
+ 
+.tip-text {
+	font-size: 11px;
+    color: #FFF;
+	padding: 4px 8px 8px;
+	background: url(bubble.png) bottom right;
+}

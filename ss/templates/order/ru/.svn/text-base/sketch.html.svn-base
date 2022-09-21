@@ -1,0 +1,17 @@
+<?
+    $this->title = 'Настоящий рисунок с вашей фотографии';
+    $this->description = 'Специально для вас, наш художник нарисует натуральный рисунок карандашом. С вашей фотографии на листе А4. Вы можете получить оригинальный рисунок карандашом по почте.';
+    $this->addScript(SSURL.'js/ValidateSimple.js');
+    
+    $price_str  = 'от 250 руб.';
+    $ext_desc   = '<span>Сообщите нам свои пожелания</span>, загрузите фото, и мы расчитаем стоимость и срок изготовления. Качеством работы вы останетесь довольны!</span>';
+    $maxsize    = ini_get('upload_max_filesize'); 
+    
+    $name       = $user?$user['nick']:'';
+    $email      = $user?$user['email']:'';
+    $orderType  = 'sketch';
+    $works = array(
+        array('r05.jpg', 'Здесь вы видите пример рисунка с фотографии, выполненного художником.')
+    );
+    include_once(dirname(__FILE__).'/order_tmpl.html');                                                             
+?>

@@ -1,0 +1,99 @@
+<?
+    GLOBAL $locale;
+    $this->styles[] = SSURL.'dispute.css';
+    $this->addScript(SSURL.'js/mootools-1.2.5.1-tips.js');
+    $this->addScript(SSURL.'js/rate-bar.js');
+    $this->addScript(SSURL.'js/dispute.js');
+    $this->addScript(SSURL.'js/mrequest.js');
+    $this->addScript(SSURL.'js/game.js');
+
+    $s_name = ss::userName($game);
+    $a_data = $s_name;//$game['nick']?$game['nick']:$s_name;
+    $this->title = sprintf($locale['FROMGAMETITLE'], $s_name, $game['gName'], $game['name']);  
+    $this->description = sprintf($locale['FROMGAMEDESC'], $s_name, $game['gName']);   
+    $this->keywords = $locale['FROMGAMEKEYWORDS'];
+    $this->setPageImage($this->scenePictureURL($game));
+    ss::addCSS('#bodyArea', 'background: none !important;');
+    
+    $gamelistLink = link::c('game', 'gamelist', $gamegroup['group_id'], 1);
+    $game_title = $locale['GAMEGROUP'];
+?>
+<script>
+    gameListInit();
+</script>
+<div class="scene">
+    <div>
+        <h1><?=$game['name']?></h1>
+        <?if ($game['state'] != 'active') {
+            if ($game['contest_id'] > 0) {
+                $gamelistLink = link::c('game', 'arhive', "contest-{$game['contest_id']}-page-1");
+                $contest = DB::line("SELECT date FROM ".DBPREF."contest WHERE contest_id={$game['contest_id']}");
+                $game_title = sprintf($locale['GAMEARHIVETITLE'], date(SS_DATEFORMAT, strtotime($contest['date'])));
+            }
+        ?>
+        <p class="message"><?=$locale['GAMEITEMINACTIVE']?></p>
+        <?}?>
+        <div class="a-center"><a href="<?=$gamelistLink?>"><?=$game_title?>: <b><?=$gamegroup['name']?></b></a></div>
+    </div>
+    <div class="<?=$game['app']?>">
+        <div>
+            <div class="share-panel">
+                <div class="share42init"></div>
+            </div>
+            <?include(dirname(__FILE__).'/apps/'.$game['app'].'.html')?>
+        </div>
+    </div>
+    <div class="rate tipz" data-rate="<?=round($game['rate'])?>" data-id="<?=$game['game_id']?>" title="Средняя оценка:: <?=round($game['rate'])?>"></div>
+    <table class="tipz" title="Информация::<?=$this->gameInfo($game)?>">
+        <tr>
+            <td rowspan="6" class="ds-param">
+                <div class="ds-user" rel="<?=$game['uid']?>">
+                    <a class="ds-user-link" href="<?=ss::userLink($game)?>">
+                        <img class="ds-user-pic" src="<?=ss::avatar($game)?>" alt="<?=$a_data?>">
+                    </a>
+                </div>
+            </td>
+        <tr>
+        <tr class="ds-param">
+            <td><?=$locale['AUTOR']?></td><td class="a-right"><?=$a_data?></td>
+        </tr>
+        <tr class="ds-param">
+            <td>Номер публикации</td><td class="a-right"><?=$game['game_id']?></td>
+        </tr>
+        <tr class="ds-param">
+            <td>Время публикации</td><td class="a-right"><?=$this->gameTime($game)?></td>
+        </tr> 
+        <tr class="ds-param">
+            <td>Рейтинг</td><td class="a-right" id="votes-<?=$game['game_id']?>"><?=$game['votes']?></td>
+        </tr>
+    </table>
+</div>
+<div class="post">
+    <?=parseTags($game['rulesText'])?>
+    <?=parseTags($game['descText'])?>
+</div>
+<div class="post">
+<?if (ss::getUserID() == $game['uid']) {?> 
+    <p>Уважаемый <?=$a_data?> продвигайте свой коллаж в социальных сетях. Для этого наведите курсор на изображение и выберите кнопку нужной соцсети. Помните, чем больше вы пригласите друзей проголосовать за ваш коллаж - тем больше вероятности выиграть конкурс.</p>
+<?} else {?>
+    <p>Продвигайте этот коллаж в социальных сетях. Для этого наведите курсор на изображение и выберите кнопку нужной соцсети.</p>
+<?}?>
+</div>
+<?if ($game['options'] & 1 == 1) {?>
+<div id="social">
+    <script type="text/javascript">
+        comments('<?=link::c('comment', 'ajax')?>', 'game-<?=$game['game_id']?>', function(comment, answer_to) {
+            app.SendEvent('GM-COMM', <?=$game['uid']?>, <?=$game['game_id']?>, '<?=$game['source']?>');
+            if (answer_to)
+                app.SendEvent('GA-COMM', answer_to[1], <?=$game['game_id']?>, answer_to[2], answer_to[0]);
+        }, function(data_cm) {
+            app.SendEvent('GCM-LIKE', data_cm[1], <?=$game['game_id']?>, data_cm[2], data_cm[0]);
+        });
+    </script>
+    <div class="tmpl-login">
+    <?include_once(TEMPLATES_PATH.'user/login_block.html')?>    
+    </div>
+</div>                          
+<?}?>         
+<script type="text/javascript" src="<?=SSURL?>js/share42/share42.js"></script>
+<?include(TEMPLATES_PATH.'game/_templates.html');?>

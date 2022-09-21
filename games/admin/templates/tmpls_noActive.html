@@ -1,0 +1,18 @@
+<?
+    function outList($list) {
+        foreach ($list as $item) {
+            echo "{\n    id:{$item['id']},\n    ears: {$item['ears']},\n    group: {$item['group']}";
+            if (isset($item['corr']) && $item['corr']) echo ",\n    corr:{$item['corr']}";
+            if (isset($item['ws_object']) && $item['ws_object']) echo ",\n    ws:{$item['ws_object']}";
+            else if (isset($item['ws']) && $item['ws']) echo ",\n    ws:{$item['ws']}";
+            echo "\n},";
+        }
+    }
+?>
+<pre>
+<h2>Костюмы</h2>
+<?outList($clothings);?>
+<h2>Прически</h2>
+<?outList($hairs);?>
+</pre>
+<a href="?task=tmpls,accept">Считать принятыми</a>

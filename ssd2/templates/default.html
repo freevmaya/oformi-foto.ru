@@ -1,0 +1,127 @@
+<?
+GLOBAl $locale, $menuList;
+include_once(SSPATH.'helpers/flashTest.html');
+
+if (isset($words) && (count($words) > 0)) {
+    $this->styles[] = SSURL.'sbox/assets/SqueezeBox.css';
+    $this->styles[] = SSURL.'catalog.css';
+    
+    $this->scripts[] = SSURL.'sbox/SqueezeBox.js';
+    $this->scripts[] = SSURL.'js/catalog.js';
+    $this->scripts[] = SSURL.'js/mootools-1.2.5.1-tips.js';
+    
+    $this->title = $locale['CATFRAMESTITLE'].': '.$page_ru;
+    $this->description = $locale['SEARCHRESULT'].' '.$this->title;
+    
+//    $this->description = $page_ru;
+    ss::addCSS('.list div.item', 'visibility: visible !important;');
+?>
+<script type="text/javascript">
+    var FRAMES_URL = '<?=FRAMES_URL;?>'; 
+    
+    function doSendCads() {
+        var form = $('cadsForm');
+        var catsElems = form.getElements('input');
+        var cats = [];
+        catsElems.each(function(elem) {
+            if (elem.checked) cats.push(elem.value);
+        }); 
+        if (cats.length > 0) {
+            var link = '';
+            cats.each(function(id) {
+                link += (link?'-':'') + id;
+            });
+            
+            form.set('action', '<?=MAINURL?>/catalog/' + link + '.html');
+            return true;
+        }
+        alert('Надо выбрать хотя бы одну категорию');
+        return false;
+    }
+    
+    window.addEvent('domready', function() {
+        resetIframeLinks();
+    });
+    
+    function onImgLoad(img) {
+        img.getParent('td').removeClass('noPicture');
+    }
+</script>
+<h1><?=$page_ru?></h1>
+<div class="post">
+<p>Вы искали: <i><?=$page_ru?></i>.</p><p>На нашем <a href="<?=MAINURL?>/home.html">сайте</a> собраны лучшие фото-рамки, фотоэффекты и фото-приколы, по вашему запросу мы вам можем предложить выборку из нашего <b><a href="<?MAINURL?>/catalog/0.html">каталога</a> фото-оформления</b>, здесь вы можете подобрать понравившееся вам <i>фото-оформление</i> а также создать <i>для своего фото</i> наилучшее <b>графическое обрамление</b>, создать оригинальный коллаж, подчеркнуть свою индивидуальность.</p>
+<p>У нас Вы сможете бесплатно сохранить <b>фото-прикол</b> или <i>фото-рамку</i> на <i>рабочий стол</i>, как и остальные выставленные рисунки на предоставленном сайте. Вы искали: <b><?=$page_ru?></b> или <i><?=nextWord($words)?></i>, мы так же советуем побывать в остальных разделах нашего интернет-сайта, какие представлены ниже. 
+Все <a href="<?MAINURL?>/catalog/Fotoramka.html">фото-рамки</a>, <a href="<?MAINURL?>/catalog/Krasochnye.html">фотоэффекты</a> и <a href="<?MAINURL?>/catalog/Prikoly.html">фото-приколы</a> кропотливо отсортированы сообразно тем разделов, потому вы без труда отыщите пригодные изображения на рабочий стол для вашего широкоформатного монитора. Потрудитесь не заблудится в мире высококачественных широкоформатных <a href="<?MAINURL?>/catalog/Fotoramka.html">фото-рамок</a>, прекрасных <b>изображений</b> и ярких фото!;)</p>
+<p>Возможно вас заинтересуют не только <?=nextWord($words)?>, <?=nextWord($words)?> или <?=nextWord($words)?>, но и разделы в нашем каталоге, связанные с этой темой:</p>
+<div class="cat_links">
+<?
+    foreach ($words as $word) {
+        $tword = controller::translit($word);
+        $link = $MAINURL.'/catalog/'.$tword.'.html';
+        echo "<a href=\"$link\">$word</a><br>";
+    }
+?>
+</div>
+<?if (count($tmpls) > 0) {?>
+<div class="catalog other">
+<h3>А так же избранные для Вас фоторамки и фотоприколы:</h3>
+<div class="list">
+<?
+    foreach ($tmpls as $item) {
+        $tmplId = $item['tmpl_id'];
+        $itemAlt = ($item['name']?($item['name'].'. '):'').$item['desc'];
+    
+        $imageLink = FRAMES_URL.$tmplId.'.jpg';
+        $iframeLink = BASEAPP_URL.'/pjjs/view.php?tid='.$tmplId;
+        $appLink = MAINURL.'/template/'.$tmplId.'-'.controller::translit($item['name']).'.html';
+        $appJSLink = MAINURL.'/pjjs/'.$tmplId.'.html';
+        $footerLine = '<span>'.textLimit($item['name'], 20, 'h3').textLimit($item['desc'], 58, 'span').'</span>';
+              
+        echo '<div class="item">'.
+                '<table><tr><td class="noPicture">'.
+                '<a href="'.$iframeLink.'" data-rel="iframeBox" data-id="a-'.$tmplId.'"><img src="'.FRAMES_URLPREVIEW.$tmplId.'.jpg" alt="'.$itemAlt.'" onload="onImgLoad(this)"></a>'.
+                '</td></tr></table>'.$footerLine.'</div>';
+    }
+?>    
+<div class="clr"></div>
+<a style="margin-top: 20px" href="<?=MAINURL?>/catalog/0.html" class="ctrl-button app-link">Хочу больше фоторамок!</a>
+</div>
+</div>
+<?}?>
+</div>
+<?} else {
+    GLOBAL $menuList;
+
+    function outMenuItem($task, $item) {
+        $style = 'class="m'.$item['align'].'"'; 
+        echo "<li $style><a href=\"{$task}\">{$item['caption']}</a>";
+        if (isset($item['submenu'])) {
+            echo '<ul>';
+            outSubMenu($item['submenu']);
+            echo '</ul>';
+        }
+        echo '</li>';
+    }
+
+    function outSubMenu($submenu) {
+        foreach ($submenu as $subTask=>$subItem) {
+            if (is_string($subItem)) {
+                echo "<li><a href=\"$subTask\">$subItem</a></li>";
+            } else {
+                outMenuItem($subTask, $subItem);
+            }
+        }
+    }
+?>
+<h1>Нет такого раздела</h1>
+<div class="post">
+    <p>Но есть много других интересных разделов и приложений, например:</p>
+    <ul>
+<?
+    $menu_url = MAINURL.'/';
+    foreach ($menuList as $task=>$item) 
+        outMenuItem($task, $item);
+?>
+    </ul>
+</div>
+<?}?>

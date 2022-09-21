@@ -1,0 +1,366 @@
+html, body	{
+    height:100%; 
+}
+
+html, body, table, tbody, td, img  {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none; 
+    -o-user-select: none;
+    user-select: none;
+}
+
+body {
+    font-family: tahome, arial, verbana;
+    margin: 0px;
+}
+
+#wrapper {
+    position: absolute;
+    left    : 0px;
+    right   : 0px;
+    top     : 0px;
+    bottom  : 0px;
+    padding : 0px;
+}
+
+#view = {
+    visibility: hidden;
+}
+
+#categories {
+    top: 0px;
+    position: absolute;
+    margin: 1px 20px 0px 20px;
+    height: 20px;
+    overflow: hidden;
+}
+
+#categories a {
+    margin-top: 2px; 
+    padding: 1px 9px 2px 9px;
+    margin-right: 2px;
+    font-size: 13px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    cursor: pointer;
+    color: #AAA;
+    text-decoration: none;
+    background: #444;
+}
+
+#categories a.current {
+    color: #333;
+    background: #EEE;
+}
+
+#loader p, .tip-wrap, .tip-title, .tip-text {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}        
+
+#loader, #injectPhoto {
+    position: absolute;
+    text-align: center;
+    z-index: 1000;
+}
+
+#loader {
+    top: 60%;
+    margin-left: 50%;
+}    
+
+#loader p, #injectPhoto p {
+    z-index: 1000;
+    box-shadow:  2px 2px 6px #000;
+    display: inline-block;
+}
+
+#loader p {
+    border  : 1px solid gray;
+    padding : 16px;
+    margin-left: -150px;
+    bottom  : 0px;
+    background: #FFF;
+}
+
+#injectPhoto p {
+    border  : 2px solid white;
+    padding : 12px;
+    margin-left: -90px;
+    bottom  : 0px;
+    background: #EEE;
+    cursor: pointer;
+}
+
+.round, .tip-wrap, .toolPanel {
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+.dragRect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+} 
+
+.dragRect .rect {
+    border: 1px solid gray;
+}
+
+.button {
+    border  : 1px solid gray;
+    width   : 140px;
+    height  : 40px;
+    background  : #888;
+    display     : block;
+    font-size   : 12px;
+}
+
+#centerBlock {
+    height: 100%;
+    background: #FFFFFF url(../images/loader_32.gif) center center no-repeat;
+}
+
+#centerBlock canvas {
+    position: absolute;
+    z-index: 1;
+}
+
+#listWindow {
+    position: absolute;
+    top: -202px;
+    left: 10px;
+    right: 10px; 
+    height: 200px;
+    background: #AAA;
+    border: 1px solid gray;
+    overflow-y: scroll;
+}
+
+.listArea {
+    clear: both;
+    text-align: center;
+}
+
+.loaded {
+    width: auto !important;
+    background: #888 !important;
+}
+
+.listItem {
+    display: inline-block;
+    margin: 0px 2px;
+    border: 1px solid gray;
+    text-align: center;
+    cursor: pointer;
+    background: url(../images/loader_32.gif) center center no-repeat;
+    background-color: #FFF;
+}
+
+.listItem td {
+    width: 90px;
+    height:90px;
+}
+.listItem img {
+}
+
+/* -----TIPS---- */
+.tip-wrap, .toolPanel {
+	z-index: 13000;
+    background: #666;
+    border: 1px solid #AAA;
+    padding: 14px;
+    opacity: 0.8;
+}
+ 
+.tip-title, .toolPanel .head {
+	font-weight: bold;
+	font-size: 14px;
+	margin: 0;
+	color: #9FD4FF;
+	padding: 8px 8px 4px;
+}
+ 
+.tip-text {
+	font-size: 11px;
+    color: #FFF;
+	padding: 4px 8px 8px;
+}
+
+
+/*PANEL*/
+.toolPanel {
+    width: 300px;
+    position: absolute;
+    visibility: hidden;
+}
+
+.toolPanel .head {
+    cursor: pointer;
+    touch-action: none;
+}
+
+.toolPanel .close {
+    cursor: pointer;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 43px;
+    height: 18px;
+    background: url(../images/close.gif);
+}
+
+.toolPanel .button {
+    cursor: pointer;
+    width: 80px;
+    line-height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 10px auto;
+    border: 1px solid #555;
+    background: #888;
+    font-family: Arial;
+	font-weight: bold;
+}
+
+.toolPanel .button:hover {
+    background: white;
+}
+
+/*------------------FUNC PANEL-----------------*/
+
+#func_panel {
+    position: absolute;
+    visibility: hidden;
+    width: 121px;
+    height: 121px;
+    background: url(../images/func_panel.png);
+    z-index: 1200;
+    touch-action: none;
+}
+
+.fp-m, .fp-r, .fp-s, .fp-c {
+    position: absolute;
+    touch-action: none;
+}
+
+.fp-m {
+    width: 60px;
+    height: 59px;
+    background: url(../images/fp-m.png);
+} 
+
+.fp-r {
+    width: 62px;
+    height: 59px;
+    margin-left: 60px;
+    background: url(../images/fp-r.png);
+} 
+
+.fp-s {
+    width: 62px;
+    height: 63px;
+    margin-left: 60px;
+    margin-top: 59px;
+    background: url(../images/fp-s.png);
+} 
+
+.fp-c {
+    width: 60px;
+    height: 63px;
+    margin-top: 59px;
+    background: url(../images/fp-c.png);
+}
+
+.buttons {
+    position : absolute;
+    margin: 0px;
+    z-index: 1001; 
+}
+
+.buttons span, .buttons a {
+    display: block;
+    float: left;
+    width: 64px;
+    height: 64px;    
+    line-height: 64px;
+    margin-right: 4px;
+    cursor: pointer;
+    margin: 6px;
+    color: gray;
+}
+
+#saveButton {
+    font-size: 40px;
+    text-align: center;
+    background: #EEE;
+    border-radius: 32px;
+    display: block;
+    box-shadow: 2px 2px #00000055;
+    border: 2px solid white;
+}
+
+#question {
+    background: url(../buttons/question.gif) top left no-repeat;
+    display: none;
+}
+
+#vk {
+    margin-top: -1px;
+}
+
+#mm {
+    background: url(../images/mm.gif);
+}
+
+#ok {
+    background: url(../images/ok.gif);
+}
+
+#fb {
+    background: url(../images/fb.gif);
+}
+
+#tw {
+    background: url(../images/tw.gif);
+}
+
+#mail {
+    background: url(../images/mail.gif);
+}
+
+#editor {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1002;
+    display: none;
+    background: white url(../images/loader_32.gif) center center no-repeat;
+}
+
+#editorText {
+    visibility: hidden;
+}
+
+.toast {
+    position: absolute;
+    height: 4em;
+    left: 0px;
+    right: 0px;
+    top: 56px;
+    z-index: 101;
+    background: rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+}
+
+.toast p {
+    font-size: 1em;
+    display: block;
+    text-align: center;
+}

@@ -1,0 +1,66 @@
+<?
+    include(dirname(__FILE__).'/paginator.php');
+    $link = Admin::getTaskLink();
+    
+?>
+<h2>Имена</h2>
+
+<h2>Добавление имени</h2>
+<form method="post" action="<?=$link?>">
+<div>Имя<br> 
+    Несколько имен через запятую<br>
+    Имя и шаблоны через запятую
+</div>
+<textarea style="width:600px; height:200px;" name="names"></textarea><br>
+<div>
+    месяцДень (Пример 1204, или оставить пустым если не надо определять дату):<br>
+    <input type="text" size="5" name="n-date" value="<?=$this->svar('n-date', '')?>">
+</div>
+<input type="submit" value="Добавить">
+</form>
+
+<div style="height:50px;padding: 5px;border:1px solid gray; margin-top:10px;background:#EEE">
+    <div style="width:250px;position:absolute;margin-top:15px;">
+        <form method="POST" action="<?=$link?>">
+        Фильтр: <input type="text" size="10" name="filter" value="<?=$this->request->getVar('filter', '')?>"><input type="submit" value="Применить">
+        </form>
+    </div>
+    <?=paginator($page, ceil($count/COUNTPERPAGE), $link.'&n2page=%s')?>
+</div>
+<form method="post" action="<?=$link?>">
+<table class="report">
+    <tr>
+        <th>ID</th>
+        <th>Шаблон по умолчанию</th>
+        <th>Имя</th>
+        <th>Описание</th> 
+        <th>Удалить</th>
+    </tr>
+    <? foreach ($list as $key=>$item) {?>
+        <tr class="<?=(($key%2)?'odd':'')?>">
+            <td>
+                <?=$item['name_id']?>
+            </td>
+            <td>
+                <a href="?task=holiday,namesTmpl&name_id=<?=$item['name_id']?>&retLink=<?=$link?>"><img src="<?
+                    if ($item['tmpl_id']) 
+                        echo "http://fotoprivet.com/pj/jpg_preview/i{$item['tmpl_id']}.jpg";
+                    else echo 'http://fotoprivet.com/pj/empty_03.jpg'
+                ?>"</a>
+            </td>
+            <td>
+                <?=$item['name']?>
+            </td>
+            <td>
+                <?=$item['desc']?>
+            </td>
+            <td>
+                <input type="checkbox" name="delete[]" value="<?=$item['name_id']?>">
+            </td>
+        </tr>
+    <?}?>
+    <tr>
+        <td colspan="6"><input type="submit" value="Применить"></td>
+    </tr>    
+</table>
+</form>
