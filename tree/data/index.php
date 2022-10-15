@@ -17,8 +17,8 @@ define('CONTROLLERS_PATH', ADMINPATH.'controllers/');
 
 include_once(HOMEPATH.'/secrects.inc');
 include_once(HOMEPATH.'/domains.inc');
-include_once(INCLUDE_PATH.'/_dbu.php');
-include_once(INCLUDE_PATH.'/_edbu2.php');
+//include_once(INCLUDE_PATH.'/_dbu.php');
+include_once(INCLUDE_PATH.'/_edbu_pdo.php');
 include_once(INCLUDE_PATH.'/fdbg.php');
 
 $modelName = isset($_GET['model'])?$_GET['model']:'pj_model';

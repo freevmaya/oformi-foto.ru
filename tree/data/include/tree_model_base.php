@@ -35,7 +35,7 @@
             $count  = count($result);      
             
             if ($count) {
-                if (query_one("SELECT count(rod_id) FROM t_wins_tree WHERE uid={$uid} AND rod_id={$aid[0]}") == 0) {
+                if (DB::one("SELECT count(rod_id) FROM t_wins_tree WHERE uid={$uid} AND rod_id={$aid[0]}") == 0) {
                     $rod_head = $this->getRodHead($aid[0], $uid);
                     if ($rod_head['uid'] != $uid) {
                         if (($wcount = round($count * WINPERCENT)) > 0) { 
@@ -261,7 +261,7 @@
             $aid = explode('-', $id);
             if ($rod = DB::line("SELECT r.*, a.level AS access FROM t_rod r LEFT JOIN t_access a ON r.rod_id=a.rod_id AND a.uid={$uid} WHERE r.rod_id={$aid[0]}")) {
                 if (!isset($aid[1])) {
-                    $start_id = query_one("SELECT start_id FROM t_rod_state WHERE rod_id={$aid[0]} AND uid={$uid}");
+                    $start_id = DB::one("SELECT start_id FROM t_rod_state WHERE rod_id={$aid[0]} AND uid={$uid}");
                     $rod['start_id'] = $start_id?$start_id:$id;
                 } else $rod['start_id'] = $aid[1]; 
             } 
@@ -334,7 +334,7 @@
         
         protected function addTransactionA($uid, $service, $amount=0, $param_int=0) {
             if ($amount == 0)
-                $amount = query_one("SELECT `price` FROM t_wins WHERE id={$service}");
+                $amount = DB::one("SELECT `price` FROM t_wins WHERE id={$service}");
                 
             $query = "INSERT INTO t_transaction (uid, amount, service, param_int) VALUES ({$uid}, {$amount}, {$service}, {$param_int})";
             return DB::query($query);
@@ -385,7 +385,7 @@
         }
         
         protected function getBalance($uid) {
-            $balance = query_one("SELECT SUM(amount) FROM `t_transaction` WHERE uid={$uid}");
+            $balance = DB::one("SELECT SUM(amount) FROM `t_transaction` WHERE uid={$uid}");
             return $balance?$balance:0;
         }
         

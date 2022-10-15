@@ -1,14 +1,14 @@
 <?
     define('JPGQUALITY', 80);
-    define('PEOPLEIMAGEPATH', 'C:/WebServers/home/192.168.1.158/www/tree/theme/tree/images/people/');
-    define('PEOPLEIMAGEURL', '//192.168.1.158/tree/theme/tree/images/people/');
+    define('PEOPLEIMAGEPATH', '//home/oformi-foto.ru/tree/theme/tree/images/people/');
+    define('PEOPLEIMAGEURL', '//home/oformi-foto.ru/tree/theme/tree/images/people/');
         
-    define('SHAREIMAGEPATH', 'C:/WebServers/home/192.168.1.158/www/tree/theme/tree/images/share/');  
-    define('SHAREIMAGEURL', '//192.168.1.158/tree/theme/tree/images/share/');
+    define('SHAREIMAGEPATH', '//home/oformi-foto.ru/tree/theme/tree/images/share/');  
+    define('SHAREIMAGEURL', '//oformi-foto.ru/tree/theme/tree/images/share/');
     define('RODNAMEDEFAULT', 'Моя семья');
-    define('MODELURL', '//'.$_SERVER['HTTP_HOST'].'/data/');
+    define('MODELURL', '//'.$_SERVER['HTTP_HOST'].'/tree/data/');
     
-    define('SHAREURL', '//192.168.1.158/tree/?id=%s');
+    define('SHAREURL', '//oformi-foto.ru/tree/?id=%s');
     define('MODELMODULE', 'tree_model_anysocial');
     define('IMAGEMODE', 0774);
     define('DEMORODID', 1);
