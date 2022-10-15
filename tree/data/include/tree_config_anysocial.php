@@ -1,7 +1,7 @@
 <?
     define('JPGQUALITY', 80);
     define('PEOPLEIMAGEPATH', '//home/oformi-foto.ru/tree/theme/tree/images/people/');
-    define('PEOPLEIMAGEURL', '//home/oformi-foto.ru/tree/theme/tree/images/people/');
+    define('PEOPLEIMAGEURL', '//oformi-foto.ru/tree/theme/tree/images/people/');
         
     define('SHAREIMAGEPATH', '//home/oformi-foto.ru/tree/theme/tree/images/share/');  
     define('SHAREIMAGEURL', '//oformi-foto.ru/tree/theme/tree/images/share/');
