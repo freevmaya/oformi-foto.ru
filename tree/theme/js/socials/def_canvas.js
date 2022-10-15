@@ -93,7 +93,7 @@ var canvasTree = function(uid, id) {
     this.inUser = function() {
         $.main.query('inUser', {uid: uid, id: id}, function(a_data) {
             function checkNullUsers(suser) {
-                if (!treeApp.rel || (treeApp.rel.getList().length == 0)) treeApp.editDialog(social.toPeople(suser[0]));
+                if (treeApp.rel && (treeApp.rel.getList().length == 0)) treeApp.editDialog(social.toPeople(suser[0]));
             }
         
         
