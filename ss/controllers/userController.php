@@ -191,14 +191,14 @@ class userController extends gameBaseController {
                 
                 $sPath = AVAPATH.$source; 
                 if (!file_exists($sPath)) {
-                    $result &= @mkdir($sPath);
-                    $result &= @chmod($sPath, 0755); 
+                    @mkdir($sPath);
+                    @chmod($sPath, 0755); 
                 }
                  
                 $imagePath = $sPath.'/'.$uid;
                 if (file_exists(AVAPATH.'default')) {
-                    $result &= @copy(AVAPATH.'default', $imagePath);
-                    $result &= @chmod($imagePath, 0744);
+                    @copy(AVAPATH.'default', $imagePath);
+                    @chmod($imagePath, 0744);
                 }
                 
                 $res['create'] = $result?1:0;
