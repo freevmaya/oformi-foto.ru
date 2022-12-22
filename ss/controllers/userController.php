@@ -186,7 +186,7 @@ class userController extends gameBaseController {
                     $uid = ajaxController::getNAUID_A(); 
                 
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $result = DB::query("INSERT INTO ".DBPREF."users (uid, nauid, first_name, last_name, avatar, birthday, last_notify, url, source, nick, email, create_date, last_ip) VALUES ($uid, $uid, '', '', '', NOW(), NOW(), '', '{$source}', '{$name}', '{$email}', NOW(), '{$ip}')");
+                $result = DB::query("INSERT INTO ".DBPREF."users (uid, nauid, first_name, last_name, avatar, birthday, url, source, nick, email, create_date, last_ip) VALUES ($uid, $uid, '', '', '', NOW(), '', '{$source}', '{$name}', '{$email}', NOW(), '{$ip}')");
                 $result &= DB::query("INSERT INTO ".DBPREF."user_options (uid, source, pass) VALUES ({$uid}, '{$source}', '{$pass}')");
                 
                 $sPath = AVAPATH.$source; 

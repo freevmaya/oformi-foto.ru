@@ -1,12 +1,12 @@
 <?
 $host="localhost";
 $user="root";
-$password="Vthkby2010";
+$password="";
 
 define('DS', '/');
 define('_dbname_default', '_request');
 define('MAINPATH', $_SERVER['DOCUMENT_ROOT'].'/');
-define('HOMEPATH', '/home/');
+define('HOMEPATH', 'C:/OpenServer/domains/');
 define('LOGPATH', HOMEPATH.'/oformi-foto.ru/logs/');
 
 define('_sql_i18n', true);
@@ -22,12 +22,6 @@ define('MAINURL', $sheme.$_SERVER['HTTP_HOST']);
 define('MODEL_PATH', MAINPATH.'games'.DS.'models'.DS);
 define('DATA_PATH', MAINPATH.'games'.DS.'data'.DS);
 define('DATA_URL', MAINURL.DS.'games'.DS.'data'.DS);
-
-define('CARDS_PATH', DATA_PATH.'images/cards'.DS);
-
-
-$cadUrls = array($sheme.'pjof.ru/', $sheme.'clothof.ru/');
-define('CARDS_URL', $cadUrls[rand(0, 1)]);
 
 define('mainURL', $mainURL);
 ?>

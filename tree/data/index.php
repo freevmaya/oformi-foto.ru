@@ -9,14 +9,14 @@ header('Pragma: no-cache');
 error_reporting(E_ALL);
 date_default_timezone_set('Europe/Moscow');
 
-include_once('/home/config.php');
+include_once('../../config/config.php');
 
 define('ADMINPATH', MAINPATH.'games/admin/');
 define('TEMPLATES_PATH', ADMINPATH.'templates/');
 define('CONTROLLERS_PATH', ADMINPATH.'controllers/');
 
-include_once(HOMEPATH.'/secrects.inc');
-include_once(HOMEPATH.'/domains.inc');
+include_once(HOMEPATH.'of-secrects.inc');
+include_once(HOMEPATH.'domains.inc');
 //include_once(INCLUDE_PATH.'/_dbu.php');
 include_once(INCLUDE_PATH.'/_edbu_pdo.php');
 include_once(INCLUDE_PATH.'/fdbg.php');

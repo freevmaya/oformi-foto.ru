@@ -1,7 +1,7 @@
 <?php
     GLOBAL $contentType, $mysql_cache_expired;
 
-    include_once('/home/of-config.php');
+    include_once('config/config.php');
     include_once(INCLUDE_PATH.'/request.php');
    
     $rqest = new Request();
