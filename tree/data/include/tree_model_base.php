@@ -157,13 +157,11 @@
                 $noclear = $this->getVar('noclear', 0);
                  
                 foreach ($uids as $uid) $values .= ($values?',':'')."({$id}, {$uid}, '{$access}')";
-                
-                tables_lock('t_access');
+
                 if ($noclear == 0) DB::query("DELETE FROM t_access WHERE rod_id={$id}");
                 
                 $res['result'] = DB::query("REPLACE INTO t_access (`rod_id`, `uid`, `level`) VALUES {$values}")?1:0;
                 $res['rod_id'] = $id;
-                tables_unlock();
             }
             return $res; 
         }
@@ -203,8 +201,7 @@
                         foreach ($item as $cid)       
                             $values .= ($values?',':'')."({$id}, {$cid})";
                 } 
-                
-                tables_lock('t_childs');
+                 
                 if ($del_where) {
                     $del_query = "DELETE FROM t_childs WHERE $del_where";
                     $db_result = DB::query($del_query);                    
@@ -213,7 +210,6 @@
                     $ins_query = "INSERT INTO t_childs (parent_id, child_id) VALUES $values";
                     $db_result = $db_result && DB::query($ins_query);                    
                 }
-                tables_unlock();
             }
             
             $resp['result'] = $db_result?1:0;
@@ -296,13 +292,11 @@
                 }
                 $res = array('user'=>$user, 'tree'=>$this->getRod($id), 'rod'=>$rod, 'trees'=>$this->getRodsA($uid), 'balance'=>$this->getBalance($uid));
             } else {
-                tables_lock('t_users,t_rod');
                 $rod_id = $this->createDefRod($uid);
                 
                 $user = array('uid'=>$uid, 'def_rod'=>$rod_id);
                 $query = "INSERT INTO t_users (`uid`, `def_rod`) VALUES ({$uid}, {$rod_id})";
                 DB::query($query);
-                tables_unlock();
                 
                 $this->addTransactionA($uid, 103);
                 

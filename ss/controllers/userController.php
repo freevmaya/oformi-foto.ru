@@ -162,8 +162,12 @@ class userController extends gameBaseController {
         if (($pass = $this->getSafeVar('pass')) && ($email = $this->getSafeVar('email'))) {
             $query = "SELECT * FROM ".DBPREF."users u, ".DBPREF."user_options o WHERE u.uid=o.uid AND u.source=o.source AND o.pass='{$pass}' AND u.email='{$email}' AND u.source='of'";
 
-            $res['query'] = $query;
+             $res['query'] = $query;
             if ($result = DB::line($query)) {
+                if ($result['nauid'] == 0) {
+                    if ($result['nauid'] = ajaxController::getNAUID_A()) 
+                        DB::query("UPDATE ".DBPREF."users SET nauid = {$result['nauid']} WHERE uid={$result['uid']} AND source='of' AND email='{$email}'");
+                }
                 $_SESSION[SESUSER] = $result;
                 $_SESSION['NAUID'] = $result['nauid'];
             }

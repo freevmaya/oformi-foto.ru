@@ -110,7 +110,7 @@ class ajaxController extends controller {
         echo '{"result": '.$result.'}';
     }
     
-    public function getNAUID_A() {
+    public static function getNAUID_A() {
         GLOBAL $_SERVER;
         $nauid = ss::nauid();
         $res = array('result'=>0);

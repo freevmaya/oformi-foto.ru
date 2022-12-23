@@ -28,10 +28,10 @@
             td = $('tree_display');
             td.setStyle('display', 'block');
             
-            td.set('src', '<?=$TREEURL?>index.php?source=anysocial&nopayed=1&uid=' + app.nauid + '&avatar=' + app.user.avatar + '&gender=' + (app.user.gender=='male'?0:1) + 
-                '&first_name=' + app.user.first_name + '&last_name=' + app.user.last_name + '&birthday=' + app.user.birthday + '&id=' + '<?=$id?>');
+            td.set('src', '<?=$TREEURL?>index.php?source=anysocial&nopayed=1&uid=' + e.nauid + '&avatar=' + e.avatar + '&gender=' + (e.gender=='male'?0:1) + 
+                '&first_name=' + e.first_name + '&last_name=' + e.last_name + '&birthday=' + e.birthday + '&id=' + '<?=$id?>');
 
-            eval('external = ' + app.user.source + '_external');
+            eval('external = ' + e.source + '_external');
                 
         });
         
