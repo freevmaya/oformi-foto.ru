@@ -2,11 +2,11 @@
     $source = isset($_GET['source'])?$_GET['source']:'cap';
     $ispaysupport = !isset($_GET['nopayed']);
     
-    include_once('data/include/tree_config_'.$source.'.php');
+    include_once('data/config/tree_config_'.$source.'.php');
     
     $v = @$_GET['dev']?rand(1, 10000000):11;
-    $uid = isset($_GET['uid'])?$_GET['uid']:1234;
-    $lang = isset($_GET['lang'])?$_GET['lang']:'ru';
+    $uid = isset($_GET['uid'])?$_GET['uid']:DEFUID;
+    $lang = isset($_GET['lang'])?$_GET['lang']:DEFLANG;
     $id = @$_GET['id'];
     
     $desc = 'Древо жизни. Генеологическое дерево моей семьи.';
@@ -61,11 +61,11 @@
 ?>        
         
         
-        MODELURL = '<?=MODELURL?>';
-        MODELMODULE = '<?=MODELMODULE?>';
-        PLIMAGEPATH = '<?=PEOPLEIMAGEURL?>';
-        SHAREURL = '<?=SHAREURL?>';    
-        PAYVARS = <?=PAYVARS?>;          
+        var MODELURL = '<?=MODELURL?>';
+        var MODELMODULE = '<?=MODELMODULE?>';
+        var PLIMAGEPATH = '<?=PEOPLEIMAGEURL?>';
+        var SHAREURL = '<?=SHAREURL?>';    
+        var PAYVARS = <?=PAYVARS?>;
         
         var ldo = new (function(v) {
             var scInd = 1;

@@ -21,6 +21,12 @@
     $this->setPageImage(SSURL.'images/pi-tree.jpg');
 ?>
 
+
+
+<?
+    GLOBAL $root, $rqest;
+    if ($root->getUser()) {
+?>
 <script type="text/javascript">
     (function() {
         var td;
@@ -55,4 +61,10 @@
 </div>
 <iframe id="tree_display">
 </iframe>
+<?} else {
+    $params = isset($root->request->values['id']) ? ('?id='.$root->request->values['id']) : '';
+?>
+<iframe id="tree_display" src="<?=$TREEURL.$params?>" style="display:block;">
+</iframe>
+<?}?>
 <?include_once(TEMPLATES_PATH.'comments.html')?>

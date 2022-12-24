@@ -135,5 +135,6 @@ var locale = {
                 }
             }
         }
-    }    
+    },
+    REQUIREAUTH: 'Требуется <a href="/auth" target="_parent">авторизация</a>'
 }

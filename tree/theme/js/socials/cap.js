@@ -51,6 +51,33 @@ var social = {
             gender: p.gender,
             img: p.avatar?Utils.proxy(p.avatar):DEFAULT_USER_IMAGE
         }
+    },
+
+//APP
+
+    shareMenu: function(){
+        return  [
+            {id: 1, name: locale.SHARELINK}
+        ] 
+    },
+    saveMenu: function(){
+        return  [
+            {id: 1, name: locale.SAVEASIMAGE},
+            {id: 2, name: locale.SAVEASTEXT},
+            {id: 3, name: locale.SAVEASDATA}
+       ]
+    },
+    shareMenuRelease: function(itm) {
+        switch (itm.id) {
+            case 1: treeApp.shareTree(); break;
+        }
+    },
+    saveMenuRelease: function(itm) {
+        switch (itm.id) {
+            case 1: treeApp.saveToFile(); break;
+            case 2: treeApp.saveToText(); break;
+            case 3: treeApp.saveToData(); break;
+        }
     }
 
 }

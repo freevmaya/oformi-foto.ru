@@ -523,23 +523,25 @@ var TreeApp = function(options){
     
     this.createNewTree = function(sitem) {
         var This = this;
-        $('.content').dialog({
-            new_tree: controlInput(''),
-            vintitle: controllCB(0)        
-        }, function(result) {
-            pay_support.possibly('NEWTREE', function() {
-                $.main.query('newRod', {name: result.new_tree, uid: This.user.uid, options: result.vintitle}, function(a_data) {
-                    if (a_data.rod_id) { 
-                        This.responseDBTree({rod_id: a_data.rod_id, name: result.new_tree, uid: This.user.uid}, []);
-                        This.trigger($.Event('createnewtree'));
-                        This.tree.setMode(MODE_EDIT);     
-                        This.newPeople(sitem);    
-                    }
+        if (this.user.uid) {
+            $('.content').dialog({
+                new_tree: controlInput(''),
+                vintitle: controllCB(0)        
+            }, function(result) {
+                pay_support.possibly('NEWTREE', function() {
+                    $.main.query('newRod', {name: result.new_tree, uid: This.user.uid, options: result.vintitle}, function(a_data) {
+                        if (a_data.rod_id) { 
+                            This.responseDBTree({rod_id: a_data.rod_id, name: result.new_tree, uid: This.user.uid}, []);
+                            This.trigger($.Event('createnewtree'));
+                            This.tree.setMode(MODE_EDIT);     
+                            This.newPeople(sitem);    
+                        }
+                    });
                 });
-            });
-        }, {
-            new_tree: validatorName('Допустимы только буквы и пробел')
-        }, 'dlg_new_tree').toCenter().show();
+            }, {
+                new_tree: validatorName('Допустимы только буквы и пробел')
+            }, 'dlg_new_tree').toCenter().show();
+        } else This.alert(locale.REQUIREAUTH);
     }
     
     this.setUser = function(a_user) {
