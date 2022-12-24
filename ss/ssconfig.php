@@ -60,7 +60,7 @@
         HOLIDAYSSELECTOR=>'catalog'
     );
     
-    $AUXTYPES = array('vk', 'fb', 'ok', 'mm');
+    $AUXTYPES = array('vk', 'ok', 'mm');
     $EVENT_TYPES = array('ADDVOTE','GA-COMM','GM-COMM','PCM-LIKE','GCM-LIKE','LOGIN','PA-COMM','PG-COMM','TOGAME');
 
     $LANGINSTALL = array('ru', 'uk', 'en', 'si');

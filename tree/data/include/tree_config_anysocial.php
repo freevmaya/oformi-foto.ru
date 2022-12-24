@@ -8,7 +8,7 @@
     define('RODNAMEDEFAULT', 'Моя семья');
     define('MODELURL', '//'.$_SERVER['HTTP_HOST'].'/tree/data/');
     
-    define('SHAREURL', '//oformi-foto.ru/tree/?id=%s');
+    define('SHAREURL', 'https://oformi-foto.ru/tree.hml/?id=%s');
     define('MODELMODULE', 'tree_model_anysocial');
     define('IMAGEMODE', 0774);
     define('DEMORODID', 1);
