@@ -661,11 +661,19 @@ var TreeApp = function(options){
             reader.readAsDataURL(file);
         });
     }
+
+    this.toClipboard = function(elem) {
+        let toclipboard = $(elem).parent().find(".toclipboard");
+        if (toclipboard.length > 0) {
+            toclipboard.select();
+            document.execCommand("copy");
+        }
+    }
     
     this.shareTree = function() {
-        var cnt = $('#content');
         var url = SHAREURL.replace('%s', This.rod.rod_id);  
-        This.alert(locale.SHARECOMPLETE.replace('%s', url));
+        This.alert(locale.SHARECOMPLETE.replace('%s', url) + 
+            "<button class\"copytobuffer\" onclick=\"treeApp.toClipboard(this);\">" + locale.TOCLIPBOARD + "</button>");
         /*
         domtoimage.toCanvas(cnt[0], {maxsize: options.share_size || 300})
             .then(function(canvas) {
