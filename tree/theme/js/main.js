@@ -673,7 +673,12 @@ var TreeApp = function(options){
     }
     
     this.shareTree = function() {
-        var url = SHAREURL.replace('%s', This.rod.rod_id);  
+
+        var shparam = This.rod.rod_id;
+        var titem = This.tree.getTree();
+        if (titem) shparam += '-' + titem.id;
+        
+        var url = SHAREURL.replace('%s', shparam); 
         This.alert(locale.SHARECOMPLETE.replace('%s', url) + 
             "<button class\"copytobuffer\" onclick=\"treeApp.toClipboard(this);\">" + locale.TOCLIPBOARD + "</button>");
         /*

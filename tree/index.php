@@ -14,7 +14,9 @@
     
     $image = SHAREIMAGEURL.'default.jpg';
     
-    if ($id) $image = SHAREIMAGEURL.$id.'.jpg';
+    $share_image = SHAREIMAGEURL.$id.'.jpg';
+
+    if ($id && file_exists($share_image)) $image = $share_image;
     
     $scripts = array('theme/js/jquery-1.12.4.js', 'theme/language/'.$lang.'/locale.js', 'theme/language/'.$lang.'/'.$source.'.js');
     
