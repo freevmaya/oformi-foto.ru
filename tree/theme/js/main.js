@@ -664,6 +664,9 @@ var TreeApp = function(options){
     
     this.shareTree = function() {
         var cnt = $('#content');
+        var url = SHAREURL.replace('%s', This.rod.rod_id);  
+        This.alert(locale.SHARECOMPLETE.replace('%s', url));
+        /*
         domtoimage.toCanvas(cnt[0], {maxsize: options.share_size || 300})
             .then(function(canvas) {
                 var shparam = This.rod.rod_id;
@@ -678,7 +681,8 @@ var TreeApp = function(options){
                     var url = SHAREURL.replace('%s', shparam);  
                     This.alert(locale.SHARECOMPLETE.replace('%s', url));
                 });
-            }); 
+            });
+        */
     }
     
     this.shareToFriend = function(editmode) {
