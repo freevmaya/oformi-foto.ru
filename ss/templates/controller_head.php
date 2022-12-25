@@ -66,7 +66,7 @@ if ($controller->noindex) {?>
             echo '<link rel="stylesheet" type="text/css" href="'.$fileStyle.'?v='.$ver.'">'."\n";
         }
 ?>
-    <script src="<?=MAINURL.'/'.SSRELATIVE?>js/loader-copy-mailru.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="//connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
     <script src="<?=MAINURL.'/'.SSRELATIVE?>js/ok_api.js" type="text/javascript"></script>
     <script src="<?=MAINURL.'/'.SSRELATIVE?>js/swfobject.js" type="text/javascript"></script>
     <script src="<?=MAINURL.'/'.SSRELATIVE?>js/mootools-1.2.6-core-yc.js" type="text/javascript"></script>
