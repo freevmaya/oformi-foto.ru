@@ -419,6 +419,15 @@ div.profile {
     text-shadow: 2px 2px 2px black;
 }
 
+.message button {
+    font-family: BuxtonSketch;
+    margin: 0.2em;
+}
+
+.message a {
+    color: yellow;
+}
+
 .message a.button {
     display: block;
     text-align: center !important;
@@ -1229,4 +1238,12 @@ div.mitem {
 .history a {
     display: none;
     visibility: hidden;
+}
+
+.noauth .edit, .noauth .money {
+    visibility: hidden;
+}
+
+.noauth [data-id="import"] {
+    display: none;
 }

@@ -210,7 +210,7 @@
     </table>
     <div id="page">
         <div id="wrapper">
-            <div id="content">    
+            <div id="content"<?=$uid?"":' class="noauth"'?>>    
                 <div class="history">
                     <span><a class="button hint back" data-button="back" title="back"></a></span>
                     <span><a class="button hint forward" data-button="forward" title="forward"></a></span>

@@ -5,10 +5,16 @@
 			"path": ".",
 		},
 	],*/
-	"folders":
+	/*"folders":
 	[
 		{
 			"path": "C:\\OpenServer\\domains\\oformi-foto-dev.ru"
+		}
+	],*/
+	"folders":
+	[
+		{
+			"path": ".",
 		}
 	],
 }
