@@ -136,6 +136,9 @@ var canvasTree = function(uid, id) {
             new History($('.history'), treeApp.getCommandManager());
             new Tips(treeApp);
             assistant = new Assistant(treeApp);
+
+            let id_parse = id.split("-");
+            if (id_parse.length > 1) a_data.rod.main_id = parseInt(id_parse[1]);
             
             if (!social.initCanvas) This.startRod(a_data);
             else social.initCanvas(This, a_data);

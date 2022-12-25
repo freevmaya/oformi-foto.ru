@@ -153,7 +153,7 @@ var TreeApp = function(options){
     }
     
     this.updateRelations = function() {
-        This.rel.updateRelations(This.main_index, This.user.uid);
+        This.rel.updateRelations(This.main_index, This.rod.uid);
     }
     
     this.Reassign = function() {
@@ -395,12 +395,6 @@ var TreeApp = function(options){
         this.start_index = 0;
         if (a_tree.length > 1) { 
             var ppl = a_tree[0];
-            for (var i=0;i<ppl.length; i++)
-                if (ppl[i].link_uid == this.user.uid) {
-                    this.main_index = i;
-                    break;
-                }
-            
             for (var i=0;i<ppl.length; i++) {
                 if ((this.main_index == 0) && (ppl[i].id == rod.main_id)) this.main_index = i;
                 if (ppl[i].id == rod.start_id) this.start_index = i;

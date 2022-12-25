@@ -1,6 +1,6 @@
 var locale = {
     MAINSELF: 'Вы',
-    OUTSELF: 'Автор',
+    AUTHOR: '(Автор)',
     ERROR: 'Ошибка',
     WENTWRONG: 'Что то пошло не так',
     ROD: 'Род',
@@ -16,7 +16,7 @@ var locale = {
     SHARELINK: 'Поделиться ссылкой',
     SHAREFRIENDS: 'Показать другу',
     SHAREFRIENDEDIT: 'Пригласить редактировать',
-    SHARELINK: 'Получить ссылку на дерево',
+    SHARELINK: 'Отправить ссылку на дерево',
     SHARELIST: 'Деревья которыми вы поделились',
     NOACCESS: 'Не доступа',
     AUTOR: 'Автор: %s',
@@ -65,7 +65,7 @@ var locale = {
         forward: 'Вперед:Показывает следующие состояние древа'
     },
     relations: {
-        type: ['Я', 'Я'],
+        type: ['***', '***'],
         childs : {
             type: ['Сын', 'Дочь'],
             childs : {
@@ -78,7 +78,7 @@ var locale = {
                 }
             },
             parents: {
-                type: ['Муж', 'Жена'],
+                type: ['Супруг', 'Супруга'],
                 parents: {
                     type: ['Тесть', 'Тёща']
                 }

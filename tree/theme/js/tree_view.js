@@ -159,7 +159,7 @@ function Relatives(a_rel, a_options) {
         }
     }
     
-    this.updateRelations = function(baseIndex, mainUID) {
+    this.updateRelations = function(baseIndex, autorUID) {
         var pased = [];
         var vinRelType = (options & OPT_VINTITLE) == 0;
         
@@ -167,6 +167,9 @@ function Relatives(a_rel, a_options) {
             if (item && ((pased.indexOf(item.id) == -1) || !$.ck(item.type))) {
                 if (relations && relations.type) {
                     item.type = vinRelType?relations.type:item.bday;
+
+                    if (item.link_uid && (autorUID == item.link_uid))
+                        item.father += '<br>' + locale.AUTHOR;
                     pased.push(item.id);
                 }
                 if (relations) {
@@ -191,10 +194,7 @@ function Relatives(a_rel, a_options) {
         if (rel.length > 0) {
                     
             this.clearCycle();
-            
-            var gitem = rel[baseIndex];
-            updateItems(gitem, locale.relations);
-            gitem.type = vinRelType?((mainUID == gitem.link_uid)?locale.MAINSELF:locale.OUTSELF):gitem.bday; 
+            updateItems(rel[baseIndex], locale.relations);
         }   
         this.trigger($.Event('RELATIVE'));
     }
