@@ -33,14 +33,12 @@ html, body, table, tbody, td, img  {
 }
 
 #wrapper {
-    max-width: 1230px;
     margin: 0px auto 0px auto;
     position: relative;
     height: 100%;
 }
 
 #content, #tree-content {
-    max-width: 1230px;
     margin: 0px 0px 0px auto;
     position: relative;
     height: 100%;
