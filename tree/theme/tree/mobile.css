@@ -1,0 +1,19 @@
+.menu-left {
+    left: 1em !important;
+}
+
+.menu-right {
+    right: 1em !important;
+}
+
+.menu {
+    top: 2px !important;
+}
+
+.mitem {
+    font-size: 2em !important;
+}
+
+.submenu {
+    width: 20em !important;
+}

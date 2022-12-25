@@ -970,7 +970,7 @@ div.profile {
 
 .submenu {
     position: absolute;
-    width: 14em;
+    width: 15em;
     padding: 0.2em;
     background: rgb(193, 154, 114);
     border: 1px solid black;
@@ -986,6 +986,7 @@ div.profile {
     display: block;
     padding: 1px 3px;
     overflow: hidden;
+    font-size: 1.2em;
 }
 
 div.mitem {

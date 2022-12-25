@@ -4,7 +4,7 @@
     
     include_once('data/config/tree_config_'.$source.'.php');
     
-    $v = @$_GET['dev']?rand(1, 10000000):11;
+    $v = @$_GET['dev']?rand(1, 10000000):12;
     $uid = isset($_GET['uid'])?$_GET['uid']:DEFUID;
     $lang = isset($_GET['lang'])?$_GET['lang']:DEFLANG;
     $id = @$_GET['id'];
@@ -100,13 +100,13 @@
                 })(document, 'script');
             }
             
-            this.loadStyle = function(url, onComplete) {
+            this.loadStyle = function(url, onComplete, media="screen") {
                 loadcount++;
                 (function(d, s){
                     var css, fcss = d.getElementsByTagName(s)[0];
                     css = d.createElement(s); 
                     css.rel = 'stylesheet'; 
-                    css.media = 'screen';
+                    css.media = media;
                     css.type = 'text/css'; 
                     css.href = url + '?v=' + v;
                     css.onload = function(e) {
@@ -136,6 +136,11 @@
             this.loadScripts = function(list) {
                 for (var i=0; i<list.length; i++) 
                     if (list[i]) This.loadScript(list[i]);                            
+            }
+            
+            this.loadStyles = function(list) {
+                for (var i=0; i<list.length; i++) 
+                    if (list[i]) This.loadStyle(list[i]);                            
             } 
             
             this.loadImages = function(pathURL, list) {
@@ -165,6 +170,9 @@
         
         ldo.loadScripts(slist);
         ldo.loadImages('theme/tree/images/', ilist);
+        ldo.loadStyle('theme/tree/styles.css');
+        ldo.loadStyle('theme/tree/mobile.css', null, '(max-width: 840px)');
+        ldo.loadStyle('theme/tree/vin.css');
         
         var dom_ready = false;
         function checkLoaded() {
@@ -187,11 +195,7 @@
             return true;
         });        
         
-        ldo.complete = function() {
-            ldo.loadStyle('theme/tree/styles.css');
-            ldo.loadStyle('theme/tree/vin.css');
-            ldo.complete = checkLoaded;
-        }
+        ldo.complete = checkLoaded;
         
         $(window).ready(function() {
             dom_ready = true;

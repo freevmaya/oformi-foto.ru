@@ -74,6 +74,7 @@ function panelCreate(treeApp, elem) {
     function onMode(e) {
         if (treeApp.tree.getMode() == MODE_EDIT) {
             container.vshow();
+            refreshSize();        
         } else {
             container.vhide();     
         }
