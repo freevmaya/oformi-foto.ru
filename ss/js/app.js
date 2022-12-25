@@ -255,7 +255,7 @@ var PJApp;
             });
             
             if (this.user == null) {
-                VK.Api.call('users.get', {uids: a_session.mid, v:"5.73", fields: 'contacts,photo_100,photo_max,sex,screen_name,bdate'}, (function(r) {
+                VK.Api.call('users.get', {uids: a_session.mid, v:"5.81", fields: 'contacts,photo_100,photo_max,sex,screen_name,bdate'}, (function(r) {
                     user = r.response[0];
                     user.uid = user.id;
                     user.nick = user.screen_name;
