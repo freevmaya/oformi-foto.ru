@@ -271,7 +271,7 @@ var PJApp;
     loginOK: function(session) {
         pt = location.protocol;
         var client_id=125582592;
-        var redirect_uri= pt + '//oformi-foto.ru/ssd2/ok_auth.php';
+        var redirect_uri= location.origin + '/ss/ok_auth.php';
         window.authSuccess = (function(s) {this._afterLogin_ok(s);}).bind(this);         
         window.open(pt + "//connect.ok.ru/dk?cmd=WidgetCtrl&st.cmd=OAuth2Permissions&st.scope=PUBLISH_TO_STREAM%3BSET_STATUS%3BPHOTO_CONTENT%3BVALUABLE_ACCESS%3BAPP_INVITE%3BVIDEO_CONTENT&st.response_type=token&st.redirect_uri=" + redirect_uri + "&st.client_id=" + client_id + "&st.show_permissions=off",
                     'AuthWindow', 'scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height:0');
