@@ -18,7 +18,7 @@
     $controller->addScript(SSURL.'js/utils.js');
     $controller->addScript(SSURL.'js/thankView.js');
     $controller->addScript(SSURL.'js/comments.js');
-//    $controller->addScript($sheme.'vk.com/js/api/share.js', true);
+//    $controller->addScript($sheme.'vk.com/js/api/xd_connection.js?2', true);
     $controller->addScript($sheme.'vk.com/js/api/openapi.js?169', true);
 //    $controller->addScript($sheme.'mc.yandex.ru/metrika/watch.js');
     $controller->addScript(SSURL.'language/js/'.ss::lang().'.js');
