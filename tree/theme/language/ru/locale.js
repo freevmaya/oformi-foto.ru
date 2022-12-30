@@ -9,6 +9,7 @@ var locale = {
     NEWROD: '<i>Создать новое дерево</i>',
     IMPORT: '<i>Импорт</i>',
     QUESTION_DELROD: 'Вы действительно хотите удалить это родословное дерево?',
+    REMOVEFROMTREE: 'Вы действительно хотите удалить из дерева?',
     NEWPEOPLE: 'Новый',
     SHARECOMPLETE: 'Доступ к дереву по этой ссылке: <input type="text" value="%s" class="toclipboard">',
     TOCLIPBOARD: "Копировать в буфер обмена",

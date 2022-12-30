@@ -167,9 +167,6 @@ function Relatives(a_rel, a_options) {
             if (item && ((pased.indexOf(item.id) == -1) || !$.ck(item.type))) {
                 if (relations && relations.type) {
                     item.type = vinRelType?relations.type:item.bday;
-
-                    if (item.link_uid && (autorUID == item.link_uid))
-                        item.father += '<br>' + locale.AUTHOR;
                     pased.push(item.id);
                 }
                 if (relations) {
@@ -329,8 +326,11 @@ function Relatives(a_rel, a_options) {
             if (item.id == id) return level;
             var cl = item.childIds; 
             for (var i=0; i<cl.length; i++) {
-                var lv = findStep(This.find(cl[i]), level + 1);
-                if (lv > -1) return lv;
+                let aitem = This.find(cl[i]);
+                if (aitem) {
+                    var lv = findStep(aitem, level + 1);
+                    if (lv > -1) return lv;
+                }
             }
             return -1;
         } 
@@ -835,6 +835,10 @@ _userView = {
             var size = new Vector(e.width() * cs, e.height() * cs);
             
             var p = this._isDrag?this._dpanel:this._fpanel;
+
+            let item = c.getData();
+            let delbtn = this._fpanel.find('a[data-button="idelete"]');
+            delbtn.css('display', this._treeView.getTree().id == item.id ? 'none' : 'block');
             
             p.vshow();
             if (!this._isDrag) {

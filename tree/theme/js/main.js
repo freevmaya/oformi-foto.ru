@@ -736,6 +736,8 @@ var TreeApp = function(options){
     }); 
     
     this.on('ideleteRequire', function(itm) {
-        This.clearItem(itm.getData());
+        This.alert(locale.REMOVEFROMTREE, function() {
+            This.clearItem(itm.getData());
+        }, '', null, true);
     });
 }
