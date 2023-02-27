@@ -45,6 +45,8 @@ var Canvas = new Class({
         this.listenerEvents();
         if (inputClass) this._input = new inputClass(this);
     },
+
+    getContext: function(ctx) {this[0].getContext("2d");},
     
     listenerEvents: function() {
     },
