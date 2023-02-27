@@ -45,7 +45,7 @@ if ($controller->noindex) {?>
     <title><?=$title?></title>
     <link rel="stylesheet" href="<?=SSURL.$controller->getFileStyle('styles_phone.css')?>" type="text/css" media="screen" />
     <link rel="stylesheet" href="<?=SSURL.$controller->getFileStyle('cat_phone.css')?>" type="text/css" media="screen" />
-    <link rel="stylesheet" href="<?=MAINURL?>/pjjs/styles/styles-viewjs.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?=MAINURL?>/pjjs/styles/styles-view.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="<?=MAINURL?>/pjjs/styles/styles-slider.css" type="text/css" media="screen" />
 <?
     foreach ($controller->getStyles() as $fileStyle) {
