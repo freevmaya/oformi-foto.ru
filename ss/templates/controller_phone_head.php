@@ -62,6 +62,7 @@ if ($controller->noindex) {?>
     <script src="<?=SSURL?>js/cat_phone.js"></script>
     <script src="<?=SSURL?>js/adv/adv-google.js"></script>
     <script data-ad-client="ca-pub-8187394655464689" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script stype="text/javascript">var PROTOCOL = document.location.protocol + '//';</script>
 <?
 
 
