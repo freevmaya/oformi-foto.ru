@@ -2,7 +2,7 @@
     GLOBAL $ALIASES, $AUXTYPES, $EVENT_TYPES, $sheme, $ADMINS, $FDBGLogFile, $ADMINEMAILS, $ADMINNOTIFY;
     define('SSPATH', MAINPATH.'ss/');
     define('PJAPPID', '488687');
-    define('DEFAULT_LANG', 'ru');
+    define('DEFAULT_LANG', 'rus');
     define('COLLECT_QUESTION', true); 
     define('VER', 344);
 
