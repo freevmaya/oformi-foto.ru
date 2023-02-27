@@ -28,184 +28,30 @@
 	"buffers":
 	[
 		{
-			"file": "/C/UnityProjects/videoobssystem/language.data",
+			"contents": "2.2",
 			"settings":
 			{
-				"buffer_size": 938,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"buffer_size": 3,
+				"line_ending": "Windows",
+				"name": "2.2"
 			},
 			"undo_stack":
 			[
 				[
-					3,
 					1,
-					"insert",
-					{
-						"characters": "\n"
-					},
-					"AQAAAGMDAAAAAAAAZAMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAGMDAAAAAAAAYwMAAAAAAAAAAAAAAADwvw"
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
 				],
 				[
 					4,
 					1,
 					"paste",
 					null,
-					"AQAAAGQDAAAAAAAAagMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAGQDAAAAAAAAZAMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					5,
-					1,
-					"insert",
-					{
-						"characters": " "
-					},
-					"AQAAAGoDAAAAAAAAawMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAGoDAAAAAAAAagMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					6,
-					1,
-					"insert_snippet",
-					{
-						"contents": "($0)"
-					},
-					"AQAAAGsDAAAAAAAAbQMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAGsDAAAAAAAAawMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					8,
-					2,
-					"left_delete",
-					null,
-					"AgAAAGwDAAAAAAAAbAMAAAAAAAABAAAAKWsDAAAAAAAAawMAAAAAAAABAAAAKA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAG0DAAAAAAAAbQMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					9,
-					1,
-					"insert_snippet",
-					{
-						"contents": "{$0}"
-					},
-					"AQAAAGsDAAAAAAAAbQMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAGsDAAAAAAAAawMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					12,
-					1,
-					"insert",
-					{
-						"characters": "0"
-					},
-					"AQAAAGwDAAAAAAAAbQMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAGwDAAAAAAAAbAMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					19,
-					1,
-					"paste",
-					null,
-					"AQAAAG4DAAAAAAAAewMAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAG4DAAAAAAAAbgMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					24,
-					1,
-					"insert",
-					{
-						"characters": "Переме"
-					},
-					"BwAAAG8DAAAAAAAAcAMAAAAAAAAAAAAAcAMAAAAAAABwAwAAAAAAABAAAADQn9Cw0YDQsNC80LXRgtGAcAMAAAAAAABxAwAAAAAAAAAAAABxAwAAAAAAAHIDAAAAAAAAAAAAAHIDAAAAAAAAcwMAAAAAAAAAAAAAcwMAAAAAAAB0AwAAAAAAAAAAAAB0AwAAAAAAAHUDAAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAG8DAAAAAAAAdwMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					25,
-					1,
-					"insert",
-					{
-						"characters": "щение"
-					},
-					"BQAAAHUDAAAAAAAAdgMAAAAAAAAAAAAAdgMAAAAAAAB3AwAAAAAAAAAAAAB3AwAAAAAAAHgDAAAAAAAAAAAAAHgDAAAAAAAAeQMAAAAAAAAAAAAAeQMAAAAAAAB6AwAAAAAAAAAAAAA",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAHUDAAAAAAAAdQMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					30,
-					1,
-					"paste",
-					null,
-					"AgAAAG8DAAAAAAAAegMAAAAAAAAAAAAAegMAAAAAAAB6AwAAAAAAABYAAADQn9C10YDQtdC80LXRidC10L3QuNC1",
-					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAG8DAAAAAAAAegMAAAAAAAAAAAAAAADwvw"
-				],
-				[
-					9,
-					2,
-					"paste",
-					null,
-					"AwAAAGMDAAAAAAAAfgMAAAAAAAAAAAAAfgMAAAAAAAB+AwAAAAAAACYAAAAKTW92aW5nIHswfTrQn9C10YDQtdC80LXRidC10L3QuNC1IHswfX4DAAAAAAAAmQMAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAYwMAAAAAAAB+AwAAAAAAAAAAAAAAAPC/"
-				],
-				[
-					14,
-					1,
-					"insert",
-					{
-						"characters": "Template"
-					},
-					"CQAAAH8DAAAAAAAAgAMAAAAAAAAAAAAAgAMAAAAAAACAAwAAAAAAAAYAAABNb3ZpbmeAAwAAAAAAAIEDAAAAAAAAAAAAAIEDAAAAAAAAggMAAAAAAAAAAAAAggMAAAAAAACDAwAAAAAAAAAAAACDAwAAAAAAAIQDAAAAAAAAAAAAAIQDAAAAAAAAhQMAAAAAAAAAAAAAhQMAAAAAAACGAwAAAAAAAAAAAACGAwAAAAAAAIcDAAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAfwMAAAAAAACFAwAAAAAAAAAAAAAAAPC/"
-				],
-				[
-					17,
-					1,
-					"insert",
-					{
-						"characters": " not"
-					},
-					"BAAAAIsDAAAAAAAAjAMAAAAAAAAAAAAAjAMAAAAAAACNAwAAAAAAAAAAAACNAwAAAAAAAI4DAAAAAAAAAAAAAI4DAAAAAAAAjwMAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAiwMAAAAAAACLAwAAAAAAAAAAAAAAAPC/"
-				],
-				[
-					18,
-					1,
-					"insert",
-					{
-						"characters": " found"
-					},
-					"BgAAAI8DAAAAAAAAkAMAAAAAAAAAAAAAkAMAAAAAAACRAwAAAAAAAAAAAACRAwAAAAAAAJIDAAAAAAAAAAAAAJIDAAAAAAAAkwMAAAAAAAAAAAAAkwMAAAAAAACUAwAAAAAAAAAAAACUAwAAAAAAAJUDAAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAjwMAAAAAAACPAwAAAAAAAAAAAAAAAPC/"
-				],
-				[
-					21,
-					1,
-					"insert",
-					{
-						"characters": "Шаблон"
-					},
-					"BwAAAJYDAAAAAAAAlwMAAAAAAAAAAAAAlwMAAAAAAACXAwAAAAAAABYAAADQn9C10YDQtdC80LXRidC10L3QuNC1lwMAAAAAAACYAwAAAAAAAAAAAACYAwAAAAAAAJkDAAAAAAAAAAAAAJkDAAAAAAAAmgMAAAAAAAAAAAAAmgMAAAAAAACbAwAAAAAAAAAAAACbAwAAAAAAAJwDAAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAlgMAAAAAAAChAwAAAAAAAAAAAAAAAPC/"
-				],
-				[
-					24,
-					1,
-					"insert",
-					{
-						"characters": " не"
-					},
-					"AwAAAKADAAAAAAAAoQMAAAAAAAAAAAAAoQMAAAAAAACiAwAAAAAAAAAAAACiAwAAAAAAAKMDAAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAoAMAAAAAAACgAwAAAAAAAAAAAAAAAPC/"
-				],
-				[
-					25,
-					1,
-					"insert",
-					{
-						"characters": " найден"
-					},
-					"BwAAAKMDAAAAAAAApAMAAAAAAAAAAAAApAMAAAAAAAClAwAAAAAAAAAAAAClAwAAAAAAAKYDAAAAAAAAAAAAAKYDAAAAAAAApwMAAAAAAAAAAAAApwMAAAAAAACoAwAAAAAAAAAAAACoAwAAAAAAAKkDAAAAAAAAAAAAAKkDAAAAAAAAqgMAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAowMAAAAAAACjAwAAAAAAAAAAAAAAAPC/"
+					"AgAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAADAAAAAAAAACAAAABwb3NpdGlvbiA9ICIoLTcuNDAsIDEuODAsIDAuNjApIg",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
 				]
 			]
 		}
@@ -242,28 +88,40 @@
 	},
 	"expanded_folders":
 	[
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/config",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/tree"
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree"
 	],
 	"file_history":
 	[
+		"/C/Users/fwadi/Video-Virt/room_01.json",
 		"/C/Users/fwadi/Documents/Google disk/numbers.js",
+		"/C/Users/fwadi/UIWindows/blocks.json",
 		"/C/UnityProjects/videoobssystem/language.data",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/ss/templates/app/tree.html",
+		"/C/UnityProjects/UIWindows/.gitignore",
+		"/C/UnityProjects/videoobssystem/.gitignore",
+		"/C/UnityProjects/videoobssystem/Packages/packages-lock.json",
+		"/C/Programs/Ethereum/mydata/begin.cmd",
+		"/C/Programs/Ethereum/mydata/bootnode.cmd",
+		"/C/Programs/Ethereum/mydata/init/genesis.json",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/tree_view.js",
+		"/C/Documents/Ethereum/public.txt",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/controls.js",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/index.php",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/tree/styles.css",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/main.js",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/right-panel.js",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/socials/def_canvas.js",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/main.js",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/include/tree_model_base.php",
+		"/?wsl.localhost/Ubuntu/home/vmaya/mine_start",
+		"/C/Users/fwadi/AppData/Local/Ether/genesis.json",
+		"/C/Programs/Ethereum/mydata/boot.key",
+		"/C/Programs/Ethereum/mydata/miner.cmd",
+		"/C/Programs/Ethereum/mydata/init/genesis,json",
+		"/C/ProgramData/Microsoft/Windows/Start Menu/Programs/Geth/Attach.lnk",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/language/ru/locale.js",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/ss/templates/app/tree.html",
+		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/tree/styles.css",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/config/all.php",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/include/anysocial.css",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/socials/mm.js",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/language/ru/locale.js",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/right-panel.js",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/controls.js",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/js/tree_view.js",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/include/cap.css",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/theme/tree/mobile.css",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/config/tree_config_cap.php",
@@ -284,7 +142,6 @@
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/include/tree_model_cap.php",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/include/tree_config_cap.php",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/games/include/_edbu.php",
-		"/C/OpenServer/domains/oformi-foto-dev.ru/tree/data/include/tree_model_base.php",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/ss/ssconfig.php",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/ss/ssutils.php",
 		"/C/OpenServer/domains/oformi-foto-dev.ru/games/include/_dbu.php",
@@ -338,13 +195,17 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.2
 	},
 	"find_in_files":
 	{
 		"height": 104.0,
 		"where_history":
 		[
+			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme\\js,<project filters>",
+			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme,<project filters>",
+			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme\\js,<project filters>",
+			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme,<project filters>",
 			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme\\js,<project filters>",
 			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme,<project filters>",
 			"C:\\OpenServer\\domains\\oformi-foto-dev.ru\\tree\\theme\\js,<project filters>",
@@ -366,6 +227,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Cour",
+			"Список",
+			"panelFocus",
+			"Initialize",
+			"QUESTION_DELROD",
+			"deleteRequire",
+			"idelete",
+			"Require",
+			"focus_panel",
+			"idelete",
+			"findTop",
+			"updateTree",
+			"t_childs",
+			"removeItem",
+			"idelete",
+			"responseDBTree",
+			"setDisplayData",
 			"Found",
 			"query",
 			"ajax",
@@ -460,7 +338,7 @@
 		"scrollbar_highlights": true,
 		"show_context": true,
 		"use_buffer2": true,
-		"use_gitignore": true,
+		"use_gitignore": false,
 		"whole_word": true,
 		"wrap": true
 	},
@@ -471,24 +349,24 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/C/UnityProjects/videoobssystem/language.data",
 					"selected": true,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 938,
+						"buffer_size": 3,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								895,
-								917
+								3,
+								3
 							]
 						],
 						"settings":
 						{
+							"auto_name": "2.2",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,

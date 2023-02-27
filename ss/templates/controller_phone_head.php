@@ -45,8 +45,8 @@ if ($controller->noindex) {?>
     <title><?=$title?></title>
     <link rel="stylesheet" href="<?=SSURL.$controller->getFileStyle('styles_phone.css')?>" type="text/css" media="screen" />
     <link rel="stylesheet" href="<?=SSURL.$controller->getFileStyle('cat_phone.css')?>" type="text/css" media="screen" />
-    <link rel="stylesheet" href="<?=MAINURL?>/jquery/styles/styles-viewjs.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="<?=MAINURL?>/jquery/styles/styles-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?=MAINURL?>/pjjs/styles/styles-viewjs.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?=MAINURL?>/pjjs/styles/styles-slider.css" type="text/css" media="screen" />
 <?
     foreach ($controller->getStyles() as $fileStyle) {
         echo '<link rel="stylesheet" type="text/css" href="'.$fileStyle.'">'."\n";
@@ -67,7 +67,7 @@ if ($controller->noindex) {?>
 
 //PJJS
     $language = ss::lang();
-    $jaPath = MAINURL.'/jquery/jsa';
+    $jaPath = MAINURL.'/pjjs/jsa';
 ?>
     <script src="<?=$jaPath?>/locale/<?=$language?>.js" type="text/javascript"></script>
 <?    
