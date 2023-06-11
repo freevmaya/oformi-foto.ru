@@ -1,12 +1,12 @@
 <?
 $host="localhost";
 $user="root";
-$password="";
+$password="Vthkby2010";
 
 define('DS', '/');
 define('_dbname_default', '_request');
 define('MAINPATH', $_SERVER['DOCUMENT_ROOT'].'/');
-define('HOMEPATH', 'C:/OpenServer/domains/');
+define('HOMEPATH', '/home/');
 define('LOGPATH', HOMEPATH.'/oformi-foto.ru/logs/');
 
 define('_sql_i18n', true);
